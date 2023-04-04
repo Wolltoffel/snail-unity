@@ -7,11 +7,13 @@ public class MapData: SaveData
 {
     Vector2 size;
     int []contents;
+    public string name;
 
-    public MapData(Vector2 size, int[]contents)
+    public MapData(Vector2 size, int[]contents, string name)
     {
         this.size = size;
         this.contents = contents;
+        this.name = name;
     }
 
     public override void loadDefaultValues()

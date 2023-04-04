@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class SaveSystem : MonoBehaviour
+public class SaveSystem
 {
-    public static SaveSystem Instance { get; private set; }
-
     void Awake()
     {
     }
 
-    public void saveData(SaveData saveFile, string savePath)
+    public void SaveData(SaveData saveFile, string savePath)
     {
         string json = JsonUtility.ToJson(saveFile);
        
@@ -30,18 +28,15 @@ public class SaveSystem : MonoBehaviour
       
     }  
 
-    public void loadData(SaveData saveFile,string savePath)
+    public T LoadData<T>(string savePath) where T:SaveData
     {
         StreamReader reader = new StreamReader(savePath);
         string json = reader.ReadToEnd();
 
-        saveFile = JsonUtility.FromJson<PlayerSettings>(json);
-
-        Debug.Log("Loading Data");
-        Debug.Log(json);
+        return JsonUtility.FromJson<T>(json);
     }
 
-    public string findSave(string fileNameInput,string path)
+    public string FindSave(string fileNameInput,string path)
     {
         string [] fileNames =  System.IO.Directory.GetFiles(path);
 
@@ -56,16 +51,4 @@ public class SaveSystem : MonoBehaviour
         return "";
     }
 
-    public string[] returnAllSaves (string path)
-    {
-        return System.IO.Directory.GetFiles(path);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-           Debug.Log ( returnAllSaves(Application.streamingAssetsPath));
-        }
-    }
 }
