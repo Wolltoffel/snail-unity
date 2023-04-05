@@ -22,7 +22,10 @@ public class MapManager : MonoBehaviour
         for (int i = 0; i < filePaths.Length; i++)
         {
             maps[i] = saver.LoadData<MapData>(filePaths[i]);
-            maps[i].name = Path.GetFileNameWithoutExtension(filePaths[i]);
+            if (maps[i] != null)
+            {
+                maps[i].name = Path.GetFileNameWithoutExtension(filePaths[i]);
+            }
         }
 
         selectedMap = maps[0];

@@ -22,6 +22,11 @@ public class PlayerSettings: SaveData
         this.requireSquareMap = requireSquareMap;
     }
 
+    public PlayerSettings()
+    {
+        loadDefaultValues();
+    }
+
     public override void loadDefaultValues()
     {
         maxTurnDuration = 30;

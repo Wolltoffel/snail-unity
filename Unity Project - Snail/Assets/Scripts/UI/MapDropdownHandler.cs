@@ -17,8 +17,10 @@ public class MapDropdownHandler : MonoBehaviour
 
         for (int i = 0; i < maps.Length; i++)
         {
+            if (maps[i] != null) { 
             items.Add(maps[i].name);
             Debug.Log(maps[i].name);
+            }
         }
 
         foreach (var item in items)

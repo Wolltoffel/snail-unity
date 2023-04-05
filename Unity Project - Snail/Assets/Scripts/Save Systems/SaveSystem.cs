@@ -24,6 +24,7 @@ public class SaveSystem
         catch (IOException)
         {
             Debug.Log("Could not save. Try again in a few seconds");
+  
         }
       
     }  
@@ -33,7 +34,15 @@ public class SaveSystem
         StreamReader reader = new StreamReader(savePath);
         string json = reader.ReadToEnd();
 
-        return JsonUtility.FromJson<T>(json);
+        try
+        {
+            return JsonUtility.FromJson<T>(json);
+        }
+        catch(System.Exception ex)
+        {
+            return null;
+        }
+        
     }
 
     public string FindSave(string fileNameInput,string path)
