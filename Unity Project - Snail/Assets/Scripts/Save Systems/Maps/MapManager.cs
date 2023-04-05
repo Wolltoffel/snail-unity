@@ -5,7 +5,7 @@ using System.IO;
 
 public class MapManager : MonoBehaviour
 {
-    public MapData[] maps;
+    public List<MapData> maps;
     SaveSystem saver;
     string savePath;
 
@@ -17,14 +17,17 @@ public class MapManager : MonoBehaviour
 
        savePath = Application.streamingAssetsPath + "/maps";
        string[] filePaths  = System.IO.Directory.GetFiles(savePath, "*.json");
-       maps = new MapData[filePaths.Length];
+       maps = new List<MapData>();
+       MapData[] mapArray = new MapData[filePaths.Length];
 
         for (int i = 0; i < filePaths.Length; i++)
         {
-            maps[i] = saver.LoadData<MapData>(filePaths[i]);
-            if (maps[i] != null)
+            mapArray[i] = saver.LoadData<MapData>(filePaths[i]);
+
+            if (mapArray[i] != null)
             {
-                maps[i].name = Path.GetFileNameWithoutExtension(filePaths[i]);
+                mapArray[i].name = Path.GetFileNameWithoutExtension(filePaths[i]);
+                maps.Add(mapArray[i]);
             }
         }
 

@@ -13,13 +13,13 @@ public class MapDropdownHandler : MonoBehaviour
         dropdown.options.Clear();
 
         List<string> items = new List<string>();
-        MapData[] maps = mapManager.maps;
+        List <MapData> maps = mapManager.maps;
 
-        for (int i = 0; i < maps.Length; i++)
+        foreach(var map in maps)
         {
-            if (maps[i] != null) { 
-            items.Add(maps[i].name);
-            Debug.Log(maps[i].name);
+            if (map != null) { 
+            items.Add(map.name);
+            Debug.Log(map.name);
             }
         }
 
