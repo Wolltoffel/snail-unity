@@ -5,11 +5,11 @@ using System.IO;
 
 public class MapData: SaveData
 {
-    Vector2 size;
-    int []contents;
+    public Vector2Int size;
+    public int []contents;
     public string name;
 
-    public MapData(Vector2 size, int[]contents, string name)
+    public MapData(Vector2Int size, int[]contents, string name)
     {
         this.size = size;
         this.contents = contents;
@@ -30,6 +30,8 @@ public class MapData: SaveData
         Debug.Log("Loading Default Map");
         Debug.Log(json);
     }
+
+
 
   
 }

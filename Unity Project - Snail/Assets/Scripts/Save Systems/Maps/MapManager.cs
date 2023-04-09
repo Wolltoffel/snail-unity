@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Linq;
 
 public class MapManager : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class MapManager : MonoBehaviour
     SaveSystem saver;
     string savePath;
 
-    public MapData selectedMap;
+    public static MapData selectedMap;
 
     private void Awake()
     {
@@ -26,11 +27,23 @@ public class MapManager : MonoBehaviour
 
             if (mapArray[i] != null)
             {
-                mapArray[i].name = Path.GetFileNameWithoutExtension(filePaths[i]);
-                maps.Add(mapArray[i]);
+                int mapFieldCount = mapArray[i].size.x * mapArray[i].size.y;
+                
+                if (mapArray[i].contents.Length == mapFieldCount)
+                {
+                    mapArray[i].name = Path.GetFileNameWithoutExtension(filePaths[i]);
+                    maps.Add(mapArray[i]);
+                }
+                else
+                {
+                    Debug.Log("Map not formatted correctly");
+                }
+                
             }
         }
 
         selectedMap = maps[0];
+
+        maps = maps.OrderBy(map => map.name).ToList<MapData>();
     }
 }
