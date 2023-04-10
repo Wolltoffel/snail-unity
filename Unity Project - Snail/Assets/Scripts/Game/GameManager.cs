@@ -10,5 +10,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         player = new Player[2];
+       
     }
 }

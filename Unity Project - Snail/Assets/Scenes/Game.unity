@@ -153,9 +153,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upperLeftCorner: {x: 0, y: 0}
-  camera: {fileID: 2032426179}
-  tileSize: 1
-  centerPosition: {x: 0, y: 0}
 --- !u!4 &130402297
 Transform:
   m_ObjectHideFlags: 0
@@ -268,3 +265,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8820a86d963236549b38f6c07fd5e5ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zoomLevel: 2

@@ -24,7 +24,6 @@ public class SaveSystem
         catch (IOException)
         {
             Debug.Log("Could not save. Try again in a few seconds");
-  
         }
       
     }  
