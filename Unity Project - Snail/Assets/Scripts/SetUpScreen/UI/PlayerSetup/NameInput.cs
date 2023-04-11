@@ -8,7 +8,7 @@ public class NameInput : MonoBehaviour
     public void setName(int index)
     {
         string playername = GetComponent<TMP_InputField>().text;
-        SetupConfig.SetName(playername, index);
+        PlayerConfig.SetName(playername, index);
     }
 
 }

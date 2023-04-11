@@ -5,7 +5,7 @@ using System.IO;
 
 public class PlayerSettingsManager : MonoBehaviour
 {
-    public PlayerSettings settings;
+    public static PlayerSettings settings;
     SaveSystem saver;
     string savePath;
 
