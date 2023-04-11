@@ -6,9 +6,10 @@ public class Player
 {
     public string name;
     public int score;
-    public Vector2Int position;
+    public Vector2 position;
     public List<Vector2> possibleFields;
     public List<Vector2> slimeFields;
+    public GameObject sprite;
     public enum Agent{computer,human }
     public Agent agent; 
 

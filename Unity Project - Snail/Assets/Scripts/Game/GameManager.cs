@@ -15,50 +15,49 @@ public class GameManager : MonoBehaviour
         tiles = Map.tiles;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            markPassableFields(tiles[0], player[0]);
+        }
+    }
+
     private void  movePlayer(Player activePlayer) { 
 
 
     }
 
-    void markPassableFields(Tile currentTile, Player player)
+    public void markPassableFields(Tile currentTile, Player player)
     {
-        List<Tile> passableTiles = checkPassableFields(currentTile, player);
+        List<Tile> passableTiles = checkPassableTiles(currentTile, player);
         foreach(Tile tile in passableTiles)
         {
-            Map.PlaceHighlight(tile);
+            tile.setHighlight(true);
         }
     }
 
-    private List<Tile> checkPassableFields(Tile currentTile,Player player)
+    private  List<Tile> checkPassableTiles(Tile currentTile,Player player)
     {
+        List<Tile> proxomityTiles = new List<Tile>();
         List<Tile> freeTiles = new List<Tile>();
-        Tile left = currentTile.left;
-        Tile right = currentTile.right;
-        Tile up = currentTile.up;
-        Tile down = currentTile.down;
 
-        freeTiles.Add(currentTile.left);
-        freeTiles.Add(currentTile.right);
-        freeTiles.Add(currentTile.up);
-        freeTiles.Add(currentTile.down);
 
-        foreach(Tile tile in freeTiles)
+        proxomityTiles.Add(currentTile.left);
+        proxomityTiles.Add(currentTile.right);
+        proxomityTiles.Add(currentTile.up);
+        proxomityTiles.Add(currentTile.down);
+       
+        foreach(Tile tile in proxomityTiles)
         {
-            if (!checkField(tile, player))
-                freeTiles.Remove(tile);
+            if (tile.checkTile(player))
+                freeTiles.Add(tile);
+ 
         }
 
         return freeTiles;
     }
 
-    bool checkField(Tile tile,Player player)
-    {
-        if (tile.generallyPassable 
-            && tile.slimeOwner==null
-            && tile.playerSlot != player)
-        {return true;}
-        else
-        {return false; }
-    }
+
 
 }

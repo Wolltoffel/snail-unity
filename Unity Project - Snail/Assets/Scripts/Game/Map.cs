@@ -16,13 +16,14 @@ public class Map : MonoBehaviour
     List <Object> playerSprites;
     public static List<Tile> tiles;
 
-    private void Start()
+    private void Awake()
     {
         tiles = new List<Tile>();
         loadSprites();
         loadMap();
         manageTiles();
     }
+
 
     void loadSprites()
     {
@@ -36,13 +37,13 @@ public class Map : MonoBehaviour
 
     void loadMap()
     {
-       //MapData selected = MapManager.selectedMap;
+       MapData activeMap= MapManager.selectedMap;
        //Load provisional Map
        int[] provisionalContents = new int[18];
        provisionalContents[4] = 64;
        provisionalContents[9] = 129;
        provisionalContents[11] = 130;
-       MapData activeMap = new MapData(new Vector2Int(6, 3), provisionalContents, "Provisional");
+       //MapData activeMap = new MapData(new Vector2Int(6, 3), provisionalContents, "Provisional");
 
        int[] contents = activeMap.contents;
        size = activeMap.size;
@@ -52,37 +53,45 @@ public class Map : MonoBehaviour
         Vector2 nextPosition = upperLeftCorner+new Vector2(0.5f*tileSize,-0.5f*tileSize);
         int rowCounter=0;
         int rowNumber = 1;
-        bool passable = true;
-        Player player = null;
 
         for (int i = 0; i<contents.Length; i++)
         {
-            //Spawn Ground
+            //Spawn Ground and Add Tiles
             Vector3 position = new Vector3(nextPosition.x, nextPosition.y, 0);
-            Instantiate(ground, position,Quaternion.Euler(Vector3.zero));
+
+            Tile newTile = new Tile(position, new Vector2(i - (rowNumber - 1) * size.x+1, rowNumber));
+
+            newTile.grassField = Instantiate(ground, position,Quaternion.Euler(Vector3.zero)) as GameObject;
+            newTile.grassField.name = $"Grass ({newTile.position.x}/{newTile.position.y})";
+            InsertHighlight(newTile, newTile.grassField);
 
             switch (contents[i])
             {
-                case 64:
-                    Instantiate(impassable, position, Quaternion.Euler(Vector3.zero));
-                    passable = false;
+                case 64://Spawn Impassable Rocks
+                    newTile.impassable = Instantiate(impassable, position, Quaternion.Euler(Vector3.zero)) as  GameObject;
+                    newTile.impassable.name = $"Impassable ({newTile.position.x}/{newTile.position.y})";
+                    newTile.impassable.transform.parent = newTile.grassField.transform;
                     break;
                 case 129: //Spawn Player 1
-                    Instantiate(playerSprites[0], position, Quaternion.Euler(Vector3.zero));
-                    player = PlayerConfig.player[0];
+                    newTile.playerSlot =  PlayerConfig.player[0] == null ?new Player("Player 1"):PlayerConfig.player[0];
+                    newTile.playerSlot.sprite = Instantiate(playerSprites[0], position, Quaternion.Euler(Vector3.zero)) as GameObject;
+                    newTile.playerSlot.sprite.transform.parent = newTile.grassField.transform;
+                    newTile.playerSlot.position = newTile.position;
+                    newTile.playerSlot.sprite.name = $"{newTile.playerSlot.name} Sprite";
                     break;
                 case 130: //Spawn Player 2
-                    Instantiate(playerSprites[1], position, Quaternion.Euler(Vector3.zero));
-                    player = PlayerConfig.player[1];
+                    newTile.playerSlot = PlayerConfig.player[1] == null ? new Player("Player 2") : PlayerConfig.player[1];
+                    newTile.playerSlot.sprite = Instantiate(playerSprites[1], position, Quaternion.Euler(Vector3.zero)) as GameObject;
+                    newTile.playerSlot.position = newTile.position;
+                    newTile.playerSlot.sprite.transform.parent = newTile.grassField.transform;
+                    newTile.playerSlot.sprite.name = $"{newTile.playerSlot.name} Sprite";
                     break;
                 default:
                     break;
             }
 
-            //Add Tiles
-            Tile newTile = new Tile(new Vector2(i - (rowNumber - 1) * size.x, rowNumber), position, passable,player);
+            //Add Tiles to List
             tiles.Add(newTile);
-            player = null;
 
             nextPosition.x++;
             rowCounter++;
@@ -98,12 +107,10 @@ public class Map : MonoBehaviour
         }
 
     }
-
     void manageTiles()
     {
         foreach (Tile tile in tiles)
         {
-
             //Right Tile
             if (tile.right == null)
             {
@@ -116,7 +123,6 @@ public class Map : MonoBehaviour
                     }
                 }
             }
-
             //Left Tile
             if (tile.left == null)
             {
@@ -129,7 +135,6 @@ public class Map : MonoBehaviour
                     }
                 }
             }
-
             //Up Tile
             if (tile.up == null)
             {
@@ -142,7 +147,6 @@ public class Map : MonoBehaviour
                     }
                 }
             }
-
             //Down Tile
             if (tile.down == null)
             {
@@ -160,9 +164,16 @@ public class Map : MonoBehaviour
 
     }
 
-    public static void PlaceHighlight(Tile tile)
+    public static void InsertHighlight(Tile tile, GameObject parent)
     {
         tile.highLightSlot = Instantiate(highlight, tile.worldPosition, Quaternion.Euler(Vector3.zero))as GameObject;
-        tile.highLightSlot.name = $"Highlight x {tile.position.x} {tile.position.y}";
+        tile.highLightSlot.name = $"Highlight ({tile.position.x}/{tile.position.y})";
+        tile.highLightSlot.SetActive(false);
+        tile.highLightSlot.AddComponent<BoxCollider2D>();
+        tile.highLightSlot.AddComponent<HighLight>();
+        tile.highLightSlot.GetComponent<HighLight>().tile = tile;
+        tile.highLightSlot.transform.parent = parent.transform;
     }
+
+
 }
