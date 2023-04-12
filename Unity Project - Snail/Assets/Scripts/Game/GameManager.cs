@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     MapData activeMap;
     PlayerSettings settings;
     List<Tile> tiles;
+    static List<Tile> highlightedTiles;
 
     private void Start()
     {
@@ -17,20 +18,30 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        markPassableFields(RoundManager.activePlayer().activeTile,RoundManager.activePlayer());
+    }
+
+    public static  void movePlayer(Player activePlayer, Tile tile) {
+
+
+        if (Vector2.Distance(activePlayer.sprite.transform.position, tile.worldPosition) < 0.0001f)
         {
-            markPassableFields(tiles[0], player[0]);
+            activePlayer.activeTile = tile;
+            activePlayer.sprite.transform.Translate(tile.worldPosition - activePlayer.sprite.transform.position * Time.deltaTime * 10);
         }
+
+        foreach (Tile item in highlightedTiles)
+        {
+            item.highLightSlot.SetActive(false);
+        }
+    
+
     }
 
-    private void  movePlayer(Player activePlayer) { 
-
-
-    }
-
-    public void markPassableFields(Tile currentTile, Player player)
+    void markPassableFields(Tile currentTile, Player player)
     {
         List<Tile> passableTiles = checkPassableTiles(currentTile, player);
+        highlightedTiles = passableTiles;
         foreach(Tile tile in passableTiles)
         {
             tile.setHighlight(true);
@@ -50,11 +61,11 @@ public class GameManager : MonoBehaviour
        
         foreach(Tile tile in proxomityTiles)
         {
-            if (tile.checkTile(player))
-                freeTiles.Add(tile);
- 
+            if (tile != null){
+                if (tile.checkTile(player))
+                    freeTiles.Add(tile);
+            }
         }
-
         return freeTiles;
     }
 

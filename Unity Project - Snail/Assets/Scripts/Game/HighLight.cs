@@ -7,6 +7,16 @@ public class HighLight : MonoBehaviour
     [HideInInspector]public Tile tile;
     Vector3 initialSize;
 
+    bool activeMovement;
+
+    private void Update()
+    {
+        if (activeMovement)
+        {
+         GameManager.movePlayer(RoundManager.activePlayer(), tile);
+        }
+    }
+
     private void Awake()
     {
         initialSize = transform.localScale;
@@ -20,5 +30,10 @@ public class HighLight : MonoBehaviour
     private void OnMouseExit()
     {
         transform.localScale = initialSize;
+    }
+
+    private void OnMouseDown()
+    {
+        activeMovement = true;
     }
 }

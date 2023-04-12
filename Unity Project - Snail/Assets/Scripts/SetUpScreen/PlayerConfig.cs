@@ -24,4 +24,11 @@ public class PlayerConfig : MonoBehaviour
         player[index].agent = agent;
     }
 
+    public static void DetermineTurnOrder()
+    {
+        int random = Random.Range(0, 1);
+        player[0].turn = random == 0 ? true : false;
+        player[1].turn = random == 1 ? true : false;
+    }
+
 }

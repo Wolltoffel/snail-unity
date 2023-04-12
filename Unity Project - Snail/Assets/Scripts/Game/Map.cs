@@ -21,7 +21,7 @@ public class Map : MonoBehaviour
         tiles = new List<Tile>();
         loadSprites();
         loadMap();
-        manageTiles();
+       manageTiles();
     }
 
 
@@ -76,15 +76,15 @@ public class Map : MonoBehaviour
                     newTile.playerSlot =  PlayerConfig.player[0] == null ?new Player("Player 1"):PlayerConfig.player[0];
                     newTile.playerSlot.sprite = Instantiate(playerSprites[0], position, Quaternion.Euler(Vector3.zero)) as GameObject;
                     newTile.playerSlot.sprite.transform.parent = newTile.grassField.transform;
-                    newTile.playerSlot.position = newTile.position;
                     newTile.playerSlot.sprite.name = $"{newTile.playerSlot.name} Sprite";
+                    newTile.playerSlot.activeTile = newTile;
                     break;
                 case 130: //Spawn Player 2
                     newTile.playerSlot = PlayerConfig.player[1] == null ? new Player("Player 2") : PlayerConfig.player[1];
                     newTile.playerSlot.sprite = Instantiate(playerSprites[1], position, Quaternion.Euler(Vector3.zero)) as GameObject;
-                    newTile.playerSlot.position = newTile.position;
                     newTile.playerSlot.sprite.transform.parent = newTile.grassField.transform;
                     newTile.playerSlot.sprite.name = $"{newTile.playerSlot.name} Sprite";
+                    newTile.playerSlot.activeTile = newTile;
                     break;
                 default:
                     break;
@@ -116,43 +116,43 @@ public class Map : MonoBehaviour
             {
                 foreach (Tile item in tiles)
                 {
-                    if (item.position.x == tile.position.x + 1)
+                    if (tile.position.x+1 == item.position.x && item.position.y == tile.position.y)
                     {
                         tile.right = item;
                         item.left = tile;
                     }
                 }
             }
-            //Left Tile
+            //Left
             if (tile.left == null)
             {
                 foreach (Tile item in tiles)
                 {
-                    if (item.position.x == tile.position.x - 1)
+                    if (tile.position.x - 1 == item.position.x && item.position.y == tile.position.y)
                     {
                         tile.left = item;
                         item.right = tile;
                     }
                 }
             }
-            //Up Tile
+            //Up Tile / Down Item
             if (tile.up == null)
             {
                 foreach (Tile item in tiles)
                 {
-                    if (item.position.y == tile.position.y + 1)
+                    if (tile.position.y+1==item.position.y && item.position.x == tile.position.x)
                     {
                         tile.up = item;
                         item.down = tile;
                     }
                 }
             }
-            //Down Tile
+            //Down Tile / Up Item
             if (tile.down == null)
             {
                 foreach (Tile item in tiles)
                 {
-                    if (item.position.y == tile.position.y - 1)
+                    if (tile.position.y - 1 == item.position.y && item.position.x == tile.position.x)
                     {
                         tile.down = item;
                         item.up = tile;
