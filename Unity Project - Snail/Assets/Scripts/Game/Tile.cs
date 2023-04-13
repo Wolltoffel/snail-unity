@@ -18,7 +18,7 @@ public class Tile
         this.worldPosition = worldPosition;
     }
 
-    public bool checkTile(Player player)
+    public bool checkPassable(Player player)
     {
         if (impassable==null
             &&slime == null
@@ -31,6 +31,19 @@ public class Tile
     public void setHighlight(bool b) 
     {
         highLightSlot.SetActive(b);
+    }
+
+    public bool checkSlime(Player player) {
+        if (slime != null) {
+            if (slime.owner == player)
+                return true;
+            else
+                return false;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 }

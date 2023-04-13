@@ -27,6 +27,7 @@ public class HighLight : MonoBehaviour
 
     private void OnMouseDown()
     {
-        GameManager.movePlayer(RoundManager.activePlayer(), tile);
+        Player player = RoundManager.activePlayer();
+        GameManager.movePlayer(player, tile);
     }
 }

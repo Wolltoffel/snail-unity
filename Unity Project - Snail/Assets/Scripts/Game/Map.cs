@@ -203,7 +203,7 @@ public class Map : MonoBehaviour
         {
             if (tile != null)
             {
-                if (tile.checkTile(player))
+                if (tile.checkPassable(player))
                     freeTiles.Add(tile);
             }
         }
