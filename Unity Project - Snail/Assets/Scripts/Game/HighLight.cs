@@ -9,13 +9,6 @@ public class HighLight : MonoBehaviour
 
     bool activeMovement;
 
-    private void Update()
-    {
-        if (activeMovement)
-        {
-         GameManager.movePlayer(RoundManager.activePlayer(), tile);
-        }
-    }
 
     private void Awake()
     {
@@ -34,6 +27,6 @@ public class HighLight : MonoBehaviour
 
     private void OnMouseDown()
     {
-        activeMovement = true;
+        GameManager.movePlayer(RoundManager.activePlayer(), tile);
     }
 }

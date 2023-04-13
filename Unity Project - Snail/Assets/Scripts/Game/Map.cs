@@ -7,12 +7,14 @@ public class Map : MonoBehaviour
 {
     [SerializeField]Vector2 upperLeftCorner;
     static public int tileSize = 1;
-    [HideInInspector]static public Vector2 centerPosition;
-    [HideInInspector]static public Vector2 size;
-    [HideInInspector] static public MapData activeMap;
+    static public Vector2 centerPosition;
+    static public Vector2 size;
+    static public MapData activeMap;
     Object ground;
     Object impassable;
+    static List<Object> slimeSprite;
     static Object highlight;
+    public static List<Tile> highlightedTiles;
     List <Object> playerSprites;
     public static List<Tile> tiles;
 
@@ -21,9 +23,8 @@ public class Map : MonoBehaviour
         tiles = new List<Tile>();
         loadSprites();
         loadMap();
-       manageTiles();
+        manageTiles();
     }
-
 
     void loadSprites()
     {
@@ -33,6 +34,9 @@ public class Map : MonoBehaviour
         playerSprites = new List<Object>();
         playerSprites.Add(Resources.Load("Sprites/" + "snail_blue_256x256"));
         playerSprites.Add(Resources.Load("Sprites/" + "snail_orange_256x256"));
+        slimeSprite = new List<Object>();
+        slimeSprite.Add(Resources.Load("Sprites/" + "trail_blue_256x256"));
+        slimeSprite.Add(Resources.Load("Sprites/" + "trail_orange_256x256"));
     }
 
     void loadMap()
@@ -135,31 +139,31 @@ public class Map : MonoBehaviour
                     }
                 }
             }
-            //Up Tile / Down Item
-            if (tile.up == null)
-            {
-                foreach (Tile item in tiles)
-                {
-                    if (tile.position.y+1==item.position.y && item.position.x == tile.position.x)
-                    {
-                        tile.up = item;
-                        item.down = tile;
-                    }
-                }
-            }
             //Down Tile / Up Item
             if (tile.down == null)
             {
                 foreach (Tile item in tiles)
                 {
-                    if (tile.position.y - 1 == item.position.y && item.position.x == tile.position.x)
+                    if (tile.position.y+1==item.position.y && item.position.x == tile.position.x)
                     {
                         tile.down = item;
                         item.up = tile;
                     }
                 }
             }
-
+            //Up Tile / Down Item
+            if (tile.up == null)
+            {
+                foreach (Tile item in tiles)
+                {
+                    if (tile.position.y - 1 == item.position.y && item.position.x == tile.position.x)
+                    {
+                        tile.up = item;
+                        item.down = tile;
+                    }
+                }
+            }
+            
         }
 
     }
@@ -175,5 +179,41 @@ public class Map : MonoBehaviour
         tile.highLightSlot.transform.parent = parent.transform;
     }
 
+    public static void markPassableFields(Tile currentTile, Player player)
+    {
+        List<Tile> passableTiles = checkPassableTiles(currentTile, player);
+        highlightedTiles = passableTiles;
+        foreach (Tile tile in passableTiles)
+        {
+            tile.setHighlight(true);
+        }
+    }
 
+    private static List<Tile> checkPassableTiles(Tile currentTile, Player player)
+    {
+        List<Tile> proxomityTiles = new List<Tile>();
+        List<Tile> freeTiles = new List<Tile>();
+
+        proxomityTiles.Add(currentTile.left);
+        proxomityTiles.Add(currentTile.right);
+        proxomityTiles.Add(currentTile.up);
+        proxomityTiles.Add(currentTile.down);
+
+        foreach (Tile tile in proxomityTiles)
+        {
+            if (tile != null)
+            {
+                if (tile.checkTile(player))
+                    freeTiles.Add(tile);
+            }
+        }
+        return freeTiles;
+    }
+
+    public static void AddSlime(Tile tile, Player player)
+    {
+        Slime slime = new Slime(player,tile);
+        slime.instance = Instantiate(slimeSprite[RoundManager.activePlayerIndex()], tile.worldPosition, Quaternion.Euler(Vector3.zero)) as GameObject;
+        tile.slime = slime;
+    }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RoundManager : MonoBehaviour
 {
-    float turnDurationCounter;
+    static float turnDurationCounter;
     float maxTurnDuration;
 
     private void Awake()
@@ -17,11 +17,13 @@ public class RoundManager : MonoBehaviour
 
     private void Update()
     {
-        countdownRoundSeconds();
+       // countdownRoundSeconds();
     }
 
-    void switchTurns()
+    public static void switchTurns()
     {
+        turnDurationCounter = 0;
+
         if (PlayerConfig.player[0].turn == false)
         {
             PlayerConfig.player[0].turn = true;
@@ -32,14 +34,14 @@ public class RoundManager : MonoBehaviour
             PlayerConfig.player[0].turn = false;
             PlayerConfig.player[1].turn = true;
         }
+        Debug.Log("Switched Turns");
+
     }
 
     void countdownRoundSeconds() {
         turnDurationCounter += Time.deltaTime;
-
         if (turnDurationCounter > maxTurnDuration)
         {
-            turnDurationCounter = 0;
             switchTurns();
         }
     }
@@ -54,6 +56,20 @@ public class RoundManager : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public static int activePlayerIndex()
+    {
+        List<Player> player = PlayerConfig.player;
+
+        for (int i= 0;i<player.Count;i++)
+        {
+            if (player[i].turn == true)
+            {
+                return i;
+            }
+        }
+        return 0;
     }
 
     void stopCountRoundSeconds() { }
