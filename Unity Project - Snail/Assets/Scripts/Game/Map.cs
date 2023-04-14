@@ -79,6 +79,7 @@ public class Map : MonoBehaviour
                 case 129: //Spawn Player 1
                     newTile.playerSlot =  PlayerConfig.player[0] == null ?new Player("Player 1"):PlayerConfig.player[0];
                     newTile.playerSlot.sprite = Instantiate(playerSprites[0], position, Quaternion.Euler(Vector3.zero)) as GameObject;
+                    newTile.playerSlot.sprite.GetComponent<SpriteRenderer>().sortingOrder = 2;
                     newTile.playerSlot.sprite.transform.parent = newTile.grassField.transform;
                     newTile.playerSlot.sprite.name = $"{newTile.playerSlot.name} Sprite";
                     newTile.playerSlot.activeTile = newTile;
@@ -86,6 +87,7 @@ public class Map : MonoBehaviour
                 case 130: //Spawn Player 2
                     newTile.playerSlot = PlayerConfig.player[1] == null ? new Player("Player 2") : PlayerConfig.player[1];
                     newTile.playerSlot.sprite = Instantiate(playerSprites[1], position, Quaternion.Euler(Vector3.zero)) as GameObject;
+                    newTile.playerSlot.sprite.GetComponent<SpriteRenderer>().sortingOrder = 2;
                     newTile.playerSlot.sprite.transform.parent = newTile.grassField.transform;
                     newTile.playerSlot.sprite.name = $"{newTile.playerSlot.name} Sprite";
                     newTile.playerSlot.activeTile = newTile;

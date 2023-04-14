@@ -24,6 +24,14 @@ public class Tile
             &&slime == null
            && playerSlot == null)
         { return true; }
+        else if (slime != null)
+        {
+            if (slime.owner == player)
+            {
+                return true;
+            }
+            else { return false; }
+        }
         else
         { return false; }
     }
@@ -44,6 +52,31 @@ public class Tile
         {
             return false;
         }
+    }
+
+    public Tile giveNextSlideTile(Tile adjacentTile, Player player)
+    {
+        if (right != null)
+        {
+             if (right == adjacentTile && adjacentTile.right.checkSlime(player))
+            return adjacentTile.right.right;
+        }
+        if (left != null)
+        {
+            if (left == adjacentTile && adjacentTile.left.checkSlime(player))
+                return adjacentTile.left.left;
+        }
+        if(up!=null){
+            if (up == adjacentTile && adjacentTile.up.checkSlime(player))
+                return up.up;
+        }
+        if (down != null)
+        {
+            if (down == adjacentTile && adjacentTile.down.checkSlime(player))
+                return adjacentTile.down.down;
+        }
+
+       return null;
     }
 
 }
