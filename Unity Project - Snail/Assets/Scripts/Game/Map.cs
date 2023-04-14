@@ -77,20 +77,10 @@ public class Map : MonoBehaviour
                     newTile.impassable.transform.parent = newTile.grassField.transform;
                     break;
                 case 129: //Spawn Player 1
-                    newTile.playerSlot =  PlayerConfig.player[0] == null ?new Player("Player 1"):PlayerConfig.player[0];
-                    newTile.playerSlot.sprite = Instantiate(playerSprites[0], position, Quaternion.Euler(Vector3.zero)) as GameObject;
-                    newTile.playerSlot.sprite.GetComponent<SpriteRenderer>().sortingOrder = 2;
-                    newTile.playerSlot.sprite.transform.parent = newTile.grassField.transform;
-                    newTile.playerSlot.sprite.name = $"{newTile.playerSlot.name} Sprite";
-                    newTile.playerSlot.activeTile = newTile;
+                    SpawnPlayer(newTile,0,position);
                     break;
                 case 130: //Spawn Player 2
-                    newTile.playerSlot = PlayerConfig.player[1] == null ? new Player("Player 2") : PlayerConfig.player[1];
-                    newTile.playerSlot.sprite = Instantiate(playerSprites[1], position, Quaternion.Euler(Vector3.zero)) as GameObject;
-                    newTile.playerSlot.sprite.GetComponent<SpriteRenderer>().sortingOrder = 2;
-                    newTile.playerSlot.sprite.transform.parent = newTile.grassField.transform;
-                    newTile.playerSlot.sprite.name = $"{newTile.playerSlot.name} Sprite";
-                    newTile.playerSlot.activeTile = newTile;
+                    SpawnPlayer(newTile, 1, position);
                     break;
                 default:
                     break;
@@ -113,59 +103,49 @@ public class Map : MonoBehaviour
         }
 
     }
+
+    void SpawnPlayer(Tile newTile, int index, Vector3 position)
+    {
+        newTile.playerSlot = PlayerConfig.player[0] == null ? new Player("Player 1") : PlayerConfig.player[0];
+        newTile.playerSlot.sprite = Instantiate(playerSprites[0], position, Quaternion.Euler(Vector3.zero)) as GameObject;
+        newTile.playerSlot.sprite.GetComponent<SpriteRenderer>().sortingOrder = 2;
+        newTile.playerSlot.sprite.transform.parent = newTile.grassField.transform;
+        newTile.playerSlot.sprite.name = $"{newTile.playerSlot.name} Sprite";
+        newTile.playerSlot.activeTile = newTile;
+    }
+
     void manageTiles()
     {
         foreach (Tile tile in tiles)
         {
-            //Right Tile
-            if (tile.right == null)
+            foreach (Tile item in tiles)
             {
-                foreach (Tile item in tiles)
+                Vector2 right = tile.position + Vector2.right;
+                Vector2 left = tile.position + Vector2.left;
+                Vector2 down = tile.position + Vector2.down;
+                Vector2 up = tile.position + Vector2.up;
+
+                if (tile.right == null && item.position == right)
                 {
-                    if (tile.position.x+1 == item.position.x && item.position.y == tile.position.y)
-                    {
-                        tile.right = item;
-                        item.left = tile;
-                    }
+                    tile.right = item;
+                    item.left = tile;
+                }
+                else if (tile.left == null && item.position == left)
+                {
+                    tile.left = item;
+                    item.right = tile;
+                }
+                else if (tile.down == null && item.position == down)
+                {
+                    tile.down = item;
+                    item.up = tile;
+                }
+                else if (tile.up == null && item.position == up)
+                {
+                    tile.up = item;
+                    item.down = tile;
                 }
             }
-            //Left
-            if (tile.left == null)
-            {
-                foreach (Tile item in tiles)
-                {
-                    if (tile.position.x - 1 == item.position.x && item.position.y == tile.position.y)
-                    {
-                        tile.left = item;
-                        item.right = tile;
-                    }
-                }
-            }
-            //Down Tile / Up Item
-            if (tile.down == null)
-            {
-                foreach (Tile item in tiles)
-                {
-                    if (tile.position.y+1==item.position.y && item.position.x == tile.position.x)
-                    {
-                        tile.down = item;
-                        item.up = tile;
-                    }
-                }
-            }
-            //Up Tile / Down Item
-            if (tile.up == null)
-            {
-                foreach (Tile item in tiles)
-                {
-                    if (tile.position.y - 1 == item.position.y && item.position.x == tile.position.x)
-                    {
-                        tile.up = item;
-                        item.down = tile;
-                    }
-                }
-            }
-            
         }
 
     }
