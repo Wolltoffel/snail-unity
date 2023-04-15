@@ -24,11 +24,6 @@ public class GameManager : MonoBehaviour
         activePlayer.activeTile.playerSlot = null;
         Map.AddSlime(activePlayer.activeTile, activePlayer);
         activePlayer.activeTile = tile;
-
-        foreach (Tile item in Map.highlightedTiles)
-        {
-            item.highLightSlot.SetActive(false);
-        }
         tile.playerSlot = activePlayer;
         
         if (tile.checkSlime(activePlayer))
@@ -37,25 +32,13 @@ public class GameManager : MonoBehaviour
             if (nextSlideTile != null)
             {
                 movePlayer(activePlayer, nextSlideTile);
-            }
-            else
-            {
-                endTurn(activePlayer);
+                return;
             }
         }
-        else
-        {
-            endTurn(activePlayer);
-        }
+        RoundManager.switchTurns();
     }
 
-    static void endTurn(Player activePlayer)
-    {
-        RoundManager.switchTurns();
-        activePlayer = RoundManager.activePlayer();
-        Tile currentTile = activePlayer.activeTile;
-        Map.markPassableFields(currentTile, activePlayer);
-    }
+
 
 
 

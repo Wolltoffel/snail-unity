@@ -16,6 +16,10 @@ public class Tile
     public Tile(Vector3 worldPosition,Vector2 position) {
         this.position = position;
         this.worldPosition = worldPosition;
+        left = null;
+        right = null;
+        up = null;
+        down = null;
     }
 
     public bool checkPassable(Player player)
@@ -56,23 +60,24 @@ public class Tile
 
     public Tile giveNextSlideTile(Tile adjacentTile, Player player)
     {
-        if (right != null)
+        if (right != null && adjacentTile.right!=null )
         {
-             if (right == adjacentTile && adjacentTile.right.checkSlime(player))
-            return adjacentTile.right.right;
+            if (right == adjacentTile && adjacentTile.right.checkSlime(player) && adjacentTile.right.right != null)
+                return adjacentTile.right.right;
         }
-        if (left != null)
+        if (left != null && adjacentTile.left!= null)
         {
-            if (left == adjacentTile && adjacentTile.left.checkSlime(player))
+            if (left == adjacentTile && adjacentTile.left.checkSlime(player) && adjacentTile.left.left != null)
                 return adjacentTile.left.left;
         }
-        if(up!=null){
-            if (up == adjacentTile && adjacentTile.up.checkSlime(player))
-                return up.up;
-        }
-        if (down != null)
+        if(up!=null && adjacentTile.up != null )
         {
-            if (down == adjacentTile && adjacentTile.down.checkSlime(player))
+            if (up == adjacentTile && adjacentTile.up.checkSlime(player) && adjacentTile.up.up != null)
+                return adjacentTile.up.up;
+        }
+        if (down != null && adjacentTile.down != null )
+        {
+            if (down == adjacentTile && adjacentTile.down.checkSlime(player) && adjacentTile.down.down != null)
                 return adjacentTile.down.down;
         }
 

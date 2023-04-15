@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class RoundManager : MonoBehaviour
 {
     static float turnDurationCounter;
     float maxTurnDuration;
+
 
     private void Awake()
     {
@@ -14,7 +16,6 @@ public class RoundManager : MonoBehaviour
         PlayerConfig.DetermineTurnOrder();
     }
 
-
     private void Update()
     {
        // countdownRoundSeconds();
@@ -22,6 +23,7 @@ public class RoundManager : MonoBehaviour
 
     public static void switchTurns()
     {
+
         turnDurationCounter = 0;
 
         if (PlayerConfig.player[0].turn == false)
@@ -34,7 +36,16 @@ public class RoundManager : MonoBehaviour
             PlayerConfig.player[0].turn = false;
             PlayerConfig.player[1].turn = true;
         }
-        Debug.Log("Switched Turns");
+
+
+        foreach (Tile item in Map.highlightedTiles)
+        {
+            item.highLightSlot.SetActive(false);
+        }
+
+        Player activePlayer = RoundManager.activePlayer();
+        Tile currentTile = activePlayer.activeTile;
+        Map.markPassableFields(currentTile, activePlayer);
 
     }
 

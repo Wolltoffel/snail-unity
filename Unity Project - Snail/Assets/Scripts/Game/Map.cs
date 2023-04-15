@@ -106,12 +106,12 @@ public class Map : MonoBehaviour
 
     void SpawnPlayer(Tile newTile, int index, Vector3 position)
     {
-        newTile.playerSlot = PlayerConfig.player[0] == null ? new Player("Player 1") : PlayerConfig.player[0];
-        newTile.playerSlot.sprite = Instantiate(playerSprites[0], position, Quaternion.Euler(Vector3.zero)) as GameObject;
-        newTile.playerSlot.sprite.GetComponent<SpriteRenderer>().sortingOrder = 2;
-        newTile.playerSlot.sprite.transform.parent = newTile.grassField.transform;
-        newTile.playerSlot.sprite.name = $"{newTile.playerSlot.name} Sprite";
-        newTile.playerSlot.activeTile = newTile;
+         newTile.playerSlot = PlayerConfig.player[index] == null ? new Player("Player "+index) : PlayerConfig.player[index];
+         newTile.playerSlot.sprite = Instantiate(playerSprites[index], position, Quaternion.Euler(Vector3.zero)) as GameObject;
+         newTile.playerSlot.sprite.GetComponent<SpriteRenderer>().sortingOrder = 2;
+         newTile.playerSlot.sprite.transform.parent = newTile.grassField.transform;
+         newTile.playerSlot.sprite.name = $"{newTile.playerSlot.name} Sprite";
+         newTile.playerSlot.activeTile = newTile;
     }
 
     void manageTiles()
@@ -176,10 +176,14 @@ public class Map : MonoBehaviour
         List<Tile> proxomityTiles = new List<Tile>();
         List<Tile> freeTiles = new List<Tile>();
 
-        proxomityTiles.Add(currentTile.left);
-        proxomityTiles.Add(currentTile.right);
-        proxomityTiles.Add(currentTile.up);
-        proxomityTiles.Add(currentTile.down);
+        if(currentTile.left!=null)
+            proxomityTiles.Add(currentTile.left);
+        if (currentTile.right != null)
+            proxomityTiles.Add(currentTile.right);
+        if (currentTile.up != null)
+            proxomityTiles.Add(currentTile.up);
+        if (currentTile.down != null)
+            proxomityTiles.Add(currentTile.down);
 
         foreach (Tile tile in proxomityTiles)
         {
