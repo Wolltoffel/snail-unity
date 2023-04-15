@@ -5,7 +5,7 @@ using System;
 
 public class RoundManager : MonoBehaviour
 {
-    static float turnDurationCounter;
+    public static float turnDurationCounter;
     float maxTurnDuration;
 
 
@@ -18,7 +18,7 @@ public class RoundManager : MonoBehaviour
 
     private void Update()
     {
-       // countdownRoundSeconds();
+       countdownRoundSeconds();
     }
 
     public static void switchTurns()
@@ -82,6 +82,4 @@ public class RoundManager : MonoBehaviour
         }
         return 0;
     }
-
-    void stopCountRoundSeconds() { }
 }
