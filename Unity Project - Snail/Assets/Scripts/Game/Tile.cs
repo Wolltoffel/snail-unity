@@ -49,6 +49,7 @@ public class Tile
         playerSlot.sprite.GetComponent<SpriteRenderer>().sortingOrder = 2;
         playerSlot.sprite.transform.parent = grassFieldSlot.transform;
         playerSlot.sprite.name = $"{playerSlot.name} Sprite";
+        playerSlot.sprite.AddComponent<PlayerSprite>();
         playerSlot.activeTile = this;
     }
 
@@ -113,28 +114,18 @@ public class Tile
 
     public Tile giveNextSlideTile(Tile adjacentTile, Player player)
     {
-        if (right != null && adjacentTile.right!=null )
-        {
-            if (right == adjacentTile && adjacentTile.right.checkSlime(player) && adjacentTile.right.right != null)
-                return adjacentTile.right.right;
-        }
-        if (left != null && adjacentTile.left!= null)
-        {
-            if (left == adjacentTile && adjacentTile.left.checkSlime(player) && adjacentTile.left.left != null)
-                return adjacentTile.left.left;
-        }
-        if(up!=null && adjacentTile.up != null )
-        {
-            if (up == adjacentTile && adjacentTile.up.checkSlime(player) && adjacentTile.up.up != null)
-                return adjacentTile.up.up;
-        }
-        if (down != null && adjacentTile.down != null )
-        {
-            if (down == adjacentTile && adjacentTile.down.checkSlime(player) && adjacentTile.down.down != null)
-                return adjacentTile.down.down;
-        }
+        Tile[] currentTiles = new Tile[] {left,right,up,down};
+        Tile[] adjacentTiles = new Tile[] {adjacentTile.left, adjacentTile.right, adjacentTile.up, adjacentTile.down};
 
-       return null;
+        for (int i= 0; i < currentTiles.Length; i++)
+        {
+            if(currentTiles[i] == adjacentTile && adjacentTiles[i] != null)
+            {
+                if (adjacentTiles[i].checkSlime(player))
+                    return adjacentTiles[i];
+            }
+        }
+        return null;
     }
 
    

@@ -19,7 +19,6 @@ public class Map : MonoBehaviour
     {
         tiles = new List<Tile>();
         loadMap();
-        calculateCenterPosition();
     }
 
 
@@ -56,6 +55,7 @@ public class Map : MonoBehaviour
         }
 
         manageTiles();
+        calculateCenterPosition();
     }
 
 

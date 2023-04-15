@@ -20,11 +20,7 @@ public class GameManager : MonoBehaviour
     public static void movePlayer(Player activePlayer, Tile tile)
     {
         Tile previousTile = activePlayer.activeTile;
-        activePlayer.sprite.transform.position = tile.worldPosition;
-        activePlayer.activeTile.playerSlot = null;
-        activePlayer.activeTile.AddSlime();
-        activePlayer.activeTile = tile;
-        tile.playerSlot = activePlayer;
+        activePlayer.move(tile);
         
         if (tile.checkSlime(activePlayer))
         {
