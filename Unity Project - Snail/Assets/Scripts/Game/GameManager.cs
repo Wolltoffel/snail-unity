@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
         Tile previousTile = activePlayer.activeTile;
         activePlayer.sprite.transform.position = tile.worldPosition;
         activePlayer.activeTile.playerSlot = null;
-        Map.AddSlime(activePlayer.activeTile, activePlayer);
+        activePlayer.activeTile.AddSlime();
         activePlayer.activeTile = tile;
         tile.playerSlot = activePlayer;
         
