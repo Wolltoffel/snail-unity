@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 
 public class Map : MonoBehaviour
@@ -17,6 +18,7 @@ public class Map : MonoBehaviour
 
     private void Awake()
     {
+        RoundManager.switchTurn += switchRounds;
         tiles = new List<Tile>();
         loadMap();
     }
@@ -96,7 +98,7 @@ public class Map : MonoBehaviour
     }
 
 
-    public static void markPassableFields(Tile currentTile, Player player)
+    public static void markPassableTiles(Tile currentTile, Player player)
     {
         List<Tile> passableTiles = checkPassableTiles(currentTile, player);
         highlightedTiles = passableTiles;
@@ -134,5 +136,37 @@ public class Map : MonoBehaviour
     void calculateCenterPosition()
     {
         centerPosition = upperLeftCorner + new Vector2(size.x / 2, -size.y / 2);
+    }
+
+
+    void switchRounds(object sender, EventArgs e)
+    {
+        foreach (Tile item in highlightedTiles)
+        {
+            item.highLightSlot.SetActive(false);
+        }
+
+        Player activePlayer = RoundManager.activePlayer();
+        Tile currentTile = activePlayer.activeTile;
+        markPassableTiles(currentTile, activePlayer);
+        checkTiles();
+    }
+
+
+    void checkTiles()
+    {
+        if (highlightedTiles.Count < 1) {
+            GameManager.EndGame();
+        }
+
+        foreach (Tile tile in tiles)
+        {
+            if (tile.slime==null && tile.impassableSlot==null) {
+                return;
+            }
+        }
+
+        GameManager.EndGame();
+
     }
 }

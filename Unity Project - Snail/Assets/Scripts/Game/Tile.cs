@@ -10,11 +10,11 @@ public class Tile
     public Tile left, right, up, down;
     public GameObject highLightSlot, grassFieldSlot, impassableSlot;
     public Slime slime;
-    static SpriteLoader spriteLoader;
+    static AssetLoader spriteLoader;
     public Tile(Vector3 worldPosition,Vector2 position) {
         this.position = position;
         this.worldPosition = worldPosition;
-        spriteLoader = new SpriteLoader();
+        spriteLoader = new AssetLoader();
     }
 
     public void insertContent(int index) {

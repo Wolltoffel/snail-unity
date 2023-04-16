@@ -1,38 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GameManager : MonoBehaviour
 {
-    List <Player> player;
-    MapData activeMap;
-    PlayerSettings settings;
-    List<Tile> tiles;
-
     private void Start()
     {
-        player = PlayerConfig.player;
-        tiles = Map.tiles;
 
-        Map.markPassableFields(RoundManager.activePlayer().activeTile, RoundManager.activePlayer());
+        Map.markPassableTiles(RoundManager.activePlayer().activeTile, RoundManager.activePlayer());
     }
 
-    public static void movePlayer(Player activePlayer, Tile tile)
+    public static void movePlayer(Player activePlayer, Tile tile, ActionInfo actionInfo)
     {
         Tile previousTile = activePlayer.activeTile;
         activePlayer.move(tile);
         
         if (tile.checkSlime(activePlayer))
         {
+            if (actionInfo.action != ActionInfo.Action.slide)
+                actionInfo.action = ActionInfo.Action.empty;
+
             Tile nextSlideTile = previousTile.giveNextSlideTile(tile, activePlayer);;
             if (nextSlideTile != null)
-            {
-                movePlayer(activePlayer, nextSlideTile);
+            {   actionInfo.action = ActionInfo.Action.slide;
+                movePlayer(activePlayer, nextSlideTile,actionInfo);
                 return;
             }
         }
-        RoundManager.switchTurns();
+        
+        RoundManager.switchTurnsEvent(actionInfo);
+
     }
+
+    public static void EndGame()
+    {
+        Debug.Log("End Game");
+    }
+
 
 
 

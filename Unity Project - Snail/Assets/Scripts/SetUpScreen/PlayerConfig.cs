@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerConfig : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerConfig : MonoBehaviour
         player = new List<Player>();
         player.Add(new Player("Player 1"));
         player.Add(new Player("Player 2"));
+        RoundManager.switchTurn += SwitchTurns;
     }
 
     public static void SetName(string name,int index)
@@ -26,9 +28,32 @@ public class PlayerConfig : MonoBehaviour
 
     public static void DetermineTurnOrder()
     {
-        int random = Random.Range(0, 1);
+        int random = UnityEngine.Random.Range(0, 1);
         player[0].turn = random == 0 ? true : false;
         player[1].turn = random == 1 ? true : false;
     }
+
+    static void SwitchTurns(object sender, EventArgs e)
+    {
+
+        if (player[0].turn == false)
+        {
+            player[0].turn = true;
+            player[1].turn = false;
+        }
+        else
+        {
+            player[0].turn = false;
+            player[1].turn = true;
+        }
+    }
+
+    public static void unsubscribeSwitchTurns()
+    {
+        RoundManager.switchTurn -= SwitchTurns;
+    }
+
+
+    
 
 }

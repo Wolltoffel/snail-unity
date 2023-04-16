@@ -9,9 +9,9 @@ public class Player
     public GameObject sprite;
     public Tile activeTile;
     public bool turn;
+    public int turnsWithoutCapture;
     public enum Agent{computer,human }
     public Agent agent;
-    public int speed;
 
     bool moving;
 
@@ -28,6 +28,7 @@ public class Player
         activeTile.AddSlime();
         activeTile = tile;
         tile.playerSlot = this;
+        score++;
     }
 
 

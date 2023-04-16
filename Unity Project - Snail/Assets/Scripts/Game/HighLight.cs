@@ -25,9 +25,15 @@ public class HighLight : MonoBehaviour
         transform.localScale = initialSize;
     }
 
+    private void OnDisable()
+    {
+        transform.localScale = initialSize;
+    }
+
     private void OnMouseDown()
     {
         Player player = RoundManager.activePlayer();
-        GameManager.movePlayer(player, tile);
+        ActionInfo actionInfo = new ActionInfo(ActionInfo.Action.capture);
+        GameManager.movePlayer(player, tile,actionInfo);
     }
 }

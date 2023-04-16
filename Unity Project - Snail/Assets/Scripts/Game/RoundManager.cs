@@ -7,6 +7,8 @@ public class RoundManager : MonoBehaviour
 {
     public static float turnDurationCounter;
     float maxTurnDuration;
+    public static event EventHandler<ActionInfo> switchTurn;
+
 
 
     private void Awake()
@@ -14,6 +16,7 @@ public class RoundManager : MonoBehaviour
         turnDurationCounter = 0;
         maxTurnDuration = PlayerSettingsManager.settings.maxTurnDuration;
         PlayerConfig.DetermineTurnOrder();
+        switchTurn += resetCounter;
     }
 
     private void Update()
@@ -21,39 +24,22 @@ public class RoundManager : MonoBehaviour
        countdownRoundSeconds();
     }
 
-    public static void switchTurns()
+    public static void switchTurnsEvent(ActionInfo actionInfo)
     {
+        switchTurn?.Invoke(null, actionInfo);
+    }
 
+    public static void resetCounter(object sender, EventArgs e)
+    {
         turnDurationCounter = 0;
-
-        if (PlayerConfig.player[0].turn == false)
-        {
-            PlayerConfig.player[0].turn = true;
-            PlayerConfig.player[1].turn = false;
-        }
-        else
-        {
-            PlayerConfig.player[0].turn = false;
-            PlayerConfig.player[1].turn = true;
-        }
-
-
-        foreach (Tile item in Map.highlightedTiles)
-        {
-            item.highLightSlot.SetActive(false);
-        }
-
-        Player activePlayer = RoundManager.activePlayer();
-        Tile currentTile = activePlayer.activeTile;
-        Map.markPassableFields(currentTile, activePlayer);
-
     }
 
     void countdownRoundSeconds() {
         turnDurationCounter += Time.deltaTime;
         if (turnDurationCounter > maxTurnDuration)
         {
-            switchTurns();
+            ActionInfo actionInfo = new ActionInfo(ActionInfo.Action.skip);
+            switchTurn?.Invoke(null, actionInfo );
         }
     }
 
@@ -82,4 +68,17 @@ public class RoundManager : MonoBehaviour
         }
         return 0;
     }
+
+    public static void skipRound()
+    {
+        int turnsWithoutCapture = RoundManager.activePlayer().turnsWithoutCapture;
+        turnsWithoutCapture++;
+        RoundManager.activePlayer().turnsWithoutCapture = turnsWithoutCapture;
+        if (turnsWithoutCapture >= PlayerSettingsManager.settings.maxTurnsWithoutCapture)
+        {
+            PlayerConfig.unsubscribeSwitchTurns();
+        }
+    }
+
+
 }
