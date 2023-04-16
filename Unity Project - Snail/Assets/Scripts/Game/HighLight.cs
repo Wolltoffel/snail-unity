@@ -33,7 +33,7 @@ public class HighLight : MonoBehaviour
     private void OnMouseDown()
     {
         Player player = RoundManager.activePlayer();
-        ActionInfo actionInfo = new ActionInfo(ActionInfo.Action.capture);
+        ActionInfo actionInfo = new ActionInfo(ActionInfo.Action.capture,player);
         GameManager.movePlayer(player, tile,actionInfo);
     }
 }

@@ -21,7 +21,7 @@ public class Announcement : MonoBehaviour
 
     void makeAnnouncement(object sender, ActionInfo actionInfo)
     {
-        Player activePlayer = RoundManager.activePlayer();
+        Player activePlayer = actionInfo.player;
         string activePlayerName = activePlayer.name;
         string text="";
 
@@ -39,11 +39,6 @@ public class Announcement : MonoBehaviour
         }
 
         textMesh.text = text;
-        AnnouncementAnimation();
     }
 
-    void AnnouncementAnimation()
-    {
-        GetComponent<Animator>().Play("FadeInAndOut");
-    }
 }

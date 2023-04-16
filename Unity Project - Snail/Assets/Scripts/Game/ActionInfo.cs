@@ -10,9 +10,11 @@ public class ActionInfo : EventArgs
         slide, skip, capture,empty
     };
     public Action action;
+    public Player player;
 
-    public ActionInfo(Action action)
+    public ActionInfo(Action action, Player player)
     {
         this.action = action;
+        this.player = player;
     }
 }
