@@ -5,6 +5,8 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
+    public static event EventHandler<StatData> endGame;
+
     private void Start()
     {
 
@@ -21,7 +23,7 @@ public class GameManager : MonoBehaviour
             if (actionInfo.action != ActionInfo.Action.slide)
                 actionInfo.action = ActionInfo.Action.empty;
 
-            Tile nextSlideTile = previousTile.giveNextSlideTile(tile, activePlayer);;
+            Tile nextSlideTile = previousTile.giveNextSlideTile(tile, activePlayer);
             if (nextSlideTile != null)
             {   actionInfo.action = ActionInfo.Action.slide;
                 movePlayer(activePlayer, nextSlideTile,actionInfo);
@@ -30,21 +32,22 @@ public class GameManager : MonoBehaviour
         }
         
         RoundManager.switchTurnsEvent(actionInfo);
-
     }
 
     public static void EndGame()
     {
-        Debug.Log("End Game");
+        /*StatData stats = new StatData(RoundManager.roundCounter,);
+        endGame.Invoke(null,stats);*/
     }
 
+    //static Player winner()
+    //{
+       /* List<Player> players = PlayerConfig.player;
+        Player winner = players[0];
+        for(int i=0;i<players.Capacity;i++)
+        {
+            if (players[i].score>players[i+1].score)
 
+        }*/
+    }
 
-
-
-
-
-
-
-
-}
