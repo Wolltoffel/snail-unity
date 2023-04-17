@@ -8,15 +8,14 @@ public class RoundManager : MonoBehaviour
     public static float turnDurationCounter;
     float maxTurnDuration;
     public static event EventHandler<ActionInfo> switchTurn;
-
-
+    public static int turnCounter;
 
     private void Awake()
     {
         turnDurationCounter = 0;
         maxTurnDuration = PlayerSettingsManager.settings.maxTurnDuration;
-        PlayerConfig.DetermineTurnOrder();
         switchTurn += resetCounter;
+        GameManager.endGame += ResetManager;
     }
 
     private void Update()
@@ -31,6 +30,8 @@ public class RoundManager : MonoBehaviour
 
     public static void resetCounter(object sender, EventArgs e)
     {
+        turnCounter++;
+        Debug.Log(turnCounter);
         turnDurationCounter = 0;
     }
 
@@ -52,7 +53,8 @@ public class RoundManager : MonoBehaviour
                 return player;
             }
         }
-        return null;
+        PlayerConfig.DetermineTurnOrder();
+        return activePlayer();
     }
 
     public static int activePlayerIndex()
@@ -78,6 +80,14 @@ public class RoundManager : MonoBehaviour
         {
             PlayerConfig.unsubscribeSwitchTurns();
         }
+    }
+
+    private void ResetManager(object sender, EventArgs e)
+    {
+        turnCounter = 0;
+        turnDurationCounter = 0;
+        switchTurn -= resetCounter;
+        GameManager.endGame -= ResetManager;
     }
 
 

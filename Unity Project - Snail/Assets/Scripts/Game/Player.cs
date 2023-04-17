@@ -27,8 +27,18 @@ public class Player
         activeTile.playerSlot = null;
         activeTile.AddSlime();
         activeTile = tile;
+        turnsWithoutCapture = 0;
         tile.playerSlot = this;
         score++;
+    }
+
+    public void resetPlayer()
+    {
+        score = 0;
+        Object.Destroy(sprite);
+        activeTile = null;
+        turn = false;
+        turnsWithoutCapture = 0;
     }
 
 

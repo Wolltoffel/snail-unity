@@ -128,6 +128,13 @@ public class Tile
         return null;
     }
 
+    public void emptyTile()
+    {
+      Object.Destroy(highLightSlot);
+      Object.Destroy(grassFieldSlot);
+      Object.Destroy(impassableSlot);
+     }
+
    
 
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,7 +10,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-
         Map.markPassableTiles(RoundManager.activePlayer().activeTile, RoundManager.activePlayer());
     }
 
@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     {
         Tile previousTile = activePlayer.activeTile;
         activePlayer.move(tile);
-        
+
         if (tile.checkSlime(activePlayer))
         {
             if (actionInfo.action != ActionInfo.Action.slide)
@@ -25,29 +25,52 @@ public class GameManager : MonoBehaviour
 
             Tile nextSlideTile = previousTile.giveNextSlideTile(tile, activePlayer);
             if (nextSlideTile != null)
-            {   actionInfo.action = ActionInfo.Action.slide;
-                movePlayer(activePlayer, nextSlideTile,actionInfo);
+            { actionInfo.action = ActionInfo.Action.slide;
+                movePlayer(activePlayer, nextSlideTile, actionInfo);
                 return;
             }
         }
-        
-        RoundManager.switchTurnsEvent(actionInfo);
+
+        if (Map.checkTiles())
+        {
+            RoundManager.switchTurnsEvent(actionInfo);
+        }
+
     }
 
     public static void EndGame()
     {
-        /*StatData stats = new StatData(RoundManager.roundCounter,);
-        endGame.Invoke(null,stats);*/
+        Player winner = giveWinner();
+        Player loser = giveLooser();
+        StatData stats = new StatData(RoundManager.turnCounter+1,winner.score,winner.name,loser.name,loser.score);
+        StatManager.stats = stats;
+        endGame?.Invoke(null, stats);
+        SceneManager.LoadScene("End");
     }
 
-    //static Player winner()
-    //{
-       /* List<Player> players = PlayerConfig.player;
+    static Player giveWinner()
+    {
+        List<Player> players = PlayerConfig.player;
         Player winner = players[0];
-        for(int i=0;i<players.Capacity;i++)
+        foreach (Player player in players)
         {
-            if (players[i].score>players[i+1].score)
-
-        }*/
+            if (player.score > winner.score)
+                winner = player;
+        }
+        return winner;
     }
+
+    static Player giveLooser()
+    {
+
+        List<Player> players = PlayerConfig.player;
+        Player loser = players[0];
+        foreach (Player player in players)
+        {
+            if (player.score < loser.score)
+                loser = player;
+        }
+        return loser;
+    }
+}
 

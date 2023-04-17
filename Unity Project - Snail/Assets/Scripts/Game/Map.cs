@@ -19,6 +19,7 @@ public class Map : MonoBehaviour
     private void Awake()
     {
         RoundManager.switchTurn += switchRounds;
+        GameManager.endGame += emptyMap;
         tiles = new List<Tile>();
         loadMap();
     }
@@ -145,28 +146,42 @@ public class Map : MonoBehaviour
         {
             item.highLightSlot.SetActive(false);
         }
-
-        Player activePlayer = RoundManager.activePlayer();
-        Tile currentTile = activePlayer.activeTile;
-        markPassableTiles(currentTile, activePlayer);
-        checkTiles();
+ 
+            Player activePlayer = RoundManager.activePlayer();
+            Tile currentTile = activePlayer.activeTile;
+            markPassableTiles(currentTile, activePlayer);
+        
     }
 
 
-    void checkTiles()
+    public static bool checkTiles()
     {
         if (highlightedTiles.Count < 1) {
             GameManager.EndGame();
+            return false;
         }
 
         foreach (Tile tile in tiles)
         {
             if (tile.slime==null && tile.impassableSlot==null) {
-                return;
+                return true;
             }
         }
-
         GameManager.EndGame();
+        return false;
 
+    }
+
+    void emptyMap(object sender, EventArgs e)
+    {
+        foreach (Tile tile in tiles)
+        {
+            tile.emptyTile();
+        }
+
+        RoundManager.switchTurn -= switchRounds;
+        GameManager.endGame -= emptyMap;
+
+        tiles.Clear();
     }
 }

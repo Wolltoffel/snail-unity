@@ -10,10 +10,15 @@ public class PlayerConfig : MonoBehaviour
 
     private void Awake()
     {
-        player = new List<Player>();
-        player.Add(new Player("Player 1"));
-        player.Add(new Player("Player 2"));
+        if (player == null)
+        {
+            player = new List<Player>();
+            player.Add(new Player("Player 1"));
+            player.Add(new Player("Player 2"));
+        }
         RoundManager.switchTurn += SwitchTurns;
+        GameManager.endGame += resetPlayers;
+        DetermineTurnOrder();
     }
 
     public static void SetName(string name,int index)
@@ -51,6 +56,13 @@ public class PlayerConfig : MonoBehaviour
     public static void unsubscribeSwitchTurns()
     {
         RoundManager.switchTurn -= SwitchTurns;
+    }
+
+    void resetPlayers(object sender, EventArgs e) {
+        foreach (Player player in player)
+        {
+            player.resetPlayer();
+        }
     }
 
 
