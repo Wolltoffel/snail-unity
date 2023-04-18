@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Player
 {
@@ -29,13 +30,17 @@ public class Player
         activeTile = tile;
         turnsWithoutCapture = 0;
         tile.playerSlot = this;
+    }
+
+    public void increaseScore()
+    {
         score++;
     }
 
     public void resetPlayer()
     {
         score = 0;
-        Object.Destroy(sprite);
+        UnityEngine.Object.Destroy(sprite);
         activeTile = null;
         turn = false;
         turnsWithoutCapture = 0;

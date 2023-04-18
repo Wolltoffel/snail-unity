@@ -6,12 +6,9 @@ using TMPro;
 
 public class Announcement : MonoBehaviour
 {
-    TextMeshProUGUI textMesh;
-
     void Start()
     {
         RoundManager.switchTurn += makeAnnouncement;
-        textMesh = GetComponent<TextMeshProUGUI>();
     }
     void makeAnnouncement(object sender, ActionInfo actionInfo)
     {
@@ -22,17 +19,22 @@ public class Announcement : MonoBehaviour
         switch (actionInfo.action)
         {
             case ActionInfo.Action.slide:
-                text = $"{activePlayerName}: Slide to {activePlayer.activeTile.position.x} {activePlayer.activeTile.position.y}";
+                text = $"{activePlayerName} slides to {activePlayer.activeTile.position.x}/{activePlayer.activeTile.position.y}";
                 break;
             case ActionInfo.Action.capture:
-                text = $"{activePlayerName}: Capture {activePlayer.activeTile.position.x} {activePlayer.activeTile.position.y}";
+                text = $"{activePlayerName} captured {activePlayer.activeTile.position.x}/{activePlayer.activeTile.position.y}";
                 break;
             case ActionInfo.Action.skip:
-                text = $"{activePlayerName}: Miss";
+                text = $"{activePlayerName} missed his turn";
                 break;
         }
 
-        textMesh.text = text;
+        if (text != "")
+        {
+            PopUpManager popUpManager = new PopUpManager("PopUpTemplates/PopUp_Template_2");
+            popUpManager.showPopUp(text, 0.5f);
+        }
+
     }
 
 }

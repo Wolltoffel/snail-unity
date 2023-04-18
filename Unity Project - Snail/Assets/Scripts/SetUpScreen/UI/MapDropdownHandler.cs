@@ -9,6 +9,8 @@ public class MapDropdownHandler : MonoBehaviour
 
     public MapData testData;
 
+    int dropDownIndex;
+
     private void Start()
     {
         TMPro.TMP_Dropdown dropdown = GetComponent<TMPro.TMP_Dropdown>();
@@ -37,11 +39,15 @@ public class MapDropdownHandler : MonoBehaviour
 
         dropdown.onValueChanged.AddListener(delegate { setMap(dropdown); });
 
+        dropDownIndex = dropdown.value;
     }
 
     void setMap(TMPro.TMP_Dropdown dropdown)
     {
         int index = dropdown.value;
-        mapManager.setSelectedMap(mapManager.maps[index]);
+        if (mapManager.trySettingSelectedMap(mapManager.maps[index]))
+            dropDownIndex = dropdown.value;
+        else
+            dropdown.value = dropDownIndex;
     }
 }

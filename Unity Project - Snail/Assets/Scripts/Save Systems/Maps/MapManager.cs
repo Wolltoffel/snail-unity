@@ -44,7 +44,19 @@ public class MapManager : MonoBehaviour
         maps = maps.OrderBy(map => map.name).ToList<MapData>();
     }
 
-    void setSelectdMap() {
+    public bool trySettingSelectedMap(MapData mapData) {
+        string mapValidity = checkMapValidity(mapData);
+        if (mapValidity== "Valid")
+        {
+            selectedMap = mapData;
+            return true;
+        }
+        else
+        {
+           PopUpManager popUpManager  =  new PopUpManager("PopUpTemplates/PopUp_Template_1");
+           popUpManager.showPopUp(mapValidity, 5);
+            return false;
+        }
     }
 
     string checkMapValidity(MapData mapData)
@@ -52,16 +64,16 @@ public class MapManager : MonoBehaviour
         int mapFieldCount = mapData.size.x * mapData.size.y;
 
         if (mapData.contents.Length != mapFieldCount)
-            return $"{mapData.name}'s tiles are exceeding or receding the specified mapFieldCount .";
+            return $"{mapData.name}'s tiles are exceeding or receding the specified mapFieldCount.";
         if (PlayerSettingsManager.settings.requireSquareMap && mapData.size.x != mapData.size.y)
             return $"{mapData.name}is not square.";
         for (int i = 0; i < mapData.contents.Length; i++)
         {
             if (mapData.contents[i] != 129 && mapData.contents[i] != 130 && mapData.contents[i] != 64 && mapData.contents[i] != 0)
-                return $"{mapData.name} is using unkwon numbers. Pls update your map to only include the numbers: 129, 130, 64 and 0";
+                return $"{mapData.name} is using unkwon numbers. Pls update your map to only include the numbers: 129, 130, 64 and 0.";
         }
         if (checkPlayerValidity(mapData.contents))
-            return $"{mapData.name} is missing one or more players";
+            return $"{mapData.name} is missing one or more players.";
         return "Valid";
     }
 
@@ -82,4 +94,6 @@ public class MapManager : MonoBehaviour
         }
         return false;
     }
+
 }
+
