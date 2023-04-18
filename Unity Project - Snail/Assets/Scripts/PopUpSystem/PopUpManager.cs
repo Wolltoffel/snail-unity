@@ -10,9 +10,9 @@ public class PopUpManager
     GameObject popUp;
 
 
-    PopUpManager(string templatePath)
+    public PopUpManager(string templatePath)
     {
-        popUpTemplate = Resources.Load<GameObject>(templatePath) as GameObject;
+        popUpTemplate = Resources.Load(templatePath) as GameObject;
     }
 
    public void showPopUp(string text,float showTime) {

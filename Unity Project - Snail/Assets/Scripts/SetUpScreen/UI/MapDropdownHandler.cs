@@ -42,6 +42,6 @@ public class MapDropdownHandler : MonoBehaviour
     void setMap(TMPro.TMP_Dropdown dropdown)
     {
         int index = dropdown.value;
-        MapManager.selectedMap = mapManager.maps[index];
+        mapManager.setSelectedMap(mapManager.maps[index]);
     }
 }
