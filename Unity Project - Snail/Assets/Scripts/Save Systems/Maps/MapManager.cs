@@ -14,12 +14,17 @@ public class MapManager : MonoBehaviour
 
     private void Awake()
     {
+        loadMaps();
+    }
+
+    void loadMaps()
+    {
         saver = new SaveSystem();
 
-       savePath = Application.streamingAssetsPath + "/maps";
-       string[] filePaths  = System.IO.Directory.GetFiles(savePath, "*.json");
-       maps = new List<MapData>();
-       MapData[] mapArray = new MapData[filePaths.Length];
+        savePath = Application.streamingAssetsPath + "/maps";
+        string[] filePaths = System.IO.Directory.GetFiles(savePath, "*.json");
+        maps = new List<MapData>();
+        MapData[] mapArray = new MapData[filePaths.Length];
 
         for (int i = 0; i < filePaths.Length; i++)
         {
@@ -27,23 +32,54 @@ public class MapManager : MonoBehaviour
 
             if (mapArray[i] != null)
             {
-                int mapFieldCount = mapArray[i].size.x * mapArray[i].size.y;
-                
-                if (mapArray[i].contents.Length == mapFieldCount)
-                {
-                    mapArray[i].name = Path.GetFileNameWithoutExtension(filePaths[i]);
-                    maps.Add(mapArray[i]);
-                }
-                else
-                {
-                    Debug.Log("Map not formatted correctly");
-                }
-                
+                mapArray[i].name = Path.GetFileNameWithoutExtension(filePaths[i]);
+                maps.Add(mapArray[i]);
             }
         }
-
-        selectedMap = maps[0];
+        if (selectedMap == null)
+        {
+            selectedMap = maps[0];
+        }
 
         maps = maps.OrderBy(map => map.name).ToList<MapData>();
+    }
+
+    void setSelectdMap() {
+    }
+
+    string checkMapValidity(MapData mapData)
+    {
+        int mapFieldCount = mapData.size.x * mapData.size.y;
+
+        if (mapData.contents.Length != mapFieldCount)
+            return $"{mapData.name}'s tiles are exceeding or receding the specified mapFieldCount .";
+        if (PlayerSettingsManager.settings.requireSquareMap && mapData.size.x != mapData.size.y)
+            return $"{mapData.name}is not square.";
+        for (int i = 0; i < mapData.contents.Length; i++)
+        {
+            if (mapData.contents[i] != 129 && mapData.contents[i] != 130 && mapData.contents[i] != 64 && mapData.contents[i] != 0)
+                return $"{mapData.name} is using unkwon numbers. Pls update your map to only include the numbers: 129, 130, 64 and 0";
+        }
+        if (checkPlayerValidity(mapData.contents))
+            return $"{mapData.name} is missing one or more players";
+        return "Valid";
+    }
+
+    bool checkPlayerValidity(int[] contents)
+    {
+        for (int i = 0; i < contents.Length; i++)
+        {
+            if (contents[i] == 130)
+            {
+                for (int j = 0; j < contents.Length; j++)
+                {
+                    if (contents[i] == 129)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

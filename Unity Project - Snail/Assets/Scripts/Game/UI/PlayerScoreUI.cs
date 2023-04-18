@@ -10,12 +10,16 @@ public class PlayerScoreUI : MonoBehaviour
     TextMeshProUGUI tmpProText;
 
     void Start() {
-        player = PlayerConfig.player[playerIndex];
+        player = PlayerManager.player[playerIndex];
         tmpProText = GetComponent<TextMeshProUGUI>();
     }
 
     private void Update()
     {
+        if (player == null)
+        {
+            player = PlayerManager.player[playerIndex];
+        }
         string text = $"Score: {player.score}";
         tmpProText.text = text;
     }

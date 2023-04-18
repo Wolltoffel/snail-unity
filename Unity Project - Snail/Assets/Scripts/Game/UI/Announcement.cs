@@ -13,12 +13,6 @@ public class Announcement : MonoBehaviour
         RoundManager.switchTurn += makeAnnouncement;
         textMesh = GetComponent<TextMeshProUGUI>();
     }
-
-    private void Update()
-    {
-        
-    }
-
     void makeAnnouncement(object sender, ActionInfo actionInfo)
     {
         Player activePlayer = actionInfo.player;

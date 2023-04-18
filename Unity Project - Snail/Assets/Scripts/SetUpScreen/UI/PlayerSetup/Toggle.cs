@@ -44,13 +44,13 @@ public class Toggle : MonoBehaviour
     {
         computerToggle.SetActive(false);
         humanToggle.SetActive(true);
-        PlayerConfig.SetAgent(Player.Agent.human, index);
+        PlayerSetUp.SetAgent(Player.Agent.human, index);
     }
 
     void switchToComputer(int indexInput)
     {
         computerToggle.SetActive(true);
         humanToggle.SetActive(false);
-        PlayerConfig.SetAgent(Player.Agent.computer, index);
+        PlayerSetUp.SetAgent(Player.Agent.computer, index);
     }
 }

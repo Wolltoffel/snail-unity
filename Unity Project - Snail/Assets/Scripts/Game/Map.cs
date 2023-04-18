@@ -12,8 +12,8 @@ public class Map : MonoBehaviour
     static public Vector2 size;
     private MapData activeMap;
     
-    public static List<Tile> highlightedTiles;
-    public static List<Tile> tiles;
+    static List<Tile> highlightedTiles;
+    static List<Tile> tiles;
 
 
     private void Awake()
@@ -150,7 +150,6 @@ public class Map : MonoBehaviour
             Player activePlayer = RoundManager.activePlayer();
             Tile currentTile = activePlayer.activeTile;
             markPassableTiles(currentTile, activePlayer);
-        
     }
 
 

@@ -44,7 +44,7 @@ public class Tile
 
     void spawnPlayer(int index)
     {
-        playerSlot = PlayerConfig.player[index] == null ? new Player("Player " + index) : PlayerConfig.player[index];
+        playerSlot = PlayerManager.player[index] == null ? new Player("Player " + index) : PlayerManager.player[index];
         playerSlot.sprite = GameObject.Instantiate(spriteLoader.player[index], worldPosition, Quaternion.Euler(Vector3.zero)) as GameObject;
         playerSlot.sprite.GetComponent<SpriteRenderer>().sortingOrder = 2;
         playerSlot.sprite.transform.parent = grassFieldSlot.transform;

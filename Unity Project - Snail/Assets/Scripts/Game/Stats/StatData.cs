@@ -15,5 +15,6 @@ public class StatData: EventArgs
         this.rounds = rounds;
         this.winnerScore = winnerScore;
         this.winner = winner;
+        this.loserScore = loserScore;
     }
 }

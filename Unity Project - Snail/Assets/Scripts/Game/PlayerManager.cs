@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class PlayerConfig : MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
 
     public static List<Player> player;
@@ -16,20 +16,11 @@ public class PlayerConfig : MonoBehaviour
             player.Add(new Player("Player 1"));
             player.Add(new Player("Player 2"));
         }
-        RoundManager.switchTurn += SwitchTurns;
+        RoundManager.switchTurn += switchTurns;
         GameManager.endGame += resetPlayers;
         DetermineTurnOrder();
     }
 
-    public static void SetName(string name,int index)
-    {
-        player[index].name = name;
-    }
-
-    public static void SetAgent(Player.Agent agent,int index)
-    {
-        player[index].agent = agent;
-    }
 
     public static void DetermineTurnOrder()
     {
@@ -38,9 +29,8 @@ public class PlayerConfig : MonoBehaviour
         player[1].turn = random == 1 ? true : false;
     }
 
-    static void SwitchTurns(object sender, EventArgs e)
+    static void switchTurns(object sender, EventArgs e)
     {
-
         if (player[0].turn == false)
         {
             player[0].turn = true;
@@ -51,11 +41,12 @@ public class PlayerConfig : MonoBehaviour
             player[0].turn = false;
             player[1].turn = true;
         }
+
     }
 
     public static void unsubscribeSwitchTurns()
     {
-        RoundManager.switchTurn -= SwitchTurns;
+        RoundManager.switchTurn -= switchTurns;
     }
 
     void resetPlayers(object sender, EventArgs e) {
@@ -63,6 +54,7 @@ public class PlayerConfig : MonoBehaviour
         {
             player.resetPlayer();
         }
+        RoundManager.switchTurn -= switchTurns;
     }
 
 

@@ -31,7 +31,6 @@ public class RoundManager : MonoBehaviour
     public static void resetCounter(object sender, EventArgs e)
     {
         turnCounter++;
-        Debug.Log(turnCounter);
         turnDurationCounter = 0;
     }
 
@@ -46,20 +45,20 @@ public class RoundManager : MonoBehaviour
 
     public static Player activePlayer()
     {
-        foreach(Player player in PlayerConfig.player)
+        foreach(Player player in PlayerManager.player)
         {
             if (player.turn == true)
             {
                 return player;
             }
         }
-        PlayerConfig.DetermineTurnOrder();
+        PlayerManager.DetermineTurnOrder();
         return activePlayer();
     }
 
     public static int activePlayerIndex()
     {
-        List<Player> player = PlayerConfig.player;
+        List<Player> player = PlayerManager.player;
 
         for (int i= 0;i<player.Count;i++)
         {
@@ -78,7 +77,7 @@ public class RoundManager : MonoBehaviour
         RoundManager.activePlayer().turnsWithoutCapture = turnsWithoutCapture;
         if (turnsWithoutCapture >= PlayerSettingsManager.settings.maxTurnsWithoutCapture)
         {
-            PlayerConfig.unsubscribeSwitchTurns();
+            PlayerManager.unsubscribeSwitchTurns();
         }
     }
 

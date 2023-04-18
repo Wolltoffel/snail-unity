@@ -18,20 +18,21 @@ public class GameManager : MonoBehaviour
         Tile previousTile = activePlayer.activeTile;
         activePlayer.move(tile);
 
-        if (tile.checkSlime(activePlayer))
+        if (tile.checkSlime(activePlayer))  //Check Tile for slime
         {
             if (actionInfo.action != ActionInfo.Action.slide)
                 actionInfo.action = ActionInfo.Action.empty;
-
+            
+            //In case an adjacent Tile lies one tile away in the same direction as the player has just moved and it has slime it will return the adjacent tile
             Tile nextSlideTile = previousTile.giveNextSlideTile(tile, activePlayer);
             if (nextSlideTile != null)
-            { actionInfo.action = ActionInfo.Action.slide;
+            {   actionInfo.action = ActionInfo.Action.slide;
                 movePlayer(activePlayer, nextSlideTile, actionInfo);
                 return;
             }
         }
 
-        if (Map.checkTiles())
+        if (Map.checkTiles()) //Checks whether the game has ended
         {
             RoundManager.switchTurnsEvent(actionInfo);
         }
@@ -50,7 +51,7 @@ public class GameManager : MonoBehaviour
 
     static Player giveWinner()
     {
-        List<Player> players = PlayerConfig.player;
+        List<Player> players = PlayerManager.player;
         Player winner = players[0];
         foreach (Player player in players)
         {
@@ -62,8 +63,7 @@ public class GameManager : MonoBehaviour
 
     static Player giveLooser()
     {
-
-        List<Player> players = PlayerConfig.player;
+        List<Player> players = PlayerManager.player;
         Player loser = players[0];
         foreach (Player player in players)
         {

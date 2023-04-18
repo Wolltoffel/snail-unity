@@ -28,10 +28,14 @@ public class MapDropdownHandler : MonoBehaviour
         {
             dropdown.options.Add(new TMPro.TMP_Dropdown.OptionData() {text = item});
         }
-        dropdown.value = items.IndexOf("default");
+       
+        //Set Default or preselected Value for Dropdown as Standard
+        if (MapManager.selectedMap == null)
+            dropdown.value = items.IndexOf("default");
+        else
+            dropdown.value = items.IndexOf(MapManager.selectedMap.name);
+
         dropdown.onValueChanged.AddListener(delegate { setMap(dropdown); });
-
-
 
     }
 
