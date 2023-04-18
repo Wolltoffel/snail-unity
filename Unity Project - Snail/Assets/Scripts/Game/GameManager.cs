@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Map.markPassableTiles(RoundManager.activePlayer().activeTile, RoundManager.activePlayer());
+        MapBuilder.markPassableTiles(RoundManager.activePlayer().activeTile, RoundManager.activePlayer());
     }
 
     public static void movePlayer(Player activePlayer, Tile tile, ActionInfo actionInfo)
@@ -31,8 +31,11 @@ public class GameManager : MonoBehaviour
                 return;
             }
         }
+        else
+            activePlayer.increaseScore(); //Increase score if current field has no slime
 
-        if (Map.checkTiles()) //Checks whether the game has ended
+
+        if (MapBuilder.checkTiles()) //Checks whether the game has ended
         {
             RoundManager.switchTurnsEvent(actionInfo);
         }

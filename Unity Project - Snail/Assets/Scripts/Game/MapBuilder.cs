@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 
-public class Map : MonoBehaviour
+public class MapBuilder : MonoBehaviour
 {
     [SerializeField]Vector2 upperLeftCorner;
     static public int tileSize = 1;
@@ -23,7 +23,6 @@ public class Map : MonoBehaviour
         tiles = new List<Tile>();
         loadMap();
     }
-
 
     void loadMap()
     {
@@ -97,8 +96,6 @@ public class Map : MonoBehaviour
         }
 
     }
-
-
     public static void markPassableTiles(Tile currentTile, Player player)
     {
         List<Tile> passableTiles = checkPassableTiles(currentTile, player);

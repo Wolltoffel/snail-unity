@@ -29,7 +29,7 @@ public class PlayerSprite : MonoBehaviour
         if (Vector3.Distance(currentPosition, targetPosition) > 0.0001f)
         {
             Vector3 direction = (targetPosition - currentPosition).normalized;
-            transform.Translate(direction*movementSpeed*Map.tileSize*Time.deltaTime); 
+            transform.Translate(direction*movementSpeed*MapBuilder.tileSize*Time.deltaTime); 
         }
         else
         {
