@@ -50,6 +50,8 @@ public class Tile
         playerSlot.sprite.transform.parent = grassFieldSlot.transform;
         playerSlot.sprite.name = $"{playerSlot.name} Sprite";
         playerSlot.sprite.AddComponent<PlayerSprite>();
+        playerSlot.sprite.GetComponent<PlayerSprite>().player = playerSlot;
+        playerSlot.sprite.AddComponent<BoxCollider2D>();
         playerSlot.activeTile = this;
     }
 

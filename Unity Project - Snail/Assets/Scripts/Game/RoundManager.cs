@@ -52,7 +52,6 @@ public class RoundManager : MonoBehaviour
                 return player;
             }
         }
-        PlayerManager.DetermineTurnOrder();
         return activePlayer();
     }
 

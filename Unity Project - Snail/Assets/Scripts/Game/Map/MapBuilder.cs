@@ -153,7 +153,7 @@ public class MapBuilder : MonoBehaviour
     public static bool checkTiles()
     {
         if (highlightedTiles.Count < 1) {
-            GameManager.EndGame();
+            GameManager.EndGame(GameManager.giveWinner(),GameManager.giveLoser());
             return false;
         }
 
@@ -163,7 +163,7 @@ public class MapBuilder : MonoBehaviour
                 return true;
             }
         }
-        GameManager.EndGame();
+        GameManager.EndGame(GameManager.giveWinner(),GameManager.giveLoser());
         return false;
 
     }

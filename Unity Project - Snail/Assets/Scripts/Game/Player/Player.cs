@@ -20,6 +20,7 @@ public class Player
     {
         this.name = name;
         agent = Agent.human;
+
     }
 
     public void move(Tile tile)

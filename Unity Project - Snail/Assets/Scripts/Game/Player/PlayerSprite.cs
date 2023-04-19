@@ -7,6 +7,7 @@ public class PlayerSprite : MonoBehaviour
     bool activateMovement;
     Tile target;
     public float movementSpeed = 3f;
+    [HideInInspector]public Player player;
 
     private void Update()
     {
@@ -35,5 +36,10 @@ public class PlayerSprite : MonoBehaviour
         {
             activateMovement = false;
         }
+    }
+
+    private void OnMouseDown()
+    {
+        Controls.handleOnMouseInputs(player);
     }
 }

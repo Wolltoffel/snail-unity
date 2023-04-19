@@ -7,10 +7,17 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static event EventHandler<StatData> endGame;
+    private Controls controls;
 
     private void Start()
     {
+        controls = new Controls();
         MapBuilder.markPassableTiles(RoundManager.activePlayer().activeTile, RoundManager.activePlayer());
+    }
+
+    private void Update()
+    {
+        controls.checkInputs();
     }
 
     public static void movePlayer(Player activePlayer, Tile tile, ActionInfo actionInfo)
@@ -42,17 +49,17 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public static void EndGame()
+    public static void EndGame(Player winnerInput, Player loserInput)
     {
         Player winner = giveWinner();
-        Player loser = giveLooser();
+        Player loser = giveLoser();
         StatData stats = new StatData(RoundManager.turnCounter+1,winner.score,winner.name,loser.name,loser.score);
         StatManager.stats = stats;
         endGame?.Invoke(null, stats);
         SceneManager.LoadScene("End");
     }
 
-    static Player giveWinner()
+    public static Player giveWinner()
     {
         List<Player> players = PlayerManager.player;
         Player winner = players[0];
@@ -64,7 +71,7 @@ public class GameManager : MonoBehaviour
         return winner;
     }
 
-    static Player giveLooser()
+    public static Player giveLoser()
     {
         List<Player> players = PlayerManager.player;
         Player loser = players[0];
@@ -74,6 +81,11 @@ public class GameManager : MonoBehaviour
                 loser = player;
         }
         return loser;
+    }
+
+    static void giveUp()
+    {
+        
     }
 }
 
