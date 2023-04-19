@@ -24,7 +24,7 @@ public class PlayerManager : MonoBehaviour
 
     public static void DetermineTurnOrder()
     {
-        int random = UnityEngine.Random.Range(0, 1);
+        int random = UnityEngine.Random.Range(0, 2);
         player[0].turn = random == 0 ? true : false;
         player[1].turn = random == 1 ? true : false;
     }
