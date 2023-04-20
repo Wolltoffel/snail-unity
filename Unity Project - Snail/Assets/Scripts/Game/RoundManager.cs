@@ -67,7 +67,6 @@ public class RoundManager : MonoBehaviour
         return inactivePlayer();
     }
 
-
     public static int activePlayerIndex()
     {
         List<Player> player = PlayerManager.player;
