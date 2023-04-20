@@ -30,7 +30,7 @@ public class PlayerSettingsManager : MonoBehaviour
        
     }
 
-    void saveSettings(PlayerSettings settings)
+    public void saveSettings(PlayerSettings settings)
     {   
         saver.SaveData(settings, savePath + "/settings.gcf");
     }

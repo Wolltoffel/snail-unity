@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class ResetSettingsButton : MonoBehaviour
 {
+   [SerializeField] PlayerSettingsManager playerSettingsManager;
 
     public void resetSettings()
     {
-        PlayerSettingsManager.settings.loadDefaultValues();
+        PlayerSettings playerSettings = PlayerSettingsManager.settings;
+        playerSettings.loadDefaultValues();
+        playerSettingsManager.saveSettings(playerSettings);
     }
 }
