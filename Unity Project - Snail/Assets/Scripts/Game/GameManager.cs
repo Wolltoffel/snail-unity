@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         controls = new Controls();
-        MapBuilder.markPassableTiles(RoundManager.activePlayer().activeTile, RoundManager.activePlayer());
+        Player player = RoundManager.activePlayer();
+        MapBuilder.markPassableTiles(player.activeTile, player);
     }
 
     private void Update()
