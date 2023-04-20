@@ -55,6 +55,19 @@ public class RoundManager : MonoBehaviour
         return activePlayer();
     }
 
+    public static Player inactivePlayer()
+    {
+        foreach (Player player in PlayerManager.player)
+        {
+            if (player.turn == false)
+            {
+                return player;
+            }
+        }
+        return inactivePlayer();
+    }
+
+
     public static int activePlayerIndex()
     {
         List<Player> player = PlayerManager.player;

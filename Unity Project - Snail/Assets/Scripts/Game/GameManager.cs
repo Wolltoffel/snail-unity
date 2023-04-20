@@ -49,10 +49,8 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public static void EndGame(Player winnerInput, Player loserInput)
+    public static void EndGame(Player winner, Player loser)
     {
-        Player winner = giveWinner();
-        Player loser = giveLoser();
         StatData stats = new StatData(RoundManager.turnCounter+1,winner.score,winner.name,loser.name,loser.score);
         StatManager.stats = stats;
         endGame?.Invoke(null, stats);
@@ -81,11 +79,6 @@ public class GameManager : MonoBehaviour
                 loser = player;
         }
         return loser;
-    }
-
-    static void giveUp()
-    {
-        
     }
 }
 
