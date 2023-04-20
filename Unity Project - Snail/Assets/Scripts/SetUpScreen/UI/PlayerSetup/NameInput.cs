@@ -5,10 +5,28 @@ using TMPro;
 
 public class NameInput : MonoBehaviour
 {
-    public void setName(int index)
+    [SerializeField] int characterLimit;
+    TMP_InputField tMP_InputField;
+    [SerializeField]TextMeshProUGUI placeHolder;
+    [SerializeField]int playerIndex;
+    private void Start()
     {
-        string playername = GetComponent<TMP_InputField>().text;
-        PlayerSetUp.SetName(playername, index);
+        tMP_InputField = GetComponent<TMP_InputField>();
+        setDefaultValueForPlaceHolder();
+    }
+
+    void setDefaultValueForPlaceHolder() {
+        Player player = PlayerSetUp.player[playerIndex];
+        placeHolder.text = player.name;
+    }
+    void setCharacterLimit()
+    {
+        tMP_InputField.characterLimit = characterLimit;
+    }
+    public void setName()
+    {
+        string playername = tMP_InputField.text;
+        PlayerSetUp.SetName(playername, playerIndex);
     }
 
 }
