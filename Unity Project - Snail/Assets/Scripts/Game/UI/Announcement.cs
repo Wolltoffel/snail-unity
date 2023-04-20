@@ -8,9 +8,9 @@ public class Announcement : MonoBehaviour
 {
     void Start()
     {
-        RoundManager.switchTurn += makeAnnouncement;
+        RoundManager.switchTurn += makeAnnouncementAfterTurn;
     }
-    void makeAnnouncement(object sender, ActionInfo actionInfo)
+    void makeAnnouncementAfterTurn(object sender, ActionInfo actionInfo)
     {
         Player activePlayer = actionInfo.player;
         string activePlayerName = activePlayer.name;
@@ -32,9 +32,17 @@ public class Announcement : MonoBehaviour
         if (text != "")
         {
             PopUpManager popUpManager = new PopUpManager("PopUpTemplates/PopUp_Template_2");
-            popUpManager.showPopUp(text, 0.5f);
+            popUpManager.showPopUp(text, 0.3f);
         }
 
+    }
+
+    public void makeAnnouncementBeforeTurn()
+    {
+        string text = $"Round: {RoundManager.turnCounter} - {RoundManager.activePlayer()}";
+
+        PopUpManager popUpManager = new PopUpManager("PopUpTemplates/PopUp_Template_2");
+        popUpManager.showPopUp(text, 0.3f);
     }
 
 }
