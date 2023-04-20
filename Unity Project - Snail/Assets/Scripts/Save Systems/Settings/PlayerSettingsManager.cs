@@ -18,13 +18,21 @@ public class PlayerSettingsManager : MonoBehaviour
 
     void loadSettings()
     {
-        string[] filePaths = System.IO.Directory.GetFiles(savePath, "*settings.json");
-        settings = saver.LoadData<PlayerSettings>(filePaths[0]);
+        string[] filePaths = System.IO.Directory.GetFiles(savePath, "*settings.gcf");
+        if (filePaths.Length!=0)
+            settings = saver.LoadData<PlayerSettings>(filePaths[0]);
+        else
+        {
+            settings = new PlayerSettings();
+            settings.loadDefaultValues();
+        }
+
+       
     }
 
     void saveSettings(PlayerSettings settings)
     {   
-        saver.SaveData(settings, savePath + "/settings.json");
+        saver.SaveData(settings, savePath + "/settings.gcf");
     }
 
 }
