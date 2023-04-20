@@ -2,22 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Toggle : MonoBehaviour
+public class AIVsPlayerToggle : MonoBehaviour
 {
     [SerializeField] GameObject humanToggle;
     [SerializeField] GameObject computerToggle;
 
     enum ActiveAgent{
+        undefined,
         computer,
         human
     }
     ActiveAgent activeAgent;
 
+    Player player;
+
     [SerializeField]int index;
 
     private void Start()
     {
-        loadDefaultValues();
+        player = PlayerSetUp.player[index];
+
+     loadDefaultValues();
+
     }
     void loadDefaultValues()
     {
@@ -30,11 +36,9 @@ public class Toggle : MonoBehaviour
         switch (activeAgent)
         {
             case ActiveAgent.human:
-                activeAgent = ActiveAgent.computer;
                 switchToComputer(index);
                 break;
             case ActiveAgent.computer:
-                activeAgent = ActiveAgent.human;
                 switchToHuman(index);
                 break;
         }
@@ -42,6 +46,7 @@ public class Toggle : MonoBehaviour
 
     void switchToHuman(int indexInput)
     {
+        activeAgent = ActiveAgent.human;
         computerToggle.SetActive(false);
         humanToggle.SetActive(true);
         PlayerSetUp.SetAgent(Player.Agent.human, index);
@@ -49,6 +54,7 @@ public class Toggle : MonoBehaviour
 
     void switchToComputer(int indexInput)
     {
+        activeAgent = ActiveAgent.computer;
         computerToggle.SetActive(true);
         humanToggle.SetActive(false);
         PlayerSetUp.SetAgent(Player.Agent.computer, index);

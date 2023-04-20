@@ -60,7 +60,6 @@ public class MapBuilder : MonoBehaviour
         calculateCenterPosition();
     }
 
-
     void manageTiles()
     {
         foreach (Tile tile in tiles)
@@ -105,7 +104,6 @@ public class MapBuilder : MonoBehaviour
             tile.setHighlight(true);
         }
     }
-
     private static List<Tile> checkPassableTiles(Tile currentTile, Player player)
     {
         List<Tile> proxomityTiles = new List<Tile>();
@@ -135,7 +133,6 @@ public class MapBuilder : MonoBehaviour
     {
         centerPosition = upperLeftCorner + new Vector2(size.x / 2, -size.y / 2);
     }
-
 
     void switchRounds(object sender, EventArgs e)
     {
