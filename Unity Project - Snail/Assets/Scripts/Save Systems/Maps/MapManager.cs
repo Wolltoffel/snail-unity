@@ -62,11 +62,17 @@ public class MapManager : MonoBehaviour
     string checkMapValidity(MapData mapData)
     {
         int mapFieldCount = mapData.size.x * mapData.size.y;
+        PlayerSettings playersettings = PlayerSettingsManager.settings;
 
         if (mapData.contents.Length != mapFieldCount)
             return $"{mapData.name}'s tiles are exceeding or receding the specified mapFieldCount.";
-        if (PlayerSettingsManager.settings.requireSquareMap && mapData.size.x != mapData.size.y)
+        if (playersettings.requireSquareMap && mapData.size.x != mapData.size.y)
             return $"{mapData.name}is not square.";
+        if (mapData.size.x>playersettings.maxMapSize| 
+            mapData.size.y > playersettings.maxMapSize| 
+            mapData.size.x < playersettings.minMapSize| 
+            mapData.size.y < playersettings.minMapSize)
+            return $"{mapData.name} does not fulfill the required size requirements.";
         for (int i = 0; i < mapData.contents.Length; i++)
         {
             if (mapData.contents[i] != 129 && mapData.contents[i] != 130 && mapData.contents[i] != 64 && mapData.contents[i] != 0)
