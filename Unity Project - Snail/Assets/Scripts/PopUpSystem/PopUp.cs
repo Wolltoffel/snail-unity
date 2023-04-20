@@ -7,8 +7,8 @@ public class PopUp: MonoBehaviour {
     float showTimeCounter;
     float maxShowTime;
     PopUpManager popUpManager;
-    
-     private void Update()
+
+    private void Update()
      {
         checkPopUpActivation();
      }

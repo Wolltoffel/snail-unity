@@ -37,12 +37,20 @@ public class Announcement : MonoBehaviour
 
     }
 
-    public void makeAnnouncementBeforeTurn()
+    public PopUpManager makeAnnouncementBeforeTurn(float time)
     {
         string text = $"Round: {RoundManager.turnCounter} - {RoundManager.activePlayer()}";
 
         PopUpManager popUpManager = new PopUpManager("PopUpTemplates/PopUp_Template_2");
-        popUpManager.showPopUp(text, 0.3f);
+        popUpManager.showPopUp(text, time);
+        return popUpManager;
+    }
+
+    void initiateSwitchTurns()
+    {
+        float time = 0.3f;
+        PopUpManager popUpManager = makeAnnouncementBeforeTurn(time);
+        popUpManager.popUpHiddenNow += RoundManager.switchTurnsEvent;
     }
 
 }

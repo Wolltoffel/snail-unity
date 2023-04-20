@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class PopUpManager
 {
     GameObject popUpTemplate;
     GameObject canvas;
     GameObject popUp;
-
+    public event EventHandler popUpHiddenNow;
 
     public PopUpManager(string templatePath)
     {
@@ -24,9 +25,9 @@ public class PopUpManager
         popUp.GetComponentInChildren<Button>()?.onClick.AddListener(() => hidePopUp());
     }
 
-
     public void hidePopUp()
     {
+        popUpHiddenNow.Invoke(this, EventArgs.Empty);
         popUp.SetActive(false);
         GameObject.Destroy(popUp);
         popUp = null;
