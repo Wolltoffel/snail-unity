@@ -14,6 +14,7 @@ public class MapBuilder : MonoBehaviour
     
     static List<Tile> highlightedTiles;
     static List<Tile> tiles;
+    static Tile[,] arrayTiles;
 
 
     private void Awake()
@@ -29,30 +30,38 @@ public class MapBuilder : MonoBehaviour
        MapData activeMap= MapManager.selectedMap;
        int[] contents = activeMap.contents;
        size = activeMap.size;
+        Vector2Int sizeToInt = new Vector2Int((int)size.x, (int)size.y);
+        arrayTiles = new Tile[sizeToInt.x, sizeToInt.y];
 
         Vector2 nextPosition = upperLeftCorner+new Vector2(0.5f*tileSize,-0.5f*tileSize);
         int rowCounter=0;
-        int rowNumber = 1;
+        int rowIndex=0;
 
         for (int i = 0; i<contents.Length; i++)
         {
             //Add Tiles
             Vector3 worldPosition = new Vector3(nextPosition.x, nextPosition.y, 0);
-            Tile newTile = new Tile(worldPosition, new Vector2(i - (rowNumber - 1) * size.x+1, rowNumber));
+            
+            int x = i;
+            x = (int)Mathf.Clamp(x, 0, size.x-1);
+            Vector2Int position = new Vector2Int(x, rowIndex);
+            
+            Tile newTile = new Tile(worldPosition,position);
             newTile.insertContent(contents[i]);
 
             //Add Tiles to List
             tiles.Add(newTile);
+            arrayTiles[position.x, position.y] = newTile;
 
             nextPosition.x++;
             rowCounter++;
 
             //Switch Rows
-            if (rowCounter >= size.x) {
+            if (rowCounter > size.x-1) {
                 nextPosition.y--;
                 nextPosition.x = upperLeftCorner.x+0.5f*tileSize;
                 rowCounter = 0;
-                rowNumber++;
+                rowIndex++;
             }
         }
 
@@ -97,28 +106,35 @@ public class MapBuilder : MonoBehaviour
     }
     public static void markPassableTiles(Tile currentTile, Player player)
     {
-        List<Tile> passableTiles = checkPassableTiles(currentTile, player);
+        List<Tile> passableTiles = givePassableTiles(currentTile, player);
         highlightedTiles = passableTiles;
         foreach (Tile tile in passableTiles)
         {
             tile.setHighlight(true);
         }
     }
-    private static List<Tile> checkPassableTiles(Tile currentTile, Player player)
+    private static List<Tile> givePassableTiles(Tile currentTile, Player player)
     {
-        List<Tile> proxomityTiles = new List<Tile>();
+        List<Tile> neighbourTiles = new List<Tile>();
         List<Tile> freeTiles = new List<Tile>();
 
-        if(currentTile.left!=null)
-            proxomityTiles.Add(currentTile.left);
-        if (currentTile.right != null)
-            proxomityTiles.Add(currentTile.right);
-        if (currentTile.up != null)
-            proxomityTiles.Add(currentTile.up);
-        if (currentTile.down != null)
-            proxomityTiles.Add(currentTile.down);
+       int x = currentTile.position.x;
+       int y = currentTile.position.y;
 
-        foreach (Tile tile in proxomityTiles)
+        //Left Neighbour
+        if (x-1 > 0)
+            neighbourTiles.Add(arrayTiles[x - 1, y]);
+        //Right Neighbour
+        if (x +1 < size.x)
+            neighbourTiles.Add(arrayTiles[x + 1, y]);
+        //Top Neighbour
+        if (y - 1 > 0)
+            neighbourTiles.Add(arrayTiles[x, y-1]);
+        //Bottom Neighbour
+        if (y+1<size.y)
+            neighbourTiles.Add(arrayTiles[x, y+1]);
+
+        foreach (Tile tile in neighbourTiles)
         {
             if (tile != null)
             {
@@ -131,7 +147,7 @@ public class MapBuilder : MonoBehaviour
 
     void calculateCenterPosition()
     {
-        centerPosition = upperLeftCorner + new Vector2(size.x / 2, -size.y / 2);
+        centerPosition = upperLeftCorner + new Vector2(size.x / 2, -size.y / 2);;
     }
 
     void switchRounds(object sender, EventArgs e)
