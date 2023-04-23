@@ -5,16 +5,12 @@ using System;
 
 public class ActionInfo : EventArgs
 {
-    public enum Action
-    {
-        slide, skip, capture,empty
-    };
-    public Action action;
+    public ActionType actionType;
     public Player player;
 
-    public ActionInfo(Action action, Player player)
+    public ActionInfo(ActionType actionType, Player player)
     {
-        this.action = action;
+        this.actionType = actionType;
         this.player = player;
     }
 }

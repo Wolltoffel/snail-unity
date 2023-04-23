@@ -9,6 +9,7 @@ public class CameraManager : MonoBehaviour
         PlaceCamera();
         ScaleCamera();
     }
+
     void PlaceCamera()
     {
        transform.position = new Vector3(MapBuilder.centerPosition.x, MapBuilder.centerPosition.y, transform.position.z);
@@ -16,10 +17,10 @@ public class CameraManager : MonoBehaviour
 
     void ScaleCamera()
     {
-        float zoomLevel = 8;
         Vector2 leftUpperCorner = Vector2.zero;
-        Vector3 rightBottomCorner = MapBuilder.size;
+        Vector2 mapSize = MapBuilder.size;
+        Vector3 rightBottomCorner = new Vector3(mapSize.x, -mapSize.y, 0);
         float distance = Vector2.Distance(leftUpperCorner, rightBottomCorner);
-        GetComponent<Camera>().orthographicSize =  (distance)/ Mathf.Sqrt(zoomLevel);
+        GetComponent<Camera>().orthographicSize =  (distance)/ Mathf.Sqrt(8);
     }
 }

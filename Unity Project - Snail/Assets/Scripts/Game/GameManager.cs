@@ -24,24 +24,27 @@ public class GameManager : MonoBehaviour
     public static void movePlayer(Player activePlayer, Tile tile, ActionInfo actionInfo)
     {
         Tile previousTile = activePlayer.activeTile;
-        activePlayer.move(tile);
 
         if (tile.checkSlime(activePlayer))  //Check Tile for slime
         {
-            if (actionInfo.action != ActionInfo.Action.slide)
-                actionInfo.action = ActionInfo.Action.empty;
+            if (actionInfo.actionType != ActionType.slide)
+                actionInfo.actionType = ActionType.empty;
             
             //In case an adjacent Tile lies one tile away in the same direction as the player has just moved and it has slime it will return the adjacent tile
-            Tile nextSlideTile = previousTile.giveNextSlideTile(tile, activePlayer);
+            Tile nextSlideTile = MapBuilder.giveNextSlideTile(previousTile,tile, activePlayer);
             if (nextSlideTile != null)
-            {   actionInfo.action = ActionInfo.Action.slide;
+            {   actionInfo.actionType = ActionType.slide;
                 movePlayer(activePlayer, nextSlideTile, actionInfo);
                 return;
             }
         }
         else
+        {
+            tile.AddSlime();
             activePlayer.increaseScore(); //Increase score if current field has no slime
+        }
 
+        activePlayer.move(tile, actionInfo);
 
         if (MapBuilder.checkTiles()) //Checks whether the game has ended
         {

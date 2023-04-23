@@ -7,7 +7,7 @@ public class EndRoundButton : MonoBehaviour
 
     public void Aussetzen()
     {
-        ActionInfo actionInfo = new ActionInfo(ActionInfo.Action.skip, RoundManager.activePlayer());
+        ActionInfo actionInfo = new ActionInfo(ActionType.skip, RoundManager.activePlayer());
         RoundManager.switchTurnsEvent(actionInfo);
         RoundManager.skipRound();
     }

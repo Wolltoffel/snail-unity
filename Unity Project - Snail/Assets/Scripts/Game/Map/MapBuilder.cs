@@ -14,7 +14,7 @@ public class MapBuilder : MonoBehaviour
     
     static List<Tile> highlightedTiles;
     static List<Tile> tiles;
-    static Tile[,] arrayTiles;
+    public static Tile[,] arrayTiles;
 
 
     private void Awake()
@@ -34,76 +34,36 @@ public class MapBuilder : MonoBehaviour
         arrayTiles = new Tile[sizeToInt.x, sizeToInt.y];
 
         Vector2 nextPosition = upperLeftCorner+new Vector2(0.5f*tileSize,-0.5f*tileSize);
-        int rowCounter=0;
         int rowIndex=0;
+        int index=0;
 
-        for (int i = 0; i<contents.Length; i++)
+        for (int y = 0; y<size.y; y++)
         {
-            //Add Tiles
-            Vector3 worldPosition = new Vector3(nextPosition.x, nextPosition.y, 0);
-            
-            int x = i;
-            x = (int)Mathf.Clamp(x, 0, size.x-1);
-            Vector2Int position = new Vector2Int(x, rowIndex);
-            
-            Tile newTile = new Tile(worldPosition,position);
-            newTile.insertContent(contents[i]);
+            for (int x = 0; x < size.x; x++)
+            {
+                //Add Tiles
+                Vector3 worldPosition = new Vector3(nextPosition.x, nextPosition.y, 0);
+                int xPosition = x;
+                xPosition = Mathf.RoundToInt(xPosition % size.x - 1) + 1;
+                Vector2Int position = new Vector2Int(xPosition, rowIndex);
 
-            //Add Tiles to List
-            tiles.Add(newTile);
-            arrayTiles[position.x, position.y] = newTile;
+                Tile newTile = new Tile(worldPosition, position);
+                newTile.insertContent(contents[index]);
+                index++;
 
-            nextPosition.x++;
-            rowCounter++;
-
-            //Switch Rows
-            if (rowCounter > size.x-1) {
-                nextPosition.y--;
-                nextPosition.x = upperLeftCorner.x+0.5f*tileSize;
-                rowCounter = 0;
-                rowIndex++;
+                //Add Tiles to List
+                tiles.Add(newTile);
+                arrayTiles[position.x, position.y] = newTile;
+                nextPosition.x++;
             }
+            nextPosition.y--;
+            nextPosition.x = upperLeftCorner.x + 0.5f * tileSize;
+            rowIndex++;
         }
 
-        manageTiles();
         calculateCenterPosition();
     }
 
-    void manageTiles()
-    {
-        foreach (Tile tile in tiles)
-        {
-            foreach (Tile item in tiles)
-            {
-                Vector2 right = tile.position + Vector2.right;
-                Vector2 left = tile.position + Vector2.left;
-                Vector2 down = tile.position + Vector2.down;
-                Vector2 up = tile.position + Vector2.up;
-
-                if (tile.right == null && item.position == right)
-                {
-                    tile.right = item;
-                    item.left = tile;
-                }
-                else if (tile.left == null && item.position == left)
-                {
-                    tile.left = item;
-                    item.right = tile;
-                }
-                else if (tile.down == null && item.position == down)
-                {
-                    tile.down = item;
-                    item.up = tile;
-                }
-                else if (tile.up == null && item.position == up)
-                {
-                    tile.up = item;
-                    item.down = tile;
-                }
-            }
-        }
-
-    }
     public static void markPassableTiles(Tile currentTile, Player player)
     {
         List<Tile> passableTiles = givePassableTiles(currentTile, player);
@@ -115,25 +75,10 @@ public class MapBuilder : MonoBehaviour
     }
     private static List<Tile> givePassableTiles(Tile currentTile, Player player)
     {
-        List<Tile> neighbourTiles = new List<Tile>();
+        List<Tile> neighbourTiles = giveNeighbours(currentTile);
         List<Tile> freeTiles = new List<Tile>();
 
-       int x = currentTile.position.x;
-       int y = currentTile.position.y;
-
-        //Left Neighbour
-        if (x-1 > 0)
-            neighbourTiles.Add(arrayTiles[x - 1, y]);
-        //Right Neighbour
-        if (x +1 < size.x)
-            neighbourTiles.Add(arrayTiles[x + 1, y]);
-        //Top Neighbour
-        if (y - 1 > 0)
-            neighbourTiles.Add(arrayTiles[x, y-1]);
-        //Bottom Neighbour
-        if (y+1<size.y)
-            neighbourTiles.Add(arrayTiles[x, y+1]);
-
+     
         foreach (Tile tile in neighbourTiles)
         {
             if (tile != null)
@@ -143,6 +88,56 @@ public class MapBuilder : MonoBehaviour
             }
         }
         return freeTiles;
+    }
+
+    static List<Tile> giveNeighbours(Tile currentTile)
+    {
+        List<Tile> neighbourTiles = new List<Tile>();
+
+        int x = currentTile.position.x;
+        int y = currentTile.position.y;
+
+        //Left Neighbour
+        if (x - 1 >= 0)
+            neighbourTiles.Add(arrayTiles[x - 1, y]);
+        else
+            neighbourTiles.Add(null);
+        //Right Neighbour
+        if (x + 1 < size.x)
+            neighbourTiles.Add(arrayTiles[x + 1, y]);
+        else
+            neighbourTiles.Add(null);
+        //Top Neighbour
+        if (y - 1 >= 0)
+            neighbourTiles.Add(arrayTiles[x, y - 1]);
+        else
+            neighbourTiles.Add(null);
+        //Bottom Neighbour
+        if (y + 1 < size.y)
+        {
+            neighbourTiles.Add(arrayTiles[x, y + 1]);
+        }
+        else
+            neighbourTiles.Add(null);
+
+
+        return neighbourTiles;
+    }
+
+    public static Tile giveNextSlideTile(Tile currentTile, Tile adjacentTile, Player player)
+    {
+        Tile[] currentTiles= giveNeighbours(currentTile).ToArray();
+        Tile[] adjacentTiles= giveNeighbours(adjacentTile).ToArray();
+
+        for (int i = 0; i < currentTiles.Length; i++)
+        {
+            if (currentTiles[i] == adjacentTile && adjacentTiles[i] != null)
+            {
+                if (adjacentTiles[i].checkSlime(player))
+                    return adjacentTiles[i];
+            }
+        }
+        return null;
     }
 
     void calculateCenterPosition()

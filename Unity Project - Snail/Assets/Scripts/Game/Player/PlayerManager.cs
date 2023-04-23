@@ -21,6 +21,13 @@ public class PlayerManager : MonoBehaviour
         DetermineTurnOrder();
     }
 
+    private void Start()
+    {
+        foreach (Player item in player)
+        {
+            item.setSlimeToStart();
+        }
+    }
 
     public static void DetermineTurnOrder()
     {

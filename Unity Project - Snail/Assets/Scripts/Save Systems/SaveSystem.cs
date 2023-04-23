@@ -5,9 +5,6 @@ using System.IO;
 
 public class SaveSystem
 {
-    void Awake()
-    {
-    }
 
     public void SaveData(SaveData saveFile, string savePath)
     {

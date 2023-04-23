@@ -17,6 +17,7 @@ public class HighLight : MonoBehaviour
 
     private void OnMouseEnter()
     {
+        SoundManager.soundManager.PlaySound("ui-click-high-modern-click-06");
         transform.localScale = transform.localScale * 1.1f;
     }
 
@@ -33,7 +34,7 @@ public class HighLight : MonoBehaviour
     private void OnMouseDown()
     {
         Player player = RoundManager.activePlayer();
-        ActionInfo actionInfo = new ActionInfo(ActionInfo.Action.capture,player);
+        ActionInfo actionInfo = new ActionInfo(ActionType.capture,player);
         GameManager.movePlayer(player, tile,actionInfo);
     }
 }

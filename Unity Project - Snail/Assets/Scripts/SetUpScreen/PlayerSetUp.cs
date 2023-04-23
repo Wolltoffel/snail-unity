@@ -14,6 +14,11 @@ public class PlayerSetUp : MonoBehaviour
             player.Add(new Player("Player 1"));
             player.Add(new Player("Player 2"));
         }
+
+        foreach (Player item in player)
+        {
+            item.index = player.IndexOf(item);
+        }
     }
 
     public static void SetName(string name, int index)

@@ -28,7 +28,7 @@ public class RoundManager : MonoBehaviour
         switchTurn?.Invoke(null, actionInfo);
     }
 
-    public static void resetCounter(object sender, EventArgs e)
+    public static void resetCounter(object sender, ActionInfo e)
     {
         turnCounter++;
         turnDurationCounter = 0;
@@ -38,8 +38,8 @@ public class RoundManager : MonoBehaviour
         turnDurationCounter += Time.deltaTime;
         if (turnDurationCounter > maxTurnDuration)
         {
-            ActionInfo actionInfo = new ActionInfo(ActionInfo.Action.skip,activePlayer());
-            switchTurn?.Invoke(null, actionInfo );
+            ActionInfo actionInfo = new ActionInfo(ActionType.skip,activePlayer());
+            switchTurn?.Invoke(null, actionInfo);
         }
     }
 

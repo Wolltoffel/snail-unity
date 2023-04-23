@@ -13,29 +13,47 @@ public class Player
     public int turnsWithoutCapture;
     public enum Agent{computer,human }
     public Agent agent;
+    public int index;
 
     bool moving;
 
     public Player(string name) 
     {
         this.name = name;
-        agent = Agent.human;
-
+        RoundManager.switchTurn += switchTurn;
     }
 
-    public void move(Tile tile)
+    public void setSlimeToStart()
+    {
+        Slime slime = new Slime(this, activeTile);
+        activeTile.AddCustomSlime(slime,this);
+    }
+
+    public void move(Tile tile, ActionInfo actionInfo)
     {
         sprite.GetComponent<PlayerSprite>().startMove(tile);
         activeTile.playerSlot = null;
-        activeTile.AddSlime();
         activeTile = tile;
-        turnsWithoutCapture = 0;
+        if (actionInfo.actionType == ActionType.capture)
+            turnsWithoutCapture=0;
+        else
+            turnsWithoutCapture++;
+        Debug.Log(turnsWithoutCapture);
+        if (turnsWithoutCapture >= PlayerSettingsManager.settings.maxTurnsWithoutCapture)
+            GameManager.EndGame(this, RoundManager.inactivePlayer());
+
         tile.playerSlot = this;
     }
 
     public void increaseScore()
     {
         score++;
+    }
+
+    void switchTurn(object sender, ActionInfo e)
+    {
+        if (e.actionType == ActionType.skip)
+            turnsWithoutCapture++;
     }
 
     public void resetPlayer()

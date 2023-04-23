@@ -10,7 +10,6 @@ public class PopUpManager
     GameObject popUpTemplate;
     GameObject canvas;
     GameObject popUp;
-    public event EventHandler popUpHiddenNow;
 
     public PopUpManager(string templatePath)
     {
@@ -27,7 +26,6 @@ public class PopUpManager
 
     public void hidePopUp()
     {
-        popUpHiddenNow.Invoke(this, EventArgs.Empty);
         popUp.SetActive(false);
         GameObject.Destroy(popUp);
         popUp = null;

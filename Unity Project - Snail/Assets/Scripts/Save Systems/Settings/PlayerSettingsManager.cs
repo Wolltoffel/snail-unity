@@ -26,8 +26,6 @@ public class PlayerSettingsManager : MonoBehaviour
             settings = new PlayerSettings();
             settings.loadDefaultValues();
         }
-
-       
     }
 
     public void saveSettings(PlayerSettings settings)

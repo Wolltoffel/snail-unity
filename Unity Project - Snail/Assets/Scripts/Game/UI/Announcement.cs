@@ -16,15 +16,15 @@ public class Announcement : MonoBehaviour
         string activePlayerName = activePlayer.name;
         string text="";
 
-        switch (actionInfo.action)
+        switch (actionInfo.actionType)
         {
-            case ActionInfo.Action.slide:
+            case ActionType.slide:
                 text = $"{activePlayerName} slides to {activePlayer.activeTile.position.x}/{activePlayer.activeTile.position.y}";
                 break;
-            case ActionInfo.Action.capture:
+            case ActionType.capture:
                 text = $"{activePlayerName} captured {activePlayer.activeTile.position.x}/{activePlayer.activeTile.position.y}";
                 break;
-            case ActionInfo.Action.skip:
+            case ActionType.skip:
                 text = $"{activePlayerName} missed his turn";
                 break;
         }
@@ -50,7 +50,6 @@ public class Announcement : MonoBehaviour
     {
         float time = 0.3f;
         PopUpManager popUpManager = makeAnnouncementBeforeTurn(time);
-        popUpManager.popUpHiddenNow += RoundManager.switchTurnsEvent;
     }
 
 }

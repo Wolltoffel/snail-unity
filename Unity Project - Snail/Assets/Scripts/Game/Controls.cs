@@ -10,7 +10,7 @@ public class Controls
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             //Skips one Round
-            ActionInfo actionInfo = new ActionInfo(ActionInfo.Action.skip, RoundManager.activePlayer());
+            ActionInfo actionInfo = new ActionInfo(ActionType.skip, RoundManager.activePlayer());
             RoundManager.switchTurnsEvent(actionInfo);
             RoundManager.skipRound();
         }
@@ -28,7 +28,7 @@ public class Controls
         if (RoundManager.activePlayer() == player)
         {
             //Skips one Round
-            ActionInfo actionInfo = new ActionInfo(ActionInfo.Action.skip, RoundManager.activePlayer());
+            ActionInfo actionInfo = new ActionInfo(ActionType.skip, RoundManager.activePlayer());
             RoundManager.switchTurnsEvent(actionInfo);
             RoundManager.skipRound();
         }
