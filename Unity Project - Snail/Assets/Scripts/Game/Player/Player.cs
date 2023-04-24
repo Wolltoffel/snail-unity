@@ -38,7 +38,6 @@ public class Player
             turnsWithoutCapture=0;
         else
             turnsWithoutCapture++;
-        Debug.Log(turnsWithoutCapture);
         if (turnsWithoutCapture >= PlayerSettingsManager.settings.maxTurnsWithoutCapture)
             GameManager.EndGame(this, RoundManager.inactivePlayer());
 

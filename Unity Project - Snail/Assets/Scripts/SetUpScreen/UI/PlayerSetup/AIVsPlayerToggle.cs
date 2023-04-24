@@ -20,7 +20,7 @@ public class AIVsPlayerToggle : MonoBehaviour
 
     private void Start()
     {
-        player = PlayerSetUp.player[index];
+        player = SetUpScreenData.setUpScreenData.players[index];
 
      loadDefaultValues();
 
@@ -49,7 +49,7 @@ public class AIVsPlayerToggle : MonoBehaviour
         activeAgent = ActiveAgent.human;
         computerToggle.SetActive(false);
         humanToggle.SetActive(true);
-        PlayerSetUp.SetAgent(Player.Agent.human, index);
+        SetUpScreenData.setUpScreenData.setAgent(Player.Agent.human, index);
     }
 
     void switchToComputer(int indexInput)
@@ -57,6 +57,6 @@ public class AIVsPlayerToggle : MonoBehaviour
         activeAgent = ActiveAgent.computer;
         computerToggle.SetActive(true);
         humanToggle.SetActive(false);
-        PlayerSetUp.SetAgent(Player.Agent.computer, index);
+        SetUpScreenData.setUpScreenData.setAgent(Player.Agent.computer, index);
     }
 }

@@ -8,11 +8,13 @@ public class GameManager : MonoBehaviour
 {
     public static event EventHandler<StatData> endGame;
     private Controls controls;
+    private MapBuilder mapBuilder;
 
     private void Start()
     {
         controls = new Controls();
         Player player = RoundManager.activePlayer();
+        mapBuilder = new MapBuilder();
         MapBuilder.markPassableTiles(player.activeTile, player);
     }
 
@@ -21,9 +23,11 @@ public class GameManager : MonoBehaviour
         controls.checkInputs();
     }
 
-    public static void movePlayer(Player activePlayer, Tile tile, ActionInfo actionInfo)
+    public static void excuteTurn(Player activePlayer, Tile tile, ActionInfo actionInfo)
     {
         Tile previousTile = activePlayer.activeTile;
+
+        activePlayer.move(tile, actionInfo);
 
         if (tile.checkSlime(activePlayer))  //Check Tile for slime
         {
@@ -34,7 +38,7 @@ public class GameManager : MonoBehaviour
             Tile nextSlideTile = MapBuilder.giveNextSlideTile(previousTile,tile, activePlayer);
             if (nextSlideTile != null)
             {   actionInfo.actionType = ActionType.slide;
-                movePlayer(activePlayer, nextSlideTile, actionInfo);
+                excuteTurn(activePlayer, nextSlideTile, actionInfo);
                 return;
             }
         }
@@ -43,8 +47,6 @@ public class GameManager : MonoBehaviour
             tile.AddSlime();
             activePlayer.increaseScore(); //Increase score if current field has no slime
         }
-
-        activePlayer.move(tile, actionInfo);
 
         if (MapBuilder.checkTiles()) //Checks whether the game has ended
         {

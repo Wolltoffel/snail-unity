@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 
-public class MapBuilder : MonoBehaviour
+public class MapBuilder
 {
     [SerializeField]Vector2 upperLeftCorner;
     static public int tileSize = 1;
@@ -16,8 +16,7 @@ public class MapBuilder : MonoBehaviour
     static List<Tile> tiles;
     public static Tile[,] arrayTiles;
 
-
-    private void Awake()
+    public MapBuilder()
     {
         RoundManager.switchTurn += switchRounds;
         GameManager.endGame += emptyMap;

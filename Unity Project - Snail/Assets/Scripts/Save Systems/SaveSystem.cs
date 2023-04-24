@@ -5,7 +5,6 @@ using System.IO;
 
 public class SaveSystem
 {
-
     public void SaveData(SaveData saveFile, string savePath)
     {
         string json = JsonUtility.ToJson(saveFile);

@@ -20,12 +20,17 @@ public class RoundManager : MonoBehaviour
 
     private void Update()
     {
-       countdownRoundSeconds();
+        countdownRoundSeconds();
     }
 
     public static void switchTurnsEvent(ActionInfo actionInfo)
     {
         switchTurn?.Invoke(null, actionInfo);
+    }
+
+    private void RoundManager_switchTurn(object sender, ActionInfo e)
+    {
+        throw new NotImplementedException();
     }
 
     public static void resetCounter(object sender, ActionInfo e)

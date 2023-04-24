@@ -35,6 +35,6 @@ public class HighLight : MonoBehaviour
     {
         Player player = RoundManager.activePlayer();
         ActionInfo actionInfo = new ActionInfo(ActionType.capture,player);
-        GameManager.movePlayer(player, tile,actionInfo);
+        GameManager.excuteTurn(player, tile,actionInfo);
     }
 }

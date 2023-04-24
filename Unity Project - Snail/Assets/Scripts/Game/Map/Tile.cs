@@ -44,7 +44,7 @@ public class Tile
 
     void spawnPlayer(int index)
     {
-        playerSlot = PlayerManager.player[index] == null ? new Player("Player " + index) : PlayerManager.player[index];
+        playerSlot = SetUpScreenData.setUpScreenData.players[index];
         playerSlot.sprite = GameObject.Instantiate(spriteLoader.player[index], worldPosition, Quaternion.Euler(Vector3.zero)) as GameObject;
         playerSlot.sprite.GetComponent<SpriteRenderer>().sortingOrder = 2;
         playerSlot.sprite.transform.parent = grassFieldSlot.transform;
@@ -53,6 +53,7 @@ public class Tile
         playerSlot.sprite.GetComponent<PlayerSprite>().player = playerSlot;
         playerSlot.sprite.AddComponent<BoxCollider2D>();
         playerSlot.activeTile = this;
+        playerSlot.setSlimeToStart();
     }
 
     void spawnImpassable()

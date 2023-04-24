@@ -8,7 +8,7 @@ public class PlayButton : MonoBehaviour
 
     public void StartGame()
     {
-        PlayerSetUp.insertPlayers();
+        SetUpScreenData.setUpScreenData.insertPlayers();
         SceneManager.LoadScene(sceneName: "Game");
     }
     

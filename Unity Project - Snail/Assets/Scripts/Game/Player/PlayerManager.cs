@@ -12,9 +12,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (player == null)
         {
-            player = new List<Player>();
-            player.Add(new Player("Player 1"));
-            player.Add(new Player("Player 2"));
+            player = SetUpScreenData.setUpScreenData.players;
         }
         RoundManager.switchTurn += switchTurns;
         GameManager.endGame += resetPlayers;
@@ -23,10 +21,6 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
-        foreach (Player item in player)
-        {
-            item.setSlimeToStart();
-        }
     }
 
     public static void DetermineTurnOrder()

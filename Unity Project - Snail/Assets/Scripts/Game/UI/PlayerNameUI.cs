@@ -12,7 +12,8 @@ public class PlayerNameUI : MonoBehaviour
     Player player;
     TextMeshProUGUI tmpProText;
 
-    void Start() {
+    void Start() 
+    {
         player = PlayerManager.player[playerIndex];
         tmpProText = GetComponent<TextMeshProUGUI>();
         tmpProText.text = player.name;
