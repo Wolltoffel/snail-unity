@@ -6,6 +6,7 @@ public class HighLight : MonoBehaviour
 {
     [HideInInspector]public Tile tile;
     Vector3 initialSize;
+    AIHandler aiHandler;
 
     bool activeMovement;
 
@@ -13,12 +14,29 @@ public class HighLight : MonoBehaviour
     private void Awake()
     {
         initialSize = transform.localScale;
+        aiHandler = new AIHandler();
+    }
+
+    private void Update()
+    {
+        Player activePlayer = RoundManager.activePlayer();
+        if (activePlayer.agent == Player.Agent.computer)
+        {
+            Vector2Int nextMove = aiHandler.giveNextMove(MapBuilder.arrayTiles, (uint)RoundManager.activePlayer().index);
+            ActionInfo actionInfo = new ActionInfo(ActionType.capture, activePlayer);
+            GameManager.excuteTurn(activePlayer, MapBuilder.arrayTiles[nextMove.x,nextMove.y], actionInfo);
+        }
+
     }
 
     private void OnMouseEnter()
     {
-        SoundManager.soundManager.PlaySound("ui-click-high-modern-click-06");
-        transform.localScale = transform.localScale * 1.1f;
+        Player player = RoundManager.activePlayer();
+        if (player.agent == Player.Agent.human)
+        {
+            SoundManager.soundManager.PlaySound("ui-click-high-modern-click-06");
+            transform.localScale = transform.localScale * 1.1f;
+        }
     }
 
     private void OnMouseExit()
@@ -34,7 +52,10 @@ public class HighLight : MonoBehaviour
     private void OnMouseDown()
     {
         Player player = RoundManager.activePlayer();
-        ActionInfo actionInfo = new ActionInfo(ActionType.capture,player);
-        GameManager.excuteTurn(player, tile,actionInfo);
+        if (player.agent == Player.Agent.human)
+        {
+            ActionInfo actionInfo = new ActionInfo(ActionType.capture, player);
+            GameManager.excuteTurn(player, tile, actionInfo);
+        }
     }
 }

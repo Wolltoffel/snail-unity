@@ -21,6 +21,7 @@ public class Player
     {
         this.name = name;
         RoundManager.switchTurn += switchTurn;
+        score = 1;
     }
 
     public void setSlimeToStart()
@@ -62,6 +63,12 @@ public class Player
         activeTile = null;
         turn = false;
         turnsWithoutCapture = 0;
+    }
+
+    public void captureField(Tile tile)
+    {
+        tile.AddSlime();
+        increaseScore(); //Increase score if current field has no slime
     }
 
 

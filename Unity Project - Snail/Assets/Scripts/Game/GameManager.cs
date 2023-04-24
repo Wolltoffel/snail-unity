@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static event EventHandler<StatData> endGame;
+    public static event EventHandler <ActionType>endRound;
     private Controls controls;
     private MapBuilder mapBuilder;
 
@@ -15,7 +16,7 @@ public class GameManager : MonoBehaviour
         controls = new Controls();
         Player player = RoundManager.activePlayer();
         mapBuilder = new MapBuilder();
-        MapBuilder.markPassableTiles(player.activeTile, player);
+        mapBuilder.markPassableTiles(player.activeTile, player);
     }
 
     private void Update()
@@ -25,35 +26,45 @@ public class GameManager : MonoBehaviour
 
     public static void excuteTurn(Player activePlayer, Tile tile, ActionInfo actionInfo)
     {
-        Tile previousTile = activePlayer.activeTile;
+        if (actionInfo.actionType == ActionType.skip)
+        {
+            RoundManager.switchTurnsEvent(actionInfo);
+            return;
+        }
 
-        activePlayer.move(tile, actionInfo);
+        else
+        {
+            movePlayer(activePlayer,tile,actionInfo);
+            MapBuilder.unmarkTiles();
+        }
+    }
+
+    static void movePlayer(Player activePlayer, Tile tile, ActionInfo actionInfo)
+    {
+        Tile previousTile = activePlayer.activeTile;
 
         if (tile.checkSlime(activePlayer))  //Check Tile for slime
         {
-            if (actionInfo.actionType != ActionType.slide)
+            //Override tile in case of possible slide
+            Tile tileBackup = tile;
+            tile = MapBuilder.giveNextSlideTile(previousTile, tile, activePlayer);
+            if (tile != tileBackup)
+                actionInfo.actionType = ActionType.slide;
+            else
+            {
+                tile = tileBackup;
                 actionInfo.actionType = ActionType.empty;
-            
-            //In case an adjacent Tile lies one tile away in the same direction as the player has just moved and it has slime it will return the adjacent tile
-            Tile nextSlideTile = MapBuilder.giveNextSlideTile(previousTile,tile, activePlayer);
-            if (nextSlideTile != null)
-            {   actionInfo.actionType = ActionType.slide;
-                excuteTurn(activePlayer, nextSlideTile, actionInfo);
-                return;
             }
         }
-        else
-        {
-            tile.AddSlime();
-            activePlayer.increaseScore(); //Increase score if current field has no slime
-        }
 
-        if (MapBuilder.checkTiles()) //Checks whether the game has ended
-        {
-            RoundManager.switchTurnsEvent(actionInfo);
-        }
+        //Capture Field
+        else
+            activePlayer.captureField(tile);
+
+        activePlayer.move(tile, actionInfo);
 
     }
+
 
     public static void EndGame(Player winner, Player loser)
     {
@@ -63,7 +74,7 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("End");
     }
 
-    public static Player giveWinner()
+    public static Player giveWinnerByScore()
     {
         List<Player> players = PlayerManager.player;
         Player winner = players[0];
@@ -75,7 +86,7 @@ public class GameManager : MonoBehaviour
         return winner;
     }
 
-    public static Player giveLoser()
+    public static Player giveLoserByScore()
     {
         List<Player> players = PlayerManager.player;
         Player loser = players[0];

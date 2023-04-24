@@ -22,15 +22,17 @@ public class MapBuilder
         GameManager.endGame += emptyMap;
         tiles = new List<Tile>();
         loadMap();
+        calculateCenterPosition();
     }
 
     void loadMap()
     {
        MapData activeMap= MapManager.selectedMap;
        int[] contents = activeMap.contents;
+       
        size = activeMap.size;
-        Vector2Int sizeToInt = new Vector2Int((int)size.x, (int)size.y);
-        arrayTiles = new Tile[sizeToInt.x, sizeToInt.y];
+       Vector2Int sizeToInt = new Vector2Int((int)size.x, (int)size.y);
+       arrayTiles = new Tile[sizeToInt.x, sizeToInt.y];
 
         Vector2 nextPosition = upperLeftCorner+new Vector2(0.5f*tileSize,-0.5f*tileSize);
         int rowIndex=0;
@@ -59,11 +61,9 @@ public class MapBuilder
             nextPosition.x = upperLeftCorner.x + 0.5f * tileSize;
             rowIndex++;
         }
-
-        calculateCenterPosition();
     }
 
-    public static void markPassableTiles(Tile currentTile, Player player)
+    public void markPassableTiles(Tile currentTile, Player player)
     {
         List<Tile> passableTiles = givePassableTiles(currentTile, player);
         highlightedTiles = passableTiles;
@@ -72,11 +72,18 @@ public class MapBuilder
             tile.setHighlight(true);
         }
     }
-    private static List<Tile> givePassableTiles(Tile currentTile, Player player)
+
+    public static void unmarkTiles()
+    {
+        foreach (Tile tile in highlightedTiles)
+        {
+            tile.setHighlight(false);
+        }
+    }
+    List<Tile> givePassableTiles(Tile currentTile, Player player)
     {
         List<Tile> neighbourTiles = giveNeighbours(currentTile);
         List<Tile> freeTiles = new List<Tile>();
-
      
         foreach (Tile tile in neighbourTiles)
         {
@@ -119,24 +126,23 @@ public class MapBuilder
         else
             neighbourTiles.Add(null);
 
-
         return neighbourTiles;
     }
 
-    public static Tile giveNextSlideTile(Tile currentTile, Tile adjacentTile, Player player)
+    public static Tile giveNextSlideTile(Tile previousTile, Tile activeTile, Player player)
     {
-        Tile[] currentTiles= giveNeighbours(currentTile).ToArray();
-        Tile[] adjacentTiles= giveNeighbours(adjacentTile).ToArray();
+        Tile[] previousTileNeighbours= giveNeighbours(previousTile).ToArray();
+        Tile[] activeTileNeighbours= giveNeighbours(activeTile).ToArray();
 
-        for (int i = 0; i < currentTiles.Length; i++)
+        for (int i = 0; i < previousTileNeighbours.Length; i++)
         {
-            if (currentTiles[i] == adjacentTile && adjacentTiles[i] != null)
+            if (previousTileNeighbours[i] == activeTile && activeTileNeighbours[i] != null)
             {
-                if (adjacentTiles[i].checkSlime(player))
-                    return adjacentTiles[i];
+                if (activeTileNeighbours[i].checkSlime(player))
+                    return giveNextSlideTile(activeTile, activeTileNeighbours[i], player);
             }
         }
-        return null;
+        return activeTile;
     }
 
     void calculateCenterPosition()
@@ -151,16 +157,15 @@ public class MapBuilder
             item.highLightSlot.SetActive(false);
         }
  
-            Player activePlayer = RoundManager.activePlayer();
-            Tile currentTile = activePlayer.activeTile;
-            markPassableTiles(currentTile, activePlayer);
+        Player activePlayer = RoundManager.activePlayer();
+        Tile currentTile = activePlayer.activeTile;
+        markPassableTiles(currentTile, activePlayer);
     }
 
-
-    public static bool checkTiles()
+    bool checkTiles()
     {
         if (highlightedTiles.Count < 1) {
-            GameManager.EndGame(GameManager.giveWinner(),GameManager.giveLoser());
+            GameManager.EndGame(GameManager.giveWinnerByScore(),GameManager.giveLoserByScore());
             return false;
         }
 
@@ -170,7 +175,7 @@ public class MapBuilder
                 return true;
             }
         }
-        GameManager.EndGame(GameManager.giveWinner(),GameManager.giveLoser());
+        GameManager.EndGame(GameManager.giveWinnerByScore(),GameManager.giveLoserByScore());
         return false;
 
     }

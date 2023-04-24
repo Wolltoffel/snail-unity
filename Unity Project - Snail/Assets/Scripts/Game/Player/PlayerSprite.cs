@@ -5,22 +5,32 @@ using UnityEngine;
 public class PlayerSprite : MonoBehaviour
 {
     bool activateMovement;
+    bool endedMovement;
     Tile target;
     public float movementSpeed = 3f;
     [HideInInspector]public Player player;
 
+    ActionType actionType;
+
     private void Update()
     {
         if (activateMovement)
-        {
             move();
-        }
+        else if (endedMovement)
+            endMove();
     }
 
     public void startMove(Tile target)
     {
         activateMovement = true;
         this.target = target;
+    }
+
+    public void endMove()
+    {
+        ActionInfo actionInfo = new ActionInfo(actionType, RoundManager.activePlayer());
+        RoundManager.switchTurnsEvent(actionInfo);
+        endedMovement = false;
     }
 
     void move()
@@ -35,6 +45,7 @@ public class PlayerSprite : MonoBehaviour
         else
         {
             activateMovement = false;
+            endedMovement = true;
         }
     }
 

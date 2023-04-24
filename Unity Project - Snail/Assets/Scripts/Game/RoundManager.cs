@@ -15,7 +15,7 @@ public class RoundManager : MonoBehaviour
         turnDurationCounter = 0;
         maxTurnDuration = PlayerSettingsManager.settings.maxTurnDuration;
         switchTurn += resetCounter;
-        GameManager.endGame += ResetManager;
+        GameManager.endGame += resetManager;
     }
 
     private void Update()
@@ -28,7 +28,7 @@ public class RoundManager : MonoBehaviour
         switchTurn?.Invoke(null, actionInfo);
     }
 
-    private void RoundManager_switchTurn(object sender, ActionInfo e)
+    private void roundManager_switchTurn(object sender, ActionInfo e)
     {
         throw new NotImplementedException();
     }
@@ -97,12 +97,12 @@ public class RoundManager : MonoBehaviour
         }
     }
 
-    private void ResetManager(object sender, EventArgs e)
+    private void resetManager(object sender, EventArgs e)
     {
         turnCounter = 0;
         turnDurationCounter = 0;
         switchTurn -= resetCounter;
-        GameManager.endGame -= ResetManager;
+        GameManager.endGame -= resetManager;
     }
 
 
