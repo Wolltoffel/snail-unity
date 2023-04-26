@@ -15,8 +15,6 @@ public class Player
     public Agent agent;
     public int index;
 
-    bool moving;
-
     public Player(string name) 
     {
         this.name = name;
@@ -32,7 +30,7 @@ public class Player
 
     public void move(Tile tile, ActionInfo actionInfo)
     {
-        sprite.GetComponent<PlayerSprite>().startMove(tile);
+        sprite.GetComponent<PlayerSprite>().startMove(tile,actionInfo.actionType);
         activeTile.playerSlot = null;
         activeTile = tile;
         if (actionInfo.actionType == ActionType.capture)
@@ -40,7 +38,7 @@ public class Player
         else
             turnsWithoutCapture++;
         if (turnsWithoutCapture >= PlayerSettingsManager.settings.maxTurnsWithoutCapture)
-            GameManager.EndGame(this, RoundManager.inactivePlayer());
+            GameManager.endGameplay(this, RoundManager.inactivePlayer());
 
         tile.playerSlot = this;
     }

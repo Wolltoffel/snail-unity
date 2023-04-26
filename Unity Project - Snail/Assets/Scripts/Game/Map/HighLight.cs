@@ -9,29 +9,44 @@ public class HighLight : MonoBehaviour
     AIHandler aiHandler;
 
     bool activeMovement;
+    ActivePlayerGiver activePlayerGiver;
+
+    bool slideMove;
 
 
     private void Awake()
     {
         initialSize = transform.localScale;
         aiHandler = new AIHandler();
+        activePlayerGiver = new ActivePlayerGiver();
     }
 
     private void Update()
     {
-        Player activePlayer = RoundManager.activePlayer();
+        Player activePlayer = activePlayerGiver.giveActivePlayer();
         if (activePlayer.agent == Player.Agent.computer)
         {
-            Vector2Int nextMove = aiHandler.giveNextMove(MapBuilder.arrayTiles, (uint)RoundManager.activePlayer().index);
+            Vector2Int nextMove = aiHandler.giveNextMove(MapBuilder.arrayTiles, (uint)activePlayer.index);
             ActionInfo actionInfo = new ActionInfo(ActionType.capture, activePlayer);
-            GameManager.excuteTurn(activePlayer, MapBuilder.arrayTiles[nextMove.x,nextMove.y], actionInfo);
+            Controls controls = new Controls();
+            controls.handleInputs(MapBuilder.arrayTiles[nextMove.x,nextMove.y], actionInfo);
         }
 
     }
 
+    public void switchToSlideMode()
+    {
+        slideMove = enabled;
+    }
+
+    void turnOffSlideMode()
+    {
+        slideMove = false;
+    }
+
     private void OnMouseEnter()
     {
-        Player player = RoundManager.activePlayer();
+        Player player = activePlayerGiver.giveActivePlayer();
         if (player.agent == Player.Agent.human)
         {
             SoundManager.soundManager.PlaySound("ui-click-high-modern-click-06");
@@ -46,16 +61,22 @@ public class HighLight : MonoBehaviour
 
     private void OnDisable()
     {
+        turnOffSlideMode();
         transform.localScale = initialSize;
     }
 
     private void OnMouseDown()
     {
-        Player player = RoundManager.activePlayer();
+        Player player = activePlayerGiver.giveActivePlayer();
         if (player.agent == Player.Agent.human)
         {
-            ActionInfo actionInfo = new ActionInfo(ActionType.capture, player);
-            GameManager.excuteTurn(player, tile, actionInfo);
+            ActionInfo actionInfo;
+            if (slideMove)
+                actionInfo = new ActionInfo(ActionType.slide, player);
+            else
+                actionInfo = new ActionInfo(ActionType.capture, player);
+            Controls controls = new Controls();
+            controls.handleInputs(tile,actionInfo);
         }
     }
 }

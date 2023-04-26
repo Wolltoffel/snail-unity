@@ -10,18 +10,13 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
-        if (player == null)
-        {
-            player = SetUpScreenData.setUpScreenData.players;
-        }
+        player = SetUpScreenData.setUpScreenData.players;
+
         RoundManager.switchTurn += switchTurns;
         GameManager.endGame += resetPlayers;
         DetermineTurnOrder();
     }
 
-    private void Start()
-    {
-    }
 
     public static void DetermineTurnOrder()
     {

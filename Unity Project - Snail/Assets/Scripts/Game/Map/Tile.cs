@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Tile
@@ -11,10 +9,14 @@ public class Tile
     public GameObject highLightSlot, grassFieldSlot, impassableSlot;
     public Slime slime;
     static AssetLoader spriteLoader;
+
+    private ActivePlayerGiver activePlayerGiver;
+
     public Tile(Vector3 worldPosition,Vector2Int position) {
         this.position = position;
         this.worldPosition = worldPosition;
         spriteLoader = new AssetLoader();
+        activePlayerGiver = new ActivePlayerGiver();
     }
 
     public void insertContent(int index) {
@@ -97,8 +99,13 @@ public class Tile
 
     public void AddSlime()
     {
-        Slime slime = new Slime(RoundManager.activePlayer(), this);
-        slime.instance = GameObject.Instantiate(spriteLoader.slime[RoundManager.activePlayerIndex()], worldPosition, Quaternion.Euler(Vector3.zero)) as GameObject;
+        Player activePlayer = activePlayerGiver.giveActivePlayer();
+        Slime slime = new Slime(activePlayer, this);
+        GameObject slimeInstance;
+        slimeInstance = GameObject.Instantiate(spriteLoader.slime[activePlayer.index], worldPosition, Quaternion.Euler(Vector3.zero)) as GameObject;
+        slimeInstance.name = $"Slime{position.x} {position.y}";
+        slimeInstance.transform.parent = grassFieldSlot.transform;
+        slime.instance = slimeInstance;
         this.slime = slime;
     }
 
@@ -121,26 +128,6 @@ public class Tile
         }
     }
 
-    public Tile giveNextSlideTile(Tile currentTile, Tile adjacentTile, Player player)
-    {
-        //Tile[] currentTiles = MapBuilder.givePassableTiles(this,player).ToArray();
-        //Tile[] adjacentTiles = MapBuilder.givePassableTiles(adjacentTile,player).ToArray();
-
-        /*for (int i= 0; i < currentTiles.Length; i++)
-        {
-            if(currentTiles[i] == adjacentTile && adjacentTiles[i] != null)
-            {
-                if (adjacentTiles[i].checkSlime(player))
-                    return adjacentTiles[i];
-            }
-        }*/
-        return null;
-    }
-
-    void givePassableTiles()
-    {
-    }
-
     public void emptyTile()
     {
       Object.Destroy(highLightSlot);
@@ -148,7 +135,8 @@ public class Tile
       Object.Destroy(impassableSlot);
      }
 
-   
+
+
 
 }
 

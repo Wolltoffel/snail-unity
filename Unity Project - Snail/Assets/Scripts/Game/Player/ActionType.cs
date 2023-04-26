@@ -4,5 +4,5 @@ using UnityEngine;
 
 public enum ActionType
 {
-    slide, skip, capture, empty
+    slide, skip, capture,surrender, empty
 };

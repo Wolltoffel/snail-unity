@@ -7,66 +7,70 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static event EventHandler<StatData> endGame;
-    public static event EventHandler <ActionType>endRound;
     private Controls controls;
     private MapBuilder mapBuilder;
+    private static ActivePlayerGiver activePlayerGiver;
 
     private void Start()
     {
         controls = new Controls();
-        Player player = RoundManager.activePlayer();
+        activePlayerGiver = new ActivePlayerGiver();
+        Player player = activePlayerGiver.giveActivePlayer();
         mapBuilder = new MapBuilder();
         mapBuilder.markPassableTiles(player.activeTile, player);
     }
 
     private void Update()
     {
-        controls.checkInputs();
+        controls.checkKeyInputs();
     }
 
-    public static void excuteTurn(Player activePlayer, Tile tile, ActionInfo actionInfo)
+    public static void tryExecuteTurn(Tile tile, ActionInfo actionInfo)
     {
-        if (actionInfo.actionType == ActionType.skip)
-        {
-            RoundManager.switchTurnsEvent(actionInfo);
+        if (actionInfo.player != activePlayerGiver.giveActivePlayer())
             return;
-        }
+        ExecuteTurn(tile, actionInfo);
+    }
 
-        else
+    static void ExecuteTurn(Tile tile, ActionInfo actionInfo)
+    {
+
+        switch (actionInfo.actionType)
         {
-            movePlayer(activePlayer,tile,actionInfo);
-            MapBuilder.unmarkTiles();
+            case ActionType.skip:
+                RoundManager.skipRound();
+                RoundManager.switchTurnsEvent(actionInfo);
+                break;
+            case ActionType.surrender:
+                Player loser = actionInfo.player;
+                Player winner = RoundManager.inactivePlayer();
+                GameManager.endGameplay(winner, loser);
+                break;
+            default:
+                movePlayer(actionInfo.player, tile, actionInfo);
+                MapBuilder.unmarkTiles();
+                break;
         }
     }
+
 
     static void movePlayer(Player activePlayer, Tile tile, ActionInfo actionInfo)
     {
         Tile previousTile = activePlayer.activeTile;
 
-        if (tile.checkSlime(activePlayer))  //Check Tile for slime
+        if (actionInfo.actionType != ActionType.slide)
         {
-            //Override tile in case of possible slide
-            Tile tileBackup = tile;
-            tile = MapBuilder.giveNextSlideTile(previousTile, tile, activePlayer);
-            if (tile != tileBackup)
-                actionInfo.actionType = ActionType.slide;
-            else
-            {
-                tile = tileBackup;
+            if (tile.checkSlime(activePlayer))  //Check Tile for slime
                 actionInfo.actionType = ActionType.empty;
-            }
+            else
+                activePlayer.captureField(tile);
         }
-
-        //Capture Field
-        else
-            activePlayer.captureField(tile);
-
+       
         activePlayer.move(tile, actionInfo);
 
     }
 
-
-    public static void EndGame(Player winner, Player loser)
+    public static void endGameplay(Player winner, Player loser)
     {
         StatData stats = new StatData(RoundManager.turnCounter+1,winner.score,winner.name,loser.name,loser.score);
         StatManager.stats = stats;

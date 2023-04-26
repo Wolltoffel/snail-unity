@@ -4,33 +4,32 @@ using UnityEngine;
 
 public class Controls
 {
-    public Controls() { }
-    public void checkInputs()
-    {
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            //Skips one Round
-            ActionInfo actionInfo = new ActionInfo(ActionType.skip, RoundManager.activePlayer());
-            RoundManager.switchTurnsEvent(actionInfo);
-            RoundManager.skipRound();
-        }
-        if (Input.GetKeyDown(KeyCode.Escape)){
+    ActivePlayerGiver activePlayerGiver;
 
-            Player winner = RoundManager.activePlayer();
-            Player loser = RoundManager.inactivePlayer();
-            GameManager.EndGame(winner,loser);
-        }
-
+    public Controls() {
+        activePlayerGiver = new ActivePlayerGiver();
     }
 
-    public static void handleOnMouseInputs(Player player)
+    public void checkKeyInputs()
     {
-        if (RoundManager.activePlayer() == player)
+        ActionInfo actionInfo;
+        Player activePlayer = activePlayerGiver.giveActivePlayer();
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            //Skips one Round
-            ActionInfo actionInfo = new ActionInfo(ActionType.skip, RoundManager.activePlayer());
-            RoundManager.switchTurnsEvent(actionInfo);
-            RoundManager.skipRound();
+            actionInfo = new ActionInfo(ActionType.skip, activePlayer);
+            handleInputs(null,actionInfo);
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            actionInfo = new ActionInfo(ActionType.surrender, activePlayer);
+            handleInputs(null,actionInfo);
+        }
+    }
+
+    public void handleInputs(Tile tile,ActionInfo actionInfo)
+    {
+        GameManager.tryExecuteTurn(tile,actionInfo);      
     }
 }

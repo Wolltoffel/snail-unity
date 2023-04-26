@@ -9,13 +9,17 @@ public class RoundManager : MonoBehaviour
     float maxTurnDuration;
     public static event EventHandler<ActionInfo> switchTurn;
     public static int turnCounter;
+    static ActivePlayerGiver activePlayerGiver;
 
     private void Awake()
     {
         turnDurationCounter = 0;
+        turnCounter = 1;
         maxTurnDuration = PlayerSettingsManager.settings.maxTurnDuration;
         switchTurn += resetCounter;
         GameManager.endGame += resetManager;
+        activePlayerGiver = new ActivePlayerGiver();
+        Player player = activePlayerGiver.giveActivePlayer();
     }
 
     private void Update()
@@ -43,21 +47,9 @@ public class RoundManager : MonoBehaviour
         turnDurationCounter += Time.deltaTime;
         if (turnDurationCounter > maxTurnDuration)
         {
-            ActionInfo actionInfo = new ActionInfo(ActionType.skip,activePlayer());
+            ActionInfo actionInfo = new ActionInfo(ActionType.skip,activePlayerGiver.giveActivePlayer());
             switchTurn?.Invoke(null, actionInfo);
         }
-    }
-
-    public static Player activePlayer()
-    {
-        foreach(Player player in PlayerManager.player)
-        {
-            if (player.turn == true)
-            {
-                return player;
-            }
-        }
-        return activePlayer();
     }
 
     public static Player inactivePlayer()
@@ -72,25 +64,12 @@ public class RoundManager : MonoBehaviour
         return inactivePlayer();
     }
 
-    public static int activePlayerIndex()
-    {
-        List<Player> player = PlayerManager.player;
-
-        for (int i= 0;i<player.Count;i++)
-        {
-            if (player[i].turn == true)
-            {
-                return i;
-            }
-        }
-        return 0;
-    }
-
     public static void skipRound()
     {
-        int turnsWithoutCapture = RoundManager.activePlayer().turnsWithoutCapture;
+        Player activePlayer = activePlayerGiver.giveActivePlayer();
+        int turnsWithoutCapture = activePlayer.turnsWithoutCapture;
         turnsWithoutCapture++;
-        RoundManager.activePlayer().turnsWithoutCapture = turnsWithoutCapture;
+        activePlayer.turnsWithoutCapture = turnsWithoutCapture;
         if (turnsWithoutCapture >= PlayerSettingsManager.settings.maxTurnsWithoutCapture)
         {
             PlayerManager.unsubscribeSwitchTurns();

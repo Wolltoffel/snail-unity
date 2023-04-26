@@ -6,6 +6,8 @@ using TMPro;
 
 public class Announcement : MonoBehaviour
 {
+    ActivePlayerGiver activePlayerGiver;
+
     void Start()
     {
         RoundManager.switchTurn += makeAnnouncementAfterTurn;
@@ -39,7 +41,7 @@ public class Announcement : MonoBehaviour
 
     public PopUpManager makeAnnouncementBeforeTurn(float time)
     {
-        string text = $"Round: {RoundManager.turnCounter} - {RoundManager.activePlayer()}";
+        string text = $"Round: {RoundManager.turnCounter} - {activePlayerGiver.giveActivePlayer()}";
 
         PopUpManager popUpManager = new PopUpManager("PopUpTemplates/PopUp_Template_2");
         popUpManager.showPopUp(text, time);

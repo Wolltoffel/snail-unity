@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerSprite : MonoBehaviour
 {
@@ -9,26 +10,32 @@ public class PlayerSprite : MonoBehaviour
     Tile target;
     public float movementSpeed = 3f;
     [HideInInspector]public Player player;
-
     ActionType actionType;
+    ActivePlayerGiver activePlayerGiver;
+
+    private void Start()
+    {
+        activePlayerGiver = new ActivePlayerGiver();
+    }
 
     private void Update()
     {
         if (activateMovement)
             move();
         else if (endedMovement)
-            endMove();
+            endMove(actionType);
     }
 
-    public void startMove(Tile target)
+    public void startMove(Tile target, ActionType actionType)
     {
         activateMovement = true;
         this.target = target;
+        this.actionType = actionType;
     }
 
-    public void endMove()
+    public void endMove(ActionType actionType)
     {
-        ActionInfo actionInfo = new ActionInfo(actionType, RoundManager.activePlayer());
+        ActionInfo actionInfo = new ActionInfo(actionType, activePlayerGiver.giveActivePlayer());
         RoundManager.switchTurnsEvent(actionInfo);
         endedMovement = false;
     }
@@ -51,6 +58,8 @@ public class PlayerSprite : MonoBehaviour
 
     private void OnMouseDown()
     {
-        Controls.handleOnMouseInputs(player);
+        Controls controls = new Controls();
+        ActionInfo actionInfo = new ActionInfo(ActionType.skip, player);
+        controls.handleInputs(null,actionInfo);
     }
 }

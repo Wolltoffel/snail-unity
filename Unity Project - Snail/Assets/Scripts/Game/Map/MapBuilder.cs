@@ -16,11 +16,14 @@ public class MapBuilder
     static List<Tile> tiles;
     public static Tile[,] arrayTiles;
 
+    ActivePlayerGiver activePlayerGiver;
+
     public MapBuilder()
     {
         RoundManager.switchTurn += switchRounds;
         GameManager.endGame += emptyMap;
         tiles = new List<Tile>();
+        activePlayerGiver = new ActivePlayerGiver();
         loadMap();
         calculateCenterPosition();
     }
@@ -73,13 +76,6 @@ public class MapBuilder
         }
     }
 
-    public static void unmarkTiles()
-    {
-        foreach (Tile tile in highlightedTiles)
-        {
-            tile.setHighlight(false);
-        }
-    }
     List<Tile> givePassableTiles(Tile currentTile, Player player)
     {
         List<Tile> neighbourTiles = giveNeighbours(currentTile);
@@ -90,11 +86,20 @@ public class MapBuilder
             if (tile != null)
             {
                 if (tile.checkPassable(player))
-                    freeTiles.Add(tile);
+                {
+                    Tile toBeAdded = giveNextSlideTile(player.activeTile, tile, player);
+                    if (tile != toBeAdded)
+                    {
+                        toBeAdded.highLightSlot.GetComponent<HighLight>().switchToSlideMode();
+                    }
+                    freeTiles.Add(toBeAdded);
+                }
             }
         }
         return freeTiles;
     }
+
+
 
     static List<Tile> giveNeighbours(Tile currentTile)
     {
@@ -129,6 +134,14 @@ public class MapBuilder
         return neighbourTiles;
     }
 
+    public static void unmarkTiles()
+    {
+        foreach (Tile tile in highlightedTiles)
+        {
+            tile.setHighlight(false);
+        }
+    }
+
     public static Tile giveNextSlideTile(Tile previousTile, Tile activeTile, Player player)
     {
         Tile[] previousTileNeighbours= giveNeighbours(previousTile).ToArray();
@@ -147,7 +160,7 @@ public class MapBuilder
 
     void calculateCenterPosition()
     {
-        centerPosition = upperLeftCorner + new Vector2(size.x / 2, -size.y / 2);;
+        centerPosition = upperLeftCorner + new Vector2(size.x / 2, -size.y / 2);
     }
 
     void switchRounds(object sender, EventArgs e)
@@ -157,7 +170,7 @@ public class MapBuilder
             item.highLightSlot.SetActive(false);
         }
  
-        Player activePlayer = RoundManager.activePlayer();
+        Player activePlayer = activePlayerGiver.giveActivePlayer();
         Tile currentTile = activePlayer.activeTile;
         markPassableTiles(currentTile, activePlayer);
     }
@@ -165,7 +178,7 @@ public class MapBuilder
     bool checkTiles()
     {
         if (highlightedTiles.Count < 1) {
-            GameManager.EndGame(GameManager.giveWinnerByScore(),GameManager.giveLoserByScore());
+            GameManager.endGameplay(GameManager.giveWinnerByScore(),GameManager.giveLoserByScore());
             return false;
         }
 
@@ -175,7 +188,7 @@ public class MapBuilder
                 return true;
             }
         }
-        GameManager.EndGame(GameManager.giveWinnerByScore(),GameManager.giveLoserByScore());
+        GameManager.endGameplay(GameManager.giveWinnerByScore(),GameManager.giveLoserByScore());
         return false;
 
     }
