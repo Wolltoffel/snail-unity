@@ -7,11 +7,6 @@ public class AIVsPlayerToggle : MonoBehaviour
     [SerializeField] GameObject humanToggle;
     [SerializeField] GameObject computerToggle;
 
-    enum ActiveAgent{
-        undefined,
-        computer,
-        human
-    }
     ActiveAgent activeAgent;
 
     Player player;
@@ -49,7 +44,7 @@ public class AIVsPlayerToggle : MonoBehaviour
         activeAgent = ActiveAgent.human;
         computerToggle.SetActive(false);
         humanToggle.SetActive(true);
-        SetUpScreenData.setUpScreenData.setAgent(Player.Agent.human, index);
+        SetUpScreenData.setUpScreenData.setAgent(ActiveAgent.human, index);
     }
 
     void switchToComputer(int indexInput)
@@ -57,6 +52,6 @@ public class AIVsPlayerToggle : MonoBehaviour
         activeAgent = ActiveAgent.computer;
         computerToggle.SetActive(true);
         humanToggle.SetActive(false);
-        SetUpScreenData.setUpScreenData.setAgent(Player.Agent.computer, index);
+        SetUpScreenData.setUpScreenData.setAgent(ActiveAgent.computer, index);
     }
 }

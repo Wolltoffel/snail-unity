@@ -24,7 +24,7 @@ public class HighLight : MonoBehaviour
     private void Update()
     {
         Player activePlayer = activePlayerGiver.giveActivePlayer();
-        if (activePlayer.agent == Player.Agent.computer)
+        if (activePlayer.agent == ActiveAgent.computer)
         {
             Vector2Int nextMove = aiHandler.giveNextMove(MapBuilder.arrayTiles, (uint)activePlayer.index);
             ActionInfo actionInfo = new ActionInfo(ActionType.capture, activePlayer);
@@ -47,7 +47,7 @@ public class HighLight : MonoBehaviour
     private void OnMouseEnter()
     {
         Player player = activePlayerGiver.giveActivePlayer();
-        if (player.agent == Player.Agent.human)
+        if (player.agent == ActiveAgent.human)
         {
             SoundManager.soundManager.PlaySound("ui-click-high-modern-click-06");
             transform.localScale = transform.localScale * 1.1f;
@@ -68,7 +68,7 @@ public class HighLight : MonoBehaviour
     private void OnMouseDown()
     {
         Player player = activePlayerGiver.giveActivePlayer();
-        if (player.agent == Player.Agent.human)
+        if (player.agent ==ActiveAgent.human)
         {
             ActionInfo actionInfo;
             if (slideMove)

@@ -39,7 +39,7 @@ public class SetUpScreenData : MonoBehaviour
         players[index].name = name;
     }
 
-    public void setAgent(Player.Agent agent, int index)
+    public void setAgent(ActiveAgent agent, int index)
     {
         players[index].agent = agent;
     }

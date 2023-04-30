@@ -80,8 +80,9 @@ public class GameManager : MonoBehaviour
 
     public static void endGameplay(Player winner, Player loser, ResultInfo resultInfo)
     {
-        StatData stats = new StatData(RoundManager.turnCounter+1,winner.score,winner.name,loser.name,loser.score);
-        StatManager.stats = stats;
+        MapData activeMap = MapManager.selectedMap;
+        StatData stats = new StatData(RoundManager.turnCounter+1,winner.score,winner.name,loser.name,loser.score,activeMap.name,winner.agent,loser.agent);
+        StatManager.statManager.overrideStats(stats);
         StatManager.resultInfo = resultInfo;
         endGame?.Invoke(null, stats);
         SceneManager.LoadScene("End");

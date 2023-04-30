@@ -17,9 +17,10 @@ public class SaveSystem
             writer = null;
             Debug.Log("SavedData to " + savePath);
         }
-        catch (IOException)
+        catch (IOException e)
         {
-            Debug.Log("Could not save. Try again in a few seconds");
+            Debug.Log("File is in use. Trying again");
+            SaveData(saveFile, savePath);
         }
       
     }  

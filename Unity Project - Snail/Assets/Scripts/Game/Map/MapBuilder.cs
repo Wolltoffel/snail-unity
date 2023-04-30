@@ -180,17 +180,13 @@ public class MapBuilder
 
     public static bool checkForAllTilesOccupied()
     {
-        if (highlightedTiles.Count < 1) {
-            return true;
-        }
-
         foreach (Tile tile in tiles)
         {
             if (tile.slime==null && tile.impassableSlot==null) {
                 return false;
             }
         }
-        return false;
+        return true;
     }
 
     void emptyMap(object sender, EventArgs e)

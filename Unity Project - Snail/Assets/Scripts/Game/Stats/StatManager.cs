@@ -4,6 +4,22 @@ using UnityEngine;
 
 public class StatManager : MonoBehaviour
 {
-    public static StatData stats;
+    static StatData stats;
     public static ResultInfo resultInfo;
+    public static StatManager statManager;
+
+    private void Start()
+    {
+        statManager = this;
+    }
+
+    public void overrideStats(StatData newStats)
+    {
+        stats = newStats;
+    }
+
+    public StatData giveCurrentStats()
+    {
+        return stats;
+    }
 }

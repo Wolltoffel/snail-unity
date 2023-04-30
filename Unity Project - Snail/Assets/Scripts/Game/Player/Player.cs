@@ -11,8 +11,7 @@ public class Player
     public Tile activeTile;
     public bool turn;
     public int turnsWithoutCapture;
-    public enum Agent{computer,human }
-    public Agent agent;
+    public ActiveAgent agent;
     public int index;
 
     public Player(string name) 

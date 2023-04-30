@@ -48,10 +48,5 @@ public class Announcement : MonoBehaviour
         return popUpManager;
     }
 
-    void initiateSwitchTurns()
-    {
-        float time = 0.3f;
-        PopUpManager popUpManager = makeAnnouncementBeforeTurn(time);
-    }
 
 }
