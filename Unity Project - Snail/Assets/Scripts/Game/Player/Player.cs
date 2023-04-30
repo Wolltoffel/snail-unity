@@ -38,7 +38,7 @@ public class Player
         else
             turnsWithoutCapture++;
         if (turnsWithoutCapture >= PlayerSettingsManager.settings.maxTurnsWithoutCapture)
-            GameManager.endGameplay(this, RoundManager.inactivePlayer());
+            GameManager.endGameplay(this, RoundManager.inactivePlayer(),ResultInfo.maxTurnsWithoutCaptureExceeded);
 
         tile.playerSlot = this;
     }

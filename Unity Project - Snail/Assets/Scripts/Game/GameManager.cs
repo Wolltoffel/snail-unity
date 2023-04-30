@@ -44,13 +44,21 @@ public class GameManager : MonoBehaviour
             case ActionType.surrender:
                 Player loser = actionInfo.player;
                 Player winner = RoundManager.inactivePlayer();
-                GameManager.endGameplay(winner, loser);
+                GameManager.endGameplay(winner, loser, ResultInfo.surrender);
                 break;
             default:
                 movePlayer(actionInfo.player, tile, actionInfo);
                 MapBuilder.unmarkTiles();
                 break;
         }
+
+        checkForAllOccupiedTiles();
+    }
+
+    static void checkForAllOccupiedTiles()
+    {
+        if (MapBuilder.checkForAllTilesOccupied())
+            endGameplay(giveWinnerByScore(), giveLoserByScore(), ResultInfo.score);
     }
 
 
@@ -70,10 +78,11 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public static void endGameplay(Player winner, Player loser)
+    public static void endGameplay(Player winner, Player loser, ResultInfo resultInfo)
     {
         StatData stats = new StatData(RoundManager.turnCounter+1,winner.score,winner.name,loser.name,loser.score);
         StatManager.stats = stats;
+        StatManager.resultInfo = resultInfo;
         endGame?.Invoke(null, stats);
         SceneManager.LoadScene("End");
     }

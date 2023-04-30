@@ -144,15 +144,18 @@ public class MapBuilder
 
     public static Tile giveNextSlideTile(Tile previousTile, Tile activeTile, Player player)
     {
-        Tile[] previousTileNeighbours= giveNeighbours(previousTile).ToArray();
-        Tile[] activeTileNeighbours= giveNeighbours(activeTile).ToArray();
-
-        for (int i = 0; i < previousTileNeighbours.Length; i++)
+        if (activeTile.checkSlime(player))
         {
-            if (previousTileNeighbours[i] == activeTile && activeTileNeighbours[i] != null)
+          Tile[] previousTileNeighbours= giveNeighbours(previousTile).ToArray();
+          Tile[] activeTileNeighbours= giveNeighbours(activeTile).ToArray();
+
+            for (int i = 0; i < previousTileNeighbours.Length; i++)
             {
-                if (activeTileNeighbours[i].checkSlime(player))
-                    return giveNextSlideTile(activeTile, activeTileNeighbours[i], player);
+                if (previousTileNeighbours[i] == activeTile && activeTileNeighbours[i] != null)
+                {
+                    if (activeTileNeighbours[i].checkSlime(player))
+                        return giveNextSlideTile(activeTile, activeTileNeighbours[i], player);
+                }
             }
         }
         return activeTile;
@@ -175,22 +178,19 @@ public class MapBuilder
         markPassableTiles(currentTile, activePlayer);
     }
 
-    bool checkTiles()
+    public static bool checkForAllTilesOccupied()
     {
         if (highlightedTiles.Count < 1) {
-            GameManager.endGameplay(GameManager.giveWinnerByScore(),GameManager.giveLoserByScore());
-            return false;
+            return true;
         }
 
         foreach (Tile tile in tiles)
         {
             if (tile.slime==null && tile.impassableSlot==null) {
-                return true;
+                return false;
             }
         }
-        GameManager.endGameplay(GameManager.giveWinnerByScore(),GameManager.giveLoserByScore());
         return false;
-
     }
 
     void emptyMap(object sender, EventArgs e)
