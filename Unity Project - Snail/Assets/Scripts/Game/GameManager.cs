@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
                 Player loser = actionInfo.player;
                 Player winner = RoundManager.inactivePlayer();
                 GameManager.endGameplay(winner, loser, ResultInfo.surrender);
-                break;
+                return;
             default:
                 movePlayer(actionInfo.player, tile, actionInfo);
                 MapBuilder.unmarkTiles();

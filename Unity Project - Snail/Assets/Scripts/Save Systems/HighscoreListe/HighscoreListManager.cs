@@ -1,70 +1,78 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Linq;
 public class HighscoreListManager : MonoBehaviour
 {
-    HighscoreList highScoreList;
+    public HighscoreData[] highscoreList;
     string savePath;
+    string fileName;
+    int maxHighScoreCount;
 
     public void Awake()
     {
         savePath = Application.streamingAssetsPath + "/HighscoreList";
+        fileName = "highscoreData";
+        maxHighScoreCount = 3;
         loadHighscoreList();
     }
 
     public HighscoreData[] giveCurrentHighscoreList(HighscoreData highscoreData)
     {
         attemptToAddToHighScoreList(highscoreData);
-        return highScoreList.highscoreDataList;
+        return highscoreList;
     }
 
     void loadHighscoreList()
     {
-        SaveSystem saver = new SaveSystem();
+        string[] filePaths = System.IO.Directory.GetFiles(savePath, $"{fileName}*.json");
+        highscoreList = new HighscoreData[maxHighScoreCount];
 
-        string[] filePaths = System.IO.Directory.GetFiles(savePath, "*highscorelist.json");
-        if (filePaths.Length != 0)
-            highScoreList = saver.LoadData<HighscoreList>(filePaths[0]);
-        else
+        for (int i= 0; i < filePaths.Length; i++)
         {
-            highScoreList = new HighscoreList();
+            if (i > maxHighScoreCount-1)
+                return;
+            SaveSystem saver = new SaveSystem();
+            highscoreList[i] = saver.LoadData<HighscoreData>(filePaths[i]);
         }
     }
 
     void saveHighscoreList()
     {
         SaveSystem saver = new SaveSystem();
-        saver.SaveData(highScoreList, savePath+"/highscorelist.json");
+        for (int i = 0; i < highscoreList.Length; i++)
+        {
+            if (highscoreList[i]!=null)
+                saver.SaveData(highscoreList[i], savePath + $"/{fileName}_{i}.json");
+        }
     }
 
     void attemptToAddToHighScoreList(HighscoreData newData)
     {
-        HighscoreData[] highscoreDataList = highScoreList.highscoreDataList;
+        HighscoreData[] highscoreListTemp = highscoreList;
 
-        for (int i = 0; i < highscoreDataList.Length; i++)
+        for (int i = 0; i < highscoreList.Length; i++)
         {
-            if (highscoreDataList[i]==null||highscoreDataList[i].winnerScore < newData.winnerScore)
+            if (highscoreList[i]==null||highscoreList[i].winnerScore < newData.winnerScore)
             {
-                highscoreDataList[i] = newData;
+                addToHighscoreList(newData, i);
                 saveHighscoreList();
                 return;
             }
         }
     }
 
-    void attemptToAddToHighScoreListImproved(HighscoreData newData)
+    void addToHighscoreList(HighscoreData newData, int index)
     {
-        HighscoreData[] highscoreDataList = highScoreList.highscoreDataList;
-
-        for (int i = 0; i < highscoreDataList.Length; i++)
+        List<HighscoreData> sortedList = new List<HighscoreData>();
+        sortedList.AddRange(highscoreList);
+        sortedList.Add(newData);
+        sortedList = sortedList.OrderByDescending(highscore => highscore.winnerScore).ToList<HighscoreData>();
+       
+        for (int i = 0; i < highscoreList.Length; i++)
         {
-            if (highscoreDataList[i].winnerScore < newData.winnerScore)
-            {
-                highscoreDataList[i] = newData;
-                saveHighscoreList();
-                return;
-            }
+            highscoreList[i] = sortedList[i];
         }
     }
+
 }

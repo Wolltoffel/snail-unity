@@ -8,9 +8,12 @@ public class StatManager : MonoBehaviour
     public static ResultInfo resultInfo;
     public static StatManager statManager;
 
-    private void Start()
+    private void Awake()
     {
-        statManager = this;
+        if (statManager != null)
+            Destroy(this);
+        else
+            statManager = this;
     }
 
     public void overrideStats(StatData newStats)

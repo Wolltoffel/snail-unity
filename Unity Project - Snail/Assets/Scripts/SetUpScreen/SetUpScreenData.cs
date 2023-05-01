@@ -18,7 +18,6 @@ public class SetUpScreenData : MonoBehaviour
         insertPlayers();
     }
 
-
     public void insertPlayers()
     {
         if (players == null)

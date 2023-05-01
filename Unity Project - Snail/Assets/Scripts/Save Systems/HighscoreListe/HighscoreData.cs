@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class HighscoreData
+public class HighscoreData: SaveData
 {
     public string mapName;
     public string winnerName;
@@ -22,5 +23,7 @@ public class HighscoreData
         this.agentWinner =agentWinner;
         this.agentLoser = agentLoser;
     }
+
+    public override void loadDefaultValues() { }
 
 }
