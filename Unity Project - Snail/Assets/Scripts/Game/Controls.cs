@@ -6,7 +6,8 @@ public class Controls
 {
     ActivePlayerGiver activePlayerGiver;
 
-    public Controls() {
+    public Controls()
+    {
         activePlayerGiver = new ActivePlayerGiver();
     }
 
@@ -18,18 +19,18 @@ public class Controls
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             actionInfo = new ActionInfo(ActionType.skip, activePlayer);
-            handleInputs(null,actionInfo);
+            handleInputs(null, actionInfo);
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             actionInfo = new ActionInfo(ActionType.surrender, activePlayer);
-            handleInputs(null,actionInfo);
+            handleInputs(null, actionInfo);
         }
     }
 
-    public void handleInputs(Tile tile,ActionInfo actionInfo)
+    public void handleInputs(Tile tile, ActionInfo actionInfo)
     {
-        GameManager.tryExecuteTurn(tile,actionInfo);      
+        GameManager.tryExecuteTurn(tile, actionInfo);
     }
 }

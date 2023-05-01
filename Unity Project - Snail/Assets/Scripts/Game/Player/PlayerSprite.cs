@@ -9,7 +9,7 @@ public class PlayerSprite : MonoBehaviour
     bool endedMovement;
     Tile target;
     public float movementSpeed = 3f;
-    [HideInInspector]public Player player;
+    [HideInInspector] public Player player;
     ActionType actionType;
     ActivePlayerGiver activePlayerGiver;
 
@@ -47,7 +47,7 @@ public class PlayerSprite : MonoBehaviour
         if (Vector3.Distance(currentPosition, targetPosition) > 0.0001f)
         {
             Vector3 direction = (targetPosition - currentPosition).normalized;
-            transform.Translate(direction*movementSpeed*MapBuilder.tileSize*Time.deltaTime); 
+            transform.Translate(direction * movementSpeed * MapBuilder.tileSize * Time.deltaTime);
         }
         else
         {
@@ -60,6 +60,6 @@ public class PlayerSprite : MonoBehaviour
     {
         Controls controls = new Controls();
         ActionInfo actionInfo = new ActionInfo(ActionType.skip, player);
-        controls.handleInputs(null,actionInfo);
+        controls.handleInputs(null, actionInfo);
     }
 }

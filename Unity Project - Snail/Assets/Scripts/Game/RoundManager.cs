@@ -43,11 +43,12 @@ public class RoundManager : MonoBehaviour
         turnDurationCounter = 0;
     }
 
-    void countdownRoundSeconds() {
+    void countdownRoundSeconds()
+    {
         turnDurationCounter += Time.deltaTime;
         if (turnDurationCounter > maxTurnDuration)
         {
-            ActionInfo actionInfo = new ActionInfo(ActionType.skip,activePlayerGiver.giveActivePlayer());
+            ActionInfo actionInfo = new ActionInfo(ActionType.skip, activePlayerGiver.giveActivePlayer());
             switchTurn?.Invoke(null, actionInfo);
         }
     }

@@ -12,14 +12,16 @@ public class Tile
 
     private ActivePlayerGiver activePlayerGiver;
 
-    public Tile(Vector3 worldPosition,Vector2Int position) {
+    public Tile(Vector3 worldPosition, Vector2Int position)
+    {
         this.position = position;
         this.worldPosition = worldPosition;
         spriteLoader = new AssetLoader();
         activePlayerGiver = new ActivePlayerGiver();
     }
 
-    public void insertContent(int index) {
+    public void insertContent(int index)
+    {
         spawnGrass();
         insertHighlight();
         switch (index)
@@ -92,7 +94,7 @@ public class Tile
         }
     }
 
-    public void setHighlight(bool b) 
+    public void setHighlight(bool b)
     {
         highLightSlot.SetActive(b);
     }
@@ -109,14 +111,16 @@ public class Tile
         this.slime = slime;
     }
 
-    public void AddCustomSlime(Slime slime,Player player)
+    public void AddCustomSlime(Slime slime, Player player)
     {
         slime.instance = GameObject.Instantiate(spriteLoader.slime[player.index], worldPosition, Quaternion.Euler(Vector3.zero)) as GameObject;
         this.slime = slime;
     }
 
-    public bool checkSlime(Player player) {
-        if (slime != null) {
+    public bool checkSlime(Player player)
+    {
+        if (slime != null)
+        {
             if (slime.owner == player)
                 return true;
             else
@@ -130,15 +134,12 @@ public class Tile
 
     public void emptyTile()
     {
-      Object.Destroy(highLightSlot);
-      Object.Destroy(grassFieldSlot);
-      Object.Destroy(impassableSlot);
-     }
+        Object.Destroy(highLightSlot);
+        Object.Destroy(grassFieldSlot);
+        Object.Destroy(impassableSlot);
+    }
 
 
 
 
 }
-
-
-
