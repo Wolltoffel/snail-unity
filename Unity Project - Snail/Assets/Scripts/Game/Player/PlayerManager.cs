@@ -10,7 +10,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
-        player = SetUpScreenData.setUpScreenData.players;
+        player = SetUpScreenData.setUpScreenData.givePlayers();
 
         RoundManager.switchTurn += switchTurns;
         GameManager.endGame += resetPlayers;

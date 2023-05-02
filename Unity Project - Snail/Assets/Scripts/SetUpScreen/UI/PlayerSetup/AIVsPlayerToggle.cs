@@ -15,7 +15,7 @@ public class AIVsPlayerToggle : MonoBehaviour
 
     private void Start()
     {
-        player = SetUpScreenData.setUpScreenData.players[index];
+        player = SetUpScreenData.setUpScreenData.givePlayers()[index];
 
      loadDefaultValues();
 

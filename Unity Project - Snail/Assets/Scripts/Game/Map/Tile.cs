@@ -48,7 +48,7 @@ public class Tile
 
     void spawnPlayer(int index)
     {
-        playerSlot = SetUpScreenData.setUpScreenData.players[index];
+        playerSlot = SetUpScreenData.setUpScreenData.givePlayers()[index];
         playerSlot.sprite = GameObject.Instantiate(spriteLoader.player[index], worldPosition, Quaternion.Euler(Vector3.zero)) as GameObject;
         playerSlot.sprite.GetComponent<SpriteRenderer>().sortingOrder = 2;
         playerSlot.sprite.transform.parent = grassFieldSlot.transform;
@@ -81,17 +81,11 @@ public class Tile
     public bool checkPassable(Player player)
     {
         if (impassableSlot == null && slime == null && playerSlot == null)
-        {
             return true;
-        }
         else if (slime != null && slime.owner == player)
-        {
             return true;
-        }
-        else
-        {
-            return false;
-        }
+
+         return false;
     }
 
     public void setHighlight(bool b)
@@ -137,6 +131,14 @@ public class Tile
         Object.Destroy(highLightSlot);
         Object.Destroy(grassFieldSlot);
         Object.Destroy(impassableSlot);
+    }
+
+    public void setSlimeActive(bool b)
+    {
+        if (b)
+            slime.show();
+        else
+            slime.hide();
     }
 
 

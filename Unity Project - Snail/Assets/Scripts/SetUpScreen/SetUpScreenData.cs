@@ -5,7 +5,7 @@ using UnityEngine;
 public class SetUpScreenData : MonoBehaviour
 {
     public static SetUpScreenData setUpScreenData;
-    public List<Player> players;
+    List<Player> players;
     public MapData selectedMap;
 
     private void Awake()
@@ -25,6 +25,7 @@ public class SetUpScreenData : MonoBehaviour
             players = new List<Player>();
             players.Add(new Player("Player 1"));
             players.Add(new Player("Player 2"));
+            Debug.Log("Is null");
         }
 
         foreach (Player item in players)
@@ -46,5 +47,10 @@ public class SetUpScreenData : MonoBehaviour
     public void setMap(MapData mapData)
     {
         selectedMap = mapData;
+    }
+
+    public List<Player> givePlayers()
+    {
+        return players;
     }
 }

@@ -16,7 +16,7 @@ public class NameInput : MonoBehaviour
     }
 
     void setDefaultValueForPlaceHolder() {
-        Player player = SetUpScreenData.setUpScreenData.players[playerIndex];
+        Player player = SetUpScreenData.setUpScreenData.givePlayers()[playerIndex];
         placeHolder.text = player.name;
     }
     void setCharacterLimit()
