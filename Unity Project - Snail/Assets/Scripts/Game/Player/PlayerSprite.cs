@@ -38,6 +38,7 @@ public class PlayerSprite : MonoBehaviour
         ActionInfo actionInfo = new ActionInfo(actionType, activePlayerGiver.giveActivePlayer());
         RoundManager.switchTurnsEvent(actionInfo);
         endedMovement = false;
+        player.hideSlime();
     }
 
     void move()

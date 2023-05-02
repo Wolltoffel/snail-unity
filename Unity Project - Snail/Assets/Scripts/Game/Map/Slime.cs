@@ -13,4 +13,14 @@ public class Slime
         this.owner = owner;
         this.tile = tile;
     }
+
+    public void hide()
+    {
+        instance.SetActive(false);
+    }
+
+    public void show()
+    {
+        instance.SetActive(true);
+    }
 }

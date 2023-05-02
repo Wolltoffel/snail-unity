@@ -31,6 +31,7 @@ public class Player
     {
         sprite.GetComponent<PlayerSprite>().startMove(tile,actionInfo.actionType);
         activeTile.playerSlot = null;
+        activeTile.setSlimeActive(true);
         activeTile = tile;
         if (actionInfo.actionType == ActionType.capture)
             turnsWithoutCapture=0;
@@ -40,6 +41,11 @@ public class Player
             GameManager.endGameplay(this, RoundManager.inactivePlayer(),ResultInfo.maxTurnsWithoutCaptureExceeded);
 
         tile.playerSlot = this;
+    }
+
+    public void hideSlime()
+    {
+        activeTile.setSlimeActive(false);
     }
 
     public void increaseScore()
