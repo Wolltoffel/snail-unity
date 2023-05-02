@@ -10,7 +10,7 @@ public class StatManager : MonoBehaviour
 
     private void Awake()
     {
-        if (statManager != null)
+        if (statManager != null && statManager!=this)
             Destroy(this);
         else
             statManager = this;

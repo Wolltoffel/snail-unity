@@ -10,8 +10,12 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
+        if (soundManager != null && soundManager != this)
+            Destroy(this);
+        else
+            soundManager = this;
+
         audioSource = GetComponent<AudioSource>();
-        soundManager = this;
     }
     public void PlaySound(int index)
     {

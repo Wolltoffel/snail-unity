@@ -75,6 +75,7 @@ public class RoundManager : MonoBehaviour
         {
             PlayerManager.unsubscribeSwitchTurns();
         }
+        SoundManager.soundManager.PlaySound(3);
     }
 
     private void resetManager(object sender, EventArgs e)

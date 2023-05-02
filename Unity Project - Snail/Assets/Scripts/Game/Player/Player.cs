@@ -34,13 +34,20 @@ public class Player
         activeTile.setSlimeActive(true);
         activeTile = tile;
         if (actionInfo.actionType == ActionType.capture)
-            turnsWithoutCapture=0;
+        {
+            captureField(tile);
+        }
+            
         else
             turnsWithoutCapture++;
-        if (turnsWithoutCapture >= PlayerSettingsManager.settings.maxTurnsWithoutCapture)
-            GameManager.endGameplay(this, RoundManager.inactivePlayer(),ResultInfo.maxTurnsWithoutCaptureExceeded);
 
         tile.playerSlot = this;
+
+        if (turnsWithoutCapture >= PlayerSettingsManager.settings.maxTurnsWithoutCapture)
+            GameManager.endGameplay(this, RoundManager.inactivePlayer(),ResultInfo.maxTurnsWithoutCaptureExceeded);
+            
+        SoundManager.soundManager.PlaySound(2);
+
     }
 
     public void hideSlime()
@@ -72,6 +79,7 @@ public class Player
     {
         tile.AddSlime();
         increaseScore(); //Increase score if current field has no slime
+        turnsWithoutCapture = 0;
     }
 
 

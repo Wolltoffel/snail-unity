@@ -18,6 +18,6 @@ public class ActivePlayerGiver
                 return player;
             }
         }
-        return giveActivePlayer();
+        return null;
     }
 }

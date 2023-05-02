@@ -46,11 +46,13 @@ public class PlayerManager : MonoBehaviour
     }
 
     void resetPlayers(object sender, EventArgs e) {
+
         foreach (Player player in player)
         {
             player.resetPlayer();
         }
         RoundManager.switchTurn -= switchTurns;
+        GameManager.endGame -= resetPlayers;
     }
 
 

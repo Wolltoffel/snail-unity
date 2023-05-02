@@ -5,12 +5,11 @@ using UnityEngine;
 public class SetUpScreenData : MonoBehaviour
 {
     public static SetUpScreenData setUpScreenData;
-    List<Player> players;
-    public MapData selectedMap;
+    private static List<Player> players;
 
     private void Awake()
     {
-        if (setUpScreenData != null)
+        if (setUpScreenData != null && setUpScreenData != this)
             Destroy(this);
         else
             setUpScreenData = this;
@@ -25,7 +24,6 @@ public class SetUpScreenData : MonoBehaviour
             players = new List<Player>();
             players.Add(new Player("Player 1"));
             players.Add(new Player("Player 2"));
-            Debug.Log("Is null");
         }
 
         foreach (Player item in players)
@@ -42,11 +40,6 @@ public class SetUpScreenData : MonoBehaviour
     public void setAgent(ActiveAgent agent, int index)
     {
         players[index].agent = agent;
-    }
-
-    public void setMap(MapData mapData)
-    {
-        selectedMap = mapData;
     }
 
     public List<Player> givePlayers()

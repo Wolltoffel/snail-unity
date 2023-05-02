@@ -70,8 +70,6 @@ public class GameManager : MonoBehaviour
         {
             if (tile.checkSlime(activePlayer))  //Check Tile for slime
                 actionInfo.actionType = ActionType.empty;
-            else
-                activePlayer.captureField(tile);
         }
        
         activePlayer.move(tile, actionInfo);
