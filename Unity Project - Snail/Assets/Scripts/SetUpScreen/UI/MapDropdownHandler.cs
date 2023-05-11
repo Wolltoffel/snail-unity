@@ -13,6 +13,7 @@ public class MapDropdownHandler : MonoBehaviour
 
     private void Start()
     {
+
         TMPro.TMP_Dropdown dropdown = GetComponent<TMPro.TMP_Dropdown>();
         dropdown.options.Clear();
 
@@ -32,8 +33,12 @@ public class MapDropdownHandler : MonoBehaviour
         }
        
         //Set Default or preselected Value for Dropdown as Standard
-        if (MapManager.selectedMap == null)
-            dropdown.value = items.IndexOf("default");
+        if (MapManager.selectedMap == null) {
+            int index = items.IndexOf("default");
+            dropdown.value = index;
+            MapManager.selectedMap = maps[index];
+        }
+            
         else
             dropdown.value = items.IndexOf(MapManager.selectedMap.name);
 

@@ -36,10 +36,7 @@ public class MapManager : MonoBehaviour
                 maps.Add(mapArray[i]);
             }
         }
-        if (selectedMap == null)
-        {
-            selectedMap = maps[0];
-        }
+      
 
         maps = maps.OrderBy(map => map.name).ToList<MapData>();
     }
