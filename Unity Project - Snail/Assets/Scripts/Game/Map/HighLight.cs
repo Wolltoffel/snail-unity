@@ -7,6 +7,7 @@ public class HighLight : MonoBehaviour
     [HideInInspector]public Tile tile;
     Vector3 initialSize;
     AIHandler aiHandler;
+    bool calculatingMove;
 
     bool activeMovement;
     ActivePlayerGiver activePlayerGiver;
@@ -26,10 +27,24 @@ public class HighLight : MonoBehaviour
         Player activePlayer = activePlayerGiver.giveActivePlayer();
         if (activePlayer.agent == ActiveAgent.computer)
         {
+            if (calculatingMove == false)
+            {
+                StartCoroutine(aiHandler.calculateNextMove());
+                calculatingMove = true;
+            }
+            
             Vector2Int nextMove = aiHandler.giveNextMove(MapBuilder.arrayTiles, (uint)activePlayer.index);
-            ActionInfo actionInfo = new ActionInfo(ActionType.capture, activePlayer);
-            Controls controls = new Controls();
-            controls.handleInputs(MapBuilder.arrayTiles[nextMove.x,nextMove.y], actionInfo);
+            
+            if (calculatingMove && nextMove!= null) {
+                if (nextMove != activePlayer.activeTile.position)
+                {
+                    ActionInfo actionInfo = new ActionInfo(ActionType.capture, activePlayer);
+                    Controls controls = new Controls();
+                    controls.handleInputs(MapBuilder.arrayTiles[nextMove.x, nextMove.y], actionInfo);
+                    Debug.Log(nextMove);
+                    calculatingMove = false;
+                }
+            }
         }
 
     }

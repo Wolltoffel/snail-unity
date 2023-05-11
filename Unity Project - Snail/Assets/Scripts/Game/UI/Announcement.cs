@@ -11,42 +11,43 @@ public class Announcement : MonoBehaviour
     void Start()
     {
         RoundManager.switchTurn += makeAnnouncementAfterTurn;
+        activePlayerGiver = new ActivePlayerGiver();
+        GameManager.endGame += unsubscribeFromEvents;
     }
     void makeAnnouncementAfterTurn(object sender, ActionInfo actionInfo)
     {
         Player activePlayer = actionInfo.player;
         string activePlayerName = activePlayer.name;
-        string text="";
+        string textAfterTurn="";
+        string textBeforeNextTurn;
 
         switch (actionInfo.actionType)
         {
             case ActionType.slide:
-                text = $"{activePlayerName} slides to {activePlayer.activeTile.position.x}/{activePlayer.activeTile.position.y}";
+                textAfterTurn = $"{activePlayerName} slides to {activePlayer.activeTile.position.x}/{activePlayer.activeTile.position.y}";
                 break;
             case ActionType.capture:
-                text = $"{activePlayerName} captured {activePlayer.activeTile.position.x}/{activePlayer.activeTile.position.y}";
+                textAfterTurn = $"{activePlayerName} captured {activePlayer.activeTile.position.x}/{activePlayer.activeTile.position.y}";
                 break;
             case ActionType.skip:
-                text = $"{activePlayerName} missed his turn";
+                textAfterTurn = $"{activePlayerName} missed his turn";
                 break;
         }
 
-        if (text != "")
+        textBeforeNextTurn = $"Round: {RoundManager.turnCounter} - {activePlayerGiver.giveActivePlayer().name}";
+
+        if (textAfterTurn != "")
         {
-            PopUpManager popUpManager = new PopUpManager("PopUpTemplates/PopUp_Template_2");
-            popUpManager.showPopUp(text, 0.3f);
+            PopUpManager popUpManager= new PopUpManager("PopUpTemplates/PopUp_Template_2");
+            StartCoroutine (popUpManager.showPopUp(textAfterTurn, 0.3f, popUpManager.showPopUp(textBeforeNextTurn,0.5f)));
         }
 
     }
 
-    public PopUpManager makeAnnouncementBeforeTurn(float time)
+    void unsubscribeFromEvents(object sender,StatData stats)
     {
-        string text = $"Round: {RoundManager.turnCounter} - {activePlayerGiver.giveActivePlayer()}";
-
-        PopUpManager popUpManager = new PopUpManager("PopUpTemplates/PopUp_Template_2");
-        popUpManager.showPopUp(text, time);
-        return popUpManager;
+        RoundManager.switchTurn -= makeAnnouncementAfterTurn;
+        GameManager.endGame -= unsubscribeFromEvents;
     }
-
 
 }
