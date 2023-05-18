@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class HighLight : MonoBehaviour
+public class HighLight : MonoBehaviour, IPointerClickHandler,IPointerEnterHandler,IPointerExitHandler
 {
     [HideInInspector]public Tile tile;
     Vector3 initialSize;
@@ -35,7 +36,7 @@ public class HighLight : MonoBehaviour
             
             Vector2Int nextMove = aiHandler.giveNextMove(MapBuilder.arrayTiles, (uint)activePlayer.index);
             
-            if (calculatingMove && nextMove!= null) {
+            if (calculatingMove && aiHandler.giveNextMoveTask().IsCompleted) {
                 if (nextMove != activePlayer.activeTile.position)
                 {
                     ActionInfo actionInfo = new ActionInfo(ActionType.capture, activePlayer);
@@ -59,17 +60,17 @@ public class HighLight : MonoBehaviour
         slideMove = false;
     }
 
-    private void OnMouseEnter()
+    public void OnPointerEnter(PointerEventData pointerEventData)
     {
         Player player = activePlayerGiver.giveActivePlayer();
-        if (player.agent == ActiveAgent.human)
+        if (player.agent == ActiveAgent.human && Controls.giveControlsActive())
         {
             SoundManager.soundManager.PlaySound("ui-click-high-modern-click-06");
             transform.localScale = transform.localScale * 1.1f;
         }
     }
 
-    private void OnMouseExit()
+    public void OnPointerExit(PointerEventData pointerEventData)
     {
         transform.localScale = initialSize;
     }
@@ -80,7 +81,7 @@ public class HighLight : MonoBehaviour
         transform.localScale = initialSize;
     }
 
-    private void OnMouseDown()
+    public void OnPointerClick(PointerEventData pointerEventData)
     {
         Player player = activePlayerGiver.giveActivePlayer();
         if (player.agent ==ActiveAgent.human)

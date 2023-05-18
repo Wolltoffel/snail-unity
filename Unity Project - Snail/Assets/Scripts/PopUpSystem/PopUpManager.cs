@@ -18,16 +18,18 @@ public class PopUpManager
 
    public IEnumerator showPopUp(string text,float showTime) {
 
+        Controls.SetControlsActive(false);
         popUp = GameObject.Instantiate(popUpTemplate, new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0),Quaternion.Euler(0,0,0));
         popUp.GetComponentInChildren<TextMeshProUGUI>().text = text;
         popUp.GetComponentInChildren<Button>()?.onClick.AddListener(() => hidePopUp());
         yield return new WaitForSeconds(showTime);
         hidePopUp();
+        Controls.SetControlsActive(true);
     }
 
     public IEnumerator showPopUp(string text, float showTime, IEnumerator followUp)
     {
-
+        Controls.SetControlsActive(false);
         popUp = GameObject.Instantiate(popUpTemplate, new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0), Quaternion.Euler(0, 0, 0));
         popUp.GetComponentInChildren<TextMeshProUGUI>().text = text;
         popUp.GetComponentInChildren<Button>()?.onClick.AddListener(() => hidePopUp());

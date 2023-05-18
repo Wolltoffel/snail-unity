@@ -5,6 +5,7 @@ using UnityEngine;
 public class Controls
 {
     ActivePlayerGiver activePlayerGiver;
+    static bool activeControls=true;
 
     public Controls()
     {
@@ -31,6 +32,22 @@ public class Controls
 
     public void handleInputs(Tile tile, ActionInfo actionInfo)
     {
-        GameManager.tryExecuteTurn(tile, actionInfo);
+        if (activeControls)
+        {
+            GameManager.tryExecuteTurn(tile, actionInfo);
+        }
+        
     }
+
+    public static void SetControlsActive(bool active)
+    {
+        activeControls = active;
+    }
+
+    public static bool giveControlsActive()
+    {
+        return activeControls;
+    }
+
+   
 }
