@@ -12,6 +12,8 @@ public class AIHandler
     WorldState worldState;
     NegamaxAgent negamaxAgent;
 
+    Task<IPlayerCommand> task;
+
     Vector2Int targetPosition;
 
 
@@ -23,14 +25,16 @@ public class AIHandler
     public Vector2Int giveNextMove(Tile[,] tiles , uint playerindex)
     {
         remapTiles(tiles,playerindex);
-        return giveNextMove();
+        return giveNextMovePosition();
     }
 
     void remapTiles(Tile[,] tiles,uint index) {
         Vector2 mapSize = MapBuilder.size;
         Vec2Int mapSizeToInt = new Vec2Int((int)mapSize.x, (int)mapSize.y);
-        worldState = new WorldState(mapSizeToInt, index, RoundManager.turnCounter);
+        Debug.Log(mapSizeToInt.ToString());
+        worldState = new WorldState(mapSizeToInt, index +1, RoundManager.turnCounter);
         uint currentPlayerIndex = 0;
+        string board = "";
 
         for (int y= 0; y < MapBuilder.size.y; y++)
         {
@@ -50,16 +54,19 @@ public class AIHandler
 
 
                 worldState[x, y] = new TileData(contents, currentPlayerIndex);
+                board += " " + worldState[x, y].ToString();
             }
+            board += "\n";
         }
+        Debug.Log(board);
     }
 
     public IEnumerator calculateNextMove()
     {
         PlayerSettings settings = PlayerSettingsManager.settings;
         Constraints constraints = new Constraints(Convert.ToInt64(settings.maxComputationTimePerTurn), Convert.ToInt64(settings.miniCPUAgentTurnDuration));
-        Task<IPlayerCommand> task = negamaxAgent.ComputeNextMoveAsync(worldState, constraints);
-        yield return new WaitUntil(() => task!=null);
+        task = negamaxAgent.ComputeNextMoveAsync(worldState, constraints);
+        yield return new WaitUntil(() => task.IsCompleted );
         Vec2Int delta = task.Result.Delta;
         Vec2Int origin = task.Result.Origin;
         Vec2Int newPosition = origin + delta;
@@ -68,8 +75,13 @@ public class AIHandler
         yield break;
     }
 
-    Vector2Int giveNextMove() {
+    Vector2Int giveNextMovePosition() {
         return targetPosition;
+    }
+
+    public Task giveNextMoveTask()
+    {
+        return task;
     }
 
 }
