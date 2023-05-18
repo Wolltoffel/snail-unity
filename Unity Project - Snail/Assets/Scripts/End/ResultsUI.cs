@@ -54,11 +54,18 @@ public class ResultsUI : MonoBehaviour
         string text="";
         string highscoreDataText="";
 
-        foreach (HighscoreData item in highScoreDataList)
+        for (int i= 0; i < highScoreDataList.Length; i++)
         {
-            if (item != null)
+            if (highScoreDataList[i]!= null)
             {
-                highscoreDataText = $"Map: {item.mapName} Winner: {item.winnerName} Score:{item.winnerScore}";
+               highscoreDataText = $"Map: {highScoreDataList[i].mapName} " +
+                    $"Winner: {highScoreDataList[i].winnerName} " +
+                    $"Score:{highScoreDataList[i].winnerScore}";
+
+                //Mark highest Score Red
+                if (i == 0)
+                    highscoreDataText = $"<color=red>{highscoreDataText}</color>";
+
                 text += highscoreDataText + "\n";
             }
         }
