@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player
 {
+    string name;
     int score;
     public Vector2Int position;
     PlayerVisual playerVisual;
@@ -19,13 +20,14 @@ public class Player : MonoBehaviour
         playerVisual.SpawnPlayerObjects(new Vector3(position.x, -position.y, 0),mapParent);
     }
 
-    public void SpawnSlime(Vector3 worldPosition, GameObject grassParent) {
-        playerVisual.SpawnSlime(worldPosition, grassParent);
+    public void SpawnSlimeVisuals(Tile tile,GameObject parent) {
+        playerVisual.SpawnSlime(tile,parent);
     }
 
-    public IEnumerator Move(Vector2 target)
+    public IEnumerator Move(Vector2Int target)
     {
         score++;
+        position = target;
         yield return playerVisual.Move(new Vector3 (target.x,-target.y,0));
     }
 }
