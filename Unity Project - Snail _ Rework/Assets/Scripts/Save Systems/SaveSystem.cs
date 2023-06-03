@@ -11,30 +11,27 @@ public class SaveSystem
        
         try
         {
-            StreamWriter writer = new StreamWriter(savePath);
+            using StreamWriter writer = new StreamWriter(savePath);
             writer.Write(json);
-            writer.Close();
-            writer = null;
             Debug.Log("SavedData to " + savePath);
         }
-        catch (IOException e)
+        catch (IOException)
         {
             Debug.Log("File is in use. Trying again");
             SaveData(saveFile, savePath);
         }
-      
     }  
 
     public T LoadData<T>(string savePath) where T:SaveData
     {
-        StreamReader reader = new StreamReader(savePath);
+        using StreamReader reader = new StreamReader(savePath);
         string json = reader.ReadToEnd();
 
         try
         {
             return JsonUtility.FromJson<T>(json);
         }
-        catch(System.Exception ex)
+        catch(System.Exception)
         {
             return null;
         }
