@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class PlayerSettingsManager : MonoBehaviour
+public class PlayerSettingsManager
 {
-    public static PlayerSettings settings;
+    public PlayerSettings settings;
     SaveSystem saver;
     string savePath;
 
-    private void Awake()
+    public  PlayerSettingsManager()
     {
         saver = new SaveSystem();
         savePath = Application.streamingAssetsPath + "/PlayerSettings";
@@ -28,7 +28,7 @@ public class PlayerSettingsManager : MonoBehaviour
         }
     }
 
-    public void saveSettings(PlayerSettings settings)
+    void saveSettings(PlayerSettings settings)
     {   
         saver.SaveData(settings, savePath + "/settings.gcf");
     }

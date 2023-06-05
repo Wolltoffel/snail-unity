@@ -17,9 +17,10 @@ public class PlayerVisual
         slimeReference = new List<GameObject>();
     }
 
-    public void SpawnPlayerObjects(Vector3 worldPosition, GameObject mapParent)
+    public void SpawnPlayerObjects(Vector3 worldPosition, GameObject mapParent, string playerName)
     {
         playerReference = GameObject.Instantiate(playerAsset, worldPosition, Quaternion.Euler(Vector3.zero));
+        playerReference.name = playerName + "_Snail";
         playerReference.transform.SetParent(mapParent.transform);
     }
 
@@ -42,4 +43,5 @@ public class PlayerVisual
             yield return null;
         }
     }
+
 }

@@ -1,36 +1,53 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.Tracing;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Manages the game flow and player turns.
 /// </summary>
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] AssetHolder assetHolder;
-    [SerializeField] int roundTimer;
-    [SerializeField] GameObject mapHolder;
+    [Header ("Tools")]
+    [SerializeField] GameController gameController;
+    [SerializeField] CameraManager cameraManager;
     MapBuilder mapBuilder;
+    [SerializeField] ScreenHandler screenHandler;
+
+    [Header ("Data")]
+    [SerializeField] AssetHolder assetHolder;
+    [SerializeField] GameObject mapHolder;
+    [SerializeField] int roundTimer;
+    [SerializeField] GameData gameData;
+
+    [Header("InputSources")]
+    [SerializeField] Button playButton;
+
+
+    [Header("InternalVaraibles")]
+
     int activePlayerIndex;
     PlayerAction nextMove;
-    bool gamehasEnded;
+    bool gamehasEnded = true;
+
 
     void Awake()
     {
-        mapBuilder = new MapBuilder(assetHolder,mapHolder, this);
-
-        //Determine first player
-        activePlayerIndex = Random.Range(0, 2);
-        mapBuilder.LoadMapFromFile();
-
+        mapBuilder = new MapBuilder(assetHolder,mapHolder,gameData);
+        activePlayerIndex = Random.Range(0, 2);//Determine first player
+        playButton.onClick.AddListener(PlayButtonClicked);
     }
 
    IEnumerator Start()
     {
+        yield return new WaitUntil(()=> gamehasEnded == false);
+        screenHandler.SetScreenActive(ScreenSelection.Game);
+        mapBuilder.LoadAndBuildMap();
+        cameraManager.SetUpCamera(gameData.GetSelectedMap().size);
+
         while (!gamehasEnded)
         {
-            mapBuilder.HighlightPassableTiles(activePlayerIndex);
+            //cameraManager.SetUpCamera();
+            mapBuilder.HighlightPassableTiles(activePlayerIndex, gameController);
             yield return PlayTurn();
             mapBuilder.DisableHighlights();
             SwitchActivePlayer();
@@ -56,12 +73,13 @@ public class GameManager : MonoBehaviour
                 break;  
         }
 
-        nextMove = null;
+        nextMove = null; //ResetNextMoveForNextPlayer
+        gameController.ResetAction();
     }
 
     /// <summary>
     /// Waits for the player to make a move or the round timer to expire.
-    /// </summary>
+    /// </summary>w
     IEnumerator WaitForPlayerMove() {
 
         float timer = 0;
@@ -69,10 +87,10 @@ public class GameManager : MonoBehaviour
             timer += Time.deltaTime;
             //Debug.Log(timer);
             yield return null;
-            if (nextMove != null)
+            nextMove = gameController.GetAction();
+            if (nextMove!=null)
                 yield break;
         }
-
         //In case there's no player action the round will be skipped for him
         nextMove = new PlayerAction(ActionType.Skip, Vector2Int.zero);
         yield return null;
@@ -84,17 +102,17 @@ public class GameManager : MonoBehaviour
         yield return null;
     }
 
-    public void MakeMove(PlayerAction newMove)
-    {
-        nextMove = newMove;
-    }
-
     public void SwitchActivePlayer()
     {
         if (activePlayerIndex == 0)
             activePlayerIndex = 1;
         else
             activePlayerIndex = 0;
+    }
+
+    void PlayButtonClicked()
+    {
+        gamehasEnded = false;
     }
 
 

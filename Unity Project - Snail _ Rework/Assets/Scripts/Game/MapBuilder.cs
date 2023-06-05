@@ -1,39 +1,43 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Snails;
-using Unity.VisualScripting;
-using JetBrains.Annotations;
-using UnityEngine.TextCore.LowLevel;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
+using UnityEditor;
 
 /// <summary>
 /// Class responsible for building and managing the game map.
 /// </summary>
 public class MapBuilder
 {
-    [Header ("Tools")]
+    [Header("Tools")]
     AssetHolder assetHolder;
     SaveSystem saver;
     MapData activeMap;
 
-    [Header ("References")]
+    [Header("References")]
     Player[] players;
-    List<Highlight> spawnedHighlights;
     GameObject mapHolder;
-    GameManager gameManager;
+    GameData gameData;
 
-    [Header ("Values")]
+    [Header("Values")]
     string savePath = Application.streamingAssetsPath + "/Maps/default.json";
     Tile[,] tiles;
-    
-    public MapBuilder(AssetHolder assetHolder, GameObject mapHolder, GameManager gameManager)
+
+    [Header("Visuals")]
+    List<Highlight> spawnedHighlights;
+    List<GameObject> spawnedMapAssets;
+
+    public MapBuilder(AssetHolder assetHolder, GameObject mapHolder, GameData gameData)
     {
         players = new Player[2];
         this.assetHolder = assetHolder;
         saver = new SaveSystem();
         this.mapHolder = mapHolder;
         spawnedHighlights = new List<Highlight>();
-        this.gameManager = gameManager;
+        spawnedMapAssets = new List<GameObject>();
+        this.gameData = gameData;
     }
 
     public Player[] GetPlayer()
@@ -41,17 +45,20 @@ public class MapBuilder
         return players;
     }
 
+
     /// <summary>
     /// Loads the map data from a file and constructs the game map.
     /// </summary>
-    public void LoadMapFromFile()
+    public void LoadAndBuildMap()
     {
-       activeMap =  saver.LoadData<MapData>(savePath);
+       PlayerInformation playerInfo = gameData.GetPlayerInformation();
+       activeMap = gameData.GetSelectedMap();
+       
        tiles = new Tile[activeMap.size.x, activeMap.size.y];
 
-       int counter = 0;
+        int counter = 0;
 
-        for (int i= 0; i < activeMap.size.y;i++)
+        for (int i = 0; i < activeMap.size.y; i++)
         {
             for (int j = 0; j < activeMap.size.x; j++)
             {
@@ -65,6 +72,7 @@ public class MapBuilder
                 GameObject grass = GameObject.Instantiate(assetHolder.grassField, worldPosition, Quaternion.Euler(Vector3.zero));
                 grass.transform.SetParent(mapHolder.transform);
                 grass.name = $"Grass {j}/{i}";
+                spawnedMapAssets.Add(grass);
 
                 switch (activeMap.contents[counter])
                 {
@@ -72,43 +80,51 @@ public class MapBuilder
                         GameObject impassable = GameObject.Instantiate(assetHolder.impassable, worldPosition, Quaternion.Euler(Vector3.zero));
                         impassable.transform.SetParent(grass.transform);
                         impassable.name = $"Impassable {j}/{i}";
+                        spawnedMapAssets.Add(impassable);
                         tileState = TileState.Impassable;
                         break;
                     case 129:
-                        SpawnPlayer(position,0);
+                        SpawnPlayer(position, 0, playerInfo);
                         tileState = TileState.Snail;
                         playerNumber = PlayerNumber.PlayerOne;
                         break;
                     case 130:
-                        SpawnPlayer(position, 1);
+                        SpawnPlayer(position, 1, playerInfo);
                         tileState = TileState.Snail;
                         playerNumber = PlayerNumber.PlayerTwo;
                         break;
                 }
 
-                tiles[j, i] = new Tile(position,worldPosition, playerNumber,tileState);
+                tiles[j, i] = new Tile(position, worldPosition, playerNumber, tileState);
                 counter++;
             }
         }
     }
 
-    void SpawnPlayer(Vector2Int position, int index)
+    void SpawnPlayer(Vector2Int position, int index, PlayerInformation playerInfo)
     {
         PlayerVisual playerVisual = new PlayerVisual(assetHolder.player[index], assetHolder.slime[index]);
-        players[index] = new Player(1, position, playerVisual, index,mapHolder);
+        players[index] = new Player(playerInfo.playernames[index], playerInfo.playerAgents[index],1, position, playerVisual, index, mapHolder);
     }
 
-    public void HighlightPassableTiles(int playerIndex)
+    public void  HighlightPassableTiles(int playerIndex, GameController gameController)
     {
         List<Tile> passableTiles = GetPassableTiles(players[playerIndex]);
 
         for (int i = 0; i < passableTiles.Count; i++)
         {
             GameObject highlightIntance = GameObject.Instantiate(assetHolder.highlight, passableTiles[i].worldPosition, Quaternion.Euler (Vector3.zero));
-            spawnedHighlights.Add(highlightIntance.AddComponent<Highlight>());
-            spawnedHighlights[i].InsertData(passableTiles[i].position,gameManager);
-            highlightIntance.AddComponent<BoxCollider2D>();
+            highlightIntance.name = $"Highlight {passableTiles[i].position.x}/{passableTiles[i].position.y}";
+            highlightIntance.transform.SetParent(mapHolder.transform);
+
+            if (players[playerIndex].playerAgent == PlayerAgent.Human)
+            {
+                highlightIntance.AddComponent<BoxCollider2D>();
+                spawnedHighlights.Add(highlightIntance.AddComponent<Highlight>());
+                spawnedHighlights[i].InsertData(passableTiles[i].position, gameController, players[playerIndex]);
+            }
         }
+
     }
 
     public List<Tile> GetPassableTiles(Player player)
@@ -226,3 +242,4 @@ public class MapBuilder
         yield return player.Move(targetPosition);
     }
   }
+

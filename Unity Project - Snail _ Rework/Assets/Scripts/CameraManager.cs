@@ -6,14 +6,12 @@ public class CameraManager : MonoBehaviour
 {
     Vector2 mapSize;
     [SerializeField] float offset;
+    [SerializeField]Transform mapTransform;
 
-    private void Start()
+        
+    public void SetUpCamera(Vector2 mapSize)
     {
-        //mapSize = MapManager.selectedMap.size;
-    }
-
-    private void Update()
-    {
+        this.mapSize = mapSize;
         PlaceCamera();
         ScaleCamera();
     }
@@ -21,7 +19,7 @@ public class CameraManager : MonoBehaviour
     void PlaceCamera()
     {
         Vector2 centerPosition = Vector2.zero + new Vector2(mapSize.x / 2, -mapSize.y / 2);
-        transform.position = new Vector3(centerPosition.x, centerPosition.y, transform.position.z);
+        transform.position = mapTransform.position+ new Vector3 (centerPosition.x-0.5f,centerPosition.y+0.5f,-4);
     }
 
     void ScaleCamera()
