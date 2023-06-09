@@ -79,9 +79,9 @@ public class GameData : MonoBehaviour
         return mapLoader.checkMapValidity(map); 
     }
 
-    public void SetRoundTimer(ref int roundTimer)
+    public void SetRoundTimer(ref float roundTimer)
     {
-        this.roundTimer = roundTimer;
+        this.roundTimer = (Mathf.RoundToInt (roundTimer));
     }
 
     public int GetRoundTimer()
