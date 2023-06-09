@@ -14,6 +14,23 @@ public class GameController : MonoBehaviour
 
     PlayerAction action;
 
+
+    //Checking Key Inputs
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            PlayerAction playerAction = new PlayerAction(ActionType.Skip, Vector2Int.zero);
+            SetAction(playerAction);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PlayerAction playerAction = new PlayerAction(ActionType.Surrender, Vector2Int.zero);
+            SetAction(playerAction);
+        }
+    }
+
     public void InsertData(Player[] players, List<Highlight> highlights, Button surrenderButton, Button skipRoundButton)
     {
         this.players = players;

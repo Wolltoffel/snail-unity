@@ -49,7 +49,7 @@ public class MapBuilder
     /// <summary>
     /// Loads the map data from a file and constructs the game map.
     /// </summary>
-    public void LoadAndBuildMap()
+    public void LoadAndBuildMap(GameController gameController)
     {
        PlayerInformation playerInfo = gameData.GetPlayerInformation();
        activeMap = gameData.GetSelectedMap();
@@ -84,12 +84,12 @@ public class MapBuilder
                         tileState = TileState.Impassable;
                         break;
                     case 129:
-                        SpawnPlayer(position, 0, playerInfo);
+                        SpawnPlayer(position, 0, playerInfo, gameController);
                         tileState = TileState.Snail;
                         playerNumber = PlayerNumber.PlayerOne;
                         break;
                     case 130:
-                        SpawnPlayer(position, 1, playerInfo);
+                        SpawnPlayer(position, 1, playerInfo , gameController);
                         tileState = TileState.Snail;
                         playerNumber = PlayerNumber.PlayerTwo;
                         break;
@@ -101,10 +101,10 @@ public class MapBuilder
         }
     }
 
-    void SpawnPlayer(Vector2Int position, int index, PlayerInformation playerInfo)
+    void SpawnPlayer(Vector2Int position, int index, PlayerInformation playerInfo, GameController gameController)
     {
         PlayerVisual playerVisual = new PlayerVisual(assetHolder.player[index], assetHolder.slime[index]);
-        players[index] = new Player(playerInfo.playernames[index], playerInfo.playerAgents[index],1, position, playerVisual, index, mapHolder);
+        players[index] = new Player(playerInfo.playernames[index], playerInfo.playerAgents[index],1, position, playerVisual, index, mapHolder,gameController);
     }
 
     public void  HighlightPassableTiles(int playerIndex, GameController gameController)
@@ -238,8 +238,60 @@ public class MapBuilder
         playerPositonTile.tileState = TileState.Slime;
         player.SpawnSlimeVisuals(playerPositonTile, mapHolder);
 
+        //Check if target has Slime
+        if (tiles[targetPosition.x, targetPosition.y].checkSlime(playerIndex))
+            players[playerIndex].turnsWithoutCapture++;
+
         //Animated Player and Update Values
         yield return player.Move(targetPosition);
     }
-  }
+
+    public bool CheckIsMapFull()
+    {
+        for (int i = 0; i < activeMap.size.y; i++)
+        {
+            for (int j = 0; j < activeMap.size.x; j++)
+            {
+                if (tiles[j, i].tileState == TileState.Default)
+                    return false;
+            }
+        }
+        return true;
+    }
+
+    public bool CheckTurnsWithoutCapture()
+    {
+        for (int i = 0; i<players.Length; i++)
+        {
+            if (players[i].turnsWithoutCapture>=GameData.playersettings.maxTurnsWithoutCapture) 
+                return true;   
+        }
+        return false;
+    }
+
+    public void SkipRound(int playerIndex)
+    {
+        players[playerIndex].turnsWithoutCapture++; 
+    }
+
+    public void SetSkipButtonActive(int activePlayerIndex, bool active)
+    {
+        players[activePlayerIndex].SetSkipButtonActive(active);
+    }
+
+    public void ResetMap()
+    {
+        for (int i = 0;i < spawnedMapAssets.Count; i++)
+        {
+            GameObject.Destroy(spawnedMapAssets[i]);
+        }
+        spawnedMapAssets.Clear();
+
+        for (int i = 0; i < players.Length; i++)
+        {
+            players[i].Reset();
+        }
+
+    }
+}
 

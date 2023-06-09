@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitUntil(()=> gamehasEnded == false);
         screenHandler.SetScreenActive(ScreenSelection.Game);
-        mapBuilder.LoadAndBuildMap();
+        mapBuilder.LoadAndBuildMap(gameController);
         cameraManager.SetUpCamera(gameData.GetSelectedMap().size);
 
         while (!gamehasEnded)
@@ -53,6 +53,10 @@ public class GameManager : MonoBehaviour
             SwitchActivePlayer();
         }
 
+        screenHandler.SetScreenActive(ScreenSelection.Results);
+
+        Debug.Log("Game has ended");
+
         yield return null;
     }
 
@@ -62,16 +66,18 @@ public class GameManager : MonoBehaviour
         switch (nextMove.move)
         {
             case ActionType.Surrender:
-                yield return Surrender();
+                yield return null;
                 break;
             case ActionType.Move:
                 mapBuilder.DisableHighlights();
                 yield return mapBuilder.MovePlayer(nextMove.position, activePlayerIndex);
                 break;
             case ActionType.Skip:
-                SwitchActivePlayer();
+                mapBuilder.SkipRound(activePlayerIndex);
                 break;  
         }
+
+        gamehasEnded = CheckForEndedGame();
 
         nextMove = null; //ResetNextMoveForNextPlayer
         gameController.ResetAction();
@@ -85,7 +91,7 @@ public class GameManager : MonoBehaviour
         float timer = 0;
         while (timer<=roundTimer) {
             timer += Time.deltaTime;
-            //Debug.Log(timer);
+            gameData.SetRoundTimer(ref timer);
             yield return null;
             nextMove = gameController.GetAction();
             if (nextMove!=null)
@@ -96,24 +102,42 @@ public class GameManager : MonoBehaviour
         yield return null;
 
     }
-    
-    IEnumerator Surrender()
-    {
-        yield return null;
-    }
+  
 
     public void SwitchActivePlayer()
     {
         if (activePlayerIndex == 0)
+        {
             activePlayerIndex = 1;
+            mapBuilder.SetSkipButtonActive(0, false);
+            mapBuilder.SetSkipButtonActive(1, true);
+        }
+
         else
+        {
             activePlayerIndex = 0;
+            mapBuilder.SetSkipButtonActive(0, true);
+            mapBuilder.SetSkipButtonActive(1, false);
+        }
+            
     }
 
     void PlayButtonClicked()
     {
         gamehasEnded = false;
     }
+
+    bool CheckForEndedGame() {
+
+        if (mapBuilder.CheckTurnsWithoutCapture()
+            || mapBuilder.CheckIsMapFull()
+            || nextMove.move == ActionType.Surrender)
+            return true;
+        return false;
+    }
+
+
+
 
 
 }
