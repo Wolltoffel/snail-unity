@@ -9,26 +9,31 @@ public class PlayerSettingsManager
     SaveSystem saver;
     string savePath;
 
-    public  PlayerSettingsManager()
+    public PlayerSettingsManager()
     {
         saver = new SaveSystem();
         savePath = Application.streamingAssetsPath + "/PlayerSettings";
-        loadSettings();
+        LoadSettings();
     }
 
-    void loadSettings()
+    void LoadSettings()
     {
         string[] filePaths = System.IO.Directory.GetFiles(savePath, "*settings.gcf");
-        if (filePaths.Length!=0)
+        if (filePaths.Length != 0)
+        {
             settings = saver.LoadData<PlayerSettings>(filePaths[0]);
+            settings.CorrectInvalidEntries();
+        }     
         else
         {
             settings = new PlayerSettings();
-            settings.loadDefaultValues();
+            settings.LoadDefaultValues();
         }
+        SaveSettings(settings);
+
     }
 
-    void saveSettings(PlayerSettings settings)
+    void SaveSettings(PlayerSettings settings)
     {   
         saver.SaveData(settings, savePath + "/settings.gcf");
     }

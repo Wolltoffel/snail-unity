@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using UnityEditor;
+using JetBrains.Annotations;
 
 /// <summary>
 /// Class responsible for building and managing the game map.
@@ -40,9 +41,14 @@ public class MapBuilder
         this.gameData = gameData;
     }
 
-    public Player[] GetPlayer()
+    public Player GetPlayer(int playerIndex)
     {
-        return players;
+        return players[playerIndex];
+    }
+
+    public ref int GetPlayerScore(int playerIndex)
+    {
+        return ref players[playerIndex].score;
     }
 
 
@@ -135,7 +141,7 @@ public class MapBuilder
         {
             if (neighbours[i].tileState == TileState.Default)
                 passables.Add(neighbours[i]);
-            else if (neighbours[i].checkSlime(player.index))
+            else if (neighbours[i].CheckSlime(player.index))
             {
                 passables.Add(GetNextSlideTile(neighbours[i], player));
             }
@@ -185,7 +191,7 @@ public class MapBuilder
             if (checkValidity(newPosition))
             {
                 Tile newTile = tiles[newPosition.x, newPosition.y];
-                if (newTile.checkSlime(player.index))
+                if (newTile.CheckSlime(player.index))
                 {
                     target = newTile;
                 }
@@ -226,6 +232,10 @@ public class MapBuilder
     /// <param name="playerIndex">The index of the player to move.</param>
     public IEnumerator MovePlayer(Vector2Int targetPosition, int playerIndex)
     {
+        //Check if target has Slime
+        if (tiles[targetPosition.x, targetPosition.y].CheckSlime(playerIndex))
+            players[playerIndex].IncreaseTurnsWithoutCapture();
+
         //Update Tile
         Tile targetTile = tiles[targetPosition.x, targetPosition.y];
         targetTile.SetPlayerNumber(playerIndex);
@@ -238,12 +248,14 @@ public class MapBuilder
         playerPositonTile.tileState = TileState.Slime;
         player.SpawnSlimeVisuals(playerPositonTile, mapHolder);
 
-        //Check if target has Slime
-        if (tiles[targetPosition.x, targetPosition.y].checkSlime(playerIndex))
-            players[playerIndex].turnsWithoutCapture++;
 
         //Animated Player and Update Values
         yield return player.Move(targetPosition);
+    }
+
+    public bool CheckSlime(Vector2Int targetPosition, int playerIndex)
+    {
+        return tiles[targetPosition.x, targetPosition.y].CheckSlime(playerIndex);
     }
 
     public bool CheckIsMapFull()
@@ -259,24 +271,32 @@ public class MapBuilder
         return true;
     }
 
-    public bool CheckTurnsWithoutCapture()
+    public bool CheckTurnsWithoutCapture(int playerIndex)
     {
-        for (int i = 0; i<players.Length; i++)
-        {
-            if (players[i].turnsWithoutCapture>=GameData.playersettings.maxTurnsWithoutCapture) 
-                return true;   
-        }
+        if (players[playerIndex].turnsWithoutCapture>=GameData.playersettings.maxTurnsWithoutCapture) 
+            return true;   
+        
         return false;
     }
 
     public void SkipRound(int playerIndex)
     {
-        players[playerIndex].turnsWithoutCapture++; 
+        players[playerIndex].IncreaseTurnsWithoutCapture();
     }
 
     public void SetSkipButtonActive(int activePlayerIndex, bool active)
     {
         players[activePlayerIndex].SetSkipButtonActive(active);
+    }
+
+    public int GetWinnerByScore()
+    {
+        if (players[0].score > players[1].score)
+            return 0;
+        if (players[0].score < players[1].score)
+            return 1;
+        else
+            return 100;
     }
 
     public void ResetMap()

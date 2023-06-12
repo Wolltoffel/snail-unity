@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class SaveData
 {
-    public abstract void loadDefaultValues();
+    public abstract void LoadDefaultValues();
 }

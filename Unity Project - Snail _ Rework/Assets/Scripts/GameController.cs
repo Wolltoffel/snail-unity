@@ -30,7 +30,13 @@ public class GameController : MonoBehaviour
             SetAction(playerAction);
         }
     }
-
+    /// <summary>
+    /// Inserts the necessary data for the GameController to function properly.
+    /// </summary>
+    /// <param name="players">An array of Player objects representing the game players.</param>
+    /// <param name="highlights">A List of Highlight objects representing the highlights in the game.</param>
+    /// <param name="surrenderButton">The Button used for surrendering.</param>
+    /// <param name="skipRoundButton">The Button used for skipping rounds.</param>
     public void InsertData(Player[] players, List<Highlight> highlights, Button surrenderButton, Button skipRoundButton)
     {
         this.players = players;

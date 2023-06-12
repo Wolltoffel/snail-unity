@@ -16,7 +16,7 @@ public class MapData: SaveData
         this.name = name;
     }
 
-    public override void loadDefaultValues()
+    public override void LoadDefaultValues()
     {
         string path = Application.streamingAssetsPath + "/map/default.json";
 

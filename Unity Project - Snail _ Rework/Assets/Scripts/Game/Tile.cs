@@ -28,7 +28,7 @@ public class Tile
         this.worldPosition = worldPosition;
     }
 
-    public bool checkSlime (int playerIndex)
+    public bool CheckSlime (int playerIndex)
     {
         if (tileState == TileState.Slime)
         {

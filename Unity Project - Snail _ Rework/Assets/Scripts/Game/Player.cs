@@ -38,6 +38,10 @@ public class Player
         playerVisual.SetSkipButtonActive(active);
     }
 
+    public void IncreaseTurnsWithoutCapture() {
+        turnsWithoutCapture++;
+    }
+
     public IEnumerator Move(Vector2Int target)
     {
         score++;

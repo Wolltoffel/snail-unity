@@ -22,6 +22,8 @@ public class PlayerInformation
 }
 
 
+
+
 public class GameData : MonoBehaviour
 {
     [Header("SetUpData")]
@@ -31,13 +33,22 @@ public class GameData : MonoBehaviour
     PlayerInformation playerInfo;
 
     [Header("InGameData")]
-    int roundTimer;
-    int turnNumber;
-    PlayerAction lastPeformedAction;
+    HighscoreData highScoreData;
 
     [Header("Tools")]
     MapLoader mapLoader;
     PlayerSettingsManager playerSettingsManager;
+
+    [Header ("InGameHUD")]
+    [Space(5)]
+    [SerializeField]GameDataVisual[] playerNameVisual = new GameDataVisual[2];
+    [SerializeField] GameDataVisual[] playerScoreVisual = new GameDataVisual[2];
+    [SerializeField] GameDataVisual roundTimerVisual;
+    [SerializeField] GameDataVisual turnCounterVisual;
+    [SerializeField] TurnAnnouncer turnAnnouncer;
+
+    [Header("ResultScreen")]
+    [SerializeField] GameDataVisual resultsVisual;
 
     public void Awake()
     {
@@ -79,13 +90,76 @@ public class GameData : MonoBehaviour
         return mapLoader.checkMapValidity(map); 
     }
 
-    public void SetRoundTimer(ref float roundTimer)
+    public void SetWinner(Player winner, Player loser)
     {
-        this.roundTimer = (Mathf.RoundToInt (roundTimer));
+        highScoreData = new HighscoreData(selectedMap.name, 
+            winner.name, loser.name, 
+            winner.score, loser.score, 
+            winner.playerAgent,loser.playerAgent);
     }
 
-    public int GetRoundTimer()
+    #region GameScreen HUD
+    public void SetPlayerNamesHUD()
     {
-        return roundTimer;
+        playerNameVisual[0].SetVisual(playerInfo.playernames[0]);
+        playerNameVisual[1].SetVisual(playerInfo.playernames[1]);
     }
+
+    public void SetPlayerScoresHUD(int[] playerScores)
+    {
+        playerScoreVisual[0].SetVisual(playerScores[0]);
+        playerScoreVisual[1].SetVisual(playerScores[1]);
+    }
+
+    public void SetTurnCounterHUD(int turnCounter)
+    {
+        turnCounterVisual.SetVisual(turnCounter);
+    }
+
+    public void SetRoundTimerVisualHUD(float roundCounter)
+    {
+        roundTimerVisual.SetVisual(roundCounter);
+    }
+
+    public IEnumerator AnnouncePlayerActionHUD(string playerName,PlayerAction playerAction,bool isSlideMove)
+    {
+        string announcement = playerName+": ";
+
+        switch (playerAction.actionType)
+        {
+            case ActionType.Move:
+                announcement += isSlideMove == true ? "Slide to " : isSlideMove == false ? "Capture " : "";
+                announcement += playerAction.position;
+                break;
+            case ActionType.Skip:
+                announcement+= "Miss";
+                break;
+            case ActionType.Surrender:
+                yield break;
+        }
+
+        yield return turnAnnouncer.Announce(announcement, 1);
+    }
+
+    public IEnumerator AnnounceNextPlayerHUD(int turnNumber, string playerName)
+    {
+        string announcement = playerName + $" Round {turnNumber} - {playerName}";
+        yield return turnAnnouncer.Announce(announcement, 1);
+    }
+
+
+    #endregion
+
+    #region ResultScreen HUD
+    public void SetGameResultsHUD(int lastTurnNumber)
+    {
+        string results = $"{highScoreData.winnerName} \n " +
+            $"{highScoreData.winnerScore} : {highScoreData.loserScore} \n " +
+            $"{lastTurnNumber} Turns";
+
+        resultsVisual.SetVisual(results);
+    }
+    #endregion
+
+
 }

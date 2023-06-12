@@ -24,10 +24,10 @@ public class PlayerSettings: SaveData
 
     public PlayerSettings()
     {
-        loadDefaultValues();
+        LoadDefaultValues();
     }
 
-    public override void loadDefaultValues()
+    public override void LoadDefaultValues()
     {
         maxTurnDuration = 30;
         maxTurnsWithoutCapture = 5;
@@ -36,5 +36,21 @@ public class PlayerSettings: SaveData
         minMapSize = 5;
         maxMapSize = 20;
         requireSquareMap = false;
+    }
+
+    public void CorrectInvalidEntries()
+    {
+        if (maxTurnDuration <= 0)
+            maxTurnDuration = 30;
+        if (maxTurnsWithoutCapture <= 0)
+            maxTurnsWithoutCapture = 5;
+        if (maxComputationTimePerTurn <= 500)
+            maxComputationTimePerTurn = 500;
+        if (miniCPUAgentTurnDuration <= 0)
+            miniCPUAgentTurnDuration = 1;
+        if (minMapSize <= 0)
+            minMapSize = 5;
+        if (maxMapSize <= 2)
+            maxMapSize *= 5;
     }
 }

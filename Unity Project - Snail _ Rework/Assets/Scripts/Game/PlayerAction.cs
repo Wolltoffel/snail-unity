@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public enum ActionType
@@ -14,11 +15,12 @@ public class PlayerAction
     public Vector2Int position;
 
 
-    public ActionType move;
+    public ActionType actionType;
 
     public PlayerAction(ActionType move, Vector2Int position)
     {
-        this.move = move;
+        this.actionType = move;
         this.position = position;
     }
+
 }

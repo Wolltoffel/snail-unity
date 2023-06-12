@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public enum Playeragent
-{
 
-}
 
 public class HighscoreData: SaveData
 {
@@ -15,10 +12,10 @@ public class HighscoreData: SaveData
     public string looserName;
     public int winnerScore;
     public int loserScore;
-    public Playeragent agentWinner;
-    public Playeragent agentLoser;
+    public PlayerAgent agentWinner;
+    public PlayerAgent agentLoser;
 
-    public HighscoreData(string mapName, string winnerName, string looserName, int winnerScore, int loserScore, Playeragent agentWinner, Playeragent agentLoser)
+    public HighscoreData(string mapName, string winnerName, string looserName, int winnerScore, int loserScore, PlayerAgent agentWinner, PlayerAgent agentLoser)
     {
         this.mapName = mapName;
         this.winnerName = winnerName;
@@ -29,6 +26,6 @@ public class HighscoreData: SaveData
         this.agentLoser = agentLoser;
     }
 
-    public override void loadDefaultValues() { }
+    public override void LoadDefaultValues() { }
 
 }
