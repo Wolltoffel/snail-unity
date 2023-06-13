@@ -6,6 +6,7 @@ using UnityEngine;
 public class DropdownHandler : MonoBehaviour
 {
     [SerializeField] GameData gameData;
+    [SerializeField] WrongMapPopUp wrongMapPopUp;
     int dropdownIndex = 0;
     List<MapData> selectableMaps;
     List<string> selectableMaps_names;
@@ -56,7 +57,7 @@ public class DropdownHandler : MonoBehaviour
         else
         {
             dropdown.value = dropdownIndex;
-            Debug.Log(mapValidity);
+            wrongMapPopUp.showPopUp(mapValidity);
             //Throw error message
         }
             

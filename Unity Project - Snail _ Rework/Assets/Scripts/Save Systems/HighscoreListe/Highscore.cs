@@ -4,8 +4,9 @@ using UnityEngine;
 using System;
 
 
+[Serializable]
+public struct Highscore
 
-public class HighscoreData: SaveData
 {
     public string mapName;
     public string winnerName;
@@ -15,7 +16,7 @@ public class HighscoreData: SaveData
     public PlayerAgent agentWinner;
     public PlayerAgent agentLoser;
 
-    public HighscoreData(string mapName, string winnerName, string looserName, int winnerScore, int loserScore, PlayerAgent agentWinner, PlayerAgent agentLoser)
+    public Highscore(string mapName, string winnerName, string looserName, int winnerScore, int loserScore, PlayerAgent agentWinner, PlayerAgent agentLoser)
     {
         this.mapName = mapName;
         this.winnerName = winnerName;
@@ -26,6 +27,5 @@ public class HighscoreData: SaveData
         this.agentLoser = agentLoser;
     }
 
-    public override void LoadDefaultValues() { }
 
 }

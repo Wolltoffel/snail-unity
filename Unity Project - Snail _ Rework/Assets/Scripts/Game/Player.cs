@@ -42,9 +42,14 @@ public class Player
         turnsWithoutCapture++;
     }
 
+    public void IncreaseScore()
+    {
+        Debug.Log("IncreasedScore");
+        score++;
+    }
+
     public IEnumerator Move(Vector2Int target)
     {
-        score++;
         position = target;
         yield return playerVisual.Move(new Vector3 (target.x,-target.y,0));
     }

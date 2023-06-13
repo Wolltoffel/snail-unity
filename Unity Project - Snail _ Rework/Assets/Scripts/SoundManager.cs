@@ -4,22 +4,16 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    AudioSource audioSource;
     [SerializeField]AudioClip[] audioClips;
-    public static SoundManager soundManager;
+    public static SoundManager instance;
 
     private void Awake()
     {
-        if (soundManager != null && soundManager != this)
-            Destroy(this);
-        else
-            soundManager = this;
-
-        audioSource = GetComponent<AudioSource>();
+            instance = this;
     }
     public void PlaySound(int index)
     {
-        audioSource.PlayOneShot(audioClips[index]);
+        AudioSource.PlayClipAtPoint(audioClips[index], Camera.main.transform.position);
     }
 
     public void PlaySound (string name)
@@ -32,7 +26,20 @@ public class SoundManager : MonoBehaviour
         }
 
         if (selectedClip != null)
-            audioSource.PlayOneShot(selectedClip);
+            AudioSource.PlayClipAtPoint(selectedClip, Camera.main.transform.position);
+    }
+
+    public IEnumerator WaitUntilSoundIsOver(string name)
+    {
+        AudioClip selectedClip = null;
+        foreach (AudioClip audioClip in audioClips)
+        {
+            if (audioClip.name == name)
+                selectedClip = audioClip;
+        }
+
+        if (selectedClip != null)
+            yield return new WaitForSeconds(selectedClip.length);
     }
 
 }

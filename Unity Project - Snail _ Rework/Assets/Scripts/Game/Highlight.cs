@@ -32,11 +32,14 @@ public class Highlight : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
         if (shrinkProcess != null)
             StopCoroutine(shrinkProcess);
 
+        SoundManager.instance.PlaySound("ui-click-high-modern-click-06");
+
         growProcess = StartCoroutine(Scale(transform.localScale,initialScale*1.1f));
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+
         if (growProcess != null)
             StopCoroutine(growProcess);
 

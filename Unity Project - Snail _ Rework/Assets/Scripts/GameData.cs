@@ -33,11 +33,12 @@ public class GameData : MonoBehaviour
     PlayerInformation playerInfo;
 
     [Header("InGameData")]
-    HighscoreData highScoreData;
+    Highscore highScore;
 
     [Header("Tools")]
     MapLoader mapLoader;
     PlayerSettingsManager playerSettingsManager;
+    HighscoreManager highscoreManager;
 
     [Header ("InGameHUD")]
     [Space(5)]
@@ -49,6 +50,7 @@ public class GameData : MonoBehaviour
 
     [Header("ResultScreen")]
     [SerializeField] GameDataVisual resultsVisual;
+    [SerializeField] HighscoreTable highscoreTable;
 
     public void Awake()
     {
@@ -84,6 +86,7 @@ public class GameData : MonoBehaviour
     public void SetSelectedMap(MapData selectedMap)
     {
         this.selectedMap = selectedMap;
+        highscoreManager = new HighscoreManager(selectedMap.name);
     }
 
     public string checkMapValidity(MapData map) {
@@ -92,7 +95,7 @@ public class GameData : MonoBehaviour
 
     public void SetWinner(Player winner, Player loser)
     {
-        highScoreData = new HighscoreData(selectedMap.name, 
+        highScore = new Highscore(selectedMap.name, 
             winner.name, loser.name, 
             winner.score, loser.score, 
             winner.playerAgent,loser.playerAgent);
@@ -153,12 +156,32 @@ public class GameData : MonoBehaviour
     #region ResultScreen HUD
     public void SetGameResultsHUD(int lastTurnNumber)
     {
-        string results = $"{highScoreData.winnerName} \n " +
-            $"{highScoreData.winnerScore} : {highScoreData.loserScore} \n " +
+        string results = $"{highScore.winnerName} \n " +
+            $"{highScore.winnerScore} : {highScore.loserScore} \n " +
             $"{lastTurnNumber} Turns";
 
         resultsVisual.SetVisual(results);
     }
+
+    public void ShowHighScoresHUD() {
+
+        bool newHighscore = highscoreManager.AttemptToAddToHighscoreData(highScore);
+
+        HighscoreData highscoreData = highscoreManager.GetHighscoreData();
+        highscoreTable.SetHeading(selectedMap);
+
+
+        for (int i = 0;i<highscoreData.highscores.Length; i++)
+        {
+
+            if (highscoreData.highscores[i].winnerScore > 0)
+            {
+                highscoreTable.AddHighScore(highscoreData.highscores[i],false);
+            }
+        }
+
+    }
+
     #endregion
 
 

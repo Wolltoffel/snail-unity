@@ -19,6 +19,7 @@ public class WrongMapPopUp : MonoBehaviour
         initialScale = popUpWindow.transform.localScale;
         smallScale = initialScale * 0.001f;
         popUpWindow.transform.localScale = smallScale;
+        errorText.richText = enabled;
 
         closeButton.onClick.AddListener(()=>HidePopUp());
     }

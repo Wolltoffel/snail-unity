@@ -39,23 +39,25 @@ public class MapLoader
     {
         int mapFieldCount = mapData.size.x * mapData.size.y;
         PlayerSettings playersettings = GameData.playersettings;
+        string mapName = $"<b>{mapData.name}</b>";
 
         if (mapData.contents.Length != mapFieldCount)
-            return $"{mapData.name}'s tiles are exceeding or receding the specified mapFieldCount.";
+            return $"{mapName}'s tiles are exceeding or receding the specified mapFieldCount.";
         if (playersettings.requireSquareMap && mapData.size.x != mapData.size.y)
-            return $"{mapData.name}is not square.";
+            return $"{mapName}is not square.";
         if (mapData.size.x > playersettings.maxMapSize |
             mapData.size.y > playersettings.maxMapSize |
             mapData.size.x < playersettings.minMapSize |
             mapData.size.y < playersettings.minMapSize)
-            return $"{mapData.name} does not fulfill the required size requirements.";
+            return $"{mapName} does not fulfill the required size requirements.";
         for (int i = 0; i < mapData.contents.Length; i++)
         {
             if (mapData.contents[i] != 129 && mapData.contents[i] != 130 && mapData.contents[i] != 64 && mapData.contents[i] != 0)
-                return $"{mapData.name} is using unkwon numbers. Pls update your map to only include the numbers: 129, 130, 64 and 0.";
+                return $"{mapName} is using unkwon numbers. Pls update your map to only include the numbers: 129, 130, 64 and 0.";
         }
+        
         if (!checkPlayerValidity(mapData.contents))
-            return $"{mapData.name} has too many /too few players or is missing one player";
+            return $"{mapName} has too many /too few players or is missing one player";
 
         return "Valid";
     }
@@ -74,7 +76,7 @@ public class MapLoader
                 playerTwoCount++;
         }
 
-        if (playerOneCount==1 || playerTwoCount==1)
+        if (playerOneCount==1 && playerTwoCount==1)
             return true;
         return false;
     }

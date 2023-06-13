@@ -232,9 +232,17 @@ public class MapBuilder
     /// <param name="playerIndex">The index of the player to move.</param>
     public IEnumerator MovePlayer(Vector2Int targetPosition, int playerIndex)
     {
+        Player player = players[playerIndex];
+
         //Check if target has Slime
         if (tiles[targetPosition.x, targetPosition.y].CheckSlime(playerIndex))
             players[playerIndex].IncreaseTurnsWithoutCapture();
+        else
+        {
+            player.IncreaseScore();
+            Debug.Log("Target had  no slime");
+        }
+           
 
         //Update Tile
         Tile targetTile = tiles[targetPosition.x, targetPosition.y];
@@ -242,12 +250,11 @@ public class MapBuilder
         targetTile.tileState = TileState.Snail;
 
         //Adjust previous Tile
-        Player player = players[playerIndex];
         Vector2Int playerPositon = player.position;
         Tile playerPositonTile = tiles[playerPositon.x, playerPositon.y];
+        if (!playerPositonTile.CheckSlime(playerIndex))
+            player.SpawnSlimeVisuals(playerPositonTile, mapHolder);
         playerPositonTile.tileState = TileState.Slime;
-        player.SpawnSlimeVisuals(playerPositonTile, mapHolder);
-
 
         //Animated Player and Update Values
         yield return player.Move(targetPosition);

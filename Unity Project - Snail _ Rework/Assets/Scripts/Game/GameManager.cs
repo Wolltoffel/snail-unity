@@ -67,9 +67,12 @@ public class GameManager : MonoBehaviour
             mapBuilder.HighlightPassableTiles(activePlayerIndex, gameController);
             yield return PlayTurn();
             mapBuilder.DisableHighlights();
+            if (gamehasEnded)
+                break;
             SwitchActivePlayer();
             turnCounter++;
             gameData.SetTurnCounterHUD(turnCounter);
+            SoundManager.instance.PlaySound("user-interface-menu-select-click-01");
             yield return gameData.AnnounceNextPlayerHUD(turnCounter, mapBuilder.GetPlayer(activePlayerIndex).name);
         }
 
@@ -83,7 +86,8 @@ public class GameManager : MonoBehaviour
             : 100;
 
             gameData.SetWinner(mapBuilder.GetPlayer(winnerIndex), mapBuilder.GetPlayer(loserIndex));
-            gameData.SetGameResultsHUD(turnCounter-1);
+            gameData.SetGameResultsHUD(turnCounter);
+            gameData.ShowHighScoresHUD();
         }
 
         yield return null;
@@ -102,21 +106,24 @@ public class GameManager : MonoBehaviour
         switch (performedAction.actionType)
         {
             case ActionType.Surrender:
-                yield return null;
+                yield return new WaitForSeconds(0.5f);
                 break;
             case ActionType.Move:
                 mapBuilder.DisableHighlights();
+                SoundManager.instance.PlaySound("ui-modern-confirmation-ascending-03");
                 yield return mapBuilder.MovePlayer(performedAction.position, activePlayerIndex);
                 break;
             case ActionType.Skip:
+                SoundManager.instance.PlaySound("ui-modern-confirmation-descending-01");
+                yield return SoundManager.instance.WaitUntilSoundIsOver("ui-modern-confirmation-descending-01");
                 mapBuilder.SkipRound(activePlayerIndex);
                 break;
         }
 
         gamehasEnded = CheckForEndedGame(out winnerIndex);
-        
         performedAction = null; //ResetNextMoveForNextPlayer
         gameController.ResetAction();
+
     }
 
     /// <summary>
