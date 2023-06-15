@@ -7,7 +7,7 @@ public class SurrenderInteractable : MonoBehaviour, IPointerClickHandler
 {
     GameController gameController;
 
-    public void InsertGameData(GameController gameController)
+    public void AddGameController(GameController gameController)
     {
         this.gameController = gameController;
     }  

@@ -282,8 +282,12 @@ public class MapBuilder
         //Adjust previous Tile
         Vector2Int playerPositon = player.position;
         Tile playerPositonTile = tiles[playerPositon.x, playerPositon.y];
-        if (!playerPositonTile.CheckSlime(playerIndex))
+        if (!playerPositonTile.CheckSlime(playerIndex) && playerPositonTile.spawnedSlime == false)
+        {
             player.SpawnSlimeVisuals(playerPositonTile, mapHolder);
+            playerPositonTile.spawnedSlime = true;
+        }
+
         playerPositonTile.tileState = TileState.Slime;
 
         //Animated Player and Update Values

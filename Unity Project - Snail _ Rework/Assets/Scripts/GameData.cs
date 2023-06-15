@@ -1,18 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
+
+/// <summary>
+/// Represents player information including names and agents.
+/// </summary>
 public class PlayerInformation
 {
     public string[] playernames;
     public PlayerAgent[] playerAgents;
 
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="PlayerInformation"/> class with the specified player names and agents.
+    /// </summary>
+    /// <param name="playernames">An array of player names.</param>
+    /// <param name="activeAgents">An array of player agents.</param>
     public PlayerInformation(string[] playernames, PlayerAgent[] activeAgents)
     {
         this.playernames = playernames;
         this.playerAgents = activeAgents;
     }
 
+    /// <summary>
+    /// Gets the default player information.
+    /// </summary>
+    /// <returns>The default <see cref="PlayerInformation"/> object.</returns>
     public static PlayerInformation Default()
     {
         string[] playernames = new string[2] {"Player 1","Player 2"};
@@ -21,9 +36,9 @@ public class PlayerInformation
     }
 }
 
-
-
-
+/// <summary>
+/// Manages game data including setup, in-game data, and UI elements.
+/// </summary>
 public class GameData : MonoBehaviour
 {
     [Header("SetUpData")]
@@ -52,6 +67,9 @@ public class GameData : MonoBehaviour
     [SerializeField] GameDataVisual resultsVisual;
     [SerializeField] HighscoreTable highscoreTable;
 
+    [Header ("Buttons")]
+    [SerializeField]Button resetSettingsButton;
+
     public void Awake()
     {
         mapLoader = new MapLoader();
@@ -59,7 +77,9 @@ public class GameData : MonoBehaviour
         playerSettingsManager = new PlayerSettingsManager();
         playersettings = playerSettingsManager.settings;
         playerInfo = PlayerInformation.Default();
+        resetSettingsButton.onClick.AddListener(ResetPlayerSettings);
     }
+
 
     public void SetPlayerName(string playername, int playerIndex)
     {
@@ -94,10 +114,20 @@ public class GameData : MonoBehaviour
         highscoreManager = new HighscoreManager(selectedMap.name);
     }
 
+    /// <summary>
+    /// Checks the validity of the map.
+    /// </summary>
+    /// <param name="map">The map to check.</param>
+    /// <returns>A string indicating the validity of the map.</returns>
     public string checkMapValidity(MapData map) {
         return mapLoader.checkMapValidity(map); 
     }
 
+    /// <summary>
+    /// Saves the winner and loser inside a highscore file.
+    /// </summary>
+    /// <param name="winner">The winning player.</param>
+    /// <param name="loser">The losing player.</param>
     public void SetWinner(Player winner, Player loser)
     {
         highScore = new Highscore(selectedMap.name, 
@@ -149,6 +179,12 @@ public class GameData : MonoBehaviour
         yield return turnAnnouncer.Announce(announcement, 1);
     }
 
+    /// <summary>
+    /// Announces the next player's turn in the HUD.
+    /// </summary>
+    /// <param name="turnNumber">The current turn number.</param>
+    /// <param name="playerName">The name of the next player.</param>
+    /// <returns>An <see cref="IEnumerator"/> for coroutine.</returns>
     public IEnumerator AnnounceNextPlayerHUD(int turnNumber, string playerName)
     {
         string announcement = playerName + $" Round {turnNumber} - {playerName}";
@@ -195,15 +231,13 @@ public class GameData : MonoBehaviour
             if (highscoreData.highscores[i].winnerScore > 0)
             {
                 // The current high score entry matches the new high score, so mark it as a new high score
-                if (highscoreData.highscores[i] == highScore)
+                if (ReferenceEquals (highscoreData.highscores[i],highScore))
                     highscoreTable.AddHighScore(highscoreData.highscores[i], true);
                 else
                 {
                     // The current high score entry is not the new high score
                     highscoreTable.AddHighScore(highscoreData.highscores[i], false);
                 }
-               
-
             }
         }
     }
@@ -211,4 +245,8 @@ public class GameData : MonoBehaviour
     #endregion
 
 
+    public void ResetPlayerSettings()
+    {
+        playersettings.LoadDefaultValues();
+    }
 }

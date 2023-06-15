@@ -5,6 +5,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Represents an action performed by the AI agent.
+/// </summary>
 public class AIAction
 {
     public Vector2Int direction;
@@ -16,6 +19,11 @@ public class AIAction
         this.direction = direction;
     }
 
+    /// <summary>
+    /// Converts the AI action to a player action.
+    /// </summary>
+    /// <param name="playerPostion">The current position of the player.</param>
+    /// <returns>The converted player action.</returns>
     public PlayerAction ConvertToPlayerAction(Vector2Int playerPostion)
     {
         return new PlayerAction(actionType, playerPostion + direction);
@@ -23,14 +31,17 @@ public class AIAction
 }
 
 /// <summary>
-/// Initializes a new instance of the <see cref="AIAgent"/> class with the specified active player index.
+/// Represents an AI agent for making AI-controlled moves.
 /// </summary>
-/// <param name="activePlayerIndex">The index of the active player.</param>
 public class AIAgent
 {
     int activePlayerIndex;
     public AIAction action;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="AIAgent"/> class with the specified active player index.
+    /// </summary>
+    /// <param name="activePlayerIndex">The index of the active player.</param>
     public AIAgent (int activePlayerIndex)
     {
        this.activePlayerIndex = activePlayerIndex;

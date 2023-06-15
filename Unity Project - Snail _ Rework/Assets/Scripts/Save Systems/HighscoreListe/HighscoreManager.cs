@@ -5,19 +5,32 @@ using System.Linq;
 using UnityEngine;
 
 
+/// <summary>
+/// Represents the highscore data.
+/// </summary>
 [Serializable]
 public class HighscoreData: SaveData
 {
     public Highscore[] highscores;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="HighscoreData"/> class with the specified maximum highscore count.
+    /// </summary>
+    /// <param name="maxHighScoreCount">The maximum number of highscores to store.</param>
     public HighscoreData(int maHighScoreCount)
     {
         highscores = new Highscore[maHighScoreCount];
     }
 
+    /// <summary>
+    /// Loads the default values for the highscore data (not implemented in this case).
+    /// </summary>
     public override void LoadDefaultValues() { }
 }
 
+/// <summary>
+/// Manages the highscore list for a specific map.
+/// </summary>
 public class HighscoreManager
 {
 
