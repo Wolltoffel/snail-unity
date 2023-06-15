@@ -6,6 +6,8 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using UnityEditor;
 using JetBrains.Annotations;
+using System;
+using UnityEngine.UIElements;
 
 /// <summary>
 /// Class responsible for building and managing the game map.
@@ -30,6 +32,13 @@ public class MapBuilder
     List<Highlight> spawnedHighlights;
     List<GameObject> spawnedMapAssets;
 
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="MapBuilder"/> class.
+    /// </summary>
+    /// <param name="assetHolder">The asset holder.</param>
+    /// <param name="mapHolder">The map holder.</param>
+    /// <param name="gameData">The game data.</param>
     public MapBuilder(AssetHolder assetHolder, GameObject mapHolder, GameData gameData)
     {
         players = new Player[2];
@@ -41,11 +50,17 @@ public class MapBuilder
         this.gameData = gameData;
     }
 
+    /// <summary>
+    /// Gets the player at the specified index.
+    /// </summary>
     public Player GetPlayer(int playerIndex)
     {
         return players[playerIndex];
     }
 
+    /// <summary>
+    /// Gets the reference to the player's score at the specified index.
+    /// </summary>
     public ref int GetPlayerScore(int playerIndex)
     {
         return ref players[playerIndex].score;
@@ -89,12 +104,12 @@ public class MapBuilder
                         spawnedMapAssets.Add(impassable);
                         tileState = TileState.Impassable;
                         break;
-                    case 129:
+                    case 129: //Spawn Player One
                         SpawnPlayer(position, 0, playerInfo, gameController);
                         tileState = TileState.Snail;
                         playerNumber = PlayerNumber.PlayerOne;
                         break;
-                    case 130:
+                    case 130: //Spawn Player Two
                         SpawnPlayer(position, 1, playerInfo , gameController);
                         tileState = TileState.Snail;
                         playerNumber = PlayerNumber.PlayerTwo;
@@ -113,6 +128,11 @@ public class MapBuilder
         players[index] = new Player(playerInfo.playernames[index], playerInfo.playerAgents[index],1, position, playerVisual, index, mapHolder,gameController);
     }
 
+    /// <summary>
+    /// Highlights the passable tiles for the specified player.
+    /// </summary>
+    /// <param name="playerIndex">The index of the player.</param>
+    /// <param name="gameController">The game controller.</param>
     public void  HighlightPassableTiles(int playerIndex, GameController gameController)
     {
         List<Tile> passableTiles = GetPassableTiles(players[playerIndex]);
@@ -126,13 +146,17 @@ public class MapBuilder
             if (players[playerIndex].playerAgent == PlayerAgent.Human)
             {
                 highlightIntance.AddComponent<BoxCollider2D>();
-                spawnedHighlights.Add(highlightIntance.AddComponent<Highlight>());
-                spawnedHighlights[i].InsertData(passableTiles[i].position, gameController, players[playerIndex]);
             }
+            spawnedHighlights.Add(highlightIntance.AddComponent<Highlight>());
+            spawnedHighlights[i].InsertData(passableTiles[i].position, gameController, players[playerIndex]);
+            spawnedHighlights[i].InsertData(passableTiles[i].position, gameController, players[playerIndex]);
         }
 
     }
 
+    /// <summary>
+    /// Gets the list of passable tiles for the specified player.
+    /// </summary>
     public List<Tile> GetPassableTiles(Player player)
     {
         List<Tile> neighbours = GetNeighbours(player.position);
@@ -188,16 +212,19 @@ public class MapBuilder
         while (true)
         {
             Vector2Int newPosition = target.position + direction;
-            if (checkValidity(newPosition))
+
+            // Check if the new position is within the field boundaries
+            if (CheckFieldBoundaries(newPosition))
             {
                 Tile newTile = tiles[newPosition.x, newPosition.y];
-                if (newTile.CheckSlime(player.index))
-                {
+
+                // If the new tile has slime, update the target tile and continue sliding
+                if (newTile.CheckSlime(player.index))   
                     target = newTile;
-                }
                 else
                     break;
             }
+            // Break the loop if the new position is outside the field boundaries
             else
                 break;
         }
@@ -205,7 +232,11 @@ public class MapBuilder
         return target;
     }
 
-    bool checkValidity(Vector2Int inputCoordinates)
+
+    /// <summary>
+    /// Checks if the input coordinates are within the field boundaries.
+    /// </summary>
+    bool CheckFieldBoundaries(Vector2Int inputCoordinates)
     {
         if (inputCoordinates.x < activeMap.size.x
             && inputCoordinates.x>=0
@@ -239,11 +270,10 @@ public class MapBuilder
             players[playerIndex].IncreaseTurnsWithoutCapture();
         else
         {
+            Debug.Log("IncreasedScore");
             player.IncreaseScore();
-            Debug.Log("Target had  no slime");
         }
            
-
         //Update Tile
         Tile targetTile = tiles[targetPosition.x, targetPosition.y];
         targetTile.SetPlayerNumber(playerIndex);
@@ -318,7 +348,50 @@ public class MapBuilder
         {
             players[i].Reset();
         }
-
     }
+
+    /// <summary>
+    /// Runs the AI agent for the specified active player.
+    /// </summary>
+    public IEnumerator RunAIAgent(int activePlayerIndex,int turnNumber, GameController gameController)
+    {
+        AIAgent aiAgent = new AIAgent(activePlayerIndex);
+
+        // Run the AI agent's logic
+        yield return aiAgent.Run(activeMap.size,turnNumber, tiles);
+        AIAction aiAction = aiAgent.GetAIAction();
+
+        // Convert the AI action to a player action based on the active player's position
+        PlayerAction playerAction = aiAction.ConvertToPlayerAction(players[activePlayerIndex].position);
+
+        // Check if the player action is valid and set it as the game action
+        if (CheckPlayerActionValidity(playerAction))
+            gameController.SetAction(playerAction);
+        else
+        {
+            // If the player action is not valid, set a default action of skipping the turn
+            gameController.SetAction(new PlayerAction(ActionType.Skip, Vector2Int.zero));
+        }
+       
+    }
+
+    /// <summary>
+    /// Checks the validity of a player action.
+    /// </summary>
+    bool CheckPlayerActionValidity (PlayerAction playerAction)
+    {
+        // Check if the position matches with one of the spawned highlights.
+        // This validation works because the highlights represent the only possible positions for the snail to move to.
+        for (int i = 0; i<spawnedHighlights.Count;i++)
+        {
+            if (spawnedHighlights[i].GetPosition() == playerAction.position)
+                return true;
+        }
+
+        return false;
+    }
+
+
+
 }
 

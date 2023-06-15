@@ -70,6 +70,11 @@ public class GameData : MonoBehaviour
         return playerInfo.playernames[playerIndex];
     }
 
+    public void SetPlayerAgent(PlayerAgent agent, int playerIndex)
+    {
+        playerInfo.playerAgents[playerIndex] = agent;
+    }
+
     public PlayerInformation GetPlayerInformation()
     {
         return playerInfo;
@@ -150,6 +155,12 @@ public class GameData : MonoBehaviour
         yield return turnAnnouncer.Announce(announcement, 1);
     }
 
+    public void ColorActivePlayerHUD(int activePlayerIndex, int otherPlayerIndex)
+    {
+        playerNameVisual[activePlayerIndex].SetColor(Color.red);
+        playerNameVisual[otherPlayerIndex].SetDefaultColor();   
+    }
+
 
     #endregion
 
@@ -163,23 +174,38 @@ public class GameData : MonoBehaviour
         resultsVisual.SetVisual(results);
     }
 
+    /// <summary>
+    /// Shows the high scores in the result screen HUD.
+    /// </summary>
     public void ShowHighScoresHUD() {
 
-        bool newHighscore = highscoreManager.AttemptToAddToHighscoreData(highScore);
-
+        // Attempt to add the current high score to the high score data
+        highscoreManager.AttemptToAddToHighscoreData(highScore);
+        
+        // Retrieve the updated high score data
         HighscoreData highscoreData = highscoreManager.GetHighscoreData();
+
+        // Set the heading of the high score table to the selected map
         highscoreTable.SetHeading(selectedMap);
 
 
         for (int i = 0;i<highscoreData.highscores.Length; i++)
         {
-
+            // Check if the high score entry has a non-zero winner score
             if (highscoreData.highscores[i].winnerScore > 0)
             {
-                highscoreTable.AddHighScore(highscoreData.highscores[i],false);
+                // The current high score entry matches the new high score, so mark it as a new high score
+                if (highscoreData.highscores[i] == highScore)
+                    highscoreTable.AddHighScore(highscoreData.highscores[i], true);
+                else
+                {
+                    // The current high score entry is not the new high score
+                    highscoreTable.AddHighScore(highscoreData.highscores[i], false);
+                }
+               
+
             }
         }
-
     }
 
     #endregion

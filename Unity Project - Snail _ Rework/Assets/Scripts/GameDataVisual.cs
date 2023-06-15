@@ -9,11 +9,13 @@ public class GameDataVisual : MonoBehaviour
     [SerializeField] string preText;
 
     TextMeshProUGUI textMeshProUGUI;
+    Color defaultColor;
 
 
     private void Awake()
     {
         textMeshProUGUI = GetComponent<TextMeshProUGUI>();
+        defaultColor = textMeshProUGUI.color;
     }
 
 
@@ -40,6 +42,16 @@ public class GameDataVisual : MonoBehaviour
             textMeshProUGUI.text = $"{preText} {Mathf.RoundToInt(value).ToString()}";
         else
             textMeshProUGUI.text = Mathf.RoundToInt(value).ToString();
+    }
+
+    public void SetColor(Color color)
+    {
+        textMeshProUGUI.color = color;
+    }
+
+    public void SetDefaultColor()
+    {
+       SetColor(defaultColor);
     }
 
 

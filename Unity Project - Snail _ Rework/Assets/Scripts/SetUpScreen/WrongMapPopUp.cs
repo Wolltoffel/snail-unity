@@ -24,6 +24,10 @@ public class WrongMapPopUp : MonoBehaviour
         closeButton.onClick.AddListener(()=>HidePopUp());
     }
 
+    /// <summary>
+    /// Shows the pop-up window with the specified error message.
+    /// </summary>
+    /// <param name="errorMessage">The error message to display.</param>
     public void showPopUp(string errorMessage)
     {
         errorText.text = errorMessage;
@@ -31,11 +35,17 @@ public class WrongMapPopUp : MonoBehaviour
         popUpWindow.SetActive(true);
     }
 
+    /// <summary>
+    /// Hides the pop-up window.
+    /// </summary>
     public void HidePopUp()
     {
         StartCoroutine(hidePopUpProcess()); 
     }
-    
+
+    /// <summary>
+    /// Coroutine that handles the process of hiding the pop-up window.
+    /// </summary>
     public IEnumerator hidePopUpProcess()
     {
         if (scaleUp != null)
@@ -45,6 +55,11 @@ public class WrongMapPopUp : MonoBehaviour
         popUpWindow.SetActive(false);
     }
 
+    /// <summary>
+    /// Coroutine that scales the pop-up window from current scale to the target scale.
+    /// </summary>
+    /// <param name="currentScale">The current scale of the pop-up window.</param>
+    /// <param name="targetScale">The target scale to be reached.</param>
     IEnumerator Scale(Vector3 currentScale, Vector3 targetScale)
     {
         Vector3 startScale = currentScale; ;

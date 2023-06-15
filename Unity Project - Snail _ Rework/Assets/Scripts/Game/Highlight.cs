@@ -21,6 +21,11 @@ public class Highlight : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
         initialScale = transform.localScale;
     }
 
+    public Vector2Int GetPosition()
+    {
+        return position;
+    }
+
     void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
     {
         PlayerAction action = new PlayerAction(ActionType.Move, position);
@@ -48,6 +53,7 @@ public class Highlight : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
 
     IEnumerator Scale(Vector3 currentScale, Vector3 targetScale)
     {
+        // Smoothly scales the highlight from currentScale to targetScale
         Vector3 startScale = currentScale;;
         float startTime = Time.time;
 

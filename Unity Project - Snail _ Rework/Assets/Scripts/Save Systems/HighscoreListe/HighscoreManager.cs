@@ -26,6 +26,10 @@ public class HighscoreManager
     string fileName;
     int maxHighScoreCount;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="HighscoreManager"/> class with the specified map name.
+    /// </summary>
+    /// <param name="mapName">The name of the map associated with the highscores.</param>
     public HighscoreManager(string mapName)
     {
         savePath = Application.streamingAssetsPath + "/HighscoreList";
@@ -35,6 +39,9 @@ public class HighscoreManager
         LoadHighscoreList();
     }
 
+    /// <summary>
+    /// Loads the highscore list from the file system.
+    /// </summary>
     void LoadHighscoreList()
     {
         string[] filePaths = System.IO.Directory.GetFiles(savePath, $"{fileName}*.json");
@@ -58,23 +65,29 @@ public class HighscoreManager
         saver.SaveData(highscoreData, savePath + $"/{fileName}.json");
     }
 
-    public bool AttemptToAddToHighscoreData(Highscore newData)
+    /// <summary>
+    /// Attempts to add new highscore data to the highscore list.
+    /// </summary>
+    /// <param name="newData">The new highscore data to add.</param>
+    public void AttemptToAddToHighscoreData(Highscore newData)
     {
-
         Highscore[] highscores = highscoreData.highscores;
 
         for (int i = 0; i < highscores.Length; i++)
         {
             if (highscores[i].winnerScore < newData.winnerScore)
             {
-                AddToHighscoreData(newData, i);
-                return true;
+                AddToHighscoreData(newData);
+                break;
             }
         }
-        return false;
     }
 
-    void AddToHighscoreData(Highscore newData, int index)
+    /// <summary>
+    /// Adds new highscore data to the highscore list at the specified index.
+    /// </summary>
+    /// <param name="newData">The new highscore data to add.</param>
+    void AddToHighscoreData(Highscore newData)
     {
         List<Highscore> highscores = new List<Highscore>();
         highscores.AddRange(highscoreData.highscores);

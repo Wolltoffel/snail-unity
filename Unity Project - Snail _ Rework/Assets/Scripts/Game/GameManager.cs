@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] CameraManager cameraManager;
     MapBuilder mapBuilder;
     [SerializeField] ScreenHandler screenHandler;
+    KeyInputChecker keyInputChecker;
+    Coroutine inputCheckerProcess;
 
     [Header ("Data")]
     [SerializeField] AssetHolder assetHolder;
@@ -40,6 +42,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         mapBuilder = new MapBuilder(assetHolder,mapHolder,gameData);
+        keyInputChecker = new KeyInputChecker(gameController);
         activePlayerIndex = Random.Range(0, 2);//Determine first player
         
         //Add Button Listeners
@@ -60,10 +63,11 @@ public class GameManager : MonoBehaviour
         gameData.SetPlayerNamesHUD();
         gameData.SetTurnCounterHUD(turnCounter);
         gameData.SetPlayerScoresHUD(new int[2] { mapBuilder.GetPlayerScore(0), mapBuilder.GetPlayerScore(1) });
+        gameData.ColorActivePlayerHUD(activePlayerIndex, GetOtherPlayerIndex(activePlayerIndex));
+
 
         while (!gamehasEnded)
         {
-            //cameraManager.SetUpCamera();
             mapBuilder.HighlightPassableTiles(activePlayerIndex, gameController);
             yield return PlayTurn();
             mapBuilder.DisableHighlights();
@@ -72,6 +76,7 @@ public class GameManager : MonoBehaviour
             SwitchActivePlayer();
             turnCounter++;
             gameData.SetTurnCounterHUD(turnCounter);
+            gameData.ColorActivePlayerHUD(activePlayerIndex,GetOtherPlayerIndex(activePlayerIndex));
             SoundManager.instance.PlaySound("user-interface-menu-select-click-01");
             yield return gameData.AnnounceNextPlayerHUD(turnCounter, mapBuilder.GetPlayer(activePlayerIndex).name);
         }
@@ -80,10 +85,7 @@ public class GameManager : MonoBehaviour
 
         if (winnerIndex== 0|| winnerIndex== 1) //Check if there is a winner
         {
-            int loserIndex =
-            winnerIndex == 0 ? 1 :
-            winnerIndex == 1 ? 0
-            : 100;
+            int loserIndex = GetOtherPlayerIndex(activePlayerIndex);
 
             gameData.SetWinner(mapBuilder.GetPlayer(winnerIndex), mapBuilder.GetPlayer(loserIndex));
             gameData.SetGameResultsHUD(turnCounter);
@@ -112,6 +114,7 @@ public class GameManager : MonoBehaviour
                 mapBuilder.DisableHighlights();
                 SoundManager.instance.PlaySound("ui-modern-confirmation-ascending-03");
                 yield return mapBuilder.MovePlayer(performedAction.position, activePlayerIndex);
+                gameData.SetPlayerScoresHUD(new int[2] { mapBuilder.GetPlayerScore(0), mapBuilder.GetPlayerScore(1) });
                 break;
             case ActionType.Skip:
                 SoundManager.instance.PlaySound("ui-modern-confirmation-descending-01");
@@ -123,7 +126,6 @@ public class GameManager : MonoBehaviour
         gamehasEnded = CheckForEndedGame(out winnerIndex);
         performedAction = null; //ResetNextMoveForNextPlayer
         gameController.ResetAction();
-
     }
 
     /// <summary>
@@ -139,22 +141,36 @@ public class GameManager : MonoBehaviour
             gameData.SetRoundTimerVisualHUD(maxRoundTime - timer);
             yield return null;
             performedAction = gameController.GetAction();
+            
             if (performedAction != null)
             {
-                gameData.SetPlayerScoresHUD(new int[2] { mapBuilder.GetPlayerScore(0), mapBuilder.GetPlayerScore(1) });
                 yield break;
             }
 
-           if (mapBuilder.CheckTurnsWithoutCapture(activePlayerIndex))
-           {
+            // In case one player has an AI the AI will calculate the next move
+            if (mapBuilder.GetPlayer(activePlayerIndex).playerAgent == PlayerAgent.Ai) {
+                yield return mapBuilder.RunAIAgent(activePlayerIndex,turnCounter,gameController);
+            }
+            else //If Player is no AI the game will react to a players inpus on the keyboard
+            {
+
+                if (inputCheckerProcess != null) //End Couroutine if there's a current one running
+                    StopCoroutine(inputCheckerProcess); 
+ 
+                inputCheckerProcess = StartCoroutine(keyInputChecker.CheckKeyInputs());
+            }
+            
+            // In case one player exceeded his turns without capture his round will be skipped
+            if (mapBuilder.CheckTurnsWithoutCapture(activePlayerIndex)) 
+            {
                 performedAction = new PlayerAction(ActionType.Skip, Vector2Int.zero);
                 yield break;
-           }
+            }
         }
 
-            //In case there's no player action the round will be skipped for him
-            performedAction = new PlayerAction(ActionType.Skip, Vector2Int.zero);
-            yield return null;
+        //In case there's no player action the round will be skipped for him
+        performedAction = new PlayerAction(ActionType.Skip, Vector2Int.zero);
+        yield return null;
     }
 
     /// <summary>
@@ -207,6 +223,11 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// Retrieves the index of the other player.
+    /// </summary>
+    /// <param name="thisPlayer">The index of the current player.</param>
+    /// <returns>The index of the other player.</returns>
     int GetOtherPlayerIndex(int thisPlayer)
     {
         if (thisPlayer == 0)
@@ -217,6 +238,9 @@ public class GameManager : MonoBehaviour
             return 100;
     }
 
+    /// <summary>
+    /// Resets the game manager to its initial state to allow replay
+    /// </summary>
     void ResetGameManager()
     {
         activePlayerIndex = Random.Range(0, 2);//Determine first player
@@ -225,6 +249,9 @@ public class GameManager : MonoBehaviour
         winnerIndex = 100;
     }
 
+    /// <summary>
+    /// Continues the game from the setup screen.
+    /// </summary>
     void ContinueGame()
     {
         mapBuilder.ResetMap();
@@ -234,6 +261,9 @@ public class GameManager : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Restarts the game from the beginning.
+    /// </summary>
     void ReplayGame()
     {
         mapBuilder.ResetMap();

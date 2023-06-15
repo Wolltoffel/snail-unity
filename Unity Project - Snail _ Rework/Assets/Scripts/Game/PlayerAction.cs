@@ -11,10 +11,7 @@ public enum ActionType
 public class PlayerAction
 
 {
-    public int index;
     public Vector2Int position;
-
-
     public ActionType actionType;
 
     public PlayerAction(ActionType move, Vector2Int position)

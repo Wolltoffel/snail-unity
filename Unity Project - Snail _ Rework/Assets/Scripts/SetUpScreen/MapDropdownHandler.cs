@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class DropdownHandler : MonoBehaviour
+public class MapDropdownHandler : MonoBehaviour
 {
     [SerializeField] GameData gameData;
     [SerializeField] WrongMapPopUp wrongMapPopUp;
@@ -36,7 +36,6 @@ public class DropdownHandler : MonoBehaviour
 
         else
             dropdown.value = selectableMaps_names.IndexOf(gameData.GetSelectedMap().name); //Select preselected map
-
 
         //Set up Droppdown vor Value Changes
         dropdown.onValueChanged.AddListener(delegate { setMap(dropdown); }); //Adjust dropdown on change

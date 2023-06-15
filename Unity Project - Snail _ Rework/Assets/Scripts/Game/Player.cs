@@ -44,7 +44,6 @@ public class Player
 
     public void IncreaseScore()
     {
-        Debug.Log("IncreasedScore");
         score++;
     }
 

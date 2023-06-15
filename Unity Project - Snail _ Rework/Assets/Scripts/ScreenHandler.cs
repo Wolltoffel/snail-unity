@@ -20,6 +20,10 @@ public class ScreenHandler : MonoBehaviour
         SetScreenActive(ScreenSelection.SetUp);
     }
 
+    /// <summary>
+    /// Sets the specified screen active and deactivates the others.
+    /// </summary>
+    /// <param name="sceneSelection">The screen to set as active.</param>
     public void SetScreenActive(ScreenSelection sceneSelection)
     {
         for (int i = 0;i<3;i++)
