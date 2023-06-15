@@ -1,0 +1,91 @@
+\doxysection{Save\+System Class Reference}
+\hypertarget{class_save_system}{}\label{class_save_system}\index{SaveSystem@{SaveSystem}}
+
+
+Provides functionality for saving and loading data to/from files.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_save_system_a5bca5498b30dc3e1c2ac8197f45116fa}{Save\+Data}} (\mbox{\hyperlink{class_save_data}{Save\+Data}} save\+File, string save\+Path)
+\begin{DoxyCompactList}\small\item\em Saves the data to a file at the specified path. \end{DoxyCompactList}\item 
+T \mbox{\hyperlink{class_save_system_afa18623bd6bcf61c6a19ff784d348bb8}{Load\+Data$<$ T $>$}} (string save\+Path)
+\begin{DoxyCompactList}\small\item\em Loads the data from a file at the specified path. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_save_system_adfac54d87a557336bece574caa4f0d71}{Find\+Save}} (string file\+Name\+Input, string path)
+\begin{DoxyCompactList}\small\item\em Finds a save file with the specified file name in the given path. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides functionality for saving and loading data to/from files. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_save_system_adfac54d87a557336bece574caa4f0d71}\label{class_save_system_adfac54d87a557336bece574caa4f0d71} 
+\index{SaveSystem@{SaveSystem}!FindSave@{FindSave}}
+\index{FindSave@{FindSave}!SaveSystem@{SaveSystem}}
+\doxysubsubsection{\texorpdfstring{FindSave()}{FindSave()}}
+{\footnotesize\ttfamily string Save\+System.\+Find\+Save (\begin{DoxyParamCaption}\item[{string}]{file\+Name\+Input,  }\item[{string}]{path }\end{DoxyParamCaption})}
+
+
+
+Finds a save file with the specified file name in the given path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Name\+Input} & The name of the file to find.\\
+\hline
+{\em path} & The directory path to search for the file.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The contents of the found file, or an empty string if the file is not found.
+\end{DoxyReturn}
+\Hypertarget{class_save_system_afa18623bd6bcf61c6a19ff784d348bb8}\label{class_save_system_afa18623bd6bcf61c6a19ff784d348bb8} 
+\index{SaveSystem@{SaveSystem}!LoadData$<$ T $>$@{LoadData$<$ T $>$}}
+\index{LoadData$<$ T $>$@{LoadData$<$ T $>$}!SaveSystem@{SaveSystem}}
+\doxysubsubsection{\texorpdfstring{LoadData$<$ T $>$()}{LoadData< T >()}}
+{\footnotesize\ttfamily T Save\+System.\+Load\+Data$<$ T $>$ (\begin{DoxyParamCaption}\item[{string}]{save\+Path }\end{DoxyParamCaption})}
+
+
+
+Loads the data from a file at the specified path. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of the \doxylink{class_save_data}{Save\+Data} to load.\\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em save\+Path} & The path to load the file from.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The loaded \doxylink{class_save_data}{Save\+Data} object or null if loading fails.
+\end{DoxyReturn}
+\begin{Desc}
+\item[Type Constraints]\begin{description}
+\item[{\em T} : {\em \mbox{\hyperlink{class_save_data}{Save\+Data}}}]\end{description}
+\end{Desc}
+\Hypertarget{class_save_system_a5bca5498b30dc3e1c2ac8197f45116fa}\label{class_save_system_a5bca5498b30dc3e1c2ac8197f45116fa} 
+\index{SaveSystem@{SaveSystem}!SaveData@{SaveData}}
+\index{SaveData@{SaveData}!SaveSystem@{SaveSystem}}
+\doxysubsubsection{\texorpdfstring{SaveData()}{SaveData()}}
+{\footnotesize\ttfamily void Save\+System.\+Save\+Data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_save_data}{Save\+Data}}}]{save\+File,  }\item[{string}]{save\+Path }\end{DoxyParamCaption})}
+
+
+
+Saves the data to a file at the specified path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em save\+File} & The \doxylink{class_save_data}{Save\+Data} object to save.\\
+\hline
+{\em save\+Path} & The path to save the file.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+K\+:/\+Macromedia/4\+\_\+\+Semester/\+Game Programming/\+Final-\/\+Project-\/\+Snail/snail-\/unity/\+Unity Project -\/ Snail \+\_\+ Rework/\+Assets/\+Scripts/\+Save Systems/Save\+System.\+cs\end{DoxyCompactItemize}

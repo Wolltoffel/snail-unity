@@ -1,0 +1,102 @@
+\doxysection{Tile Class Reference}
+\hypertarget{class_tile}{}\label{class_tile}\index{Tile@{Tile}}
+
+
+Represents a tile on the game board.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_tile_a41177b4a02d1885107f1074be766c8f5}{Tile}} (Vector2\+Int \mbox{\hyperlink{class_tile_aa4046f981671278e33441b6f001b3e9e}{position}}, Vector3 \mbox{\hyperlink{class_tile_ab400ddb8bd5eb923e9014ce1ce2f2db7}{world\+Position}}, Player\+Number player\+Number, Tile\+State tile\+State)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \doxylink{class_tile}{Tile} class. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_tile_a32e5cb30ac2cec5a55d05e888b6bf693}{Check\+Slime}} (int player\+Index)
+\begin{DoxyCompactList}\small\item\em Checks if the tile has slime based on the player index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_tile_a88238ebf0068eb980ff3e29c7b34405c}{Set\+Player\+Number}} (int player\+Index)
+\begin{DoxyCompactList}\small\item\em Sets the player number of the tile based on the player index. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_tile_aa4046f981671278e33441b6f001b3e9e}\label{class_tile_aa4046f981671278e33441b6f001b3e9e} 
+Vector2\+Int {\bfseries position}
+\begin{DoxyCompactList}\small\item\em The position of the tile on the game board. \end{DoxyCompactList}\item 
+\Hypertarget{class_tile_ab400ddb8bd5eb923e9014ce1ce2f2db7}\label{class_tile_ab400ddb8bd5eb923e9014ce1ce2f2db7} 
+Vector3 {\bfseries world\+Position}
+\begin{DoxyCompactList}\small\item\em The world position of the tile in 3D space. \end{DoxyCompactList}\item 
+\Hypertarget{class_tile_aae5310ba77698e7d46415b5565b63be9}\label{class_tile_aae5310ba77698e7d46415b5565b63be9} 
+Player\+Number {\bfseries player\+Number}
+\item 
+\Hypertarget{class_tile_a94614bcea698e49fae0259d2c3613dcc}\label{class_tile_a94614bcea698e49fae0259d2c3613dcc} 
+Tile\+State {\bfseries tile\+State}
+\item 
+\Hypertarget{class_tile_a4ea62839d998750136ea6f044d8212f8}\label{class_tile_a4ea62839d998750136ea6f044d8212f8} 
+bool {\bfseries spawned\+Slime} = false
+\begin{DoxyCompactList}\small\item\em Indicates whether slime has been spawned on the tile. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a tile on the game board. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_tile_a41177b4a02d1885107f1074be766c8f5}\label{class_tile_a41177b4a02d1885107f1074be766c8f5} 
+\index{Tile@{Tile}!Tile@{Tile}}
+\index{Tile@{Tile}!Tile@{Tile}}
+\doxysubsubsection{\texorpdfstring{Tile()}{Tile()}}
+{\footnotesize\ttfamily Tile.\+Tile (\begin{DoxyParamCaption}\item[{Vector2\+Int}]{position,  }\item[{Vector3}]{world\+Position,  }\item[{Player\+Number}]{player\+Number,  }\item[{Tile\+State}]{tile\+State }\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the \doxylink{class_tile}{Tile} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The position of the tile on the game board.\\
+\hline
+{\em world\+Position} & The world position of the tile in 3D space.\\
+\hline
+{\em player\+Number} & The player occupying the tile.\\
+\hline
+{\em tile\+State} & The state of the tile.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_tile_a32e5cb30ac2cec5a55d05e888b6bf693}\label{class_tile_a32e5cb30ac2cec5a55d05e888b6bf693} 
+\index{Tile@{Tile}!CheckSlime@{CheckSlime}}
+\index{CheckSlime@{CheckSlime}!Tile@{Tile}}
+\doxysubsubsection{\texorpdfstring{CheckSlime()}{CheckSlime()}}
+{\footnotesize\ttfamily bool Tile.\+Check\+Slime (\begin{DoxyParamCaption}\item[{int}]{player\+Index }\end{DoxyParamCaption})}
+
+
+
+Checks if the tile has slime based on the player index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player\+Index} & The index of the player.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the tile has slime for the specified player index; otherwise, {\ttfamily false}.
+\end{DoxyReturn}
+\Hypertarget{class_tile_a88238ebf0068eb980ff3e29c7b34405c}\label{class_tile_a88238ebf0068eb980ff3e29c7b34405c} 
+\index{Tile@{Tile}!SetPlayerNumber@{SetPlayerNumber}}
+\index{SetPlayerNumber@{SetPlayerNumber}!Tile@{Tile}}
+\doxysubsubsection{\texorpdfstring{SetPlayerNumber()}{SetPlayerNumber()}}
+{\footnotesize\ttfamily void Tile.\+Set\+Player\+Number (\begin{DoxyParamCaption}\item[{int}]{player\+Index }\end{DoxyParamCaption})}
+
+
+
+Sets the player number of the tile based on the player index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player\+Index} & The index of the player.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+K\+:/\+Macromedia/4\+\_\+\+Semester/\+Game Programming/\+Final-\/\+Project-\/\+Snail/snail-\/unity/\+Unity Project -\/ Snail \+\_\+ Rework/\+Assets/\+Scripts/\+Game/Tile.\+cs\end{DoxyCompactItemize}

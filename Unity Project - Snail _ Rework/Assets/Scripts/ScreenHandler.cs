@@ -3,11 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Represents the available screen selections.
+/// </summary>
 public enum ScreenSelection
 {
     SetUp,Game,Results
 }
 
+/// <summary>
+/// Handles the activation and deactivation of different screens.
+/// </summary>
 public class ScreenHandler : MonoBehaviour
 {
     [SerializeField]GameObject setUpScreen;
@@ -35,6 +41,11 @@ public class ScreenHandler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Activates the specified screen.
+    /// </summary>
+    /// <param name="sceneIndex">The index of the screen to activate.</param>
+
     void ActivateScreen(int sceneIndex)
     {
        switch (sceneIndex)
@@ -51,6 +62,9 @@ public class ScreenHandler : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Deactivates the specified screen.
+    /// <param name="sceneIndex">The index of the screen to deactivate.</param>
     void DeactivateScreen(int sceneIndex)
     {
         switch (sceneIndex)

@@ -5,6 +5,9 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using static UnityEngine.GraphicsBuffer;
 
+/// <summary>
+/// Represents a highlight in the game, which responds to pointer events.
+/// </summary>
 public class Highlight : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler, IPointerExitHandler
 {
     Vector2Int position;
@@ -13,6 +16,12 @@ public class Highlight : MonoBehaviour, IPointerDownHandler, IPointerEnterHandle
     public Player player;
     Coroutine growProcess, shrinkProcess;
 
+    /// <summary>
+    /// Inserts the necessary data for the highlight to function properly.
+    /// </summary>
+    /// <param name="position">The position of the highlight.</param>
+    /// <param name="gameController">The GameController associated with the highlight.</param>
+    /// <param name="player">The Player associated with the highlight.</param>
     public void InsertData(Vector2Int position,GameController gameController, Player player)
     {
         this.position = position;

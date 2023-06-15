@@ -1,0 +1,147 @@
+\doxysection{Player Class Reference}
+\hypertarget{class_player}{}\label{class_player}\index{Player@{Player}}
+
+
+Represents a player in the game.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_player_a3c38cc1675dfb6d3d5bcbf00a8b88927}{Player}} (string name, Player\+Agent player\+Agent, int score, Vector2\+Int position, \mbox{\hyperlink{class_player_visual}{Player\+Visual}} player\+Visual, int index, Game\+Object map\+Parent, \mbox{\hyperlink{class_game_controller}{Game\+Controller}} game\+Controller)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \doxylink{class_player}{Player} class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_adedafd4c4f6041fc6a42059db626ae33}{Spawn\+Slime\+Visuals}} (\mbox{\hyperlink{class_tile}{Tile}} tile, Game\+Object parent)
+\begin{DoxyCompactList}\small\item\em Spawns slime visuals on the specified tile. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_a22ea700738b4c2cd2c6f6174f1cfb3f1}{Set\+Skip\+Button\+Active}} (bool active)
+\begin{DoxyCompactList}\small\item\em Sets the skip button active/inactive. \end{DoxyCompactList}\item 
+\Hypertarget{class_player_a4216f4024b71aa3a48ec1c6740253d27}\label{class_player_a4216f4024b71aa3a48ec1c6740253d27} 
+void {\bfseries Increase\+Turns\+Without\+Capture} ()
+\item 
+\Hypertarget{class_player_a90b4ddede486eeb8748f10fb14c62f55}\label{class_player_a90b4ddede486eeb8748f10fb14c62f55} 
+void {\bfseries Increase\+Score} ()
+\item 
+IEnumerator \mbox{\hyperlink{class_player_a125c4ba9c2fa8079e37266207e2b28f5}{Move}} (Vector2\+Int target)
+\begin{DoxyCompactList}\small\item\em Moves the player to the target position. \end{DoxyCompactList}\item 
+\Hypertarget{class_player_a1bfa27bdc2f0a69f157a35920a3ad3bf}\label{class_player_a1bfa27bdc2f0a69f157a35920a3ad3bf} 
+void {\bfseries Reset} ()
+\begin{DoxyCompactList}\small\item\em Resets the player\+Visual to its initial state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_player_ac8bcb50bf826874dfa2d162af367d013}\label{class_player_ac8bcb50bf826874dfa2d162af367d013} 
+string {\bfseries name}
+\item 
+\Hypertarget{class_player_a43c38443fc6bbaf003e65a9408a329bf}\label{class_player_a43c38443fc6bbaf003e65a9408a329bf} 
+int {\bfseries score}
+\item 
+\Hypertarget{class_player_a00260adbf6eff181031a923e0fcd7007}\label{class_player_a00260adbf6eff181031a923e0fcd7007} 
+int {\bfseries index}
+\item 
+\Hypertarget{class_player_a5a80bae56d1e57e28b64cb38c9e0fdb4}\label{class_player_a5a80bae56d1e57e28b64cb38c9e0fdb4} 
+Player\+Agent {\bfseries player\+Agent}
+\item 
+\Hypertarget{class_player_aa9422457ea1ff75bdf264423f8c768c1}\label{class_player_aa9422457ea1ff75bdf264423f8c768c1} 
+Vector2\+Int {\bfseries position}
+\item 
+\Hypertarget{class_player_aedf8d63ae669879e3b99464260e8437b}\label{class_player_aedf8d63ae669879e3b99464260e8437b} 
+int {\bfseries turns\+Without\+Capture} = 0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_player_abaf0a3f8f7ed984653a64df9579927bb}\label{class_player_abaf0a3f8f7ed984653a64df9579927bb} 
+\mbox{\hyperlink{class_player_visual}{Player\+Visual}} {\bfseries player\+Visual}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a player in the game. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_player_a3c38cc1675dfb6d3d5bcbf00a8b88927}\label{class_player_a3c38cc1675dfb6d3d5bcbf00a8b88927} 
+\index{Player@{Player}!Player@{Player}}
+\index{Player@{Player}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Player()}{Player()}}
+{\footnotesize\ttfamily Player.\+Player (\begin{DoxyParamCaption}\item[{string}]{name,  }\item[{Player\+Agent}]{player\+Agent,  }\item[{int}]{score,  }\item[{Vector2\+Int}]{position,  }\item[{\mbox{\hyperlink{class_player_visual}{Player\+Visual}}}]{player\+Visual,  }\item[{int}]{index,  }\item[{Game\+Object}]{map\+Parent,  }\item[{\mbox{\hyperlink{class_game_controller}{Game\+Controller}}}]{game\+Controller }\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the \doxylink{class_player}{Player} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the player.\\
+\hline
+{\em player\+Agent} & The type of player agent.\\
+\hline
+{\em score} & The player\textquotesingle{}s score.\\
+\hline
+{\em position} & The player\textquotesingle{}s initial position.\\
+\hline
+{\em player\+Visual} & The visual representation of the player.\\
+\hline
+{\em index} & The index of the player.\\
+\hline
+{\em map\+Parent} & The parent object for the player\textquotesingle{}s visual representation.\\
+\hline
+{\em game\+Controller} & The game controller.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_player_a125c4ba9c2fa8079e37266207e2b28f5}\label{class_player_a125c4ba9c2fa8079e37266207e2b28f5} 
+\index{Player@{Player}!Move@{Move}}
+\index{Move@{Move}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Move()}{Move()}}
+{\footnotesize\ttfamily IEnumerator Player.\+Move (\begin{DoxyParamCaption}\item[{Vector2\+Int}]{target }\end{DoxyParamCaption})}
+
+
+
+Moves the player to the target position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & The target position.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An enumerator for the movement animation.
+\end{DoxyReturn}
+\Hypertarget{class_player_a22ea700738b4c2cd2c6f6174f1cfb3f1}\label{class_player_a22ea700738b4c2cd2c6f6174f1cfb3f1} 
+\index{Player@{Player}!SetSkipButtonActive@{SetSkipButtonActive}}
+\index{SetSkipButtonActive@{SetSkipButtonActive}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{SetSkipButtonActive()}{SetSkipButtonActive()}}
+{\footnotesize\ttfamily void Player.\+Set\+Skip\+Button\+Active (\begin{DoxyParamCaption}\item[{bool}]{active }\end{DoxyParamCaption})}
+
+
+
+Sets the skip button active/inactive. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em active} & The flag indicating whether the skip button should be active.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_adedafd4c4f6041fc6a42059db626ae33}\label{class_player_adedafd4c4f6041fc6a42059db626ae33} 
+\index{Player@{Player}!SpawnSlimeVisuals@{SpawnSlimeVisuals}}
+\index{SpawnSlimeVisuals@{SpawnSlimeVisuals}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{SpawnSlimeVisuals()}{SpawnSlimeVisuals()}}
+{\footnotesize\ttfamily void Player.\+Spawn\+Slime\+Visuals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_tile}{Tile}}}]{tile,  }\item[{Game\+Object}]{parent }\end{DoxyParamCaption})}
+
+
+
+Spawns slime visuals on the specified tile. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tile} & The tile to spawn slime visuals on.\\
+\hline
+{\em parent} & The parent object for the slime visuals.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+K\+:/\+Macromedia/4\+\_\+\+Semester/\+Game Programming/\+Final-\/\+Project-\/\+Snail/snail-\/unity/\+Unity Project -\/ Snail \+\_\+ Rework/\+Assets/\+Scripts/\+Game/Player.\+cs\end{DoxyCompactItemize}

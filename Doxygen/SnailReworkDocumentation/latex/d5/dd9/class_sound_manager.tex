@@ -1,0 +1,99 @@
+\doxysection{Sound\+Manager Class Reference}
+\hypertarget{class_sound_manager}{}\label{class_sound_manager}\index{SoundManager@{SoundManager}}
+
+
+Manages the playing of audio clips in the game.  
+
+
+Inheritance diagram for Sound\+Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d5/dd9/class_sound_manager}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_sound_manager_a5ae7537842d482fa891f104ca2f000ae}{Play\+Sound}} (int index)
+\begin{DoxyCompactList}\small\item\em Plays the audio clip at the specified index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sound_manager_a08011838c82fb0c9cecbf3359be2aa79}{Play\+Sound}} (string name)
+\begin{DoxyCompactList}\small\item\em Plays the audio clip with the specified name. \end{DoxyCompactList}\item 
+IEnumerator \mbox{\hyperlink{class_sound_manager_a4ca99aed8c90eab7a95ca3d547c0ba60}{Wait\+Until\+Sound\+Is\+Over}} (string name)
+\begin{DoxyCompactList}\small\item\em Waits until the audio clip with the specified name is over. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_sound_manager_a56244c0e0264a4884669fb389c37afe1}\label{class_sound_manager_a56244c0e0264a4884669fb389c37afe1} 
+static \mbox{\hyperlink{class_sound_manager}{Sound\+Manager}} {\bfseries instance}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_sound_manager_a06a8d04a0f9ce5d140b5308a4adb9073}\label{class_sound_manager_a06a8d04a0f9ce5d140b5308a4adb9073} 
+void {\bfseries Awake} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_sound_manager_ac57b68c4d41508c0c1b63a8c4a2a3be9}\label{class_sound_manager_ac57b68c4d41508c0c1b63a8c4a2a3be9} 
+Audio\+Clip\mbox{[}$\,$\mbox{]} {\bfseries audio\+Clips}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manages the playing of audio clips in the game. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_sound_manager_a5ae7537842d482fa891f104ca2f000ae}\label{class_sound_manager_a5ae7537842d482fa891f104ca2f000ae} 
+\index{SoundManager@{SoundManager}!PlaySound@{PlaySound}}
+\index{PlaySound@{PlaySound}!SoundManager@{SoundManager}}
+\doxysubsubsection{\texorpdfstring{PlaySound()}{PlaySound()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Sound\+Manager.\+Play\+Sound (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})}
+
+
+
+Plays the audio clip at the specified index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the audio clip to play.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_sound_manager_a08011838c82fb0c9cecbf3359be2aa79}\label{class_sound_manager_a08011838c82fb0c9cecbf3359be2aa79} 
+\index{SoundManager@{SoundManager}!PlaySound@{PlaySound}}
+\index{PlaySound@{PlaySound}!SoundManager@{SoundManager}}
+\doxysubsubsection{\texorpdfstring{PlaySound()}{PlaySound()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Sound\+Manager.\+Play\+Sound (\begin{DoxyParamCaption}\item[{string}]{name }\end{DoxyParamCaption})}
+
+
+
+Plays the audio clip with the specified name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the audio clip to play.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_sound_manager_a4ca99aed8c90eab7a95ca3d547c0ba60}\label{class_sound_manager_a4ca99aed8c90eab7a95ca3d547c0ba60} 
+\index{SoundManager@{SoundManager}!WaitUntilSoundIsOver@{WaitUntilSoundIsOver}}
+\index{WaitUntilSoundIsOver@{WaitUntilSoundIsOver}!SoundManager@{SoundManager}}
+\doxysubsubsection{\texorpdfstring{WaitUntilSoundIsOver()}{WaitUntilSoundIsOver()}}
+{\footnotesize\ttfamily IEnumerator Sound\+Manager.\+Wait\+Until\+Sound\+Is\+Over (\begin{DoxyParamCaption}\item[{string}]{name }\end{DoxyParamCaption})}
+
+
+
+Waits until the audio clip with the specified name is over. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the audio clip.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Coroutine to wait until the sound is over.
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+K\+:/\+Macromedia/4\+\_\+\+Semester/\+Game Programming/\+Final-\/\+Project-\/\+Snail/snail-\/unity/\+Unity Project -\/ Snail \+\_\+ Rework/\+Assets/\+Scripts/Sound\+Manager.\+cs\end{DoxyCompactItemize}

@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+/// <summary>
+/// Handles the dropdown menu for selecting maps in the SetUpScreen.
+/// </summary>
 public class MapDropdownHandler : MonoBehaviour
 {
     [SerializeField] GameData gameData;
@@ -38,12 +40,16 @@ public class MapDropdownHandler : MonoBehaviour
             dropdown.value = selectableMaps_names.IndexOf(gameData.GetSelectedMap().name); //Select preselected map
 
         //Set up Droppdown vor Value Changes
-        dropdown.onValueChanged.AddListener(delegate { setMap(dropdown); }); //Adjust dropdown on change
+        dropdown.onValueChanged.AddListener(delegate { SetMap(dropdown); }); //Adjust dropdown on change
 
         dropdownIndex = dropdown.value;
     }
 
-    void setMap(TMPro.TMP_Dropdown dropdown)
+    /// <summary>
+    /// Sets the selected map based on the dropdown value.
+    /// </summary>
+    /// <param name="dropdown">The dropdown component.</param>
+    void SetMap(TMPro.TMP_Dropdown dropdown)
     {
         int index = dropdown.value;
         string mapValidity = gameData.checkMapValidity(selectableMaps[index]);
@@ -57,7 +63,6 @@ public class MapDropdownHandler : MonoBehaviour
         {
             dropdown.value = dropdownIndex;
             wrongMapPopUp.showPopUp(mapValidity);
-            //Throw error message
         }
             
     }

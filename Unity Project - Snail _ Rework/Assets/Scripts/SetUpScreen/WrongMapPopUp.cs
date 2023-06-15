@@ -4,6 +4,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Represents a pop-up window for displaying a wrong map error message.
+/// </summary>
 public class WrongMapPopUp : MonoBehaviour
 {
 

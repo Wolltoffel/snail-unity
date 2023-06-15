@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
+/// <summary>
+/// Manages the game logic and UI interactions during gameplay.
+/// </summary>
 public class GameController : MonoBehaviour
 {
     Player[] players;
@@ -40,6 +43,9 @@ public class GameController : MonoBehaviour
         return action;
     }
 
+    /// <summary>
+    /// Resets the current player action.
+    /// </summary>
     public void ResetAction()
     {
         action = null;

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Represents a class that checks for key inputs and triggers corresponding actions in the game.
+/// </summary>
 public class KeyInputChecker
 {
     GameController gameController;

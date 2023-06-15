@@ -1,0 +1,88 @@
+\doxysection{Map\+Loader Class Reference}
+\hypertarget{class_map_loader}{}\label{class_map_loader}\index{MapLoader@{MapLoader}}
+
+
+Handles loading and validation of map data.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+List$<$ \mbox{\hyperlink{class_map_data}{Map\+Data}} $>$ \mbox{\hyperlink{class_map_loader_a321864c1e49f32481456116d2d7868d1}{Load\+Maps}} ()
+\begin{DoxyCompactList}\small\item\em Loads the map data from saved files. \end{DoxyCompactList}\item 
+string \mbox{\hyperlink{class_map_loader_a28e8651cbbd71e7ad7ce55d4c1610419}{Check\+Map\+Validity}} (\mbox{\hyperlink{class_map_data}{Map\+Data}} map\+Data)
+\begin{DoxyCompactList}\small\item\em Checks the validity of a map data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_map_loader_a2b2b5e0903084170af398704d944a80d}{Check\+Player\+Validity}} (int\mbox{[}$\,$\mbox{]} contents)
+\begin{DoxyCompactList}\small\item\em Checks the validity of player positions in the map data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_map_loader_a99bb19fd8fc0d1d430aee4c15d50c832}\label{class_map_loader_a99bb19fd8fc0d1d430aee4c15d50c832} 
+\mbox{\hyperlink{class_save_system}{Save\+System}} {\bfseries saver}
+\item 
+\Hypertarget{class_map_loader_a04e46d93874e0a14a4109f30904af073}\label{class_map_loader_a04e46d93874e0a14a4109f30904af073} 
+string {\bfseries save\+Path}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles loading and validation of map data. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_map_loader_a28e8651cbbd71e7ad7ce55d4c1610419}\label{class_map_loader_a28e8651cbbd71e7ad7ce55d4c1610419} 
+\index{MapLoader@{MapLoader}!CheckMapValidity@{CheckMapValidity}}
+\index{CheckMapValidity@{CheckMapValidity}!MapLoader@{MapLoader}}
+\doxysubsubsection{\texorpdfstring{CheckMapValidity()}{CheckMapValidity()}}
+{\footnotesize\ttfamily string Map\+Loader.\+Check\+Map\+Validity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_map_data}{Map\+Data}}}]{map\+Data }\end{DoxyParamCaption})}
+
+
+
+Checks the validity of a map data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em map\+Data} & The map data to check.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A string indicating the validity of the map data.
+\end{DoxyReturn}
+\Hypertarget{class_map_loader_a2b2b5e0903084170af398704d944a80d}\label{class_map_loader_a2b2b5e0903084170af398704d944a80d} 
+\index{MapLoader@{MapLoader}!CheckPlayerValidity@{CheckPlayerValidity}}
+\index{CheckPlayerValidity@{CheckPlayerValidity}!MapLoader@{MapLoader}}
+\doxysubsubsection{\texorpdfstring{CheckPlayerValidity()}{CheckPlayerValidity()}}
+{\footnotesize\ttfamily bool Map\+Loader.\+Check\+Player\+Validity (\begin{DoxyParamCaption}\item[{int\mbox{[}$\,$\mbox{]}}]{contents }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Checks the validity of player positions in the map data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em contents} & The map contents.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the players are correctly set up; otherwise, false.
+\end{DoxyReturn}
+\Hypertarget{class_map_loader_a321864c1e49f32481456116d2d7868d1}\label{class_map_loader_a321864c1e49f32481456116d2d7868d1} 
+\index{MapLoader@{MapLoader}!LoadMaps@{LoadMaps}}
+\index{LoadMaps@{LoadMaps}!MapLoader@{MapLoader}}
+\doxysubsubsection{\texorpdfstring{LoadMaps()}{LoadMaps()}}
+{\footnotesize\ttfamily List$<$ \mbox{\hyperlink{class_map_data}{Map\+Data}} $>$ Map\+Loader.\+Load\+Maps (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Loads the map data from saved files. 
+
+\begin{DoxyReturn}{Returns}
+A list of loaded map data.
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+K\+:/\+Macromedia/4\+\_\+\+Semester/\+Game Programming/\+Final-\/\+Project-\/\+Snail/snail-\/unity/\+Unity Project -\/ Snail \+\_\+ Rework/\+Assets/\+Scripts/\+Set\+Up\+Screen/Map\+Loader.\+cs\end{DoxyCompactItemize}

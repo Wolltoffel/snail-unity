@@ -1,0 +1,152 @@
+\doxysection{Game\+Manager Class Reference}
+\hypertarget{class_game_manager}{}\label{class_game_manager}\index{GameManager@{GameManager}}
+
+
+Manages the game flow and player turns.  
+
+
+Inheritance diagram for Game\+Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{db/d10/class_game_manager}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_game_manager_a8bf8923fb0310401affa9eb5c973afca}\label{class_game_manager_a8bf8923fb0310401affa9eb5c973afca} 
+void {\bfseries Switch\+Active\+Player} ()
+\begin{DoxyCompactList}\small\item\em Switches the active player and updates the HUD accordingly. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_game_manager_a2959177ee51ac31badbf8b1bc8f7f637}\label{class_game_manager_a2959177ee51ac31badbf8b1bc8f7f637} 
+void {\bfseries Awake} ()
+\begin{DoxyCompactList}\small\item\em Initializes the map builder and assigns the active player randomly. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_manager_a5a289bd5ba017166116ed73726dc0434}\label{class_game_manager_a5a289bd5ba017166116ed73726dc0434} 
+IEnumerator {\bfseries Start} ()
+\begin{DoxyCompactList}\small\item\em Starts the game flow coroutine. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_manager_ae21e7232648596e63934463cc75642eb}\label{class_game_manager_ae21e7232648596e63934463cc75642eb} 
+IEnumerator {\bfseries Play\+Turn} ()
+\begin{DoxyCompactList}\small\item\em Plays a turn of the game. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_manager_a2f878026d90d1e46fa26aca2c59fe155}\label{class_game_manager_a2f878026d90d1e46fa26aca2c59fe155} 
+IEnumerator {\bfseries Wait\+For\+Player\+Move} ()
+\begin{DoxyCompactList}\small\item\em Waits for the player to make a move or the round timer to expire. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_manager_aa535edbe5d1e381f4a2a8a191fa5cdab}\label{class_game_manager_aa535edbe5d1e381f4a2a8a191fa5cdab} 
+void {\bfseries Handle\+Game\+End} ()
+\item 
+\Hypertarget{class_game_manager_afe5667f9b2eca1cdf1194ac9cd2ec7b9}\label{class_game_manager_afe5667f9b2eca1cdf1194ac9cd2ec7b9} 
+void {\bfseries Play\+Button\+Clicked} ()
+\begin{DoxyCompactList}\small\item\em Event handler for the play button click event. Starts the game. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_game_manager_a7c6ce2827d6a437d60efa4ebb5612813}{Check\+For\+Ended\+Game}} (out int winner\+Index)
+\begin{DoxyCompactList}\small\item\em Checks if the game has ended by evaluating different end conditions. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_game_manager_a0716d5a9967dfb14626f7910ccbd0f5b}{Get\+Other\+Player\+Index}} (int this\+Player)
+\begin{DoxyCompactList}\small\item\em Retrieves the index of the other player. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_manager_a548a14fb18153a27ad10749c9dee114b}\label{class_game_manager_a548a14fb18153a27ad10749c9dee114b} 
+void {\bfseries Reset\+Game\+Manager} ()
+\begin{DoxyCompactList}\small\item\em Resets the game manager to its initial state to allow replay. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_manager_a2ba50fa10e943f9d7f70ca36ab162742}\label{class_game_manager_a2ba50fa10e943f9d7f70ca36ab162742} 
+void {\bfseries Continue\+Game} ()
+\begin{DoxyCompactList}\small\item\em Continues the game from the setup screen. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_manager_a8819f248a806c21ad1ef7eb1e81a4572}\label{class_game_manager_a8819f248a806c21ad1ef7eb1e81a4572} 
+void {\bfseries Replay\+Game} ()
+\begin{DoxyCompactList}\small\item\em Restarts the game from the beginning. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_game_manager_ab78fdf73fb6bd1eb527d2202da16b56e}\label{class_game_manager_ab78fdf73fb6bd1eb527d2202da16b56e} 
+\mbox{\hyperlink{class_game_controller}{Game\+Controller}} {\bfseries game\+Controller}
+\item 
+\Hypertarget{class_game_manager_ae276b8cab54b8f4881ef6266f44e54a2}\label{class_game_manager_ae276b8cab54b8f4881ef6266f44e54a2} 
+\mbox{\hyperlink{class_camera_manager}{Camera\+Manager}} {\bfseries camera\+Manager}
+\item 
+\Hypertarget{class_game_manager_a3397fa9c1c951374c41ffdf9e3b5f70a}\label{class_game_manager_a3397fa9c1c951374c41ffdf9e3b5f70a} 
+\mbox{\hyperlink{class_map_builder}{Map\+Builder}} {\bfseries map\+Builder}
+\item 
+\Hypertarget{class_game_manager_a6d8812d4469941852e736e5fb42e3bb6}\label{class_game_manager_a6d8812d4469941852e736e5fb42e3bb6} 
+\mbox{\hyperlink{class_screen_handler}{Screen\+Handler}} {\bfseries screen\+Handler}
+\item 
+\Hypertarget{class_game_manager_ac4bf3fac29bc487d464183afc7478d8b}\label{class_game_manager_ac4bf3fac29bc487d464183afc7478d8b} 
+\mbox{\hyperlink{class_key_input_checker}{Key\+Input\+Checker}} {\bfseries key\+Input\+Checker}
+\item 
+\Hypertarget{class_game_manager_ac58392d098539d11cad57e87b57a5b2c}\label{class_game_manager_ac58392d098539d11cad57e87b57a5b2c} 
+Coroutine {\bfseries input\+Checker\+Process}
+\item 
+\Hypertarget{class_game_manager_a5a7f86c3d4e33e746c0c67eac198225f}\label{class_game_manager_a5a7f86c3d4e33e746c0c67eac198225f} 
+\mbox{\hyperlink{class_asset_holder}{Asset\+Holder}} {\bfseries asset\+Holder}
+\item 
+\Hypertarget{class_game_manager_a21600ed287a4f7af17df2b5fbc683bed}\label{class_game_manager_a21600ed287a4f7af17df2b5fbc683bed} 
+Game\+Object {\bfseries map\+Holder}
+\item 
+\Hypertarget{class_game_manager_a995e29dff90ee4ad69c8bb803917e7f5}\label{class_game_manager_a995e29dff90ee4ad69c8bb803917e7f5} 
+int {\bfseries max\+Round\+Time}
+\item 
+\Hypertarget{class_game_manager_aaacd83b73ccfdd61fc60d600df39e065}\label{class_game_manager_aaacd83b73ccfdd61fc60d600df39e065} 
+\mbox{\hyperlink{class_game_data}{Game\+Data}} {\bfseries game\+Data}
+\item 
+\Hypertarget{class_game_manager_a23cd21450bff25ffce6a37d2a1342b2f}\label{class_game_manager_a23cd21450bff25ffce6a37d2a1342b2f} 
+Button {\bfseries play\+Button}
+\item 
+\Hypertarget{class_game_manager_a633585168a1a685be86b99aa3daa7f76}\label{class_game_manager_a633585168a1a685be86b99aa3daa7f76} 
+Button {\bfseries replay\+Button}
+\item 
+\Hypertarget{class_game_manager_ae574227e3aad58456c19c46c431a50f7}\label{class_game_manager_ae574227e3aad58456c19c46c431a50f7} 
+Button {\bfseries continue\+Button}
+\item 
+\Hypertarget{class_game_manager_afe09beba061cdee0092e65e266a1bbe8}\label{class_game_manager_afe09beba061cdee0092e65e266a1bbe8} 
+int {\bfseries active\+Player\+Index}
+\item 
+\Hypertarget{class_game_manager_a8412e41909d117e48d3eb15d17b5c09c}\label{class_game_manager_a8412e41909d117e48d3eb15d17b5c09c} 
+\mbox{\hyperlink{class_player_action}{Player\+Action}} {\bfseries performed\+Action}
+\item 
+\Hypertarget{class_game_manager_a2af4dfc2684df31fa18af7866686abfe}\label{class_game_manager_a2af4dfc2684df31fa18af7866686abfe} 
+bool {\bfseries gamehas\+Ended} = true
+\item 
+\Hypertarget{class_game_manager_a80a0cc718762889764c4e59b81348e6a}\label{class_game_manager_a80a0cc718762889764c4e59b81348e6a} 
+int {\bfseries turn\+Counter} =1
+\item 
+\Hypertarget{class_game_manager_a7a4335e3eec676845dac624cb2a86f0a}\label{class_game_manager_a7a4335e3eec676845dac624cb2a86f0a} 
+int {\bfseries winner\+Index} = 100
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manages the game flow and player turns. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_game_manager_a7c6ce2827d6a437d60efa4ebb5612813}\label{class_game_manager_a7c6ce2827d6a437d60efa4ebb5612813} 
+\index{GameManager@{GameManager}!CheckForEndedGame@{CheckForEndedGame}}
+\index{CheckForEndedGame@{CheckForEndedGame}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{CheckForEndedGame()}{CheckForEndedGame()}}
+{\footnotesize\ttfamily bool Game\+Manager.\+Check\+For\+Ended\+Game (\begin{DoxyParamCaption}\item[{out int}]{winner\+Index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Checks if the game has ended by evaluating different end conditions. 
+
+\begin{DoxyReturn}{Returns}
+True if the game has ended, false otherwise.
+\end{DoxyReturn}
+\Hypertarget{class_game_manager_a0716d5a9967dfb14626f7910ccbd0f5b}\label{class_game_manager_a0716d5a9967dfb14626f7910ccbd0f5b} 
+\index{GameManager@{GameManager}!GetOtherPlayerIndex@{GetOtherPlayerIndex}}
+\index{GetOtherPlayerIndex@{GetOtherPlayerIndex}!GameManager@{GameManager}}
+\doxysubsubsection{\texorpdfstring{GetOtherPlayerIndex()}{GetOtherPlayerIndex()}}
+{\footnotesize\ttfamily int Game\+Manager.\+Get\+Other\+Player\+Index (\begin{DoxyParamCaption}\item[{int}]{this\+Player }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Retrieves the index of the other player. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em this\+Player} & The index of the current player.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The index of the other player.
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+K\+:/\+Macromedia/4\+\_\+\+Semester/\+Game Programming/\+Final-\/\+Project-\/\+Snail/snail-\/unity/\+Unity Project -\/ Snail \+\_\+ Rework/\+Assets/\+Scripts/\+Game/Game\+Manager.\+cs\end{DoxyCompactItemize}

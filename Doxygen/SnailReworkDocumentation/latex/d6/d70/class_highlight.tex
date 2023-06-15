@@ -1,0 +1,90 @@
+\doxysection{Highlight Class Reference}
+\hypertarget{class_highlight}{}\label{class_highlight}\index{Highlight@{Highlight}}
+
+
+Represents a highlight in the game, which responds to pointer events.  
+
+
+Inheritance diagram for Highlight\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d6/d70/class_highlight}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_highlight_a9ed6c88ab7e14fb90baa3a32b83258eb}{Insert\+Data}} (Vector2\+Int position, \mbox{\hyperlink{class_game_controller}{Game\+Controller}} game\+Controller, \mbox{\hyperlink{class_player}{Player}} player)
+\begin{DoxyCompactList}\small\item\em Inserts the necessary data for the highlight to function properly. \end{DoxyCompactList}\item 
+\Hypertarget{class_highlight_af0344d980ea0302f951bf72b1e68f836}\label{class_highlight_af0344d980ea0302f951bf72b1e68f836} 
+Vector2\+Int {\bfseries Get\+Position} ()
+\item 
+\Hypertarget{class_highlight_aa5436a1be4c7ac4698713ec1e67fbdec}\label{class_highlight_aa5436a1be4c7ac4698713ec1e67fbdec} 
+void {\bfseries On\+Pointer\+Enter} (Pointer\+Event\+Data event\+Data)
+\item 
+\Hypertarget{class_highlight_a47593a6c9e0d77a1c1674fc0ec36f863}\label{class_highlight_a47593a6c9e0d77a1c1674fc0ec36f863} 
+void {\bfseries On\+Pointer\+Exit} (Pointer\+Event\+Data event\+Data)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_highlight_a8ea9d7accbd125df6e2a41d3b67c2af6}\label{class_highlight_a8ea9d7accbd125df6e2a41d3b67c2af6} 
+\mbox{\hyperlink{class_game_controller}{Game\+Controller}} {\bfseries game\+Controller}
+\item 
+\Hypertarget{class_highlight_a63a3e9b7ada3b72f1f2341aef50f31bd}\label{class_highlight_a63a3e9b7ada3b72f1f2341aef50f31bd} 
+\mbox{\hyperlink{class_player}{Player}} {\bfseries player}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_highlight_ab22a0e5408c120791428aa63aa78c9ea}\label{class_highlight_ab22a0e5408c120791428aa63aa78c9ea} 
+void IPointer\+Down\+Handler. {\bfseries On\+Pointer\+Down} (Pointer\+Event\+Data event\+Data)
+\item 
+\Hypertarget{class_highlight_a2d0603c4285d8d387283704e8eff3278}\label{class_highlight_a2d0603c4285d8d387283704e8eff3278} 
+IEnumerator {\bfseries Scale} (Vector3 current\+Scale, Vector3 target\+Scale)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_highlight_a66d11bff1bfe18996a2e5915af8c3249}\label{class_highlight_a66d11bff1bfe18996a2e5915af8c3249} 
+Vector2\+Int {\bfseries position}
+\item 
+\Hypertarget{class_highlight_a1f26af20dced2e392d72457a08c0b871}\label{class_highlight_a1f26af20dced2e392d72457a08c0b871} 
+Vector3 {\bfseries initial\+Scale}
+\item 
+\Hypertarget{class_highlight_a5b99a0db2cbae70790c18cbf04a7b3c9}\label{class_highlight_a5b99a0db2cbae70790c18cbf04a7b3c9} 
+Coroutine {\bfseries grow\+Process}
+\item 
+\Hypertarget{class_highlight_aa1ade1bd8d58a6b572c31f5c51b47789}\label{class_highlight_aa1ade1bd8d58a6b572c31f5c51b47789} 
+Coroutine {\bfseries shrink\+Process}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a highlight in the game, which responds to pointer events. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_highlight_a9ed6c88ab7e14fb90baa3a32b83258eb}\label{class_highlight_a9ed6c88ab7e14fb90baa3a32b83258eb} 
+\index{Highlight@{Highlight}!InsertData@{InsertData}}
+\index{InsertData@{InsertData}!Highlight@{Highlight}}
+\doxysubsubsection{\texorpdfstring{InsertData()}{InsertData()}}
+{\footnotesize\ttfamily void Highlight.\+Insert\+Data (\begin{DoxyParamCaption}\item[{Vector2\+Int}]{position,  }\item[{\mbox{\hyperlink{class_game_controller}{Game\+Controller}}}]{game\+Controller,  }\item[{\mbox{\hyperlink{class_player}{Player}}}]{player }\end{DoxyParamCaption})}
+
+
+
+Inserts the necessary data for the highlight to function properly. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The position of the highlight.\\
+\hline
+{\em game\+Controller} & The \doxylink{class_game_controller}{Game\+Controller} associated with the highlight.\\
+\hline
+{\em player} & The \doxylink{class_player}{Player} associated with the highlight.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+K\+:/\+Macromedia/4\+\_\+\+Semester/\+Game Programming/\+Final-\/\+Project-\/\+Snail/snail-\/unity/\+Unity Project -\/ Snail \+\_\+ Rework/\+Assets/\+Scripts/\+Game/Highlight.\+cs\end{DoxyCompactItemize}

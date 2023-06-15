@@ -1,0 +1,96 @@
+\doxysection{Wrong\+Map\+Pop\+Up Class Reference}
+\hypertarget{class_wrong_map_pop_up}{}\label{class_wrong_map_pop_up}\index{WrongMapPopUp@{WrongMapPopUp}}
+
+
+Represents a pop-\/up window for displaying a wrong map error message.  
+
+
+Inheritance diagram for Wrong\+Map\+Pop\+Up\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d1/d0c/class_wrong_map_pop_up}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_wrong_map_pop_up_a7e2d6e20bcc3204da195892218599668}\label{class_wrong_map_pop_up_a7e2d6e20bcc3204da195892218599668} 
+void {\bfseries Awake} ()
+\item 
+void \mbox{\hyperlink{class_wrong_map_pop_up_a740c6e651c51cde4d4254e6dd1952f7d}{show\+Pop\+Up}} (string error\+Message)
+\begin{DoxyCompactList}\small\item\em Shows the pop-\/up window with the specified error message. \end{DoxyCompactList}\item 
+\Hypertarget{class_wrong_map_pop_up_ad7a25ea12da8969a3cb45e648ca982f0}\label{class_wrong_map_pop_up_ad7a25ea12da8969a3cb45e648ca982f0} 
+void {\bfseries Hide\+Pop\+Up} ()
+\begin{DoxyCompactList}\small\item\em Hides the pop-\/up window. \end{DoxyCompactList}\item 
+\Hypertarget{class_wrong_map_pop_up_a6ea4f62e7f03f0b36ebad93f0ec2e241}\label{class_wrong_map_pop_up_a6ea4f62e7f03f0b36ebad93f0ec2e241} 
+IEnumerator {\bfseries hide\+Pop\+Up\+Process} ()
+\begin{DoxyCompactList}\small\item\em Coroutine that handles the process of hiding the pop-\/up window. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+IEnumerator \mbox{\hyperlink{class_wrong_map_pop_up_a312d8769249a77dcc615dd60741908db}{Scale}} (Vector3 current\+Scale, Vector3 target\+Scale)
+\begin{DoxyCompactList}\small\item\em Coroutine that scales the pop-\/up window from current scale to the target scale. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_wrong_map_pop_up_a223a76b7367f355699b3d85c24df1ed3}\label{class_wrong_map_pop_up_a223a76b7367f355699b3d85c24df1ed3} 
+Game\+Object {\bfseries pop\+Up\+Window}
+\item 
+\Hypertarget{class_wrong_map_pop_up_abd6111fe70f1b7e5af3d7f5d7db3147e}\label{class_wrong_map_pop_up_abd6111fe70f1b7e5af3d7f5d7db3147e} 
+Button {\bfseries close\+Button}
+\item 
+\Hypertarget{class_wrong_map_pop_up_ad322d42d32932fee1a0dd2548f5ef152}\label{class_wrong_map_pop_up_ad322d42d32932fee1a0dd2548f5ef152} 
+Text\+Mesh\+Pro\+UGUI {\bfseries error\+Text}
+\item 
+\Hypertarget{class_wrong_map_pop_up_aa26cb4fd2557584470fec3410cddb361}\label{class_wrong_map_pop_up_aa26cb4fd2557584470fec3410cddb361} 
+Vector3 {\bfseries initial\+Scale}
+\item 
+\Hypertarget{class_wrong_map_pop_up_ab912f81aab8a4e1fa13b3da98fe33ae9}\label{class_wrong_map_pop_up_ab912f81aab8a4e1fa13b3da98fe33ae9} 
+Vector3 {\bfseries small\+Scale}
+\item 
+\Hypertarget{class_wrong_map_pop_up_ac11bc71774adb39d2b8dfef1c12b1823}\label{class_wrong_map_pop_up_ac11bc71774adb39d2b8dfef1c12b1823} 
+Coroutine {\bfseries scale\+Up}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a pop-\/up window for displaying a wrong map error message. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_wrong_map_pop_up_a312d8769249a77dcc615dd60741908db}\label{class_wrong_map_pop_up_a312d8769249a77dcc615dd60741908db} 
+\index{WrongMapPopUp@{WrongMapPopUp}!Scale@{Scale}}
+\index{Scale@{Scale}!WrongMapPopUp@{WrongMapPopUp}}
+\doxysubsubsection{\texorpdfstring{Scale()}{Scale()}}
+{\footnotesize\ttfamily IEnumerator Wrong\+Map\+Pop\+Up.\+Scale (\begin{DoxyParamCaption}\item[{Vector3}]{current\+Scale,  }\item[{Vector3}]{target\+Scale }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Coroutine that scales the pop-\/up window from current scale to the target scale. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+Scale} & The current scale of the pop-\/up window.\\
+\hline
+{\em target\+Scale} & The target scale to be reached.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_wrong_map_pop_up_a740c6e651c51cde4d4254e6dd1952f7d}\label{class_wrong_map_pop_up_a740c6e651c51cde4d4254e6dd1952f7d} 
+\index{WrongMapPopUp@{WrongMapPopUp}!showPopUp@{showPopUp}}
+\index{showPopUp@{showPopUp}!WrongMapPopUp@{WrongMapPopUp}}
+\doxysubsubsection{\texorpdfstring{showPopUp()}{showPopUp()}}
+{\footnotesize\ttfamily void Wrong\+Map\+Pop\+Up.\+show\+Pop\+Up (\begin{DoxyParamCaption}\item[{string}]{error\+Message }\end{DoxyParamCaption})}
+
+
+
+Shows the pop-\/up window with the specified error message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em error\+Message} & The error message to display.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+K\+:/\+Macromedia/4\+\_\+\+Semester/\+Game Programming/\+Final-\/\+Project-\/\+Snail/snail-\/unity/\+Unity Project -\/ Snail \+\_\+ Rework/\+Assets/\+Scripts/\+Set\+Up\+Screen/Wrong\+Map\+Pop\+Up.\+cs\end{DoxyCompactItemize}

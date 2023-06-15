@@ -1,0 +1,129 @@
+\doxysection{AIAgent Class Reference}
+\hypertarget{class_a_i_agent}{}\label{class_a_i_agent}\index{AIAgent@{AIAgent}}
+
+
+Represents an AI agent for making AI-\/controlled moves.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_a_i_agent_ab3513e3a210d0f218f7dee2f7974bac7}{AIAgent}} (int active\+Player\+Index)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \doxylink{class_a_i_agent}{AIAgent} class with the specified active player index. \end{DoxyCompactList}\item 
+IEnumerator \mbox{\hyperlink{class_a_i_agent_a6b4f8cbd2be89f5f81c515946a20b278}{Run}} (Vector2\+Int size, int turn, \mbox{\hyperlink{class_tile}{Tile}}\mbox{[},\mbox{]} tiles)
+\begin{DoxyCompactList}\small\item\em Runs the AI agent to compute the next action asynchronously. \end{DoxyCompactList}\item 
+\Hypertarget{class_a_i_agent_a800e2b7f266311e3de47bb1a44dcd7db}\label{class_a_i_agent_a800e2b7f266311e3de47bb1a44dcd7db} 
+\mbox{\hyperlink{class_a_i_action}{AIAction}} {\bfseries Get\+AIAction} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_a_i_agent_a478b453937312fee613dd63bfd84b58d}\label{class_a_i_agent_a478b453937312fee613dd63bfd84b58d} 
+\mbox{\hyperlink{class_a_i_action}{AIAction}} {\bfseries action}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+IWorld\+State \mbox{\hyperlink{class_a_i_agent_a9954c1aff005778cabf6dd101038742a}{Convert\+To\+World\+State}} (Vector2\+Int size, int active\+Player\+Number, int turn, \mbox{\hyperlink{class_tile}{Tile}}\mbox{[},\mbox{]} tiles)
+\begin{DoxyCompactList}\small\item\em Converts the game state to a world state representation. \end{DoxyCompactList}\item 
+Content\+Type \mbox{\hyperlink{class_a_i_agent_ae8a3c487d9952984ffdc3da1b47823b3}{Convert\+Data}} (Tile\+State tilestate)
+\begin{DoxyCompactList}\small\item\em Converts a tile state to a content type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_a_i_agent_a13e5997cda1bcbb710cb5b2b94be1214}\label{class_a_i_agent_a13e5997cda1bcbb710cb5b2b94be1214} 
+int {\bfseries active\+Player\+Index}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an AI agent for making AI-\/controlled moves. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_a_i_agent_ab3513e3a210d0f218f7dee2f7974bac7}\label{class_a_i_agent_ab3513e3a210d0f218f7dee2f7974bac7} 
+\index{AIAgent@{AIAgent}!AIAgent@{AIAgent}}
+\index{AIAgent@{AIAgent}!AIAgent@{AIAgent}}
+\doxysubsubsection{\texorpdfstring{AIAgent()}{AIAgent()}}
+{\footnotesize\ttfamily AIAgent.\+AIAgent (\begin{DoxyParamCaption}\item[{int}]{active\+Player\+Index }\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the \doxylink{class_a_i_agent}{AIAgent} class with the specified active player index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em active\+Player\+Index} & The index of the active player.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_a_i_agent_ae8a3c487d9952984ffdc3da1b47823b3}\label{class_a_i_agent_ae8a3c487d9952984ffdc3da1b47823b3} 
+\index{AIAgent@{AIAgent}!ConvertData@{ConvertData}}
+\index{ConvertData@{ConvertData}!AIAgent@{AIAgent}}
+\doxysubsubsection{\texorpdfstring{ConvertData()}{ConvertData()}}
+{\footnotesize\ttfamily Content\+Type AIAgent.\+Convert\+Data (\begin{DoxyParamCaption}\item[{Tile\+State}]{tilestate }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Converts a tile state to a content type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tilestate} & The tile state to convert.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The converted content type.
+\end{DoxyReturn}
+\Hypertarget{class_a_i_agent_a9954c1aff005778cabf6dd101038742a}\label{class_a_i_agent_a9954c1aff005778cabf6dd101038742a} 
+\index{AIAgent@{AIAgent}!ConvertToWorldState@{ConvertToWorldState}}
+\index{ConvertToWorldState@{ConvertToWorldState}!AIAgent@{AIAgent}}
+\doxysubsubsection{\texorpdfstring{ConvertToWorldState()}{ConvertToWorldState()}}
+{\footnotesize\ttfamily IWorld\+State AIAgent.\+Convert\+To\+World\+State (\begin{DoxyParamCaption}\item[{Vector2\+Int}]{size,  }\item[{int}]{active\+Player\+Number,  }\item[{int}]{turn,  }\item[{\mbox{\hyperlink{class_tile}{Tile}}}]{tiles\mbox{[},\mbox{]} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Converts the game state to a world state representation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & The size of the game board.\\
+\hline
+{\em active\+Player\+Number} & The active player\textquotesingle{}s number.\\
+\hline
+{\em turn} & The current turn number.\\
+\hline
+{\em tiles} & The 2D array of game tiles.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The converted world state.
+\end{DoxyReturn}
+\Hypertarget{class_a_i_agent_a6b4f8cbd2be89f5f81c515946a20b278}\label{class_a_i_agent_a6b4f8cbd2be89f5f81c515946a20b278} 
+\index{AIAgent@{AIAgent}!Run@{Run}}
+\index{Run@{Run}!AIAgent@{AIAgent}}
+\doxysubsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily IEnumerator AIAgent.\+Run (\begin{DoxyParamCaption}\item[{Vector2\+Int}]{size,  }\item[{int}]{turn,  }\item[{\mbox{\hyperlink{class_tile}{Tile}}}]{tiles\mbox{[},\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Runs the AI agent to compute the next action asynchronously. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & The size of the game board.\\
+\hline
+{\em turn} & The current turn number.\\
+\hline
+{\em tiles} & The 2D array of game tiles.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An enumerator for the asynchronous computation.
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+K\+:/\+Macromedia/4\+\_\+\+Semester/\+Game Programming/\+Final-\/\+Project-\/\+Snail/snail-\/unity/\+Unity Project -\/ Snail \+\_\+ Rework/\+Assets/\+Scripts/AIAgent.\+cs\end{DoxyCompactItemize}

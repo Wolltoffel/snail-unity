@@ -1,0 +1,105 @@
+\doxysection{Highscore\+Manager Class Reference}
+\hypertarget{class_highscore_manager}{}\label{class_highscore_manager}\index{HighscoreManager@{HighscoreManager}}
+
+
+Manages the highscore list for a specific map.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_highscore_manager_a3681c9509b7f7278fc42ed30d5888967}{Highscore\+Manager}} (string map\+Name)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \doxylink{class_highscore_manager}{Highscore\+Manager} class with the specified map name. \end{DoxyCompactList}\item 
+\Hypertarget{class_highscore_manager_ab60a36e7896fbafb4455b1915054a176}\label{class_highscore_manager_ab60a36e7896fbafb4455b1915054a176} 
+\mbox{\hyperlink{class_highscore_data}{Highscore\+Data}} {\bfseries Get\+Highscore\+Data} ()
+\item 
+\Hypertarget{class_highscore_manager_adf86d9cd7148dbc2f383d24cff19d6ae}\label{class_highscore_manager_adf86d9cd7148dbc2f383d24cff19d6ae} 
+void {\bfseries Save\+Highscore\+Data} ()
+\item 
+void \mbox{\hyperlink{class_highscore_manager_ac5888f39aacd5e0662ee4ccae661bf3a}{Attempt\+To\+Add\+To\+Highscore\+Data}} (\mbox{\hyperlink{struct_highscore}{Highscore}} new\+Data)
+\begin{DoxyCompactList}\small\item\em Attempts to add new highscore data to the highscore list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_highscore_manager_a60623e1e6a8d40d0018eea3cfade06b2}\label{class_highscore_manager_a60623e1e6a8d40d0018eea3cfade06b2} 
+\mbox{\hyperlink{class_highscore_data}{Highscore\+Data}} {\bfseries highscore\+Data}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_highscore_manager_a15764949acdf1ca2d225d8507700fcca}\label{class_highscore_manager_a15764949acdf1ca2d225d8507700fcca} 
+void {\bfseries Load\+Highscore\+List} ()
+\begin{DoxyCompactList}\small\item\em Loads the highscore list from the file system. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_highscore_manager_a6a65f68210d618f3540aed4d3d7a06ea}{Add\+To\+Highscore\+Data}} (\mbox{\hyperlink{struct_highscore}{Highscore}} new\+Data)
+\begin{DoxyCompactList}\small\item\em Adds new highscore data to the highscore list at the specified index. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_highscore_manager_a468429f6b764027c438e198dbfbd61f9}\label{class_highscore_manager_a468429f6b764027c438e198dbfbd61f9} 
+string {\bfseries save\+Path}
+\item 
+\Hypertarget{class_highscore_manager_abe95a9619b58e72e35d53131d4b29135}\label{class_highscore_manager_abe95a9619b58e72e35d53131d4b29135} 
+string {\bfseries file\+Name}
+\item 
+\Hypertarget{class_highscore_manager_afeaf2563b0b667ca6070c9497adb5fd5}\label{class_highscore_manager_afeaf2563b0b667ca6070c9497adb5fd5} 
+int {\bfseries max\+High\+Score\+Count}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manages the highscore list for a specific map. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_highscore_manager_a3681c9509b7f7278fc42ed30d5888967}\label{class_highscore_manager_a3681c9509b7f7278fc42ed30d5888967} 
+\index{HighscoreManager@{HighscoreManager}!HighscoreManager@{HighscoreManager}}
+\index{HighscoreManager@{HighscoreManager}!HighscoreManager@{HighscoreManager}}
+\doxysubsubsection{\texorpdfstring{HighscoreManager()}{HighscoreManager()}}
+{\footnotesize\ttfamily Highscore\+Manager.\+Highscore\+Manager (\begin{DoxyParamCaption}\item[{string}]{map\+Name }\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the \doxylink{class_highscore_manager}{Highscore\+Manager} class with the specified map name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em map\+Name} & The name of the map associated with the highscores.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_highscore_manager_a6a65f68210d618f3540aed4d3d7a06ea}\label{class_highscore_manager_a6a65f68210d618f3540aed4d3d7a06ea} 
+\index{HighscoreManager@{HighscoreManager}!AddToHighscoreData@{AddToHighscoreData}}
+\index{AddToHighscoreData@{AddToHighscoreData}!HighscoreManager@{HighscoreManager}}
+\doxysubsubsection{\texorpdfstring{AddToHighscoreData()}{AddToHighscoreData()}}
+{\footnotesize\ttfamily void Highscore\+Manager.\+Add\+To\+Highscore\+Data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_highscore}{Highscore}}}]{new\+Data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Adds new highscore data to the highscore list at the specified index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Data} & The new highscore data to add.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_highscore_manager_ac5888f39aacd5e0662ee4ccae661bf3a}\label{class_highscore_manager_ac5888f39aacd5e0662ee4ccae661bf3a} 
+\index{HighscoreManager@{HighscoreManager}!AttemptToAddToHighscoreData@{AttemptToAddToHighscoreData}}
+\index{AttemptToAddToHighscoreData@{AttemptToAddToHighscoreData}!HighscoreManager@{HighscoreManager}}
+\doxysubsubsection{\texorpdfstring{AttemptToAddToHighscoreData()}{AttemptToAddToHighscoreData()}}
+{\footnotesize\ttfamily void Highscore\+Manager.\+Attempt\+To\+Add\+To\+Highscore\+Data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_highscore}{Highscore}}}]{new\+Data }\end{DoxyParamCaption})}
+
+
+
+Attempts to add new highscore data to the highscore list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Data} & The new highscore data to add.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+K\+:/\+Macromedia/4\+\_\+\+Semester/\+Game Programming/\+Final-\/\+Project-\/\+Snail/snail-\/unity/\+Unity Project -\/ Snail \+\_\+ Rework/\+Assets/\+Scripts/\+Save Systems/\+Highscore\+Liste/Highscore\+Manager.\+cs\end{DoxyCompactItemize}

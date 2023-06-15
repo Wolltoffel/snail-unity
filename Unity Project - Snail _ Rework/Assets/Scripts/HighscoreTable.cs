@@ -4,6 +4,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// Represents a highscore table in the game.
+/// </summary>
 public class HighscoreTable : MonoBehaviour
 {
     [SerializeField]TextMeshProUGUI heading;

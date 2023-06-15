@@ -56,6 +56,8 @@ public class GameManager : MonoBehaviour
     IEnumerator Start()
     {
         yield return new WaitUntil(()=> gamehasEnded == false);
+
+        // Set up the game screen
         screenHandler.SetScreenActive(ScreenSelection.Game);
         mapBuilder.LoadAndBuildMap(gameController);
         cameraManager.SetUpCamera(gameData.GetSelectedMap().size);
@@ -68,29 +70,27 @@ public class GameManager : MonoBehaviour
 
         while (!gamehasEnded)
         {
+            // Highlight passable tiles for the active player
             mapBuilder.HighlightPassableTiles(activePlayerIndex, gameController);
+            
             yield return PlayTurn();
             mapBuilder.DisableHighlights();
+            
             if (gamehasEnded)
                 break;
+
             SwitchActivePlayer();
             turnCounter++;
             gameData.SetTurnCounterHUD(turnCounter);
+            
             gameData.ColorActivePlayerHUD(activePlayerIndex,GetOtherPlayerIndex(activePlayerIndex));
+            
             SoundManager.instance.PlaySound("user-interface-menu-select-click-01");
+            
             yield return gameData.AnnounceNextPlayerHUD(turnCounter, mapBuilder.GetPlayer(activePlayerIndex).name);
         }
 
-        screenHandler.SetScreenActive(ScreenSelection.Results);
-
-        if (winnerIndex== 0|| winnerIndex== 1) //Check if there is a winner
-        {
-            int loserIndex = GetOtherPlayerIndex(activePlayerIndex);
-
-            gameData.SetWinner(mapBuilder.GetPlayer(winnerIndex), mapBuilder.GetPlayer(loserIndex));
-            gameData.SetGameResultsHUD(turnCounter);
-            gameData.ShowHighScoresHUD();
-        }
+        HandleGameEnd();
 
         yield return null;
     }
@@ -111,12 +111,15 @@ public class GameManager : MonoBehaviour
                 yield return new WaitForSeconds(0.5f);
                 break;
             case ActionType.Move:
+                // Disable highlights and play sound
                 mapBuilder.DisableHighlights();
                 SoundManager.instance.PlaySound("ui-modern-confirmation-ascending-03");
+                //Actually move the player and his sprite
                 yield return mapBuilder.MovePlayer(performedAction.position, activePlayerIndex);
                 gameData.SetPlayerScoresHUD(new int[2] { mapBuilder.GetPlayerScore(0), mapBuilder.GetPlayerScore(1) });
                 break;
             case ActionType.Skip:
+                // Play sound and skip the round
                 SoundManager.instance.PlaySound("ui-modern-confirmation-descending-01");
                 yield return SoundManager.instance.WaitUntilSoundIsOver("ui-modern-confirmation-descending-01");
                 mapBuilder.SkipRound(activePlayerIndex);
@@ -190,6 +193,20 @@ public class GameManager : MonoBehaviour
             activePlayerIndex = 0;
             mapBuilder.SetSkipButtonActive(0, true);
             mapBuilder.SetSkipButtonActive(1, false);
+        }
+    }
+
+    void HandleGameEnd()
+    {
+        screenHandler.SetScreenActive(ScreenSelection.Results);
+
+        if (winnerIndex == 0 || winnerIndex == 1) //Check if there is a winner
+        {
+            int loserIndex = GetOtherPlayerIndex(activePlayerIndex);
+
+            gameData.SetWinner(mapBuilder.GetPlayer(winnerIndex), mapBuilder.GetPlayer(loserIndex));
+            gameData.SetGameResultsHUD(turnCounter);
+            gameData.ShowHighScoresHUD();
         }
     }
     

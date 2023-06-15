@@ -1,0 +1,77 @@
+\doxysection{Game\+Controller Class Reference}
+\hypertarget{class_game_controller}{}\label{class_game_controller}\index{GameController@{GameController}}
+
+
+Manages the game logic and UI interactions during gameplay.  
+
+
+Inheritance diagram for Game\+Controller\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d1/d8b/class_game_controller}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_game_controller_a7cae6638d1cd46d3c74a4715366d9a13}{Insert\+Data}} (\mbox{\hyperlink{class_player}{Player}}\mbox{[}$\,$\mbox{]} players, List$<$ \mbox{\hyperlink{class_highlight}{Highlight}} $>$ highlights, Button surrender\+Button, Button skip\+Round\+Button)
+\begin{DoxyCompactList}\small\item\em Inserts the necessary data for the \doxylink{class_game_controller}{Game\+Controller} to function properly. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_controller_af23327b445599ca5480ff06ee1dac393}\label{class_game_controller_af23327b445599ca5480ff06ee1dac393} 
+void {\bfseries Set\+Action} (\mbox{\hyperlink{class_player_action}{Player\+Action}} input\+Action)
+\item 
+\Hypertarget{class_game_controller_a60a4d7d135390fc776dbea4f1df35803}\label{class_game_controller_a60a4d7d135390fc776dbea4f1df35803} 
+\mbox{\hyperlink{class_player_action}{Player\+Action}} {\bfseries Get\+Action} ()
+\item 
+\Hypertarget{class_game_controller_af27b5d32bcc436139537d18ed658bfd6}\label{class_game_controller_af27b5d32bcc436139537d18ed658bfd6} 
+void {\bfseries Reset\+Action} ()
+\begin{DoxyCompactList}\small\item\em Resets the current player action. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_game_controller_a674085d39c0f50688fe9af5f9596d806}\label{class_game_controller_a674085d39c0f50688fe9af5f9596d806} 
+\mbox{\hyperlink{class_player}{Player}}\mbox{[}$\,$\mbox{]} {\bfseries players}
+\item 
+\Hypertarget{class_game_controller_a5ee589de6c0e6c28d780e72ecdb77726}\label{class_game_controller_a5ee589de6c0e6c28d780e72ecdb77726} 
+List$<$ \mbox{\hyperlink{class_highlight}{Highlight}} $>$ {\bfseries highlights}
+\item 
+\Hypertarget{class_game_controller_ac73a0665f38cc74ee62ba3fb65413613}\label{class_game_controller_ac73a0665f38cc74ee62ba3fb65413613} 
+Button {\bfseries surrender\+Button}
+\item 
+\Hypertarget{class_game_controller_a643bf6feb0740b710abd98333aa34bdf}\label{class_game_controller_a643bf6feb0740b710abd98333aa34bdf} 
+Button {\bfseries skip\+Round\+Button}
+\item 
+\Hypertarget{class_game_controller_a482b01e54cf850d3b7322110ef44b61b}\label{class_game_controller_a482b01e54cf850d3b7322110ef44b61b} 
+\mbox{\hyperlink{class_player_action}{Player\+Action}} {\bfseries action}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manages the game logic and UI interactions during gameplay. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_game_controller_a7cae6638d1cd46d3c74a4715366d9a13}\label{class_game_controller_a7cae6638d1cd46d3c74a4715366d9a13} 
+\index{GameController@{GameController}!InsertData@{InsertData}}
+\index{InsertData@{InsertData}!GameController@{GameController}}
+\doxysubsubsection{\texorpdfstring{InsertData()}{InsertData()}}
+{\footnotesize\ttfamily void Game\+Controller.\+Insert\+Data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_player}{Player}}\mbox{[}$\,$\mbox{]}}]{players,  }\item[{List$<$ \mbox{\hyperlink{class_highlight}{Highlight}} $>$}]{highlights,  }\item[{Button}]{surrender\+Button,  }\item[{Button}]{skip\+Round\+Button }\end{DoxyParamCaption})}
+
+
+
+Inserts the necessary data for the \doxylink{class_game_controller}{Game\+Controller} to function properly. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em players} & An array of \doxylink{class_player}{Player} objects representing the game players.\\
+\hline
+{\em highlights} & A List of \doxylink{class_highlight}{Highlight} objects representing the highlights in the game.\\
+\hline
+{\em surrender\+Button} & The Button used for surrendering.\\
+\hline
+{\em skip\+Round\+Button} & The Button used for skipping rounds.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+K\+:/\+Macromedia/4\+\_\+\+Semester/\+Game Programming/\+Final-\/\+Project-\/\+Snail/snail-\/unity/\+Unity Project -\/ Snail \+\_\+ Rework/\+Assets/\+Scripts/Game\+Controller.\+cs\end{DoxyCompactItemize}

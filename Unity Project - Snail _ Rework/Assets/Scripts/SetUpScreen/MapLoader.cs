@@ -4,6 +4,9 @@ using UnityEngine;
 using System.IO;
 using System.Linq;
 
+/// <summary>
+/// Handles loading and validation of map data.
+/// </summary>
 public class MapLoader
 {
     SaveSystem saver;
@@ -13,7 +16,12 @@ public class MapLoader
         saver = new SaveSystem();
         savePath = Application.streamingAssetsPath + "/maps";
     }
-    public List<MapData> loadMaps()
+
+    /// <summary>
+    /// Loads the map data from saved files.
+    /// </summary>
+    /// <returns>A list of loaded map data.</returns>
+    public List<MapData> LoadMaps()
     {
         string[] filePaths = System.IO.Directory.GetFiles(savePath, "*.json");
         List<MapData> maps = new List<MapData>();
@@ -35,7 +43,12 @@ public class MapLoader
         return maps;
     }
 
-    public string checkMapValidity(MapData mapData)
+    /// <summary>
+    /// Checks the validity of a map data.
+    /// </summary>
+    /// <param name="mapData">The map data to check.</param>
+    /// <returns>A string indicating the validity of the map data.</returns>
+    public string CheckMapValidity(MapData mapData)
     {
         int mapFieldCount = mapData.size.x * mapData.size.y;
         PlayerSettings playersettings = GameData.playersettings;
@@ -56,13 +69,18 @@ public class MapLoader
                 return $"{mapName} is using unkwon numbers. Pls update your map to only include the numbers: 129, 130, 64 and 0.";
         }
         
-        if (!checkPlayerValidity(mapData.contents))
+        if (!CheckPlayerValidity(mapData.contents))
             return $"{mapName} has too many /too few players or is missing one player";
 
         return "Valid";
     }
 
-    bool checkPlayerValidity(int[] contents)
+    /// <summary>
+    /// Checks the validity of player positions in the map data.
+    /// </summary>
+    /// <param name="contents">The map contents.</param>
+    /// <returns>True if the players are correctly set up; otherwise, false.</returns>
+    bool CheckPlayerValidity(int[] contents)
     {
         int playerOneCount = 0;
         int playerTwoCount = 0;

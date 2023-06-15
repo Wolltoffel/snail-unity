@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
+
+/// <summary>
+/// Provides functionality for saving and loading data to/from files.
+/// </summary>
 public class SaveSystem
 {
     /// <summary>

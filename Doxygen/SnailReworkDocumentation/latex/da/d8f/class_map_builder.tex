@@ -1,0 +1,192 @@
+\doxysection{Map\+Builder Class Reference}
+\hypertarget{class_map_builder}{}\label{class_map_builder}\index{MapBuilder@{MapBuilder}}
+
+
+Class responsible for building and managing the game map.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_map_builder_a18091e4fcac845006b527ebfcade72b3}{Map\+Builder}} (\mbox{\hyperlink{class_asset_holder}{Asset\+Holder}} asset\+Holder, Game\+Object map\+Holder, \mbox{\hyperlink{class_game_data}{Game\+Data}} game\+Data)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \doxylink{class_map_builder}{Map\+Builder} class. \end{DoxyCompactList}\item 
+\Hypertarget{class_map_builder_ab7415329cf49b2c5dea8bf7c089da919}\label{class_map_builder_ab7415329cf49b2c5dea8bf7c089da919} 
+\mbox{\hyperlink{class_player}{Player}} {\bfseries Get\+Player} (int player\+Index)
+\begin{DoxyCompactList}\small\item\em Gets the player at the specified index. \end{DoxyCompactList}\item 
+\Hypertarget{class_map_builder_a6974d052b81fdcc348189febc94215f4}\label{class_map_builder_a6974d052b81fdcc348189febc94215f4} 
+ref int {\bfseries Get\+Player\+Score} (int player\+Index)
+\begin{DoxyCompactList}\small\item\em Gets the reference to the player\textquotesingle{}s score at the specified index. \end{DoxyCompactList}\item 
+\Hypertarget{class_map_builder_a58372ee2571011804be20aed7d338663}\label{class_map_builder_a58372ee2571011804be20aed7d338663} 
+void {\bfseries Load\+And\+Build\+Map} (\mbox{\hyperlink{class_game_controller}{Game\+Controller}} game\+Controller)
+\begin{DoxyCompactList}\small\item\em Loads the map data from a file and constructs the game map. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_map_builder_acd75165941480c51e5f479cfebeecaba}{Highlight\+Passable\+Tiles}} (int player\+Index, \mbox{\hyperlink{class_game_controller}{Game\+Controller}} game\+Controller)
+\begin{DoxyCompactList}\small\item\em Highlights the passable tiles for the specified player. \end{DoxyCompactList}\item 
+\Hypertarget{class_map_builder_a7a29c5322beffc75524fd758e1e68541}\label{class_map_builder_a7a29c5322beffc75524fd758e1e68541} 
+List$<$ \mbox{\hyperlink{class_tile}{Tile}} $>$ {\bfseries Get\+Passable\+Tiles} (\mbox{\hyperlink{class_player}{Player}} player)
+\begin{DoxyCompactList}\small\item\em Gets the list of passable tiles for the specified player. \end{DoxyCompactList}\item 
+\Hypertarget{class_map_builder_a666a63cea39404199b039321502800ab}\label{class_map_builder_a666a63cea39404199b039321502800ab} 
+void {\bfseries Disable\+Highlights} ()
+\item 
+IEnumerator \mbox{\hyperlink{class_map_builder_a00675996ab955ca37ef94a1092a641dd}{Move\+Player}} (Vector2\+Int target\+Position, int player\+Index)
+\begin{DoxyCompactList}\small\item\em Moves the player to the specified target position. \end{DoxyCompactList}\item 
+\Hypertarget{class_map_builder_a88b00072b77b99b1fd015497629861a9}\label{class_map_builder_a88b00072b77b99b1fd015497629861a9} 
+bool {\bfseries Check\+Slime} (Vector2\+Int target\+Position, int player\+Index)
+\item 
+\Hypertarget{class_map_builder_a9a8f302502c6996c91149358312bca66}\label{class_map_builder_a9a8f302502c6996c91149358312bca66} 
+bool {\bfseries Check\+Is\+Map\+Full} ()
+\item 
+\Hypertarget{class_map_builder_ac45a7af988a8386aded11d2e90716068}\label{class_map_builder_ac45a7af988a8386aded11d2e90716068} 
+bool {\bfseries Check\+Turns\+Without\+Capture} (int player\+Index)
+\item 
+\Hypertarget{class_map_builder_aaec70c4e8123954db7d491455a497918}\label{class_map_builder_aaec70c4e8123954db7d491455a497918} 
+void {\bfseries Skip\+Round} (int player\+Index)
+\item 
+\Hypertarget{class_map_builder_afaf657b4c43d6245db6b51e5a47112d4}\label{class_map_builder_afaf657b4c43d6245db6b51e5a47112d4} 
+void {\bfseries Set\+Skip\+Button\+Active} (int active\+Player\+Index, bool active)
+\item 
+\Hypertarget{class_map_builder_a657662964e5f8e0b18bd59ce426c4cc8}\label{class_map_builder_a657662964e5f8e0b18bd59ce426c4cc8} 
+int {\bfseries Get\+Winner\+By\+Score} ()
+\item 
+\Hypertarget{class_map_builder_a4237233f4ad92507d7e0d5101ae0ef64}\label{class_map_builder_a4237233f4ad92507d7e0d5101ae0ef64} 
+void {\bfseries Reset\+Map} ()
+\item 
+\Hypertarget{class_map_builder_a59dda5ef1f45374d8ec55d26c2789c78}\label{class_map_builder_a59dda5ef1f45374d8ec55d26c2789c78} 
+IEnumerator {\bfseries Run\+AIAgent} (int active\+Player\+Index, int turn\+Number, \mbox{\hyperlink{class_game_controller}{Game\+Controller}} game\+Controller)
+\begin{DoxyCompactList}\small\item\em Runs the AI agent for the specified active player. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_map_builder_ac6e37e367052ad10bfd4522b3694e191}\label{class_map_builder_ac6e37e367052ad10bfd4522b3694e191} 
+void {\bfseries Spawn\+Player} (Vector2\+Int position, int index, \mbox{\hyperlink{class_player_information}{Player\+Information}} player\+Info, \mbox{\hyperlink{class_game_controller}{Game\+Controller}} game\+Controller)
+\item 
+\Hypertarget{class_map_builder_a58b560ca193c956697988bcca73f56cc}\label{class_map_builder_a58b560ca193c956697988bcca73f56cc} 
+List$<$ \mbox{\hyperlink{class_tile}{Tile}} $>$ {\bfseries Get\+Neighbours} (Vector2\+Int position)
+\item 
+\mbox{\hyperlink{class_tile}{Tile}} \mbox{\hyperlink{class_map_builder_afe8621ebc3143f825b7e9787820648b5}{Get\+Next\+Slide\+Tile}} (\mbox{\hyperlink{class_tile}{Tile}} target, \mbox{\hyperlink{class_player}{Player}} player)
+\begin{DoxyCompactList}\small\item\em Calculates the next tile to slide to from the given target tile for the specified player. \end{DoxyCompactList}\item 
+\Hypertarget{class_map_builder_a1531ea344e0354a7260becc980f2abbc}\label{class_map_builder_a1531ea344e0354a7260becc980f2abbc} 
+bool {\bfseries Check\+Field\+Boundaries} (Vector2\+Int input\+Coordinates)
+\begin{DoxyCompactList}\small\item\em Checks if the input coordinates are within the field boundaries. \end{DoxyCompactList}\item 
+\Hypertarget{class_map_builder_af236285b979ca30a18e4c8593bc67e6a}\label{class_map_builder_af236285b979ca30a18e4c8593bc67e6a} 
+bool {\bfseries Check\+Player\+Action\+Validity} (\mbox{\hyperlink{class_player_action}{Player\+Action}} player\+Action)
+\begin{DoxyCompactList}\small\item\em Checks the validity of a player action. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_map_builder_aa405553cf3e78923e1efd0f5c20cec81}\label{class_map_builder_aa405553cf3e78923e1efd0f5c20cec81} 
+\mbox{\hyperlink{class_asset_holder}{Asset\+Holder}} {\bfseries asset\+Holder}
+\item 
+\Hypertarget{class_map_builder_a6d45a9a3ad5606c066d67704a11eb513}\label{class_map_builder_a6d45a9a3ad5606c066d67704a11eb513} 
+\mbox{\hyperlink{class_save_system}{Save\+System}} {\bfseries saver}
+\item 
+\Hypertarget{class_map_builder_adf6446afe1752cea900ae13f36130a9b}\label{class_map_builder_adf6446afe1752cea900ae13f36130a9b} 
+\mbox{\hyperlink{class_map_data}{Map\+Data}} {\bfseries active\+Map}
+\item 
+\Hypertarget{class_map_builder_a708885b7a81367feb678facb7aede509}\label{class_map_builder_a708885b7a81367feb678facb7aede509} 
+\mbox{\hyperlink{class_player}{Player}}\mbox{[}$\,$\mbox{]} {\bfseries players}
+\item 
+\Hypertarget{class_map_builder_a261349dc8bb42ef63cd9ce772bcbeaf3}\label{class_map_builder_a261349dc8bb42ef63cd9ce772bcbeaf3} 
+Game\+Object {\bfseries map\+Holder}
+\item 
+\Hypertarget{class_map_builder_a041a8a7f3f74b713a23e4f6134db6f7f}\label{class_map_builder_a041a8a7f3f74b713a23e4f6134db6f7f} 
+\mbox{\hyperlink{class_game_data}{Game\+Data}} {\bfseries game\+Data}
+\item 
+\Hypertarget{class_map_builder_a1d7bceb6cb2ccd5bc3858a123fe3dba0}\label{class_map_builder_a1d7bceb6cb2ccd5bc3858a123fe3dba0} 
+string {\bfseries save\+Path} = Application.\+streaming\+Assets\+Path + \"{}/Maps/default.\+json\"{}
+\item 
+\Hypertarget{class_map_builder_abb22f615e5b74a63f0e1a05ef0816d96}\label{class_map_builder_abb22f615e5b74a63f0e1a05ef0816d96} 
+\mbox{\hyperlink{class_tile}{Tile}}\mbox{[},\mbox{]} {\bfseries tiles}
+\item 
+\Hypertarget{class_map_builder_aa0c3532a884dcea10673ff160ec24480}\label{class_map_builder_aa0c3532a884dcea10673ff160ec24480} 
+List$<$ \mbox{\hyperlink{class_highlight}{Highlight}} $>$ {\bfseries spawned\+Highlights}
+\item 
+\Hypertarget{class_map_builder_a08191286c2dc8080e076b304d72c4369}\label{class_map_builder_a08191286c2dc8080e076b304d72c4369} 
+List$<$ Game\+Object $>$ {\bfseries spawned\+Map\+Assets}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class responsible for building and managing the game map. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_map_builder_a18091e4fcac845006b527ebfcade72b3}\label{class_map_builder_a18091e4fcac845006b527ebfcade72b3} 
+\index{MapBuilder@{MapBuilder}!MapBuilder@{MapBuilder}}
+\index{MapBuilder@{MapBuilder}!MapBuilder@{MapBuilder}}
+\doxysubsubsection{\texorpdfstring{MapBuilder()}{MapBuilder()}}
+{\footnotesize\ttfamily Map\+Builder.\+Map\+Builder (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_asset_holder}{Asset\+Holder}}}]{asset\+Holder,  }\item[{Game\+Object}]{map\+Holder,  }\item[{\mbox{\hyperlink{class_game_data}{Game\+Data}}}]{game\+Data }\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the \doxylink{class_map_builder}{Map\+Builder} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em asset\+Holder} & The asset holder.\\
+\hline
+{\em map\+Holder} & The map holder.\\
+\hline
+{\em game\+Data} & The game data.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_map_builder_afe8621ebc3143f825b7e9787820648b5}\label{class_map_builder_afe8621ebc3143f825b7e9787820648b5} 
+\index{MapBuilder@{MapBuilder}!GetNextSlideTile@{GetNextSlideTile}}
+\index{GetNextSlideTile@{GetNextSlideTile}!MapBuilder@{MapBuilder}}
+\doxysubsubsection{\texorpdfstring{GetNextSlideTile()}{GetNextSlideTile()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_tile}{Tile}} Map\+Builder.\+Get\+Next\+Slide\+Tile (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_tile}{Tile}}}]{target,  }\item[{\mbox{\hyperlink{class_player}{Player}}}]{player }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Calculates the next tile to slide to from the given target tile for the specified player. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & The target tile to slide from.\\
+\hline
+{\em player} & The player for whom the slide is being calculated.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The next tile to slide to.
+\end{DoxyReturn}
+\Hypertarget{class_map_builder_acd75165941480c51e5f479cfebeecaba}\label{class_map_builder_acd75165941480c51e5f479cfebeecaba} 
+\index{MapBuilder@{MapBuilder}!HighlightPassableTiles@{HighlightPassableTiles}}
+\index{HighlightPassableTiles@{HighlightPassableTiles}!MapBuilder@{MapBuilder}}
+\doxysubsubsection{\texorpdfstring{HighlightPassableTiles()}{HighlightPassableTiles()}}
+{\footnotesize\ttfamily void Map\+Builder.\+Highlight\+Passable\+Tiles (\begin{DoxyParamCaption}\item[{int}]{player\+Index,  }\item[{\mbox{\hyperlink{class_game_controller}{Game\+Controller}}}]{game\+Controller }\end{DoxyParamCaption})}
+
+
+
+Highlights the passable tiles for the specified player. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player\+Index} & The index of the player.\\
+\hline
+{\em game\+Controller} & The game controller.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_map_builder_a00675996ab955ca37ef94a1092a641dd}\label{class_map_builder_a00675996ab955ca37ef94a1092a641dd} 
+\index{MapBuilder@{MapBuilder}!MovePlayer@{MovePlayer}}
+\index{MovePlayer@{MovePlayer}!MapBuilder@{MapBuilder}}
+\doxysubsubsection{\texorpdfstring{MovePlayer()}{MovePlayer()}}
+{\footnotesize\ttfamily IEnumerator Map\+Builder.\+Move\+Player (\begin{DoxyParamCaption}\item[{Vector2\+Int}]{target\+Position,  }\item[{int}]{player\+Index }\end{DoxyParamCaption})}
+
+
+
+Moves the player to the specified target position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target\+Position} & The target position to move the player to.\\
+\hline
+{\em player\+Index} & The index of the player to move.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+K\+:/\+Macromedia/4\+\_\+\+Semester/\+Game Programming/\+Final-\/\+Project-\/\+Snail/snail-\/unity/\+Unity Project -\/ Snail \+\_\+ Rework/\+Assets/\+Scripts/\+Game/Map\+Builder.\+cs\end{DoxyCompactItemize}

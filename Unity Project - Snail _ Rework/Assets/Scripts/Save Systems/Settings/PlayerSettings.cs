@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Represents the player settings for the game.
+/// </summary>
 public class PlayerSettings: SaveData
 {
     public float maxTurnDuration; //In Seconds
@@ -22,6 +25,9 @@ public class PlayerSettings: SaveData
         this.requireSquareMap = requireSquareMap;
     }
 
+    /// <summary>
+    /// Loads the default values for the player settings.
+    /// </summary>
     public PlayerSettings()
     {
         LoadDefaultValues();
@@ -38,6 +44,9 @@ public class PlayerSettings: SaveData
         requireSquareMap = false;
     }
 
+    /// <summary>
+    /// Corrects any invalid entries in the player settings.
+    /// </summary>
     public void CorrectInvalidEntries()
     {
         if (maxTurnDuration <= 0)

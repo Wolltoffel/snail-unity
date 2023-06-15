@@ -1,0 +1,145 @@
+\doxysection{Player\+Visual Class Reference}
+\hypertarget{class_player_visual}{}\label{class_player_visual}\index{PlayerVisual@{PlayerVisual}}
+
+
+Handles the visual representation of a player and his slime in the game.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_player_visual_aaf2c713ee55273a15070b1a7f5e7bdf3}{Player\+Visual}} (Game\+Object player\+Asset, Game\+Object slime\+Asset)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \doxylink{class_player_visual}{Player\+Visual} class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_visual_aa5e8f9235563ff47729602658cc82218}{Spawn\+Player\+Objects}} (Vector3 world\+Position, Game\+Object map\+Parent, string player\+Name, \mbox{\hyperlink{class_game_controller}{Game\+Controller}} game\+Controller, Player\+Agent player\+Agent)
+\begin{DoxyCompactList}\small\item\em Spawns the player objects in the game world. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_visual_abb2455826e246bb395261ea7afff2394}{Spawn\+Slime}} (\mbox{\hyperlink{class_tile}{Tile}} tile, Game\+Object parent)
+\begin{DoxyCompactList}\small\item\em Spawns a slime object on a tile. \end{DoxyCompactList}\item 
+IEnumerator \mbox{\hyperlink{class_player_visual_a0ffa9fe9486a2dec6e6b1360cd4abf78}{Move}} (Vector3 target)
+\begin{DoxyCompactList}\small\item\em Moves the player to a target position. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_player_visual_a084472e9eadef70fbc7806b0d4156c82}{Set\+Skip\+Button\+Active}} (bool active)
+\begin{DoxyCompactList}\small\item\em Sets the activity state of the skip button. \end{DoxyCompactList}\item 
+\Hypertarget{class_player_visual_aa8f845d0acb7acec08fbcb51ffcf31fe}\label{class_player_visual_aa8f845d0acb7acec08fbcb51ffcf31fe} 
+void {\bfseries Reset} ()
+\begin{DoxyCompactList}\small\item\em Resets the player and slimes visual representations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_player_visual_af28b65d00747985b059b6f4786e423fe}\label{class_player_visual_af28b65d00747985b059b6f4786e423fe} 
+Game\+Object {\bfseries player\+Asset}
+\item 
+\Hypertarget{class_player_visual_af9530eb9c3756f185f1e68a9b069f9b0}\label{class_player_visual_af9530eb9c3756f185f1e68a9b069f9b0} 
+Game\+Object {\bfseries slime\+Asset}
+\item 
+\Hypertarget{class_player_visual_a1ed4f8dd9a06c17948227ddde9408273}\label{class_player_visual_a1ed4f8dd9a06c17948227ddde9408273} 
+Game\+Object {\bfseries player\+Reference}
+\item 
+\Hypertarget{class_player_visual_ae29137fa612934aa3573ba65f6eb382e}\label{class_player_visual_ae29137fa612934aa3573ba65f6eb382e} 
+List$<$ Game\+Object $>$ {\bfseries slime\+References}
+\item 
+\Hypertarget{class_player_visual_a820c67ab613258508d5efa98104d2af0}\label{class_player_visual_a820c67ab613258508d5efa98104d2af0} 
+\mbox{\hyperlink{class_surrender_interactable}{Surrender\+Interactable}} {\bfseries skip\+Interactable}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles the visual representation of a player and his slime in the game. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_player_visual_aaf2c713ee55273a15070b1a7f5e7bdf3}\label{class_player_visual_aaf2c713ee55273a15070b1a7f5e7bdf3} 
+\index{PlayerVisual@{PlayerVisual}!PlayerVisual@{PlayerVisual}}
+\index{PlayerVisual@{PlayerVisual}!PlayerVisual@{PlayerVisual}}
+\doxysubsubsection{\texorpdfstring{PlayerVisual()}{PlayerVisual()}}
+{\footnotesize\ttfamily Player\+Visual.\+Player\+Visual (\begin{DoxyParamCaption}\item[{Game\+Object}]{player\+Asset,  }\item[{Game\+Object}]{slime\+Asset }\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the \doxylink{class_player_visual}{Player\+Visual} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player\+Asset} & The player asset Game\+Object.\\
+\hline
+{\em slime\+Asset} & The slime asset Game\+Object.\\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_player_visual_a0ffa9fe9486a2dec6e6b1360cd4abf78}\label{class_player_visual_a0ffa9fe9486a2dec6e6b1360cd4abf78} 
+\index{PlayerVisual@{PlayerVisual}!Move@{Move}}
+\index{Move@{Move}!PlayerVisual@{PlayerVisual}}
+\doxysubsubsection{\texorpdfstring{Move()}{Move()}}
+{\footnotesize\ttfamily IEnumerator Player\+Visual.\+Move (\begin{DoxyParamCaption}\item[{Vector3}]{target }\end{DoxyParamCaption})}
+
+
+
+Moves the player to a target position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & The target position to move towards.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An IEnumerator for the movement coroutine.
+\end{DoxyReturn}
+\Hypertarget{class_player_visual_a084472e9eadef70fbc7806b0d4156c82}\label{class_player_visual_a084472e9eadef70fbc7806b0d4156c82} 
+\index{PlayerVisual@{PlayerVisual}!SetSkipButtonActive@{SetSkipButtonActive}}
+\index{SetSkipButtonActive@{SetSkipButtonActive}!PlayerVisual@{PlayerVisual}}
+\doxysubsubsection{\texorpdfstring{SetSkipButtonActive()}{SetSkipButtonActive()}}
+{\footnotesize\ttfamily void Player\+Visual.\+Set\+Skip\+Button\+Active (\begin{DoxyParamCaption}\item[{bool}]{active }\end{DoxyParamCaption})}
+
+
+
+Sets the activity state of the skip button. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em active} & The desired activity state.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_visual_aa5e8f9235563ff47729602658cc82218}\label{class_player_visual_aa5e8f9235563ff47729602658cc82218} 
+\index{PlayerVisual@{PlayerVisual}!SpawnPlayerObjects@{SpawnPlayerObjects}}
+\index{SpawnPlayerObjects@{SpawnPlayerObjects}!PlayerVisual@{PlayerVisual}}
+\doxysubsubsection{\texorpdfstring{SpawnPlayerObjects()}{SpawnPlayerObjects()}}
+{\footnotesize\ttfamily void Player\+Visual.\+Spawn\+Player\+Objects (\begin{DoxyParamCaption}\item[{Vector3}]{world\+Position,  }\item[{Game\+Object}]{map\+Parent,  }\item[{string}]{player\+Name,  }\item[{\mbox{\hyperlink{class_game_controller}{Game\+Controller}}}]{game\+Controller,  }\item[{Player\+Agent}]{player\+Agent }\end{DoxyParamCaption})}
+
+
+
+Spawns the player objects in the game world. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em world\+Position} & The world position to spawn the player at.\\
+\hline
+{\em map\+Parent} & The parent Game\+Object for the player.\\
+\hline
+{\em player\+Name} & The name of the player.\\
+\hline
+{\em game\+Controller} & The game controller.\\
+\hline
+{\em player\+Agent} & The agent controlling the player.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_player_visual_abb2455826e246bb395261ea7afff2394}\label{class_player_visual_abb2455826e246bb395261ea7afff2394} 
+\index{PlayerVisual@{PlayerVisual}!SpawnSlime@{SpawnSlime}}
+\index{SpawnSlime@{SpawnSlime}!PlayerVisual@{PlayerVisual}}
+\doxysubsubsection{\texorpdfstring{SpawnSlime()}{SpawnSlime()}}
+{\footnotesize\ttfamily void Player\+Visual.\+Spawn\+Slime (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_tile}{Tile}}}]{tile,  }\item[{Game\+Object}]{parent }\end{DoxyParamCaption})}
+
+
+
+Spawns a slime object on a tile. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tile} & The tile to spawn the slime on.\\
+\hline
+{\em parent} & The parent Game\+Object for the slime.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+K\+:/\+Macromedia/4\+\_\+\+Semester/\+Game Programming/\+Final-\/\+Project-\/\+Snail/snail-\/unity/\+Unity Project -\/ Snail \+\_\+ Rework/\+Assets/\+Scripts/\+Game/Player\+Visual.\+cs\end{DoxyCompactItemize}

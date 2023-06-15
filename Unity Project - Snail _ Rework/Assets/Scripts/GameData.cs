@@ -73,7 +73,7 @@ public class GameData : MonoBehaviour
     public void Awake()
     {
         mapLoader = new MapLoader();
-        selectableMaps = mapLoader.loadMaps();
+        selectableMaps = mapLoader.LoadMaps();
         playerSettingsManager = new PlayerSettingsManager();
         playersettings = playerSettingsManager.settings;
         playerInfo = PlayerInformation.Default();
@@ -120,7 +120,7 @@ public class GameData : MonoBehaviour
     /// <param name="map">The map to check.</param>
     /// <returns>A string indicating the validity of the map.</returns>
     public string checkMapValidity(MapData map) {
-        return mapLoader.checkMapValidity(map); 
+        return mapLoader.CheckMapValidity(map); 
     }
 
     /// <summary>

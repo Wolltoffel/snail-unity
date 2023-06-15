@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
+/// <summary>
+/// Manages the player settings, including loading and saving them.
+/// </summary>
 public class PlayerSettingsManager
 {
     public PlayerSettings settings;
     SaveSystem saver;
     string savePath;
 
+    /// <summary>
+    /// Initializes a new instance of the PlayerSettingsManager class.
+    /// </summary>
     public PlayerSettingsManager()
     {
         saver = new SaveSystem();
@@ -16,6 +22,9 @@ public class PlayerSettingsManager
         LoadSettings();
     }
 
+    /// <summary>
+    /// Loads the player settings from the saved file, or creates default settings if no saved file exists.
+    /// </summary>
     void LoadSettings()
     {
         string[] filePaths = System.IO.Directory.GetFiles(savePath, "*settings.gcf");
@@ -33,6 +42,10 @@ public class PlayerSettingsManager
 
     }
 
+    /// <summary>
+    /// Saves the player settings to a file.
+    /// </summary>
+    /// <param name="settings">The player settings to save.</param>
     void SaveSettings(PlayerSettings settings)
     {   
         saver.SaveData(settings, savePath + "/settings.gcf");

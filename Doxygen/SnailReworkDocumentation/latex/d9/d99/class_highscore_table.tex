@@ -1,0 +1,90 @@
+\doxysection{Highscore\+Table Class Reference}
+\hypertarget{class_highscore_table}{}\label{class_highscore_table}\index{HighscoreTable@{HighscoreTable}}
+
+
+Represents a highscore table in the game.  
+
+
+Inheritance diagram for Highscore\+Table\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d9/d99/class_highscore_table}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_highscore_table_a304249565e6a56158aa5bf6f0026136e}{Set\+Heading}} (\mbox{\hyperlink{class_map_data}{Map\+Data}} map)
+\begin{DoxyCompactList}\small\item\em Sets the heading text for the highscore table. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_highscore_table_ac1f35043e0ef317cef611d3f8b2df547}{Add\+High\+Score}} (\mbox{\hyperlink{struct_highscore}{Highscore}} high\+Score, bool new\+High\+Score\+Flag)
+\begin{DoxyCompactList}\small\item\em Adds a new highscore entry to the table. \end{DoxyCompactList}\item 
+\Hypertarget{class_highscore_table_a0a089f7774697e51f07b780bdf2895e6}\label{class_highscore_table_a0a089f7774697e51f07b780bdf2895e6} 
+void {\bfseries On\+Disable} ()
+\begin{DoxyCompactList}\small\item\em Clears the highscore table and resets its state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_highscore_table_a55b9f922d703e8ffe73228ea7307744a}\label{class_highscore_table_a55b9f922d703e8ffe73228ea7307744a} 
+void {\bfseries Awake} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_highscore_table_af224fbd988416f4231f27a428e421056}\label{class_highscore_table_af224fbd988416f4231f27a428e421056} 
+Text\+Mesh\+Pro\+UGUI {\bfseries heading}
+\item 
+\Hypertarget{class_highscore_table_a1b26871046a7ecdf0e87cb614fd0985f}\label{class_highscore_table_a1b26871046a7ecdf0e87cb614fd0985f} 
+Game\+Object {\bfseries entry\+Template}
+\item 
+\Hypertarget{class_highscore_table_adac1940db0bf3658433ebb4b19fdb0a0}\label{class_highscore_table_adac1940db0bf3658433ebb4b19fdb0a0} 
+Transform {\bfseries entry\+Container}
+\item 
+\Hypertarget{class_highscore_table_ae49432e768ae7c47ddace765f5318d6a}\label{class_highscore_table_ae49432e768ae7c47ddace765f5318d6a} 
+List$<$ Game\+Object $>$ {\bfseries spawned\+Entries} = new List$<$Game\+Object$>$()
+\item 
+\Hypertarget{class_highscore_table_aae960983b26aeaab58f8e0509c9cf945}\label{class_highscore_table_aae960983b26aeaab58f8e0509c9cf945} 
+float {\bfseries object\+Above\+YPos}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a highscore table in the game. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_highscore_table_ac1f35043e0ef317cef611d3f8b2df547}\label{class_highscore_table_ac1f35043e0ef317cef611d3f8b2df547} 
+\index{HighscoreTable@{HighscoreTable}!AddHighScore@{AddHighScore}}
+\index{AddHighScore@{AddHighScore}!HighscoreTable@{HighscoreTable}}
+\doxysubsubsection{\texorpdfstring{AddHighScore()}{AddHighScore()}}
+{\footnotesize\ttfamily void Highscore\+Table.\+Add\+High\+Score (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_highscore}{Highscore}}}]{high\+Score,  }\item[{bool}]{new\+High\+Score\+Flag }\end{DoxyParamCaption})}
+
+
+
+Adds a new highscore entry to the table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em high\+Score} & The highscore data to add.\\
+\hline
+{\em new\+High\+Score\+Flag} & Flag indicating if it is a new highscore.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_highscore_table_a304249565e6a56158aa5bf6f0026136e}\label{class_highscore_table_a304249565e6a56158aa5bf6f0026136e} 
+\index{HighscoreTable@{HighscoreTable}!SetHeading@{SetHeading}}
+\index{SetHeading@{SetHeading}!HighscoreTable@{HighscoreTable}}
+\doxysubsubsection{\texorpdfstring{SetHeading()}{SetHeading()}}
+{\footnotesize\ttfamily void Highscore\+Table.\+Set\+Heading (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_map_data}{Map\+Data}}}]{map }\end{DoxyParamCaption})}
+
+
+
+Sets the heading text for the highscore table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em map} & The map data associated with the highscores.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+K\+:/\+Macromedia/4\+\_\+\+Semester/\+Game Programming/\+Final-\/\+Project-\/\+Snail/snail-\/unity/\+Unity Project -\/ Snail \+\_\+ Rework/\+Assets/\+Scripts/Highscore\+Table.\+cs\end{DoxyCompactItemize}

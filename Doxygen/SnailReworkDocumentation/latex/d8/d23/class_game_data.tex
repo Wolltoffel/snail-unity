@@ -1,0 +1,193 @@
+\doxysection{Game\+Data Class Reference}
+\hypertarget{class_game_data}{}\label{class_game_data}\index{GameData@{GameData}}
+
+
+Manages game data including setup, in-\/game data, and UI elements.  
+
+
+Inheritance diagram for Game\+Data\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d8/d23/class_game_data}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_game_data_ab8dbb390cc0b22d4a4d59ecf23ecb7f8}\label{class_game_data_ab8dbb390cc0b22d4a4d59ecf23ecb7f8} 
+void {\bfseries Awake} ()
+\item 
+\Hypertarget{class_game_data_a19414d7342b01a547ce5a8d3897d233c}\label{class_game_data_a19414d7342b01a547ce5a8d3897d233c} 
+void {\bfseries Set\+Player\+Name} (string playername, int player\+Index)
+\item 
+\Hypertarget{class_game_data_aa2848cf43f6974810c2276100ac9b53a}\label{class_game_data_aa2848cf43f6974810c2276100ac9b53a} 
+string {\bfseries Get\+Player\+Name} (int player\+Index)
+\item 
+\Hypertarget{class_game_data_a640138539ad776d0ca1efead892c96b4}\label{class_game_data_a640138539ad776d0ca1efead892c96b4} 
+void {\bfseries Set\+Player\+Agent} (Player\+Agent agent, int player\+Index)
+\item 
+\Hypertarget{class_game_data_a5d89ec2a7f828ae2a0217c1d0184d17c}\label{class_game_data_a5d89ec2a7f828ae2a0217c1d0184d17c} 
+\mbox{\hyperlink{class_player_information}{Player\+Information}} {\bfseries Get\+Player\+Information} ()
+\item 
+\Hypertarget{class_game_data_a73d30df4f3b86745ce08b6c3275d2743}\label{class_game_data_a73d30df4f3b86745ce08b6c3275d2743} 
+List$<$ \mbox{\hyperlink{class_map_data}{Map\+Data}} $>$ {\bfseries Get\+Selectable\+Maps} ()
+\item 
+\Hypertarget{class_game_data_a5b92ae5decf78f5a6c1c74b4a7878625}\label{class_game_data_a5b92ae5decf78f5a6c1c74b4a7878625} 
+\mbox{\hyperlink{class_map_data}{Map\+Data}} {\bfseries Get\+Selected\+Map} ()
+\item 
+\Hypertarget{class_game_data_a53e06bf432a6118c4e0eeb1671508794}\label{class_game_data_a53e06bf432a6118c4e0eeb1671508794} 
+void {\bfseries Set\+Selected\+Map} (\mbox{\hyperlink{class_map_data}{Map\+Data}} selected\+Map)
+\item 
+string \mbox{\hyperlink{class_game_data_ad24348a516895c1874c5487287e3c98a}{check\+Map\+Validity}} (\mbox{\hyperlink{class_map_data}{Map\+Data}} map)
+\begin{DoxyCompactList}\small\item\em Checks the validity of the map. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_data_afe1426b9a2b153b8608c7d12295ecb84}{Set\+Winner}} (\mbox{\hyperlink{class_player}{Player}} winner, \mbox{\hyperlink{class_player}{Player}} loser)
+\begin{DoxyCompactList}\small\item\em Saves the winner and loser inside a highscore file. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_data_aa4baa5d8adf74536e2f5a46b377061eb}\label{class_game_data_aa4baa5d8adf74536e2f5a46b377061eb} 
+void {\bfseries Set\+Player\+Names\+HUD} ()
+\item 
+\Hypertarget{class_game_data_a8011c8b1021f7fca0deeebcf90da8d98}\label{class_game_data_a8011c8b1021f7fca0deeebcf90da8d98} 
+void {\bfseries Set\+Player\+Scores\+HUD} (int\mbox{[}$\,$\mbox{]} player\+Scores)
+\item 
+\Hypertarget{class_game_data_ac42d964d0fd72a7ecebc65fdc6eab593}\label{class_game_data_ac42d964d0fd72a7ecebc65fdc6eab593} 
+void {\bfseries Set\+Turn\+Counter\+HUD} (int turn\+Counter)
+\item 
+\Hypertarget{class_game_data_a1efe0f766a3f880943641ebbf6a663db}\label{class_game_data_a1efe0f766a3f880943641ebbf6a663db} 
+void {\bfseries Set\+Round\+Timer\+Visual\+HUD} (float round\+Counter)
+\item 
+\Hypertarget{class_game_data_aeeb01287f143b11b3a735ab09fbb728f}\label{class_game_data_aeeb01287f143b11b3a735ab09fbb728f} 
+IEnumerator {\bfseries Announce\+Player\+Action\+HUD} (string player\+Name, \mbox{\hyperlink{class_player_action}{Player\+Action}} player\+Action, bool is\+Slide\+Move)
+\item 
+IEnumerator \mbox{\hyperlink{class_game_data_a08074f0f51c0ff6c356371addfdb27df}{Announce\+Next\+Player\+HUD}} (int turn\+Number, string player\+Name)
+\begin{DoxyCompactList}\small\item\em Announces the next player\textquotesingle{}s turn in the HUD. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_data_a15015880af381d369d77d869986b5580}\label{class_game_data_a15015880af381d369d77d869986b5580} 
+void {\bfseries Color\+Active\+Player\+HUD} (int active\+Player\+Index, int other\+Player\+Index)
+\item 
+\Hypertarget{class_game_data_a96cff7e29595551b9ca8bf2b8b3a6133}\label{class_game_data_a96cff7e29595551b9ca8bf2b8b3a6133} 
+void {\bfseries Set\+Game\+Results\+HUD} (int last\+Turn\+Number)
+\item 
+\Hypertarget{class_game_data_a076fe0edde8a583aa6d634e08d395215}\label{class_game_data_a076fe0edde8a583aa6d634e08d395215} 
+void {\bfseries Show\+High\+Scores\+HUD} ()
+\begin{DoxyCompactList}\small\item\em Shows the high scores in the result screen HUD. \end{DoxyCompactList}\item 
+\Hypertarget{class_game_data_a1889814c88b980201a9f5675a4caa39d}\label{class_game_data_a1889814c88b980201a9f5675a4caa39d} 
+void {\bfseries Reset\+Player\+Settings} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_game_data_a2778afc5cbfe214a1460cc37c2444555}\label{class_game_data_a2778afc5cbfe214a1460cc37c2444555} 
+static \mbox{\hyperlink{class_player_settings}{Player\+Settings}} {\bfseries playersettings}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_game_data_a61b3b9d2acf6a3044cef2369aa1d4aa7}\label{class_game_data_a61b3b9d2acf6a3044cef2369aa1d4aa7} 
+\mbox{\hyperlink{class_map_data}{Map\+Data}} {\bfseries selected\+Map}
+\item 
+\Hypertarget{class_game_data_afc0a939ea109475fb6d283ac5e671af8}\label{class_game_data_afc0a939ea109475fb6d283ac5e671af8} 
+List$<$ \mbox{\hyperlink{class_map_data}{Map\+Data}} $>$ {\bfseries selectable\+Maps}
+\item 
+\Hypertarget{class_game_data_a98b8e4f3639cc7f0144a0a56d07d8257}\label{class_game_data_a98b8e4f3639cc7f0144a0a56d07d8257} 
+\mbox{\hyperlink{class_player_information}{Player\+Information}} {\bfseries player\+Info}
+\item 
+\Hypertarget{class_game_data_adfb8d114127be7fcf17efa9ceeb9afaa}\label{class_game_data_adfb8d114127be7fcf17efa9ceeb9afaa} 
+\mbox{\hyperlink{struct_highscore}{Highscore}} {\bfseries high\+Score}
+\item 
+\Hypertarget{class_game_data_aa87782804cf95648e089187450c72795}\label{class_game_data_aa87782804cf95648e089187450c72795} 
+\mbox{\hyperlink{class_map_loader}{Map\+Loader}} {\bfseries map\+Loader}
+\item 
+\Hypertarget{class_game_data_a5f3928631b241114944e81bb1417fb76}\label{class_game_data_a5f3928631b241114944e81bb1417fb76} 
+\mbox{\hyperlink{class_player_settings_manager}{Player\+Settings\+Manager}} {\bfseries player\+Settings\+Manager}
+\item 
+\Hypertarget{class_game_data_a28d3c7afc719941fad1dc200033a123c}\label{class_game_data_a28d3c7afc719941fad1dc200033a123c} 
+\mbox{\hyperlink{class_highscore_manager}{Highscore\+Manager}} {\bfseries highscore\+Manager}
+\item 
+\Hypertarget{class_game_data_a63e5463be86fd69963df7f3ac2d40415}\label{class_game_data_a63e5463be86fd69963df7f3ac2d40415} 
+\mbox{\hyperlink{class_game_data_visual}{Game\+Data\+Visual}}\mbox{[}$\,$\mbox{]} {\bfseries player\+Name\+Visual} = new \mbox{\hyperlink{class_game_data_visual}{Game\+Data\+Visual}}\mbox{[}2\mbox{]}
+\item 
+\Hypertarget{class_game_data_afc3fe2c7ebf153a56ce063145a9c358b}\label{class_game_data_afc3fe2c7ebf153a56ce063145a9c358b} 
+\mbox{\hyperlink{class_game_data_visual}{Game\+Data\+Visual}}\mbox{[}$\,$\mbox{]} {\bfseries player\+Score\+Visual} = new \mbox{\hyperlink{class_game_data_visual}{Game\+Data\+Visual}}\mbox{[}2\mbox{]}
+\item 
+\Hypertarget{class_game_data_a7a1871dcd0ead1b48f59520a388721ec}\label{class_game_data_a7a1871dcd0ead1b48f59520a388721ec} 
+\mbox{\hyperlink{class_game_data_visual}{Game\+Data\+Visual}} {\bfseries round\+Timer\+Visual}
+\item 
+\Hypertarget{class_game_data_a3741d1a919081e75981cf6853c54a649}\label{class_game_data_a3741d1a919081e75981cf6853c54a649} 
+\mbox{\hyperlink{class_game_data_visual}{Game\+Data\+Visual}} {\bfseries turn\+Counter\+Visual}
+\item 
+\Hypertarget{class_game_data_adf83c73bcdab9856b28fb5fa76ac879b}\label{class_game_data_adf83c73bcdab9856b28fb5fa76ac879b} 
+\mbox{\hyperlink{class_turn_announcer}{Turn\+Announcer}} {\bfseries turn\+Announcer}
+\item 
+\Hypertarget{class_game_data_abd5563e0f650f1665d336fffdf3d2165}\label{class_game_data_abd5563e0f650f1665d336fffdf3d2165} 
+\mbox{\hyperlink{class_game_data_visual}{Game\+Data\+Visual}} {\bfseries results\+Visual}
+\item 
+\Hypertarget{class_game_data_aa1f223ec4e44c44fc1de1d9202edb9a9}\label{class_game_data_aa1f223ec4e44c44fc1de1d9202edb9a9} 
+\mbox{\hyperlink{class_highscore_table}{Highscore\+Table}} {\bfseries highscore\+Table}
+\item 
+\Hypertarget{class_game_data_adfb3e815391d77a6a140f22bc4cac711}\label{class_game_data_adfb3e815391d77a6a140f22bc4cac711} 
+Button {\bfseries reset\+Settings\+Button}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manages game data including setup, in-\/game data, and UI elements. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_game_data_a08074f0f51c0ff6c356371addfdb27df}\label{class_game_data_a08074f0f51c0ff6c356371addfdb27df} 
+\index{GameData@{GameData}!AnnounceNextPlayerHUD@{AnnounceNextPlayerHUD}}
+\index{AnnounceNextPlayerHUD@{AnnounceNextPlayerHUD}!GameData@{GameData}}
+\doxysubsubsection{\texorpdfstring{AnnounceNextPlayerHUD()}{AnnounceNextPlayerHUD()}}
+{\footnotesize\ttfamily IEnumerator Game\+Data.\+Announce\+Next\+Player\+HUD (\begin{DoxyParamCaption}\item[{int}]{turn\+Number,  }\item[{string}]{player\+Name }\end{DoxyParamCaption})}
+
+
+
+Announces the next player\textquotesingle{}s turn in the HUD. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em turn\+Number} & The current turn number.\\
+\hline
+{\em player\+Name} & The name of the next player.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An IEnumerator for coroutine.
+\end{DoxyReturn}
+\Hypertarget{class_game_data_ad24348a516895c1874c5487287e3c98a}\label{class_game_data_ad24348a516895c1874c5487287e3c98a} 
+\index{GameData@{GameData}!checkMapValidity@{checkMapValidity}}
+\index{checkMapValidity@{checkMapValidity}!GameData@{GameData}}
+\doxysubsubsection{\texorpdfstring{checkMapValidity()}{checkMapValidity()}}
+{\footnotesize\ttfamily string Game\+Data.\+check\+Map\+Validity (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_map_data}{Map\+Data}}}]{map }\end{DoxyParamCaption})}
+
+
+
+Checks the validity of the map. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em map} & The map to check.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A string indicating the validity of the map.
+\end{DoxyReturn}
+\Hypertarget{class_game_data_afe1426b9a2b153b8608c7d12295ecb84}\label{class_game_data_afe1426b9a2b153b8608c7d12295ecb84} 
+\index{GameData@{GameData}!SetWinner@{SetWinner}}
+\index{SetWinner@{SetWinner}!GameData@{GameData}}
+\doxysubsubsection{\texorpdfstring{SetWinner()}{SetWinner()}}
+{\footnotesize\ttfamily void Game\+Data.\+Set\+Winner (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_player}{Player}}}]{winner,  }\item[{\mbox{\hyperlink{class_player}{Player}}}]{loser }\end{DoxyParamCaption})}
+
+
+
+Saves the winner and loser inside a highscore file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em winner} & The winning player.\\
+\hline
+{\em loser} & The losing player.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+K\+:/\+Macromedia/4\+\_\+\+Semester/\+Game Programming/\+Final-\/\+Project-\/\+Snail/snail-\/unity/\+Unity Project -\/ Snail \+\_\+ Rework/\+Assets/\+Scripts/Game\+Data.\+cs\end{DoxyCompactItemize}

@@ -8419,6 +8419,7 @@ MonoBehaviour:
   turnAnnouncer: {fileID: 973681241}
   resultsVisual: {fileID: 55033831}
   highscoreTable: {fileID: 1354792537}
+  resetSettingsButton: {fileID: 1504643158}
 --- !u!1 &1765836439
 GameObject:
   m_ObjectHideFlags: 0

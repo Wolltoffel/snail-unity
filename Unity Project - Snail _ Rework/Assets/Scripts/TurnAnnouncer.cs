@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Represents a turn announcer in the game that displays announcements in a popup window.
+/// </summary>
 public class TurnAnnouncer : MonoBehaviour
 {
     /// <summary>
