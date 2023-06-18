@@ -69,15 +69,24 @@ public class GameData : MonoBehaviour
 
     [Header ("Buttons")]
     [SerializeField]Button resetSettingsButton;
+    [SerializeField] Button loadSettingsButton;
 
     public void Awake()
     {
+        // Initialize the MapLoader to load maps
         mapLoader = new MapLoader();
         selectableMaps = mapLoader.LoadMaps();
+
+        // Initialize the PlayerSettingsManager to manage player settings
         playerSettingsManager = new PlayerSettingsManager();
         playersettings = playerSettingsManager.settings;
+
+        // Set the playerInfo to the default settings
         playerInfo = PlayerInformation.Default();
+
+        // Attach event listeners to buttons
         resetSettingsButton.onClick.AddListener(ResetPlayerSettings);
+        loadSettingsButton.onClick.AddListener(LoadPlayerSettings);
     }
 
 
@@ -134,6 +143,7 @@ public class GameData : MonoBehaviour
             winner.name, loser.name, 
             winner.score, loser.score, 
             winner.playerAgent,loser.playerAgent);
+
     }
 
     #region GameScreen HUD
@@ -231,11 +241,14 @@ public class GameData : MonoBehaviour
             if (highscoreData.highscores[i].winnerScore > 0)
             {
                 // The current high score entry matches the new high score, so mark it as a new high score
-                if (ReferenceEquals (highscoreData.highscores[i],highScore))
+                if (highscoreData.highscores[i] == highScore)
+                {
                     highscoreTable.AddHighScore(highscoreData.highscores[i], true);
+                }
+
+                // The current high score entry is not the new high score
                 else
                 {
-                    // The current high score entry is not the new high score
                     highscoreTable.AddHighScore(highscoreData.highscores[i], false);
                 }
             }
@@ -248,5 +261,12 @@ public class GameData : MonoBehaviour
     public void ResetPlayerSettings()
     {
         playersettings.LoadDefaultValues();
+        playerSettingsManager.SaveSettings(playersettings);
+    }
+
+    public void LoadPlayerSettings()
+    {
+        playerSettingsManager.LoadSettings();
+        playersettings = playerSettingsManager.settings;
     }
 }

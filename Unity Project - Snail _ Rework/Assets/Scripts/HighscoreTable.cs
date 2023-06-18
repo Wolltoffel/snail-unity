@@ -61,7 +61,7 @@ public class HighscoreTable : MonoBehaviour
         // Set the text values for the winner score, winner entry, and loser entry
         winnerScore.text = highScore.winnerScore.ToString();
         winnerEntry.text = $"{highScore.winnerName} [{highScore.agentWinner}]";
-        loserEntry.text = $"{highScore.looserName} [{highScore.agentLoser}]";
+        loserEntry.text = $"{highScore.loserName} [{highScore.agentLoser}]";
 
         // Set the color of the entry if it's a new high score
         if (newHighScoreFlag)

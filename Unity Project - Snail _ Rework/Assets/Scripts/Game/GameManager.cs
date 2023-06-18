@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         mapBuilder = new MapBuilder(assetHolder,mapHolder,gameData);
         keyInputChecker = new KeyInputChecker(gameController);
         activePlayerIndex = Random.Range(0, 2);//Determine first player
-        
+
         //Add Button Listeners
         playButton.onClick.AddListener(PlayButtonClicked);
         continueButton.onClick.AddListener(ContinueGame);
@@ -68,11 +68,15 @@ public class GameManager : MonoBehaviour
         gameData.ColorActivePlayerHUD(activePlayerIndex, GetOtherPlayerIndex(activePlayerIndex));
 
 
+        mapBuilder.SetSkipButtonActive(activePlayerIndex, true);
+        mapBuilder.SetSkipButtonActive(GetOtherPlayerIndex(activePlayerIndex), false);
+
+
         while (!gamehasEnded)
         {
             // Highlight passable tiles for the active player
             mapBuilder.HighlightPassableTiles(activePlayerIndex, gameController);
-            
+
             yield return PlayTurn();
             mapBuilder.DisableHighlights();
             
@@ -136,11 +140,9 @@ public class GameManager : MonoBehaviour
     /// </summary>
     IEnumerator WaitForPlayerMove()
     {
-
-        if (mapBuilder.GetPlayer(activePlayerIndex).playerAgent == PlayerAgent.Human)//If Player is no AI the game will react to a players inputs on the keyboard
-        { 
+        //If Player is no AI the game will react to a players inputs on the keyboard
+        if (mapBuilder.GetPlayer(activePlayerIndex).playerAgent == PlayerAgent.Human)
             inputCheckerProcess = StartCoroutine(keyInputChecker.CheckKeyInputs());
-        }
 
         float timer = 0;
 
@@ -162,7 +164,6 @@ public class GameManager : MonoBehaviour
             if (mapBuilder.GetPlayer(activePlayerIndex).playerAgent == PlayerAgent.Ai) {
                 yield return mapBuilder.RunAIAgent(activePlayerIndex,turnCounter,gameController);
             }
-
             
             // In case one player exceeded his turns without capture his round will be skipped
             if (mapBuilder.CheckTurnsWithoutCapture(activePlayerIndex)) 
@@ -203,7 +204,7 @@ public class GameManager : MonoBehaviour
 
         if (winnerIndex == 0 || winnerIndex == 1) //Check if there is a winner
         {
-            int loserIndex = GetOtherPlayerIndex(activePlayerIndex);
+            int loserIndex = GetOtherPlayerIndex(winnerIndex);
 
             gameData.SetWinner(mapBuilder.GetPlayer(winnerIndex), mapBuilder.GetPlayer(loserIndex));
             gameData.SetGameResultsHUD(turnCounter);

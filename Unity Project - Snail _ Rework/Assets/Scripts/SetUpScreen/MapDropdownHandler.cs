@@ -33,7 +33,8 @@ public class MapDropdownHandler : MonoBehaviour
         {
             dropdownIndex = selectableMaps_names.IndexOf("default");
             dropdown.value = dropdownIndex;
-            gameData.SetSelectedMap(selectableMaps[dropdownIndex]);
+            if (selectableMaps.Count>0)
+                gameData.SetSelectedMap(selectableMaps[dropdownIndex]);
         }
 
         else

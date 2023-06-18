@@ -270,7 +270,6 @@ public class MapBuilder
             players[playerIndex].IncreaseTurnsWithoutCapture();
         else
         {
-            Debug.Log("IncreasedScore");
             player.IncreaseScore();
         }
            

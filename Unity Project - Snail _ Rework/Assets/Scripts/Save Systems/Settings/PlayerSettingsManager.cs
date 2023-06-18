@@ -25,7 +25,7 @@ public class PlayerSettingsManager
     /// <summary>
     /// Loads the player settings from the saved file, or creates default settings if no saved file exists.
     /// </summary>
-    void LoadSettings()
+    public void LoadSettings()
     {
         string[] filePaths = System.IO.Directory.GetFiles(savePath, "*settings.gcf");
         if (filePaths.Length != 0)
@@ -46,7 +46,7 @@ public class PlayerSettingsManager
     /// Saves the player settings to a file.
     /// </summary>
     /// <param name="settings">The player settings to save.</param>
-    void SaveSettings(PlayerSettings settings)
+    public void SaveSettings(PlayerSettings settings)
     {   
         saver.SaveData(settings, savePath + "/settings.gcf");
     }
