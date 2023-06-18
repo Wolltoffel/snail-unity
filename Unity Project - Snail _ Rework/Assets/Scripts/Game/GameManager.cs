@@ -136,6 +136,12 @@ public class GameManager : MonoBehaviour
     /// </summary>
     IEnumerator WaitForPlayerMove()
     {
+
+        if (mapBuilder.GetPlayer(activePlayerIndex).playerAgent == PlayerAgent.Human)//If Player is no AI the game will react to a players inputs on the keyboard
+        { 
+            inputCheckerProcess = StartCoroutine(keyInputChecker.CheckKeyInputs());
+        }
+
         float timer = 0;
 
         while (timer <= maxRoundTime)
@@ -147,6 +153,8 @@ public class GameManager : MonoBehaviour
             
             if (performedAction != null)
             {
+                if (inputCheckerProcess != null) //End Couroutine if there's a current one running
+                    StopCoroutine(inputCheckerProcess);
                 yield break;
             }
 
@@ -154,14 +162,7 @@ public class GameManager : MonoBehaviour
             if (mapBuilder.GetPlayer(activePlayerIndex).playerAgent == PlayerAgent.Ai) {
                 yield return mapBuilder.RunAIAgent(activePlayerIndex,turnCounter,gameController);
             }
-            else //If Player is no AI the game will react to a players inpus on the keyboard
-            {
 
-                if (inputCheckerProcess != null) //End Couroutine if there's a current one running
-                    StopCoroutine(inputCheckerProcess); 
- 
-                inputCheckerProcess = StartCoroutine(keyInputChecker.CheckKeyInputs());
-            }
             
             // In case one player exceeded his turns without capture his round will be skipped
             if (mapBuilder.CheckTurnsWithoutCapture(activePlayerIndex)) 
