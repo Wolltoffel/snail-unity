@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['keyinputchecker_0',['KeyInputChecker',['../d7/dc3/class_key_input_checker.html',1,'KeyInputChecker'],['../d7/dc3/class_key_input_checker.html#af9120c9114618160ba0ee525b706c1e2',1,'KeyInputChecker.KeyInputChecker()']]]
+  ['insertdata_0',['InsertData',['../d6/d70/class_highlight.html#a9ed6c88ab7e14fb90baa3a32b83258eb',1,'Highlight.InsertData()'],['../d1/d8b/class_game_controller.html#a7cae6638d1cd46d3c74a4715366d9a13',1,'GameController.InsertData()']]]
 ];

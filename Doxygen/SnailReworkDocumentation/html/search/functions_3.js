@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['findsave_0',['FindSave',['../d5/d44/class_save_system.html#adfac54d87a557336bece574caa4f0d71',1,'SaveSystem']]]
+  ['equals_0',['Equals',['../d5/d2a/struct_highscore.html#ac3547d94bd4009259146341bc44d69a7',1,'Highscore']]]
 ];

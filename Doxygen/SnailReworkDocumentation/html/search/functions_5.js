@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['hidepopup_0',['HidePopUp',['../d1/d0c/class_wrong_map_pop_up.html#ad7a25ea12da8969a3cb45e648ca982f0',1,'WrongMapPopUp']]],
-  ['hidepopupprocess_1',['hidePopUpProcess',['../d1/d0c/class_wrong_map_pop_up.html#a6ea4f62e7f03f0b36ebad93f0ec2e241',1,'WrongMapPopUp']]],
-  ['highlightpassabletiles_2',['HighlightPassableTiles',['../da/d8f/class_map_builder.html#acd75165941480c51e5f479cfebeecaba',1,'MapBuilder']]],
-  ['highscore_3',['Highscore',['../d5/d2a/struct_highscore.html#a221323d13f033fffa226dc13f3973e56',1,'Highscore']]],
-  ['highscoredata_4',['HighscoreData',['../d1/d6a/class_highscore_data.html#a359cb708da167764da801a415c4493c7',1,'HighscoreData']]],
-  ['highscoremanager_5',['HighscoreManager',['../d5/ddd/class_highscore_manager.html#a3681c9509b7f7278fc42ed30d5888967',1,'HighscoreManager']]]
+  ['gethashcode_0',['GetHashCode',['../d5/d2a/struct_highscore.html#a4ee5c3248768447084f426adfb6d0463',1,'Highscore']]],
+  ['getnextslidetile_1',['GetNextSlideTile',['../da/d8f/class_map_builder.html#afe8621ebc3143f825b7e9787820648b5',1,'MapBuilder']]],
+  ['getotherplayerindex_2',['GetOtherPlayerIndex',['../db/d10/class_game_manager.html#a0716d5a9967dfb14626f7910ccbd0f5b',1,'GameManager']]],
+  ['getpassabletiles_3',['GetPassableTiles',['../da/d8f/class_map_builder.html#a7a29c5322beffc75524fd758e1e68541',1,'MapBuilder']]],
+  ['getplayer_4',['GetPlayer',['../da/d8f/class_map_builder.html#ab7415329cf49b2c5dea8bf7c089da919',1,'MapBuilder']]],
+  ['getplayerscore_5',['GetPlayerScore',['../da/d8f/class_map_builder.html#a6974d052b81fdcc348189febc94215f4',1,'MapBuilder']]]
 ];

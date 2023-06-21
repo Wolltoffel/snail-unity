@@ -13,7 +13,7 @@ public class PlayerVisual
     GameObject playerReference;
     List <GameObject> slimeReferences;
 
-    SurrenderInteractable skipInteractable;
+    SkipInteracatable skipInteractable;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="PlayerVisual"/> class.
@@ -43,8 +43,8 @@ public class PlayerVisual
         playerReference.AddComponent<BoxCollider2D>();
         if (playerAgent == PlayerAgent.Human)
         {
-                skipInteractable = playerReference.AddComponent<SurrenderInteractable>();
-                skipInteractable.AddGameController(gameController);
+            skipInteractable = playerReference.AddComponent<SkipInteracatable>();
+            skipInteractable.AddGameController(gameController);
         }
     }
 
@@ -66,7 +66,9 @@ public class PlayerVisual
     /// <param name="target">The target position to move towards.</param>
     /// <returns>An IEnumerator for the movement coroutine.</returns>
     public IEnumerator Move(Vector3 target)
-    {
+    {   
+        skipInteractable.ShrinkBackToNormal();
+
         Vector3 playerPosition = playerReference.transform.position;
         Vector3 startPosition = playerPosition;
         float startTime = Time.time;
@@ -77,6 +79,7 @@ public class PlayerVisual
             playerReference.transform.position = playerPosition;
             yield return null;
         }
+
     }
 
     /// <summary>

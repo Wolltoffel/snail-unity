@@ -8,7 +8,7 @@ Represents an interactable surrender button in the game.
 Inheritance diagram for Surrender\+Interactable\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[height=2.000000cm]{d4/de1/class_surrender_interactable}
+\includegraphics[height=1.944445cm]{d4/de1/class_surrender_interactable}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Public Member Functions}
@@ -17,12 +17,36 @@ Inheritance diagram for Surrender\+Interactable\+:\begin{figure}[H]
 void \mbox{\hyperlink{class_surrender_interactable_a489674fbddffa78afb903821fb6f08de}{Add\+Game\+Controller}} (\mbox{\hyperlink{class_game_controller}{Game\+Controller}} game\+Controller)
 \begin{DoxyCompactList}\small\item\em Adds a reference to the game controller. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_surrender_interactable_a9074bdf4488e450a547a51c49d410fc1}{On\+Pointer\+Click}} (Pointer\+Event\+Data event\+Data)
+\item 
+\Hypertarget{class_surrender_interactable_af541897afad17d83b3620525084277c5}\label{class_surrender_interactable_af541897afad17d83b3620525084277c5} 
+void {\bfseries On\+Pointer\+Enter} (Pointer\+Event\+Data event\+Data)
+\item 
+\Hypertarget{class_surrender_interactable_a436d70153b4e97d5c8453130229fd1a4}\label{class_surrender_interactable_a436d70153b4e97d5c8453130229fd1a4} 
+void {\bfseries On\+Pointer\+Exit} (Pointer\+Event\+Data event\+Data)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_surrender_interactable_a6232c800222e52ed667303b95e72a4c8}\label{class_surrender_interactable_a6232c800222e52ed667303b95e72a4c8} 
+void {\bfseries Awake} ()
+\item 
+\Hypertarget{class_surrender_interactable_a99d8ccb67dd84c3fe8216729f303f422}\label{class_surrender_interactable_a99d8ccb67dd84c3fe8216729f303f422} 
+IEnumerator {\bfseries Scale} (Vector3 current\+Scale, Vector3 target\+Scale)
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \Hypertarget{class_surrender_interactable_a128a8834558a5a57fbd43c3d5bd3578f}\label{class_surrender_interactable_a128a8834558a5a57fbd43c3d5bd3578f} 
 \mbox{\hyperlink{class_game_controller}{Game\+Controller}} {\bfseries game\+Controller}
+\item 
+\Hypertarget{class_surrender_interactable_a3ba416a7a50d32df3e6aa45f6f437560}\label{class_surrender_interactable_a3ba416a7a50d32df3e6aa45f6f437560} 
+Coroutine {\bfseries shrink\+Process}
+\item 
+\Hypertarget{class_surrender_interactable_a0e7083391f900dfcd4ad763afd3334f2}\label{class_surrender_interactable_a0e7083391f900dfcd4ad763afd3334f2} 
+Coroutine {\bfseries grow\+Process}
+\item 
+\Hypertarget{class_surrender_interactable_acc628d209ccda1cb87d07f703f3f3492}\label{class_surrender_interactable_acc628d209ccda1cb87d07f703f3f3492} 
+Vector3 {\bfseries initial\+Scale}
 \end{DoxyCompactItemize}
 
 

@@ -1,11 +1,13 @@
 var searchData=
 [
-  ['hidepopup_0',['HidePopUp',['../d1/d0c/class_wrong_map_pop_up.html#ad7a25ea12da8969a3cb45e648ca982f0',1,'WrongMapPopUp']]],
-  ['hidepopupprocess_1',['hidePopUpProcess',['../d1/d0c/class_wrong_map_pop_up.html#a6ea4f62e7f03f0b36ebad93f0ec2e241',1,'WrongMapPopUp']]],
-  ['highlight_2',['Highlight',['../d6/d70/class_highlight.html',1,'']]],
-  ['highlightpassabletiles_3',['HighlightPassableTiles',['../da/d8f/class_map_builder.html#acd75165941480c51e5f479cfebeecaba',1,'MapBuilder']]],
-  ['highscore_4',['Highscore',['../d5/d2a/struct_highscore.html',1,'Highscore'],['../d5/d2a/struct_highscore.html#a221323d13f033fffa226dc13f3973e56',1,'Highscore.Highscore()']]],
-  ['highscoredata_5',['HighscoreData',['../d1/d6a/class_highscore_data.html',1,'HighscoreData'],['../d1/d6a/class_highscore_data.html#a359cb708da167764da801a415c4493c7',1,'HighscoreData.HighscoreData()']]],
-  ['highscoremanager_6',['HighscoreManager',['../d5/ddd/class_highscore_manager.html',1,'HighscoreManager'],['../d5/ddd/class_highscore_manager.html#a3681c9509b7f7278fc42ed30d5888967',1,'HighscoreManager.HighscoreManager()']]],
-  ['highscoretable_7',['HighscoreTable',['../d9/d99/class_highscore_table.html',1,'']]]
+  ['gamecontroller_0',['GameController',['../d1/d8b/class_game_controller.html',1,'']]],
+  ['gamedata_1',['GameData',['../d8/d23/class_game_data.html',1,'']]],
+  ['gamedatavisual_2',['GameDataVisual',['../d6/d02/class_game_data_visual.html',1,'']]],
+  ['gamemanager_3',['GameManager',['../db/d10/class_game_manager.html',1,'']]],
+  ['gethashcode_4',['GetHashCode',['../d5/d2a/struct_highscore.html#a4ee5c3248768447084f426adfb6d0463',1,'Highscore']]],
+  ['getnextslidetile_5',['GetNextSlideTile',['../da/d8f/class_map_builder.html#afe8621ebc3143f825b7e9787820648b5',1,'MapBuilder']]],
+  ['getotherplayerindex_6',['GetOtherPlayerIndex',['../db/d10/class_game_manager.html#a0716d5a9967dfb14626f7910ccbd0f5b',1,'GameManager']]],
+  ['getpassabletiles_7',['GetPassableTiles',['../da/d8f/class_map_builder.html#a7a29c5322beffc75524fd758e1e68541',1,'MapBuilder']]],
+  ['getplayer_8',['GetPlayer',['../da/d8f/class_map_builder.html#ab7415329cf49b2c5dea8bf7c089da919',1,'MapBuilder']]],
+  ['getplayerscore_9',['GetPlayerScore',['../da/d8f/class_map_builder.html#a6974d052b81fdcc348189febc94215f4',1,'MapBuilder']]]
 ];

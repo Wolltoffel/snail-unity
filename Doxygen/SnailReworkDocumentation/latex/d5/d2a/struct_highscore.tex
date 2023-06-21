@@ -9,7 +9,18 @@ Represents a high score entry.
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{struct_highscore_a221323d13f033fffa226dc13f3973e56}{Highscore}} (string map\+Name, string winner\+Name, string looser\+Name, int winner\+Score, int loser\+Score, Player\+Agent agent\+Winner, Player\+Agent agent\+Loser)
-\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \doxylink{struct_highscore}{Highscore} struct with the specified data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \doxylink{struct_highscore}{Highscore} struct with the specified data. \end{DoxyCompactList}\item 
+override bool \mbox{\hyperlink{struct_highscore_ac3547d94bd4009259146341bc44d69a7}{Equals}} (object obj)
+\begin{DoxyCompactList}\small\item\em Determines whether the specified object is equal to the current \doxylink{struct_highscore}{Highscore}. \end{DoxyCompactList}\item 
+override int \mbox{\hyperlink{struct_highscore_a4ee5c3248768447084f426adfb6d0463}{Get\+Hash\+Code}} ()
+\begin{DoxyCompactList}\small\item\em Gets the hash code for the current \doxylink{struct_highscore}{Highscore}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{struct_highscore_aae02e5f48a72128913807131804a6b98}{operator==}} (\mbox{\hyperlink{struct_highscore}{Highscore}} highscore1, \mbox{\hyperlink{struct_highscore}{Highscore}} highscore2)
+\begin{DoxyCompactList}\small\item\em Determines whether two specified \doxylink{struct_highscore}{Highscore} objects are equal. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{struct_highscore_a26cb07876ec4eda57d379f001c02b099}{operator!=}} (\mbox{\hyperlink{struct_highscore}{Highscore}} highscore1, \mbox{\hyperlink{struct_highscore}{Highscore}} highscore2)
+\begin{DoxyCompactList}\small\item\em Determines whether two specified \doxylink{struct_highscore}{Highscore} objects are not equal. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -19,8 +30,8 @@ string {\bfseries map\+Name}
 \Hypertarget{struct_highscore_a4cda04385184859abf910e6d2c0e0069}\label{struct_highscore_a4cda04385184859abf910e6d2c0e0069} 
 string {\bfseries winner\+Name}
 \item 
-\Hypertarget{struct_highscore_a4da3486f023b1664a6ead52beddbd172}\label{struct_highscore_a4da3486f023b1664a6ead52beddbd172} 
-string {\bfseries looser\+Name}
+\Hypertarget{struct_highscore_a9c3da3feeff174246587d102e00ecb06}\label{struct_highscore_a9c3da3feeff174246587d102e00ecb06} 
+string {\bfseries loser\+Name}
 \item 
 \Hypertarget{struct_highscore_a730e29d9c4216bd09b813fcd39dc503d}\label{struct_highscore_a730e29d9c4216bd09b813fcd39dc503d} 
 int {\bfseries winner\+Score}
@@ -67,6 +78,80 @@ Initializes a new instance of the \doxylink{struct_highscore}{Highscore} struct 
 {\em agent\+Loser} & The agent representing the loser.\\
 \hline
 \end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{struct_highscore_ac3547d94bd4009259146341bc44d69a7}\label{struct_highscore_ac3547d94bd4009259146341bc44d69a7} 
+\index{Highscore@{Highscore}!Equals@{Equals}}
+\index{Equals@{Equals}!Highscore@{Highscore}}
+\doxysubsubsection{\texorpdfstring{Equals()}{Equals()}}
+{\footnotesize\ttfamily override bool Highscore.\+Equals (\begin{DoxyParamCaption}\item[{object}]{obj }\end{DoxyParamCaption})}
+
+
+
+Determines whether the specified object is equal to the current \doxylink{struct_highscore}{Highscore}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & The object to compare with the current \doxylink{struct_highscore}{Highscore}.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the specified object is equal to the current \doxylink{struct_highscore}{Highscore}; otherwise, {\ttfamily false}.
+\end{DoxyReturn}
+\Hypertarget{struct_highscore_a4ee5c3248768447084f426adfb6d0463}\label{struct_highscore_a4ee5c3248768447084f426adfb6d0463} 
+\index{Highscore@{Highscore}!GetHashCode@{GetHashCode}}
+\index{GetHashCode@{GetHashCode}!Highscore@{Highscore}}
+\doxysubsubsection{\texorpdfstring{GetHashCode()}{GetHashCode()}}
+{\footnotesize\ttfamily override int Highscore.\+Get\+Hash\+Code (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Gets the hash code for the current \doxylink{struct_highscore}{Highscore}. 
+
+\begin{DoxyReturn}{Returns}
+A hash code for the current \doxylink{struct_highscore}{Highscore}.
+\end{DoxyReturn}
+\Hypertarget{struct_highscore_a26cb07876ec4eda57d379f001c02b099}\label{struct_highscore_a26cb07876ec4eda57d379f001c02b099} 
+\index{Highscore@{Highscore}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!Highscore@{Highscore}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily static bool Highscore.\+operator!= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_highscore}{Highscore}}}]{highscore1,  }\item[{\mbox{\hyperlink{struct_highscore}{Highscore}}}]{highscore2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Determines whether two specified \doxylink{struct_highscore}{Highscore} objects are not equal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em highscore1} & The first \doxylink{struct_highscore}{Highscore} to compare.\\
+\hline
+{\em highscore2} & The second \doxylink{struct_highscore}{Highscore} to compare.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the two \doxylink{struct_highscore}{Highscore} objects are not equal; otherwise, {\ttfamily false}.
+\end{DoxyReturn}
+\Hypertarget{struct_highscore_aae02e5f48a72128913807131804a6b98}\label{struct_highscore_aae02e5f48a72128913807131804a6b98} 
+\index{Highscore@{Highscore}!operator==@{operator==}}
+\index{operator==@{operator==}!Highscore@{Highscore}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily static bool Highscore.\+operator== (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_highscore}{Highscore}}}]{highscore1,  }\item[{\mbox{\hyperlink{struct_highscore}{Highscore}}}]{highscore2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Determines whether two specified \doxylink{struct_highscore}{Highscore} objects are equal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em highscore1} & The first \doxylink{struct_highscore}{Highscore} to compare.\\
+\hline
+{\em highscore2} & The second \doxylink{struct_highscore}{Highscore} to compare.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+{\ttfamily true} if the two \doxylink{struct_highscore}{Highscore} objects are equal; otherwise, {\ttfamily false}.
+\end{DoxyReturn}
 
 
 The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}

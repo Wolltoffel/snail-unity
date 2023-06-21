@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 /// <summary>
 /// Represents an interactable surrender button in the game.
 /// </summary>
-public class SurrenderInteractable : MonoBehaviour, IPointerClickHandler,IPointerEnterHandler, IPointerExitHandler
+public class SkipInteracatable : MonoBehaviour, IPointerClickHandler,IPointerEnterHandler, IPointerExitHandler
 {
     GameController gameController;
     Coroutine shrinkProcess,growProcess;
@@ -52,6 +52,14 @@ public class SurrenderInteractable : MonoBehaviour, IPointerClickHandler,IPointe
     }
 
     public void OnPointerExit(PointerEventData eventData)
+    {
+        if (growProcess != null)
+            StopCoroutine(growProcess);
+
+        shrinkProcess = StartCoroutine(Scale(transform.localScale, initialScale));
+    }
+
+    public void ShrinkBackToNormal()
     {
         if (growProcess != null)
             StopCoroutine(growProcess);

@@ -225,6 +225,8 @@ public class GameData : MonoBehaviour
     /// </summary>
     public void ShowHighScoresHUD() {
 
+        bool newHighcore = false;
+
         // Attempt to add the current high score to the high score data
         highscoreManager.AttemptToAddToHighscoreData(highScore);
         
@@ -241,12 +243,13 @@ public class GameData : MonoBehaviour
             if (highscoreData.highscores[i].winnerScore > 0)
             {
                 // The current high score entry matches the new high score, so mark it as a new high score
-                if (highscoreData.highscores[i] == highScore)
+                if (highscoreData.highscores[i] == highScore && !newHighcore)
                 {
                     highscoreTable.AddHighScore(highscoreData.highscores[i], true);
+                    newHighcore = true;
                 }
 
-                // The current high score entry is not the new high score
+                // The current high score entry is not the new highscore
                 else
                 {
                     highscoreTable.AddHighScore(highscoreData.highscores[i], false);
