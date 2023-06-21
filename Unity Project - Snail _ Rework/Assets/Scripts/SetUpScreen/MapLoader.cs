@@ -21,21 +21,29 @@ public class MapLoader
     /// Loads the map data from saved files.
     /// </summary>
     /// <returns>A list of loaded map data.</returns>
-    public List<MapData> LoadMaps()
+    /// <param name="errorMaps">A list of maps that failed to load.</param>
+    public List<MapData> LoadMaps(out List<string> errorMaps)
     {
         string[] filePaths = System.IO.Directory.GetFiles(savePath, "*.json");
         List<MapData> maps = new List<MapData>();
         MapData[] mapArray = new MapData[filePaths.Length];
+        errorMaps = new List<string>();
 
         for (int i = 0; i < filePaths.Length; i++)
         {
             mapArray[i] = saver.LoadData<MapData>(filePaths[i]);
 
-            if (mapArray[i] != null)
+           if (mapArray[i] != null)
             {
                 mapArray[i].name = Path.GetFileNameWithoutExtension(filePaths[i]);
                 maps.Add(mapArray[i]);
             }
+            else
+            {
+                errorMaps.Add(Path.GetFileNameWithoutExtension(filePaths[i]));
+            }
+
+ 
         }
         
         maps = maps.OrderBy(map => map.name).ToList<MapData>();

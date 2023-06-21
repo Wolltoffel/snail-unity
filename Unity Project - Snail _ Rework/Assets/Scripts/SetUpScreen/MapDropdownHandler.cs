@@ -11,7 +11,8 @@ public class MapDropdownHandler : MonoBehaviour
     [SerializeField] WrongMapPopUp wrongMapPopUp;
     int dropdownIndex = 0;
     List<MapData> selectableMaps;
-    List<string> selectableMaps_names;
+    List<string> selectableMaps_name;
+   
 
     private void Start()
     {
@@ -19,26 +20,43 @@ public class MapDropdownHandler : MonoBehaviour
         dropdown.options.Clear();
 
         //Insert Loaded MapData into dropdown menu
-        selectableMaps_names = new List<string>();
-        selectableMaps = gameData.GetSelectableMaps();
+        List<string> errormaps_name;
+        selectableMaps = gameData.GetSelectableMaps(out errormaps_name);
+        selectableMaps_name = new List<string>();
 
+        //Show erromessage with faulty map
+        if (errormaps_name.Count > 0)
+        {
+            string errorMessage = "The follwing maps are not correctly formatted:";
+
+            for (int i = 0; i < errormaps_name.Count; i++)
+            {
+                errorMessage += $"\n <b>{errormaps_name[i]}</b>";
+            }
+
+            wrongMapPopUp.showPopUp(errorMessage);
+        }
+            
+
+
+        //Add maps to dropdown
         for (int i = 0;i<selectableMaps.Count;i++)
         {
-          selectableMaps_names.Add(selectableMaps[i].name);
+          selectableMaps_name.Add(selectableMaps[i].name);
           dropdown.options.Add(new TMPro.TMP_Dropdown.OptionData() { text = selectableMaps[i].name });
         }
 
         //Set Default or preselected Value for Dropdown as Standard
         if (gameData.GetSelectedMap() == null)
         {
-            dropdownIndex = selectableMaps_names.IndexOf("default");
+            dropdownIndex = selectableMaps_name.IndexOf("default");
             dropdown.value = dropdownIndex;
             if (selectableMaps.Count>0)
                 gameData.SetSelectedMap(selectableMaps[dropdownIndex]);
         }
 
         else
-            dropdown.value = selectableMaps_names.IndexOf(gameData.GetSelectedMap().name); //Select preselected map
+            dropdown.value = selectableMaps_name.IndexOf(gameData.GetSelectedMap().name); //Select preselected map
 
         //Set up Droppdown vor Value Changes
         dropdown.onValueChanged.AddListener(delegate { SetMap(dropdown); }); //Adjust dropdown on change

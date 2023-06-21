@@ -46,6 +46,7 @@ public class GameData : MonoBehaviour
     List<MapData> selectableMaps;
     public static PlayerSettings playersettings;
     PlayerInformation playerInfo;
+    List<string> errorMaps;
 
     [Header("InGameData")]
     Highscore highScore;
@@ -75,7 +76,8 @@ public class GameData : MonoBehaviour
     {
         // Initialize the MapLoader to load maps
         mapLoader = new MapLoader();
-        selectableMaps = mapLoader.LoadMaps();
+        selectableMaps = mapLoader.LoadMaps(out errorMaps);
+  
 
         // Initialize the PlayerSettingsManager to manage player settings
         playerSettingsManager = new PlayerSettingsManager();
@@ -109,7 +111,8 @@ public class GameData : MonoBehaviour
         return playerInfo;
     }
 
-    public List<MapData> GetSelectableMaps(){
+    public List<MapData> GetSelectableMaps(out List<string>errorMaps){
+        errorMaps = this.errorMaps;
         return selectableMaps;
     }
     public MapData GetSelectedMap()
