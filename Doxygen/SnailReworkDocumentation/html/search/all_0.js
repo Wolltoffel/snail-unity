@@ -2,7 +2,7 @@ var searchData=
 [
   ['actiontype_0',['actionType',['../da/d06/class_player_action.html#aecb3345ede39c3a36f390eaf48002ccf',1,'PlayerAction']]],
   ['activatescreen_1',['ActivateScreen',['../dc/d62/class_screen_handler.html#a29bb4e82f0ddca9e663704c931176829',1,'ScreenHandler']]],
-  ['addgamecontroller_2',['AddGameController',['../d4/de1/class_surrender_interactable.html#a489674fbddffa78afb903821fb6f08de',1,'SurrenderInteractable']]],
+  ['addgamecontroller_2',['AddGameController',['../d8/d20/class_skip_interacatable.html#adff01c615abcdfa3833d662ea7308cce',1,'SkipInteracatable']]],
   ['addhighscore_3',['AddHighScore',['../d9/d99/class_highscore_table.html#ac1f35043e0ef317cef611d3f8b2df547',1,'HighscoreTable']]],
   ['addtohighscoredata_4',['AddToHighscoreData',['../d5/ddd/class_highscore_manager.html#a6a65f68210d618f3540aed4d3d7a06ea',1,'HighscoreManager']]],
   ['aiaction_5',['AIAction',['../d7/d5b/class_a_i_action.html',1,'']]],

@@ -1,0 +1,92 @@
+\doxysection{Skip\+Interacatable Class Reference}
+\hypertarget{class_skip_interacatable}{}\label{class_skip_interacatable}\index{SkipInteracatable@{SkipInteracatable}}
+
+
+Represents an interactable surrender button in the game.  
+
+
+Inheritance diagram for Skip\+Interacatable\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{d8/d20/class_skip_interacatable}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_skip_interacatable_adff01c615abcdfa3833d662ea7308cce}{Add\+Game\+Controller}} (\mbox{\hyperlink{class_game_controller}{Game\+Controller}} game\+Controller)
+\begin{DoxyCompactList}\small\item\em Adds a reference to the game controller. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_skip_interacatable_a305311cb3466b98fb2cf1ff0e334e60e}{On\+Pointer\+Click}} (Pointer\+Event\+Data event\+Data)
+\item 
+\Hypertarget{class_skip_interacatable_a2af91c9534db004a3a0dff13d12ddc8a}\label{class_skip_interacatable_a2af91c9534db004a3a0dff13d12ddc8a} 
+void {\bfseries On\+Pointer\+Enter} (Pointer\+Event\+Data event\+Data)
+\item 
+\Hypertarget{class_skip_interacatable_a2bb15c4701f4745a547f1e82ff366d42}\label{class_skip_interacatable_a2bb15c4701f4745a547f1e82ff366d42} 
+void {\bfseries On\+Pointer\+Exit} (Pointer\+Event\+Data event\+Data)
+\item 
+\Hypertarget{class_skip_interacatable_a460b29e3cc51506b3098c286b2091fe5}\label{class_skip_interacatable_a460b29e3cc51506b3098c286b2091fe5} 
+void {\bfseries Shrink\+Back\+To\+Normal} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_skip_interacatable_ad9eee4207e90dfff1c776020bced2afd}\label{class_skip_interacatable_ad9eee4207e90dfff1c776020bced2afd} 
+void {\bfseries Awake} ()
+\item 
+\Hypertarget{class_skip_interacatable_a59fc96741a375567706ad6bdf4448430}\label{class_skip_interacatable_a59fc96741a375567706ad6bdf4448430} 
+IEnumerator {\bfseries Scale} (Vector3 current\+Scale, Vector3 target\+Scale)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_skip_interacatable_af33ab0264bf722199618c7cee65b5b81}\label{class_skip_interacatable_af33ab0264bf722199618c7cee65b5b81} 
+\mbox{\hyperlink{class_game_controller}{Game\+Controller}} {\bfseries game\+Controller}
+\item 
+\Hypertarget{class_skip_interacatable_a6db168936bce7529eb797241939f9175}\label{class_skip_interacatable_a6db168936bce7529eb797241939f9175} 
+Coroutine {\bfseries shrink\+Process}
+\item 
+\Hypertarget{class_skip_interacatable_ac3f2e11176ae06c558d8fbef0d3ea692}\label{class_skip_interacatable_ac3f2e11176ae06c558d8fbef0d3ea692} 
+Coroutine {\bfseries grow\+Process}
+\item 
+\Hypertarget{class_skip_interacatable_a49571b9c41f78d4756889a79e14b369c}\label{class_skip_interacatable_a49571b9c41f78d4756889a79e14b369c} 
+Vector3 {\bfseries initial\+Scale}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an interactable surrender button in the game. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_skip_interacatable_adff01c615abcdfa3833d662ea7308cce}\label{class_skip_interacatable_adff01c615abcdfa3833d662ea7308cce} 
+\index{SkipInteracatable@{SkipInteracatable}!AddGameController@{AddGameController}}
+\index{AddGameController@{AddGameController}!SkipInteracatable@{SkipInteracatable}}
+\doxysubsubsection{\texorpdfstring{AddGameController()}{AddGameController()}}
+{\footnotesize\ttfamily void Skip\+Interacatable.\+Add\+Game\+Controller (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_controller}{Game\+Controller}}}]{game\+Controller }\end{DoxyParamCaption})}
+
+
+
+Adds a reference to the game controller. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Controller} & The game controller to add.\\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_skip_interacatable_a305311cb3466b98fb2cf1ff0e334e60e}\label{class_skip_interacatable_a305311cb3466b98fb2cf1ff0e334e60e} 
+\index{SkipInteracatable@{SkipInteracatable}!OnPointerClick@{OnPointerClick}}
+\index{OnPointerClick@{OnPointerClick}!SkipInteracatable@{SkipInteracatable}}
+\doxysubsubsection{\texorpdfstring{OnPointerClick()}{OnPointerClick()}}
+{\footnotesize\ttfamily void Skip\+Interacatable.\+On\+Pointer\+Click (\begin{DoxyParamCaption}\item[{Pointer\+Event\+Data}]{event\+Data }\end{DoxyParamCaption})}
+
+Handles the pointer click event.
+
+
+\begin{DoxyParams}{Parameters}
+{\em event\+Data} & The pointer event data.\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+K\+:/\+Macromedia/4\+\_\+\+Semester/\+Game Programming/\+Final-\/\+Project-\/\+Snail/snail-\/unity/\+Unity Project -\/ Snail \+\_\+ Rework/\+Assets/\+Scripts/\+Game/Skip\+Interactbale.\+cs\end{DoxyCompactItemize}

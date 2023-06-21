@@ -8,7 +8,7 @@ Handles loading and validation of map data.
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-List$<$ \mbox{\hyperlink{class_map_data}{Map\+Data}} $>$ \mbox{\hyperlink{class_map_loader_a321864c1e49f32481456116d2d7868d1}{Load\+Maps}} ()
+List$<$ \mbox{\hyperlink{class_map_data}{Map\+Data}} $>$ \mbox{\hyperlink{class_map_loader_a403b844ae81cb1d8085dc0d8e144f951}{Load\+Maps}} (out List$<$ string $>$ error\+Maps)
 \begin{DoxyCompactList}\small\item\em Loads the map data from saved files. \end{DoxyCompactList}\item 
 string \mbox{\hyperlink{class_map_loader_a28e8651cbbd71e7ad7ce55d4c1610419}{Check\+Map\+Validity}} (\mbox{\hyperlink{class_map_data}{Map\+Data}} map\+Data)
 \begin{DoxyCompactList}\small\item\em Checks the validity of a map data. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -68,11 +68,11 @@ Checks the validity of player positions in the map data.
 \begin{DoxyReturn}{Returns}
 True if the players are correctly set up; otherwise, false.
 \end{DoxyReturn}
-\Hypertarget{class_map_loader_a321864c1e49f32481456116d2d7868d1}\label{class_map_loader_a321864c1e49f32481456116d2d7868d1} 
+\Hypertarget{class_map_loader_a403b844ae81cb1d8085dc0d8e144f951}\label{class_map_loader_a403b844ae81cb1d8085dc0d8e144f951} 
 \index{MapLoader@{MapLoader}!LoadMaps@{LoadMaps}}
 \index{LoadMaps@{LoadMaps}!MapLoader@{MapLoader}}
 \doxysubsubsection{\texorpdfstring{LoadMaps()}{LoadMaps()}}
-{\footnotesize\ttfamily List$<$ \mbox{\hyperlink{class_map_data}{Map\+Data}} $>$ Map\+Loader.\+Load\+Maps (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily List$<$ \mbox{\hyperlink{class_map_data}{Map\+Data}} $>$ Map\+Loader.\+Load\+Maps (\begin{DoxyParamCaption}\item[{out List$<$ string $>$}]{error\+Maps }\end{DoxyParamCaption})}
 
 
 
@@ -81,6 +81,11 @@ Loads the map data from saved files.
 \begin{DoxyReturn}{Returns}
 A list of loaded map data.
 \end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em error\+Maps} & A list of maps that failed to load.\\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
