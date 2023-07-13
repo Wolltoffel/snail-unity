@@ -31,7 +31,13 @@ public class PlayerSettingsManager
         if (filePaths.Length != 0)
         {
             settings = saver.LoadData<PlayerSettings>(filePaths[0]);
-            settings.CorrectInvalidEntries();
+            if (settings == null)
+            {
+                settings = new PlayerSettings();
+                settings.LoadDefaultValues();
+            }
+            else
+                settings.CorrectInvalidEntries();
         }     
         else
         {

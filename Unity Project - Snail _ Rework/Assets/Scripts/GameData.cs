@@ -63,6 +63,7 @@ public class GameData : MonoBehaviour
     [SerializeField] GameDataVisual roundTimerVisual;
     [SerializeField] GameDataVisual turnCounterVisual;
     [SerializeField] TurnAnnouncer turnAnnouncer;
+    [SerializeField] Color activePlayerColor;
 
     [Header("ResultScreen")]
     [SerializeField] GameDataVisual resultsVisual;
@@ -206,7 +207,7 @@ public class GameData : MonoBehaviour
 
     public void ColorActivePlayerHUD(int activePlayerIndex, int otherPlayerIndex)
     {
-        playerNameVisual[activePlayerIndex].SetColor(Color.red);
+        playerNameVisual[activePlayerIndex].SetColor(activePlayerColor);
         playerNameVisual[otherPlayerIndex].SetDefaultColor();   
     }
 
