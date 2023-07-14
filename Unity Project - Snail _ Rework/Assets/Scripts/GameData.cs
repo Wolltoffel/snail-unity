@@ -217,8 +217,8 @@ public class GameData : MonoBehaviour
     #region ResultScreen HUD
     public void SetGameResultsHUD(int lastTurnNumber)
     {
-        string results = $"{highScore.winnerName} \n " +
-            $"{highScore.winnerScore} : {highScore.loserScore} \n " +
+        string results = $"Winner: {highScore.winnerName} \n " +
+            $"Scores: {highScore.winnerScore} | {highScore.loserScore} \n " +
             $"{lastTurnNumber} Turns";
 
         resultsVisual.SetVisual(results);
