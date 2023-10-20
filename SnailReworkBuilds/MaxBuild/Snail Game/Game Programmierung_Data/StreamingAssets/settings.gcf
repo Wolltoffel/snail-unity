@@ -1,9 +1,0 @@
-{
-    "maxTurnDuration": 30,
-    "maxTurnsWithoutCapture": 5,
-    "maxComputationTimePerTurn": 500,
-    "minCPUAgentTurnDuration": 1.0,
-    "minMapSize": 5,
-    "maxMapSize": 20,
-    "requireSquareMap": false
-}
